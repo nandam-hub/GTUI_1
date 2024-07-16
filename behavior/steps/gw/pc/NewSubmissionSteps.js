@@ -1,0 +1,192 @@
+const { When, Then } = require('@cucumber/cucumber')
+import { NewSubmissionScenario } from '../../../../ui/actions/gw/pc/NewSubmissionScenario'
+import { NavigationScenario } from '../../../../ui/actions/gw/pc/NavigationScenario'
+import { CommercialProperty } from '../../../../ui/actions/gw/pc/LOBLogic/CommercialProperty'
+import { HomeownersProduct } from '../../../../ui/actions/gw/pc/LOBLogic/HomeownersProduct'
+import { CommercialUmbrellaAccessliability } from '../../../../ui/actions/gw/pc/LOBLogic/CommercialUmbrellaandExcessLiability'
+import { SmallBusiness } from '../../../../ui/actions/gw/pc/LOBLogic/SmallBusiness'
+import { t } from 'testcafe'
+import { USAPersonalAuto } from '../../../../ui/actions/gw/pc/LOBLogic/USAPersonalAuto'
+
+const newSubmissionScenario = new NewSubmissionScenario()
+const navigationScenario = new NavigationScenario()
+const commercialProperty = new CommercialProperty()
+const homeownersProduct = new HomeownersProduct()
+const commercialUmbrellaAccessliability = new CommercialUmbrellaAccessliability()
+const usaPersonalAuto = new USAPersonalAuto()
+const smallBusiness = new SmallBusiness()
+
+When(/^the user bind the new submission/, async function () {
+    await newSubmissionScenario.bindPolicy()
+})
+
+Then(/^the policy is bound successfully/, async function () {
+    await newSubmissionScenario.verifyIssue()
+    await newSubmissionScenario.viewSubmission()
+})
+
+When(/^the user quote the new submission for personal auto/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.usaPersonalAutoStandardCoverages()
+    await usaPersonalAuto.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.personalVehicle()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+})
+
+When(/^the user quote the new submission for homeowners/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await homeownersProduct.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+})
+
+When(/^the user quote the new submission for small business/, async function (t) {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.smallBusinessBusinessType()
+    await navigationScenario.navigateSmallBusinessTabSelection('SmallBusinessLineCoverages')
+    await smallBusiness.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+})
+
+When(/^the user issue the new submission for small business/, async function (t) {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.smallBusinessBusinessType()
+    await navigationScenario.navigateSmallBusinessTabSelection('SmallBusinessLineCoverages')
+    await smallBusiness.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user quote the new submission for umbrella liability/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.commercialUmbrellaAccessliability()
+    await commercialUmbrellaAccessliability.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+})
+
+When(/^the user issue the new submission for umbrella liability/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.commercialUmbrellaAccessliability()
+    await commercialUmbrellaAccessliability.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+Then(/^the quote is saved successfully/, async function () {
+    await newSubmissionScenario.saveQuote()
+})
+
+When(/^the user creates commercial policy/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await commercialProperty.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addCpBlanket()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user issue the new submission for personal auto/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.usaPersonalAutoStandardCoverages()
+    await usaPersonalAuto.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.personalVehicle()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user issue the new homeowner policy/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await homeownersProduct.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user quote the new submission for commercial property/, async function (t) {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await commercialProperty.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addCpBlanket()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+})
+
+Then(/^the policy is issued/, async function () {
+    await newSubmissionScenario.verifyIssue()
+    await newSubmissionScenario.viewSubmission()
+})

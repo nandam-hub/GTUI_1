@@ -1,0 +1,17 @@
+{
+    "defaultDataSet": {
+        "AccountNumber": "S000212121",
+        "InvoiceStatus": "Planned",
+        "InvoiceDate": "+0"
+    },
+    "invoiceDue_01": {
+        "AccountNumber": "S000212121",
+        "InvoiceStatus": "Planned",
+        "InvoiceDate": "+30"
+    },
+    "invoiceBilled_01": {
+        "AccountNumber": "S000212121",
+        "InvoiceStatus": "Billed",
+        "InvoiceDate": "+0"
+    }
+}

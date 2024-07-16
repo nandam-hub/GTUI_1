@@ -1,0 +1,44 @@
+{
+  "selectInput": [
+    "BodyType",
+    "LicenseState",
+    "PropertyProtectionInsurancePropertyProtectionLimits",
+    "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage",
+    "GeneralLiabilityOccurrenceLImit",
+    "GeneralLiabilityAggregateLimit",
+    "IdentityTheftProtectionLimit",
+    "IdentityTheftProtectionDeductible",
+    "LossAssessmentLimit",
+    "UmbrellaLiabilityOccurrenceLimit",
+    "UmbrellaLiabilityAggregateLimit",
+    "UmbrellaLiabilityProductandCompletedOperationsAggregateLImit",
+    "UmbrellaLiabilityUmbrellaCoverageForm",
+    "UmbrellaLiabilitySelfInsuredRetention",
+    "UmbrellaLiabilityorExcessLiability",
+    "ContentsOfOtherStructuresLimit"
+  ],
+  "textInput": [
+    "VIN",
+    "Year",
+    "Make",
+    "Model",
+    "EachLossCausedByWindLimit",
+    "EachLossCausedByWindDeductible",
+    "OutsideObjectsAndStructuresLimit",
+    "OutsideObjectsAndStructuresDeductible",
+    "ContentsOfOtherStructuresDeductible"
+  ],
+  "checkBox": [
+    "LiabilityBodilyInjuryAndPropertyDamage",
+    "PropertyProtectionInsurance",
+    "GeneralLiability",
+    "IdentityTheftProtection",
+    "LossAssessment",
+    "FirstAid",
+    "UmbrellaLiability",
+    "EachLossCausedByWind",
+    "OutsideObjectsAndStructures",
+    "ContentsOfOtherStructures",
+    "Terrorism"
+  ]
+}

@@ -1,0 +1,30 @@
+import { PcfButton, PcfComponent, PcfSelectInput } from '@gtui/gt-ui-framework';
+
+export class SubmissionWizard_New {
+	submissionWizard_Quote = PcfButton('#SubmissionWizard-SubmissionWizard_PolicyReviewScreen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote');
+	submissionWizard_QuoteStatus = PcfComponent('#SubmissionWizard-JobWizardInfoBar-JobLabel ')
+	submissionWizard_Bind = PcfComponent('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-BindOptions')
+	submissionWizard_IssuePolicy = PcfComponent('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-BindOptions-BindAndIssue')
+	submissionWizard_PolicyNumber = PcfComponent('#JobComplete-JobWizardInfoBar-PolicyNumber')
+	submissionWizard_QuoteNumber = PcfComponent('#SubmissionWizard-SubmissionWizard_QuoteScreen-Quote_SummaryDV-JobNumber')
+	submissionWizard_BindOptions = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-BindOptions-BindOnly')
+	submissionWizard_AddCPBlanket = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCpBlanketScreen-CLLCpBlanketListPanelSet-AddCpBlanket')
+	submissionWizardRefusalType = PcfSelectInput('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-RefusalType');
+	submissionWizardAdditionalCoverage = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-AdditionalCoveragesTab')
+	submissionWizardSectionIICoverages = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-SectionIICoveragesTab')
+	submissionWizardOptionalCoverages = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-OptionalCoveragesTab')
+	submissionWizardExclusionsConditions = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-ExclusionsAndconditionsTab')
+	submissionWizardGWHomeownersLine = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-detailsTab')
+	//#region small business
+	submissionWizardSmallBusienssTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-detailsTab')
+	submissionWizardSmallBusinessLineCoveragesTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-SBLLineCoveragesTab')
+	submissionWizardSmallBusinessLineAdditionalCoveragesTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-SBLAdditionalLineCoveragesTab')
+	submissionWizardExclusionsConditionsTabSb = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-ExclusionsAndconditionsTab')
+	submissionWizardBusinessType = PcfSelectInput('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-SBLBusinessType')
+	//#endregion
+	//#region USA personal Auto
+	SubmissionWizard_LineStandardCoveragesTab = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-LineStandardCoveragesTab')
+	SubmissionWizard_AddPersonalVehicle = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALPersonalVehicleScreen-UALPersonalVehicleListPanelSet-AddPersonalVehicle')
+	//#endregion
+
+}

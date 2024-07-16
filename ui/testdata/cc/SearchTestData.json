@@ -1,0 +1,57 @@
+{
+    "defaultDataSet": {
+        "PolicyNumber": "7407354463",
+        "ClaimNo": "000-00-000766",
+        "Type": "Contact",
+        "LastName": "test",
+        "Payer": "Noor",
+        "ReserveLine": "New...",
+        "CostType": "Claim Cost",
+        "CostCategory": "Other",
+        "RecoveryCategory": "Credit to expense",
+        "Amount": "500",       
+        "SearchCreatePolicy": "Create Unverified Policy",
+        "LossDate":"-1",
+        "EffectiveDate":"-2",
+        "ExpirationDate":"+366",
+        "Name":"New Person",
+        "LossCause":"Fire",
+        "City":"Pewaukee",
+        "State": "Wisconsin"
+    },
+    "searchPolicy_01": {
+        "PolicyNumber": "PA23789",
+        "ClaimNo": "000-00-000562"
+    },
+    "searchPolicy_02": {
+        "PolicyNumber": "7407354463",
+        "ClaimNo": "000-00-000766"
+    },
+    "searchRecovery_01": {
+        "Payer": "Noor",
+        "ReserveLine": "New...",
+        "CostType": "Claim Cost",
+        "CostCategory": "Other",
+        "RecoveryCategory": "Credit to expense",
+        "Amount": "500",       
+        "PolicyNumber": "7407354463",
+        "SearchCreatePolicy": "Create Unverified Policy",
+        "Type":"Commercial Property",
+        "LossDate":"-1",
+        "EffectiveDate":"-2",
+        "ExpirationDate":"+366",
+        "Name":"New Person",
+        "LossCause":"Fire",
+        "City":"Pewaukee",
+        "State": "Wisconsin"
+    },
+    "searchCheck_01": {
+        "ClaimNumber":"000-00-000554",
+        "Name": "TEST Auto"       
+    },
+    "searchContact_01": {
+        "Type": "Contact",
+        "LastName": "test",
+        "Name": "driver test"
+    }
+}

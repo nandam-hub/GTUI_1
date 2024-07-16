@@ -1,0 +1,24 @@
+{
+    "defaultDataSet": {
+        "Mandatory": "Yes",
+        "Recurring": "Yes",
+        "SecurityLevel": "Internal Only",
+        "Address1": "1737 HURLEY",
+        "City": "Pewaukee",
+        "State": "Florida",
+        "ZIPCode": "53072-0000",
+        "AddressType": "Home",
+        "Organization": "a"
+    },
+    "addActivity_01": {
+        "Mandatory": "Yes",
+        "Recurring": "Yes",
+        "SecurityLevel": "Internal Only",
+        "Address1": "1737 HURLEY",
+        "City": "Pewaukee",
+        "State": "Florida",
+        "ZIPCode": "53072-0000",
+        "AddressType": "Home",
+        "Organization": "a"
+    }
+}
