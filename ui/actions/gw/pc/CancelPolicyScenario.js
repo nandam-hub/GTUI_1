@@ -1,21 +1,26 @@
-import { CancelPolicy_New } from "./scenarioPages/policy/CancelPolicy_New.js"
+import { CancellationWizard_New } from "./scenarioPages/policy/CancellationWizard_New.js"
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New.js"
+import { Summary } from "../../../pages/gw/generated/policysolutions/pages/policy/Summary.js"
+import { Summary_Ext } from "./scenarioPages/policy/Summary_Ext.js"
 import world from "../../../util/gw/world.js"
 import { t } from "testcafe"
  
-const cancelPolicy_New = new CancelPolicy_New()
+const cancellationWizard_New = new CancellationWizard_New()
 const jobComplete_New = new JobComplete_New()
+const summary = new Summary()
+const summary_Ext = new Summary_Ext()
+
  
 export class CancelPolicyScenario {
  
     async cancelPolicy() {
-        await cancelPolicy_New.newTransactionTab.click()
-        await cancelPolicy_New.cancelPolicy.click()
-        await cancelPolicy_New.cancelPolicySource.selectOptionByLabel(world.dataMap.get('Source'))
-        await cancelPolicy_New.cancelPolicyReason.selectOptionByLabel(world.dataMap.get('Reason'))
-        await cancelPolicy_New.cancelPolicyStartCancellation.click()
-        await cancelPolicy_New.cancelPolicyBindOption.click()
-        await cancelPolicy_New.cancelPolicyBindOptionCancelNow.click()
+        await summary_Ext.newTransactionTab.click()
+        await summary.policyDetailsDetailViewTileCancelPolicy.click()
+        await cancellationWizard_New.cancelPolicySource.selectOptionByLabel(world.dataMap.get('Source'))
+        await cancellationWizard_New.cancelPolicyReason.selectOptionByLabel(world.dataMap.get('Reason'))
+        await cancellationWizard_New.cancelPolicyStartCancellation.click()
+        await cancellationWizard_New.cancelPolicyBindOption.click()
+        await cancellationWizard_New.cancelPolicyBindOptionCancelNow.click()
  
     }
  

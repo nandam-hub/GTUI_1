@@ -11,6 +11,6 @@ When(/^the user performs cancel policy transaction/, async function (t) {
     await cancelPolicyScenario.cancelPolicy()
 });
  
-Then(/^the user sucessfully cancel policy transaction/, async function () {
+Then(/^the policy is canceled successfully/, async function () {
     await cancelPolicyScenario.validateCancelStatus()
 });

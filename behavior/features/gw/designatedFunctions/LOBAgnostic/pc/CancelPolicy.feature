@@ -11,4 +11,4 @@ Feature: Cancel policy in policy center
         And the user creates commercial policy
         And the user loads "pc" data "cancelPolicy_01" from json "CancelPolicyTestData"
         And the user performs cancel policy transaction
-        Then the user sucessfully cancel policy transaction
+        Then the policy is canceled successfully
