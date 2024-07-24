@@ -8,7 +8,7 @@ Then(/^the user perform reinstate policy transaction/, async function () {
     await reinstatePolicyScenario.reinstatePolicy()
 });
 
-Then(/^the sucessfully reinstate policy transaction/, async function () {
+Then(/^the reinstate is successful/, async function () {
     await reinstatePolicyScenario.validateReinstate()
 });
 

@@ -4,10 +4,10 @@ import { RewritePolicyScenario } from "../../../../ui/actions/gw/pc/RewritePolic
 const rewritePolicyScenario = new RewritePolicyScenario();
 
 
-Then(/^the user perform rewrite the cancel policy transaction/, async function () {
+Then(/^the user rewrites the canceled policy/, async function () {
     await rewritePolicyScenario.rewritePolicy()
 });
 
-Then(/^the sucessfully rewrite policy/, async function () {
+Then(/^the rewrite is successful/, async function () {
     await rewritePolicyScenario.validateRewrite()
 });

@@ -15,4 +15,4 @@ Feature: Reinstate policy in policy center
         And the policy is canceled successfully
         And the user loads "pc" data "reinstatePolicy_01" from json "ReinstatePolicyTestData"
         And the user perform reinstate policy transaction
-        Then the sucessfully reinstate policy transaction
+        Then the reinstate is successful

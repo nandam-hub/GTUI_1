@@ -13,11 +13,8 @@ Feature: Rewrite policy in policy center
         And the user performs cancel policy transaction
         And the policy is canceled successfully
         And the user loads "pc" data "rewritePolicy_01" from json "RewritePolicyTestData"
-        And the user perform rewrite the cancel policy transaction
-        Then the sucessfully rewrite policy 
-       
-       
-        
+        And the user rewrites the canceled policy
+        Then the rewrite is successful
         
         
         
