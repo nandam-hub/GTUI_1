@@ -1,6 +1,6 @@
-import { CancellationWizard_New } from "./scenarioPages/policy/CancellationWizard_New.js"
-import { JobComplete_New } from "./scenarioPages/other/JobComplete_New.js"
-import { Summary_Ext } from "./scenarioPages/policy/Summary_Ext.js"
+import { CancellationWizard_New } from "./scenarioPages/policy/CancellationWizard_New"
+import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
+import { Summary_Ext } from "./scenarioPages/policy/Summary_Ext"
 import world from "../../../util/gw/world.js"
 import { t } from "testcafe"
  
