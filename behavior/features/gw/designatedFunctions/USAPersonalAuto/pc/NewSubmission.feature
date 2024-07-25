@@ -21,11 +21,11 @@ Feature: Personal auto new submission
         Then the policy is bound successfully
 
     @issue_submission_pa
-    Scenario: Issuing personal auto
+    Scenario: Issuing personal auto from actions menu
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         And the user creates personal account
-        And the user issue the new submission for personal auto with with "1" vehicles
+        And the user issue the new submission from actions menu for personal auto with "1" vehicles
         Then the policy is issued
 
     @multiple_vehicles

@@ -138,6 +138,22 @@ When(/^the user creates commercial policy/, async function () {
     await newSubmissionScenario.issuePolicy()
 })
 
+When(/^the user issue the new submission from actions menu for commercial property/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen_ActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await commercialProperty.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addCpBlanket()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+
 When(/^the user issue the new submission for personal auto with (.*) vehicles/, async function (t, stepArguments) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
@@ -155,9 +171,40 @@ When(/^the user issue the new submission for personal auto with (.*) vehicles/, 
     await newSubmissionScenario.issuePolicy()
 })
 
+When(/^the user issue the new submission from actions menu for personal auto with (.*) vehicles/, async function (t, stepArguments) {
+    await navigationScenario.navigateNewSubmissionScreen_ActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.usaPersonalAutoStandardCoverages()
+    await usaPersonalAuto.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.personalVehicle(stepArguments[0])
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
 When(/^the user issue the new homeowner policy/, async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await homeownersProduct.coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user issue the new submission from actions menu for homeowner policy/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen_ActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
     await newSubmissionScenario.clickNext()

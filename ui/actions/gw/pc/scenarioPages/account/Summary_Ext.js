@@ -7,6 +7,7 @@ export class Summary_Ext extends Summary {
 	accountStatus = PcfComponent('#AccountFile_Summary-AccountSummaryDashboard-AccountDetailsDetailViewTile-AccountDetailsDetailViewTile_DV-AccountStatus > div > div')
 	accountSummaryHeader = PcfComponent('#AccountFile_Summary-ttlBar')
 	policySummaryHeader = PcfComponent('#PolicyFile_Summary-ttlBar')
+	activitiesAdded = PcfComponent('#AccountFile_Summary-AccountSummaryDashboard-CurrentActivitiesAccountListViewTile-CurrentActivitiesAccountListViewTile_LV-0-Subject_button')
 }
 
 

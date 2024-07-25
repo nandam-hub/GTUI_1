@@ -21,9 +21,9 @@ Feature: Commercial property new submission
         Then the policy is bound successfully
 
     @issue_submission_cp
-    Scenario: Issuing commercial property
+    Scenario: Issuing commercial property from actions menu
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
         And the user creates commercial account
-        And the user creates commercial policy
+        And the user issue the new submission from actions menu for commercial property
         Then the policy is issued
