@@ -1,6 +1,6 @@
 @policycenter @designatedfunction @newsubmission
 
-Feature: Personal auto new Submission
+Feature: Personal auto new submission
     As a user, I want to perform create new submission(quote, bind and issue)
 
     @quote_submission_pa
