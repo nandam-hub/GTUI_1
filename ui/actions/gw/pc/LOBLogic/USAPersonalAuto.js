@@ -63,7 +63,7 @@ export class USAPersonalAuto {
                 i++
                 if (i < world.vehicleDataMap.size) {
                     await submissionWizard_New.SubmissionWizard_AddPersonalVehicle.click()
-                    console.log("Adding next Vehicle")
+                    console.log("ADDING NEXT VEHICLE")
                 }
             }
         }
