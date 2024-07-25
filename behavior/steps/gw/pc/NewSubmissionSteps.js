@@ -138,7 +138,7 @@ When(/^the user creates commercial policy/, async function () {
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user issue the new submission for personal auto/, async function () {
+When(/^the user issue the new submission for personal auto with (.*) vehicles/, async function (t, stepArguments) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -147,7 +147,7 @@ When(/^the user issue the new submission for personal auto/, async function () {
     await newSubmissionScenario.usaPersonalAutoStandardCoverages()
     await usaPersonalAuto.coverageFilter()
     await newSubmissionScenario.clickNext()
-    await newSubmissionScenario.personalVehicle()
+    await newSubmissionScenario.personalVehicle(stepArguments[0])
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()

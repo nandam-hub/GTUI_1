@@ -42,9 +42,10 @@ export class NewSubmissionScenario {
     await submissionWizard_New.SubmissionWizard_LineStandardCoveragesTab.click()
   }
 
-  async personalVehicle() {
+  async personalVehicle(vehicleNum="1") {
     await submissionWizard_New.SubmissionWizard_AddPersonalVehicle.click()
     await uSAPersonalAuto.addVehicle()
+    console.log(`Added ${vehicleNum} vehicle(s) successfully`)
   }
 
   async vehicleDriver() {

@@ -25,7 +25,7 @@ Feature: Personal auto new Submission
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         And the user creates personal account
-        And the user issue the new submission for personal auto
+        And the user issue the new submission for personal auto with with "1" vehicles
         Then the policy is issued
 
     @multiple_vehicles
@@ -33,5 +33,5 @@ Feature: Personal auto new Submission
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_06" from json "NewSubmissionTestData"
         And the user creates personal account
-        And the user issue the new submission for personal auto
+        And the user issue the new submission for personal auto with "3" vehicles
         Then the policy is issued

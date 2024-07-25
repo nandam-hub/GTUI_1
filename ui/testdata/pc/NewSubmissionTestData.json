@@ -29,10 +29,6 @@
                 "Year": "1987",
                 "Make": "Acura",
                 "Model": "Legend"
-            },
-            "Vehicle2": {
-                "BodyType": "ATV",
-                "VIN": "3G5DB03E42S524192"
             }
         },
         "Address1": "1737 HURLEY",
@@ -46,7 +42,7 @@
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
             "PropertyProtectionInsurance": "check",
             "PropertyProtectionInsurancePropertyProtectionLimits": "1,000,000"
-        } 
+        }
     },
     "newSubmission_02": {
         "ProductName": "Homeowners Product",
@@ -111,11 +107,11 @@
         "Organization": "a",
         "OrganizationType": "Common ownership",
         "BusinessType": "Apartment",
-        "Coverage":{
+        "Coverage": {
             "GeneralLiability": "check",
             "GeneralLiabilityOccurrenceLImit": "300,000",
             "GeneralLiabilityAggregateLimit": "500,000"
-        }        
+        }
     },
     "newSubmission_06": {
         "ProductName": "USA Personal Auto",
@@ -140,7 +136,6 @@
                 "Year": "2020",
                 "Make": "HOMEMADE",
                 "Model": "TRAILER"
-
             }
         },
         "Address1": "1737 HURLEY",
@@ -152,6 +147,6 @@
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10"
-        } 
+        }
     }
 }
