@@ -11,7 +11,7 @@ const summary_Ext = new Summary_Ext()
 export class AddActivityScenario {
 
     async addActivity() {
-        await accountMenuActions_Ext.actionsMenu.click();
+        await accountMenuActions_Ext.accountFileAccountFileMenuActions.click();
         await accountMenuActions_Ext.newActivity.click();
         await accountMenuActions_Ext.newActivity.click();
         await accountMenuActions_Ext.interviewOption.click();

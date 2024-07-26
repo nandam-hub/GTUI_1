@@ -1,13 +1,13 @@
 import { PolicyTabBar_Ext } from "./scenarioPages/navigation/tabBar/PolicyTabBar_Ext";
-import { NextSubmissionWizard } from "../../../pages/gw/generated/policysolutions/pages/navigation/submissionWizard/NextSubmissionWizard.js";
-import { AccountTabBar_Ext } from './scenarioPages/navigation/tabBar/AccountTabBar_Ext.js'
+import { NextSubmissionWizard } from "../../../pages/gw/generated/policysolutions/pages/navigation/submissionWizard/NextSubmissionWizard";
+import { AccountTabBar_Ext } from './scenarioPages/navigation/tabBar/AccountTabBar_Ext'
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { NewAccount_Ext } from "./scenarioPages/account/NewAccount_Ext.js";
-import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar_Ext.js";
+import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar_Ext";
 import { ContactTabBar } from "../../../pages/gw/generated/policysolutions/pages/navigation/tabBar/ContactTabBar"
 import { ContactSearch_Ext } from "./scenarioPages/search/ContactSearch_Ext"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
-import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions.js";
+import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
 import { t } from "testcafe";
 
 const policyTabBar_Ext = new PolicyTabBar_Ext()
@@ -66,8 +66,8 @@ export class NavigationScenario {
     await policyTabBar_Ext.policyTabPolicyTab_NewSubmission.click()
     await t.expect((policyTabBar_Ext.tabBar_Header).component.exists).ok();
   }
-  async navigateNewSubmissionScreen_ActionsMenu() {
-    await accountMenuActions_Ext.actionsMenu.click()
+  async navigateNewSubmissionScreenActionsMenu() {
+    await accountMenuActions_Ext.accountFileAccountFileMenuActions.click()
     await accountMenuActions_Ext.accountFileMenuActions_CreateAccountFileMenuActions_NewSubmission.click()
   }
 
