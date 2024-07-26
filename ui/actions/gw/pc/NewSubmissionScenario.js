@@ -11,6 +11,8 @@ import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWiza
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
 import { JobWizardInfoBarSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/JobWizardInfoBarSubmissionWizard_Ext";
 import { USAPersonalAuto } from "./LOBLogic/USAPersonalAuto"
+import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
+import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
 import world from "../../../util/gw/world"
 
 
@@ -24,6 +26,8 @@ const cLLCpBlanketPopup_New = new CLLCpBlanketPopup_New()
 const submissionWizard_New = new SubmissionWizard_New()
 const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizard_Ext()
 const uSAPersonalAuto = new USAPersonalAuto()
+const jobComplete_New = new JobComplete_New()
+const ratingCostDetailPopup = new RatingCostDetailPopup()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -93,6 +97,12 @@ export class NewSubmissionScenario {
     await t.takeScreenshot()
   }
 
+  async viewPolicy() {
+    await jobComplete_New.jobComplete_ViewPolicyHyperLink.click()
+    await t.wait(1000)
+    await t.takeScreenshot()
+  }
+
   async initiateNewSubmissionPolicy(accountNumber) {
     console.log("On New Submissions screen")
     await newSubmission_Ext.newSubmissionAccountNumber.setValue(accountNumber)
@@ -110,6 +120,12 @@ export class NewSubmissionScenario {
   async quote() {
     await t.wait(2000)
     await submissionWizard_New.submissionWizard_Quote.click()
+  }
+
+  async returnToQuote()
+  {
+    await submissionWizard_New.submissionWizard_Premium.click()
+    await ratingCostDetailPopup.ratingCostDetailPopup__crumb__.click()
   }
 
   async verifyQuote() {
