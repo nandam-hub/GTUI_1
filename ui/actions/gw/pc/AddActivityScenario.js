@@ -16,7 +16,7 @@ export class AddActivityScenario {
         await accountMenuActions_Ext.newActivity.click();
         await accountMenuActions_Ext.interviewOption.click();
         await accountMenuActions_Ext.interviewOption.click();
-        await accountMenuActions_Ext.meetwithInsuredOption.click();
+        await accountMenuActions_Ext.meetWithInsuredOption.click();
         await addActivityPage_New.securityLevel.selectOptionByLabel(world.dataMap.get('SecurityLevel'));
         await t.click(addActivityPage_New.radioOptionMandatory.component.withText(world.dataMap.get('Mandatory')))
         await t.click(addActivityPage_New.radioOptionRecurring.component.withText(world.dataMap.get('Recurring')))

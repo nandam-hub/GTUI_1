@@ -4,5 +4,5 @@ import {AccountMenuActions} from '../../../../../../pages/gw/generated/policysol
 export class AccountMenuActions_Ext extends AccountMenuActions{
     newActivity = PcfButton('#AccountFile-AccountFileMenuActions-AccountFileMenuActions_Create-AccountFileMenuActions_NewActivity > div.gw-action--inner.gw-hasDivider');
     interviewOption = PcfButton('#AccountFile-AccountFileMenuActions-AccountFileMenuActions_Create-AccountFileMenuActions_NewActivity-NewActivityMenuItemSet-0-NewActivityMenuItemSet_Category > div.gw-action--inner.gw-hasDivider > div.gw-label');
-    meetwithInsuredOption = PcfButton('#AccountFile-AccountFileMenuActions-AccountFileMenuActions_Create-AccountFileMenuActions_NewActivity-NewActivityMenuItemSet-0-NewActivityMenuItemSet_Category-0-item > div > div.gw-label');
+    meetWithInsuredOption = PcfButton('#AccountFile-AccountFileMenuActions-AccountFileMenuActions_Create-AccountFileMenuActions_NewActivity-NewActivityMenuItemSet-0-NewActivityMenuItemSet_Category-0-item > div > div.gw-label');
 }
