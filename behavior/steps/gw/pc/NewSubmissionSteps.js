@@ -139,7 +139,7 @@ When(/^the user creates commercial policy/, async function () {
 })
 
 When(/^the user issue the new submission from actions menu for commercial property/, async function () {
-    await navigationScenario.navigateNewSubmissionScreen_ActionsMenu()
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
     await newSubmissionScenario.clickNext()
