@@ -10,9 +10,9 @@ import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigati
 import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWizard/CLLCpBlanketPopup_New"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
 import { JobWizardInfoBarSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/JobWizardInfoBarSubmissionWizard_Ext";
-import { USAPersonalAuto } from "./LOBLogic/USAPersonalAuto"
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
+import { USAPersonalAuto} from "../../../util/gw/USAPersonalAuto"
 import world from "../../../util/gw/world"
 
 
@@ -25,9 +25,9 @@ const lOBWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionW
 const cLLCpBlanketPopup_New = new CLLCpBlanketPopup_New()
 const submissionWizard_New = new SubmissionWizard_New()
 const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizard_Ext()
-const uSAPersonalAuto = new USAPersonalAuto()
 const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
+const usaPersonalAuto = new USAPersonalAuto()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -46,9 +46,9 @@ export class NewSubmissionScenario {
     await submissionWizard_New.SubmissionWizard_LineStandardCoveragesTab.click()
   }
 
-  async personalVehicle(vehicleNum="1") {
+  async personalVehicle(vehicleNum = "1") {
     await submissionWizard_New.SubmissionWizard_AddPersonalVehicle.click()
-    await uSAPersonalAuto.addVehicle()
+    await usaPersonalAuto.addVehicle()
     console.log(`Added ${vehicleNum} vehicle(s) successfully`)
   }
 
