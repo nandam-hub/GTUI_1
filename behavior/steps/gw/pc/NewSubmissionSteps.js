@@ -104,17 +104,6 @@ When(/^the user quote the new submission for umbrella liability/, async function
 })
 
 When(/^the user performs return to quote to the new submission/, async function () {
-    await navigationScenario.navigateNewSubmissionScreen()
-    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
-    await newSubmissionScenario.selectProduct()
-    await newSubmissionScenario.policyInfo()
-    await newSubmissionScenario.clickNext()
-    await newSubmissionScenario.commercialUmbrellaAccessliability()
-    await commercialUmbrellaAccessliability.coverageFilter()
-    await newSubmissionScenario.clickNext()
-    await newSubmissionScenario.clickNext()
-    await newSubmissionScenario.clickNext()
-    await newSubmissionScenario.quote()
     await newSubmissionScenario.returnToQuote()
 })
 

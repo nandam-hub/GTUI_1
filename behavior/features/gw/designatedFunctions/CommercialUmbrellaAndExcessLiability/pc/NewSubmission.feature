@@ -17,9 +17,9 @@ Feature: Commercial umbrella and excess liability new submission
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_03" from json "NewSubmissionTestData"
         And the user creates commercial account
-        And the user performs return to quote to the new submission
         And the user quote the new submission for umbrella liability
-        Then the quote is saved successfully
+        And the quote is saved successfully
+        Then the user performs return to quote to the new submission
 
     @issue_submission_co
     Scenario: Issuing commercial umbrella and excess liability policy
