@@ -99,7 +99,6 @@ When(/^the user quote the new submission for umbrella liability/, async function
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
-    await newSubmissionScenario.returnToQuote()
     await newSubmissionScenario.verifyQuote()
 })
 

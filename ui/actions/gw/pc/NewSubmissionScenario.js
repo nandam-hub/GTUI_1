@@ -100,7 +100,6 @@ export class NewSubmissionScenario {
   async viewPolicy() {
     await jobComplete_New.jobComplete_ViewPolicyHyperLink.click()
     await t.wait(1000)
-    await t.takeScreenshot()
   }
 
   async initiateNewSubmissionPolicy(accountNumber) {
