@@ -1,5 +1,5 @@
 import { ReinstatementWizard_New } from "./scenarioPages/policy/ReinstatementWizard_New"
-import { ChangeWizard_New } from "./scenarioPages/policy/ChangeWizard_New"
+import { ChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { NewAccount_Ext } from "../../../actions/gw/pc/scenarioPages/account/NewAccount_Ext"
@@ -16,7 +16,7 @@ const editPolicyAddressPopup_Ext = new EditPolicyAddressPopup_Ext()
 
 export class ChangePolicyScenario {
 
-    async changePolicy() {
+    async addressDetailschange() {
         await jobComplete_New.jobComplete_ViewPolicyHyperLink.click()
         await summary_Ext.newTransactionTab.click()
         await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
@@ -32,13 +32,18 @@ export class ChangePolicyScenario {
         await editPolicyAddressPopup_Ext.policyAddressInputSetAddressType.click()
         await editPolicyAddressPopup_Ext.policyAddressInputSetAddressType.selectOptionByLabel(world.dataMap.get('AddressType'))
         await editPolicyAddressPopup_Ext.editPolicyAddressPopupUpdate.click()
+    } 
+        async quoteChangePolicy() {
         await changeWizard_New.changePolicyQuote.click()
+    }
+
+        async issueChangePolicy() {
         await changeWizard_New.changePoloicyIssue.click()
     }
 
-    async validateChangePolicy() {
+    async validateAddressDeatilsChange() {
         await t.expect(await reinstatementWizard_New.reinstateComplete_Title.component.textContent).eql('Policy Change Bound')
-        await jobComplete_New.JobComplete_Review_Changes.click()
-        await t.expect(await changeWizard_New.changePolicyAddressType.component.textContent).eql('Business')
+        await jobComplete_New.jobComplete_Review_Changes.click()
+        await t.expect(await changeWizard_New.changePolicyAddressType.component.textContent).eql(world.dataMap.get('AddressType'))
         }
     }

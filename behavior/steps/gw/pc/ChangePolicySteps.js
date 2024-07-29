@@ -3,10 +3,12 @@ import { ChangePolicyScenario } from "../../../../ui/actions/gw/pc/ChangePolicyS
 
 const changePolicyScenario = new ChangePolicyScenario();
 
-Then(/^the user perform change policy transaction/, async function () {
-    await changePolicyScenario.changePolicy()
+Then(/^the user perform address detail change transaction/, async function () {
+    await changePolicyScenario.addressDetailschange()
+    await changePolicyScenario.quoteChangePolicy()
+    await changePolicyScenario.issueChangePolicy()
 });
 
-Then(/^the policy is changed successfully/, async function () {
-    await changePolicyScenario.validateChangePolicy()
+Then(/^the address detail is changed successfully/, async function () {
+    await changePolicyScenario.validateAddressDeatilsChange()
 });
