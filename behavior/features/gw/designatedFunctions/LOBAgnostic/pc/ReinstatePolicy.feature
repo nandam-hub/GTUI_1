@@ -2,7 +2,7 @@
 @policycenter @designatedfunction
 
 Feature: Reinstate policy in policy center
-    As a user, I want to perform reinstate transaction on cancelled Policy
+    As a user, I want to perform reinstate transaction on cancelled Policy and validating the policy transaction status
 
     @reinstate_policy
     Scenario: Reinstate transaction on canceled policy from actions menu
@@ -16,3 +16,4 @@ Feature: Reinstate policy in policy center
         And the user loads "pc" data "reinstatePolicy_01" from json "ReinstatePolicyTestData"
         And the user perform reinstate policy transaction
         Then the reinstate is successful
+        And the user validates policy transaction status

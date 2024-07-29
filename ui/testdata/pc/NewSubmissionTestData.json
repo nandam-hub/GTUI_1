@@ -86,6 +86,9 @@
         "AddressType": "Billing",
         "Organization": "a",
         "OrganizationType": "Common ownership",
+        "SubmissionStatus": "Bound",
+        "CancellationStatus": "Bound",
+        "ReinstatementStatus": "Bound",
         "Coverage": {
             "EachLossCausedByWind": "check",
             "EachLossCausedByWindLimit": "1000",
