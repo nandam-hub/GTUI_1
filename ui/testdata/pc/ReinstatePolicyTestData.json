@@ -1,7 +1,8 @@
 {
     "defaultDataSet": {
-        "Reason":"Other"
+        "Reason": "Other"
     },
     "reinstatePolicy_01": {
-            "Reason":"Other"
-        }}
+        "Reason": "Other"
+    }
+}

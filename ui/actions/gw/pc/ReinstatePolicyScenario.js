@@ -4,7 +4,7 @@ import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import world from "../../../util/gw/world"
 import { t } from "testcafe"
 
-const reinstatementWizard_New  = new ReinstatementWizard_New ()
+const reinstatementWizard_New = new ReinstatementWizard_New()
 const jobComplete_New = new JobComplete_New()
 const summary_Ext = new Summary_Ext()
 
@@ -22,5 +22,5 @@ export class ReinstatePolicyScenario {
 
     async validateReinstate() {
         await t.expect(await reinstatementWizard_New.reinstateComplete_Title.component.textContent).eql('Reinstatement Bound')
-        }
     }
+}

@@ -1,14 +1,16 @@
 import { PolicyTabBar_Ext } from "./scenarioPages/navigation/tabBar/PolicyTabBar_Ext";
-import { NextSubmissionWizard } from "../../../pages/gw/generated/policysolutions/pages/navigation/submissionWizard/NextSubmissionWizard.js";
-import { AccountTabBar_Ext } from './scenarioPages/navigation/tabBar/AccountTabBar_Ext.js'
+import { NextSubmissionWizard } from "../../../pages/gw/generated/policysolutions/pages/navigation/submissionWizard/NextSubmissionWizard";
+import { AccountTabBar_Ext } from './scenarioPages/navigation/tabBar/AccountTabBar_Ext'
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { NewAccount_Ext } from "./scenarioPages/account/NewAccount_Ext.js";
-import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar_Ext.js";
+import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar_Ext";
 import { ContactTabBar } from "../../../pages/gw/generated/policysolutions/pages/navigation/tabBar/ContactTabBar"
 import { ContactSearch_Ext } from "./scenarioPages/search/ContactSearch_Ext"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
+
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
+import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
 import { t } from "testcafe";
 
 const summary_Ext = new Summary_Ext()
@@ -22,6 +24,7 @@ const searchTabBar_Ext = new SearchTabBar_Ext();
 const submissionWizard_New = new SubmissionWizard_New()
 const contactTabBar = new ContactTabBar();
 const contactSearch_Ext = new ContactSearch_Ext()
+const accountMenuActions_Ext = new AccountMenuActions_Ext()
 
 export class NavigationScenario {
 
@@ -67,6 +70,10 @@ export class NavigationScenario {
     await policyTabBar_Ext.tabBarPolicyTab.click()
     await policyTabBar_Ext.policyTabPolicyTab_NewSubmission.click()
     await t.expect((policyTabBar_Ext.tabBar_Header).component.exists).ok();
+  }
+  async navigateNewSubmissionScreenActionsMenu() {
+    await accountMenuActions_Ext.accountFileAccountFileMenuActions.click()
+    await accountMenuActions_Ext.accountFileMenuActions_CreateAccountFileMenuActions_NewSubmission.click()
   }
 
   async navigateContactSearchScreen() {

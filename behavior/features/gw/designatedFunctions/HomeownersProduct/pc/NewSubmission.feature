@@ -21,9 +21,9 @@ Feature: Homeowner new submission
         Then the quote is saved successfully
 
     @issue_submission_ho
-    Scenario: Issuing homeowner policy
+    Scenario: Issuing homeowner policy from actions menu
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"
         And the user creates personal account
-        And the user issue the new homeowner policy
+        And the user issue the new submission from actions menu for homeowner policy
         Then the policy is issued
