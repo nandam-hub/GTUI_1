@@ -3,15 +3,17 @@ import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import world from "../../../util/gw/world"
 import { t } from "testcafe"
-import { PolicySummary_Ext } from "./scenarioPages/other/PolicySummary_Ext"
+import { PolicyFile_New} from "./scenarioPages/other/PolicyFile_New"
 import { AccountMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/AccountMenuLinks"
-import { searchTableRecord } from "../../../util/gw/helper"
+import { validateTableRecord } from "../../../util/gw/helper"
+import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks"
 
 const reinstatementWizard_New = new ReinstatementWizard_New()
 const jobComplete_New = new JobComplete_New()
 const summary_Ext = new Summary_Ext()
-const policySummary_Ext = new PolicySummary_Ext()
+const policyFile_New = new PolicyFile_New()
 const accountMenuLinks = new AccountMenuLinks()
+const policyMenuLinks = new PolicyMenuLinks()
 
 export class ReinstatePolicyScenario {
 
@@ -31,11 +33,9 @@ export class ReinstatePolicyScenario {
     //validating policy transaction status
     async validatingPolicyTransactionStatus() {
         await jobComplete_New.jobComplete_ViewPolicyHyperLink.click()
-        await policySummary_Ext.PolicyFileMenuInfoBar_AccountNumber.click()
-        await accountMenuLinks.menuLinksAccountFile_AccountFile_WorkOrders.click()
-        await searchTableRecord("Status", world.dataMap.get('SubmissionStatus'))
-        await searchTableRecord("Status", world.dataMap.get('CancellationStatus'))
-        await searchTableRecord("Status", world.dataMap.get('ReinstatementStatus'))
+        await policyMenuLinks.menuLinksPolicyFile_PolicyFile_Jobs.click()
+        console.log("Expected value "+world.dataMap.get('CurrentStatus'))
+        await t.expect(await validateTableRecord("Type", "Reinstatement", 5)).eql(world.dataMap.get('CurrentStatus'))
     }
 
 }
