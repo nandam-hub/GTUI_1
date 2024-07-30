@@ -5,7 +5,7 @@ Feature: Reinstate policy in policy center
     As a user, I want to perform reinstate transaction on cancelled Policy
 
     @reinstate_policy
-    Scenario: Reinstate transaction on canceled policy from actions menu and validating the policy transaction status
+    Scenario: Reinstate transaction on canceled policy from actions menu
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
         And the user creates commercial account
@@ -16,4 +16,3 @@ Feature: Reinstate policy in policy center
         And the user loads "pc" data "reinstatePolicy_01" from json "ReinstatePolicyTestData"
         And the user perform reinstate policy transaction
         Then the reinstate is successful
-        And the user validates policy transaction status

@@ -102,6 +102,10 @@ When(/^the user quote the new submission for umbrella liability/, async function
     await newSubmissionScenario.verifyQuote()
 })
 
+When(/^the user performs return to quote to the new submission/, async function () {
+    await newSubmissionScenario.returnToQuote()
+})
+
 When(/^the user issue the new submission for umbrella liability/, async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
@@ -204,7 +208,7 @@ When(/^the user issue the new homeowner policy/, async function () {
 })
 
 When(/^the user issue the new submission from actions menu for homeowner policy/, async function () {
-    await navigationScenario.navigateNewSubmissionScreen_ActionsMenu()
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
     await newSubmissionScenario.clickNext()
@@ -236,4 +240,9 @@ When(/^the user quote the new submission for commercial property/, async functio
 Then(/^the policy is issued/, async function () {
     await newSubmissionScenario.verifyIssue()
     await newSubmissionScenario.viewSubmission()
+})
+
+Then(/^the policy gets issued and the summary page is displayed/, async function () {
+    await newSubmissionScenario.verifyIssue()
+    await newSubmissionScenario.viewPolicy()
 })
