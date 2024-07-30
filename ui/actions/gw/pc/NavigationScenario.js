@@ -9,6 +9,7 @@ import { ContactSearch_Ext } from "./scenarioPages/search/ContactSearch_Ext"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
 import { t } from "testcafe";
+import { Summary_Ext } from "./scenarioPages/policy/Summary_Ext.js";
 
 const policyTabBar_Ext = new PolicyTabBar_Ext()
 const nextSubmissionWizard = new NextSubmissionWizard()
@@ -20,6 +21,7 @@ const submissionWizard_New = new SubmissionWizard_New()
 const contactTabBar = new ContactTabBar();
 const contactSearch_Ext = new ContactSearch_Ext()
 const accountMenuActions_Ext = new AccountMenuActions_Ext()
+const summary_Ext = new Summary_Ext()
 
 export class NavigationScenario {
 
@@ -112,5 +114,9 @@ export class NavigationScenario {
       default:
         await submissionWizard_New.submissionWizardGWHomeownersLine.click()
     }
+  }
+  async initiateReinstate() {
+    await summary_Ext.newTransactionTab.click()
+    await summary_Ext.policyDetailsDetailViewTileReinstatePolicy.click()
   }
 }

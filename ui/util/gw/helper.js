@@ -93,6 +93,5 @@ export async function validateTableRecord(headerNameOrIndex, stringValue, target
             break;
         }
     }
-    console.log("Actual value "+actualValue)
     return actualValue
 }
