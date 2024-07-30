@@ -16,14 +16,6 @@ const editPolicyAddressPopup_Ext = new EditPolicyAddressPopup_Ext()
 
 export class ChangePolicyScenario {
 
-    async policyChangeTransaction() {
-        await jobComplete_New.jobComplete_ViewPolicyHyperLink.click()
-        await summary_Ext.newTransactionTab.click()
-        await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
-        await policyChangeWizard_New.changePolicyNext.click()
-        await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input' )
-    }
-       
     async addressDetailchange() {
         await policyChangeWizard_New.changePolicyNewAddressTab.click()
         await policyChangeWizard_New.changePolicyNewAddress.click()
@@ -45,9 +37,12 @@ export class ChangePolicyScenario {
         await policyChangeWizard_New.changePolicyIssue.click()
     }
 
-    async validateAddressDetailChange() {
+    async validatePolicyChangeStatus() {
         await t.expect(await reinstatementWizard_New.reinstateComplete_Title.component.textContent).eql('Policy Change Bound')
         await jobComplete_New.jobComplete_Review_Changes.click()
+    }
+    
+    async validateAddressType() {   
         await t.expect(await policyChangeWizard_New.changePolicyAddressType.component.textContent).eql(world.dataMap.get('AddressType'))
         }
     }
