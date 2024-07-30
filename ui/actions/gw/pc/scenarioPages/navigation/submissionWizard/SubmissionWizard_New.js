@@ -15,7 +15,6 @@ export class SubmissionWizard_New {
 	submissionWizardOptionalCoverages = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-OptionalCoveragesTab')
 	submissionWizardExclusionsConditions = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-ExclusionsAndconditionsTab')
 	submissionWizardGWHomeownersLine = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-detailsTab')
-	submissionWizard_Premium = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-RatingCumulDetailsPanelSet-0-0-Type_button')
 	//#region small business
 	submissionWizardSmallBusienssTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-detailsTab')
 	submissionWizardSmallBusinessLineCoveragesTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-SBLLineCoveragesTab')

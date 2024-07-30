@@ -3,7 +3,7 @@ import { PolicyMenuActions } from "../../../../ui/pages/gw/generated/policysolut
 import { NavigationScenario } from "./NavigationScenario.js";
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { RenewalWizard_RenewalPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/Renewal/RenewalWizard_RenewalPopup.js";
-import { JobComplete_New } from "../../../../ui/actions/gw/pc/scenarioPages/other/JobComplete_New.js";
+import { JobComplete_New } from "./scenarioPages/other/jobComplete_New.js";
 import world from "../../../../ui/util/gw/world"
 
 const policyMenuActions = new PolicyMenuActions()
