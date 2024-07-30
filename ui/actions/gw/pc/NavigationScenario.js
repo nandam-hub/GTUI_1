@@ -7,9 +7,14 @@ import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar
 import { ContactTabBar } from "../../../pages/gw/generated/policysolutions/pages/navigation/tabBar/ContactTabBar"
 import { ContactSearch_Ext } from "./scenarioPages/search/ContactSearch_Ext"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
+
+import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
+import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
 import { t } from "testcafe";
 
+const summary_Ext = new Summary_Ext()
+const policyChangeWizard_New = new PolicyChangeWizard_New()
 const policyTabBar_Ext = new PolicyTabBar_Ext()
 const nextSubmissionWizard = new NextSubmissionWizard()
 const accountTabBar_Ext = new AccountTabBar_Ext()
@@ -113,4 +118,10 @@ export class NavigationScenario {
         await submissionWizard_New.submissionWizardGWHomeownersLine.click()
     }
   }
-}
+    async navigatepolicyChange() {
+      await summary_Ext.newTransactionTab.click()
+      await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
+      await policyChangeWizard_New.changePolicyNext.click()
+      await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input' )
+  }
+  }
