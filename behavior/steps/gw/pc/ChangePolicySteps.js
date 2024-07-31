@@ -8,7 +8,7 @@ const navigationScenario = new NavigationScenario();
 
 Then(/^the user perform address detail change transaction/, async function () {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
-    await navigationScenario.navigatepolicyChange()
+    await navigationScenario.navigatePolicyChange()
     await changePolicyScenario.addressDetailchange()
     await changePolicyScenario.quoteChangePolicy()
     await changePolicyScenario.issueChangePolicy()
