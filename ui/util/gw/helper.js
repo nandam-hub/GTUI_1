@@ -32,7 +32,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     const tableRows = Selector('table').nth(0).find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
-    
+
     //To find "headerNameOrIndex" is string or index
     if (typeof headerNameOrIndex === 'string') {
         const colsCount = await tablecols.count;
@@ -61,37 +61,41 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     }
 }
 
-    export async function validateTableRecord(headerNameOrIndex, stringValue, targetColumnIndex) {
-        await t.wait(1000)
-        const tableRows = Selector('table').nth(0).find('tr');
-        const tablecols = tableRows.nth(0).find('td');
-        const rowCount = await tableRows.count;
-        //To find "headerNameOrIndex" is string or index
-        if (typeof headerNameOrIndex === 'string') {
-            const colsCount = await tablecols.count;
-            for (let i = 0; i < colsCount; i++) {
-                let cellText
-                try {
-                    cellText = await tablecols.nth(i).find('div.gw-label').textContent;
-                }
-                catch (e) {
-                    // Skip a loop if no lable found - checkbox/empty title
-                    continue;
-                }
-                if (headerNameOrIndex.includes(cellText) && cellText.trim() !== '' && cellText.trim() !== null) {
-                    headerNameOrIndex = i;
-                    break;
-                }
+//To return a specific cell value from a table
+//headerNameOrIndex - Provide column name or column index of reference cell value
+//referenceCellValue - provide the reference cell value
+//targetColumnIndex - provide the column number or index where the value has to be retrieved
+export async function validateTableRecord(headerNameOrIndex, referenceCellValue, targetColumnIndex) {
+    await t.wait(1000)
+    const tableRows = Selector('table').nth(0).find('tr');
+    const tablecols = tableRows.nth(0).find('td');
+    const rowCount = await tableRows.count;
+    //To find "headerNameOrIndex" is string or index
+    if (typeof headerNameOrIndex === 'string') {
+        const colsCount = await tablecols.count;
+        for (let i = 0; i < colsCount; i++) {
+            let cellText
+            try {
+                cellText = await tablecols.nth(i).find('div.gw-label').textContent;
             }
-        }
-        let actualValue = "";
-        for (let i = 1; i < rowCount; i++) {
-            const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
-     
-            if (cellText.includes(stringValue)) {
-                actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget')).textContent;
+            catch (e) {
+                // Skip a loop if no lable found - checkbox/empty title
+                continue;
+            }
+            if (headerNameOrIndex.includes(cellText) && cellText.trim() !== '' && cellText.trim() !== null) {
+                headerNameOrIndex = i;
                 break;
             }
         }
-        return actualValue
     }
+    let actualValue = "";
+    for (let i = 1; i < rowCount; i++) {
+        const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
+
+        if (cellText.includes(referenceCellValue)) {
+            actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget')).textContent;
+            break;
+        }
+    }
+    return actualValue
+}
