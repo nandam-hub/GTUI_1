@@ -118,6 +118,12 @@ export class NavigationScenario {
         await submissionWizard_New.submissionWizardGWHomeownersLine.click()
     }
   }
+  
+  async initiateReinstate() {
+    await summary_Ext.newTransactionTab.click()
+    await summary_Ext.policyDetailsDetailViewTileReinstatePolicy.click()
+  }
+  
     async navigatepolicyChange() {
       await summary_Ext.newTransactionTab.click()
       await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()

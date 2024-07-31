@@ -3,6 +3,7 @@
         "Reason": "Other"
     },
     "reinstatePolicy_01": {
-        "Reason": "Other"
+        "Reason": "Other",
+        "CurrentStatus": "In Force"
     }
 }

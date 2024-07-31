@@ -6,3 +6,4 @@ export class JobComplete_New {
     jobComplete_SubmissionNumber = PcfComponent('#JobComplete-JobCompleteScreen-JobCompleteDV-ViewJob');
     jobComplete_Review_Changes = PcfComponent('#JobComplete-JobCompleteScreen-JobCompleteDV-ReviewChanges')
 }
+

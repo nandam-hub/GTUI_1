@@ -12,6 +12,10 @@ Then(/^the reinstate is successful/, async function () {
     await reinstatePolicyScenario.validateReinstate()
 });
 
+Then(/^the user validates policy transaction status/, async function () {
+    await reinstatePolicyScenario.validatingPolicyTransactionStatus()
+});
+
 
 
 
