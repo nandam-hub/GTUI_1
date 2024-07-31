@@ -118,16 +118,16 @@ export class NavigationScenario {
         await submissionWizard_New.submissionWizardGWHomeownersLine.click()
     }
   }
-  
+
   async initiateReinstate() {
     await summary_Ext.newTransactionTab.click()
     await summary_Ext.policyDetailsDetailViewTileReinstatePolicy.click()
   }
-  
-    async navigatepolicyChange() {
-      await summary_Ext.newTransactionTab.click()
-      await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
-      await policyChangeWizard_New.changePolicyNext.click()
-      await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input' )
+
+  async navigatepolicyChange() {
+    await summary_Ext.newTransactionTab.click()
+    await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
+    await policyChangeWizard_New.changePolicyNext.click()
+    await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input')
   }
-  }
+}
