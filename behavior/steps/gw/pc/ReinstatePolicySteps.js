@@ -1,7 +1,7 @@
 const { When, Then } = require("@cucumber/cucumber");
 import { ReinstatePolicyScenario } from "../../../../ui/actions/gw/pc/ReinstatePolicyScenario"
-import { t } from "testcafe";
 import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario";
+import { t } from "testcafe";
 
 const reinstatePolicyScenario = new ReinstatePolicyScenario();
 const navigationScenario = new NavigationScenario()

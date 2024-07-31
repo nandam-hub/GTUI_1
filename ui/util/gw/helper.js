@@ -32,7 +32,6 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     const tableRows = Selector('table').nth(0).find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
-
     //To find "headerNameOrIndex" is string or index
     if (typeof headerNameOrIndex === 'string') {
         const colsCount = await tablecols.count;
@@ -91,7 +90,6 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
     let actualValue = "";
     for (let i = 1; i < rowCount; i++) {
         const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
-
         if (cellText.includes(referenceCellValue)) {
             actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget')).textContent;
             break;
@@ -99,3 +97,5 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
     }
     return actualValue
 }
+
+
