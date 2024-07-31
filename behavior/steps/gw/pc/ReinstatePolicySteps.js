@@ -2,6 +2,7 @@ const { When, Then } = require("@cucumber/cucumber");
 import { ReinstatePolicyScenario } from "../../../../ui/actions/gw/pc/ReinstatePolicyScenario"
 import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario";
 import { t } from "testcafe";
+import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario";
 
 const reinstatePolicyScenario = new ReinstatePolicyScenario();
 const navigationScenario = new NavigationScenario()
@@ -19,8 +20,3 @@ Then(/^the reinstate is successful/, async function () {
 Then(/^the user validates policy transaction status/, async function () {
     await reinstatePolicyScenario.validatingPolicyTransactionStatus()
 });
-
-
-
-
-

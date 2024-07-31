@@ -128,6 +128,6 @@ export class NavigationScenario {
     await summary_Ext.newTransactionTab.click()
     await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
     await policyChangeWizard_New.changePolicyNext.click()
-    await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input')
+    await t.scrollIntoView(policyChangeWizard_New.changePolicyAddressButton_Input.component)
   }
 }

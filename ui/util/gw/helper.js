@@ -32,6 +32,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     const tableRows = Selector('table').nth(0).find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
+
     //To find "headerNameOrIndex" is string or index
     if (typeof headerNameOrIndex === 'string') {
         const colsCount = await tablecols.count;
@@ -64,7 +65,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
 //headerNameOrIndex - Provide column name or column index of reference cell value
 //referenceCellValue - provide the reference cell value
 //targetColumnIndex - provide the column number or index where the value has to be retrieved
-export async function validateTableRecord(headerNameOrIndex, stringValue, targetColumnIndex) {
+export async function validateTableRecord(headerNameOrIndex, referenceCellValue, targetColumnIndex) {
     await t.wait(1000)
     const tableRows = Selector('table').nth(0).find('tr');
     const tablecols = tableRows.nth(0).find('td');
@@ -90,11 +91,12 @@ export async function validateTableRecord(headerNameOrIndex, stringValue, target
     let actualValue = "";
     for (let i = 1; i < rowCount; i++) {
         const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
-
-        if (cellText.includes(stringValue)) {
+        if (cellText.includes(referenceCellValue)) {
             actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget')).textContent;
             break;
         }
     }
     return actualValue
 }
+}
+

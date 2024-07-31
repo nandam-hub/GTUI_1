@@ -29,5 +29,4 @@ export class ReinstatePolicyScenario {
         await policyMenuLinks.menuLinksPolicyFile_PolicyFile_Jobs.click()
         await t.expect(await validateTableRecord("Type", "Reinstatement", 5)).eql(world.dataMap.get('CurrentStatus'))
     }
-
 }
