@@ -32,7 +32,6 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     const tableRows = Selector('table').nth(0).find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
-
     //To find "headerNameOrIndex" is string or index
     if (typeof headerNameOrIndex === 'string') {
         const colsCount = await tablecols.count;
