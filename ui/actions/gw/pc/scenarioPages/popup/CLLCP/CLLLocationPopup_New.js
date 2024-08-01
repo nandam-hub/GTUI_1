@@ -5,6 +5,6 @@ export class CLLLocationPopup_New {
     cllCPBuildingPopupOk = PcfButton('#CLLCPBuildingPopup-Update')
     cllLocationPopupOk = PcfButton('#CLLLocationPopup-Update')
     cllLocationPopupAddress = PcfSelectInput('#CLLLocationPopup-CLLLocationPanelSet-AddressOfLocation')
-    BuildingDescription = PcfTextInput('#CLLCPBuildingPopup-CLLCPBuildingPanelSet-BuildingDesc')
-    YearBuilt = PcfTextInput('#CLLCPBuildingPopup-CLLCPBuildingPanelSet-YearBuilt')
+    buildingDescription = PcfTextInput('#CLLCPBuildingPopup-CLLCPBuildingPanelSet-BuildingDesc')
+    yearBuilt = PcfTextInput('#CLLCPBuildingPopup-CLLCPBuildingPanelSet-YearBuilt')
 }
