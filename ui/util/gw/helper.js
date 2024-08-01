@@ -98,6 +98,7 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
     return actualValue
 }
 
-export function pascalToCamel(inputString = "") {
-    return inputString.charAt(0).toLowerCase() + inputString.slice(1)
+export function pascalToCamel(inputString) {
+    if (typeof inputString == 'string')
+        return inputString.charAt(0).toLowerCase() + inputString.slice(1)
 }

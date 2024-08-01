@@ -5,7 +5,7 @@
         "AutoLiabilityPackage": "25/50/10",
         "BodyType": "ATV",
         "LicenseState": "Idaho",
-        "VIN": "JH4KA2630HC019837",
+        "VinNumber": "JH4KA2630HC019837",
         "Year": "1987",
         "Make": "Acura",
         "Model": "Legend",
@@ -25,7 +25,7 @@
             "Vehicle1": {
                 "BodyType": "ATV",
                 "LicenseState": "Idaho",
-                "VIN": "JH4KA2630HC019837",
+                "VinNumber": "JH4KA2630HC019837",
                 "Year": "1987",
                 "Make": "Acura",
                 "Model": "Legend"
@@ -121,18 +121,18 @@
             "Vehicle1": {
                 "BodyType": "ATV",
                 "LicenseState": "Idaho",
-                "VIN": "JH4KA2630HC019837",
+                "VinNumber": "JH4KA2630HC019837",
                 "Year": "1987",
                 "Make": "Acura",
                 "Model": "Legend"
             },
             "Vehicle2": {
                 "BodyType": "Snowmobile",
-                "VIN": "3G5DB03E42S524192"
+                "VinNumber": "3G5DB03E42S524192"
             },
             "Vehicle3": {
                 "BodyType": "Trailer",
-                "VIN": "7678476FCV7876352",
+                "VinNumber": "7678476FCV7876352",
                 "Year": "2020",
                 "Make": "HOMEMADE",
                 "Model": "TRAILER"
