@@ -29,7 +29,7 @@ Feature: Commercial property new submission
         Then the policy is issued
 
     @multiple_building
-    Scenario: Issuing commercial property from actions menu
+    Scenario: Issuing commercial property with multiple buildings
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_07" from json "NewSubmissionTestData"
         And the user creates commercial account
