@@ -12,4 +12,5 @@ When(/^the user loads (.*) data (.*) from json (.*)/, async function (t, stepArg
     world.dataMap = await readTestDataFiles.loadTestData(identifier, module, jsonFileName)
     world.coverageDataMap = world.dataMap.get('Coverage')
     world.vehicleDataMap = world.dataMap.get('Vehicles')
+    world.buildingDataMap = world.dataMap.get('Buildings')
 });

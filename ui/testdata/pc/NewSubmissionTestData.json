@@ -148,5 +148,33 @@
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10"
         }
+    },
+    "newSubmission_07": {
+        "ProductName": "Go Commercial Property",
+        "Address1": "4700 S MOLSTEADS LN",
+        "State": "Idaho",
+        "ZIPCode": "83814-5113",
+        "AddressType": "Billing",
+        "Organization": "a",
+        "OrganizationType": "Common ownership",
+        "Coverage": {
+            "EachLossCausedByWind": "check",
+            "EachLossCausedByWindLimit": "1000",
+            "EachLossCausedByWindDeductible": "200"
+        },
+        "Buildings": {
+            "Building1": {
+                "BuildingDescription": "Building1",
+                "YearBuilt": "1985"
+            },
+            "Building2": {
+                "BuildingDescription": "Building2",
+                "YearBuilt": "1987"
+            },
+            "Building3": {
+                "BuildingDescription": "Building3",
+                "YearBuilt": "2000"
+            }
+        }
     }
 }

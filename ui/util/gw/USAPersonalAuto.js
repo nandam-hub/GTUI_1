@@ -13,7 +13,7 @@ export class USAPersonalAuto {
     //To load vehicle data from json input and add single or multiple vehicle
     async addVehicle() {
         const pcfType = await loadPcfCategory()
-        console.log(pcfType)
+
         if (!(world.vehicleDataMap === undefined) && Array.from(world.vehicleDataMap.keys()).length > 0) {
             t.ctx.module = 'Vehicles'
             console.log(`The current module is ${t.ctx.module}`)
