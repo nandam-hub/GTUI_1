@@ -1,5 +1,6 @@
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "../../actions/gw/pc/scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { UALPersonalVehiclePopup_New } from "../../actions/gw/pc/scenarioPages/other/UALPersonalVehiclePopup_New";
+import { CLLLocationPopup_New } from "../../actions/gw/pc/scenarioPages/popup/CLLCP/CLLLocationPopup_New";
 import world from "./world"
 import { t } from "testcafe";
 const fs = require('fs').promises;
@@ -7,10 +8,12 @@ const fs = require('fs').promises;
 let pcfCategory;
 const lobWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
+const cllLocationPopup_New = new CLLLocationPopup_New()
 
 const ModIdentifier = {
     coverage: lobWizardStepGroupSubmissionWizard_Ext,
-    vehicle: ualPersonalVehiclePopup_New
+    vehicle: ualPersonalVehiclePopup_New,
+    building: cllLocationPopup_New
 };
 
 export async function loadPcfCategory() {
@@ -44,6 +47,15 @@ export async function checkBox(fieldName) {
             if (checkAction === 'uncheck' && (await ModIdentifier.vehicle[fieldName].isChecked()))
                 await ModIdentifier.vehicle[fieldName].click()
             break;
+
+        case ('Building'):
+            if (checkAction === 'check' || checkAction === 'update') {
+                if (!(await ModIdentifier.building[fieldName].isChecked()))
+                    await ModIdentifier.building[fieldName].click()
+            }
+            if (checkAction === 'uncheck' && (await ModIdentifier.building[fieldName].isChecked()))
+                await ModIdentifier.building[fieldName].click()
+            break;
         default:
             throw new Error('Incorrect module provided')
     }
@@ -58,6 +70,9 @@ export async function textInput(fieldName) {
         case ('Vehicles'):
             await ModIdentifier.vehicle[fieldName].setValue(t.ctx.VehicleData)
             break;
+        case ('Building'):
+            await ModIdentifier.building[fieldName].setValue(t.ctx.BuildingData)
+            break;
         default:
             throw new Error('Incorrect module provided')
     }
@@ -71,6 +86,9 @@ export async function selectInput(fieldName) {
             break;
         case ('Vehicles'):
             await ModIdentifier.vehicle[fieldName].selectOptionByLabel(t.ctx.VehicleData)
+            break;
+        case ('Building'):
+            await ModIdentifier.building[fieldName].selectOptionByLabel(t.ctx.BuildingData)
             break;
         default:
             throw new Error('Incorrect module provided')
