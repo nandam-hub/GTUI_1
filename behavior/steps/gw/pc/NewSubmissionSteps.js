@@ -237,3 +237,22 @@ Then(/^the policy gets issued and the summary page is displayed/, async function
     await newSubmissionScenario.verifyIssue()
     await newSubmissionScenario.viewPolicy()
 })
+
+When(/^the user initiates the quote/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+})
+
+Then(/^the user validates error messages in GWHomeownersLine screen/, async function () {
+    await newSubmissionScenario.verifyingGWHomeownersLineScreen()
+})
+
+Then(/^the user validates error messages in Section II coverages screen/, async function () {
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await navigationScenario.navigateGWHomeownersLineTab('SectionIICoverages')
+    await newSubmissionScenario.verifyingSectionIICoveragesScreen()
+})

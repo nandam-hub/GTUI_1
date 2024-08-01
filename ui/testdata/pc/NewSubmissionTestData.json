@@ -58,7 +58,9 @@
             "IdentityTheftProtection": "check",
             "IdentityTheftProtectionLimit": "15,000",
             "IdentityTheftProtectionDeductible": "500"
-        }
+        },
+        "RefusalTypeErrorMessage": "Refusal Type : Missing required field",
+        "CoverageErrorMessage": "Cannot quote a(n) GW Homeowners Line policy with no coverages."
     },
     "newSubmission_03": {
         "ProductName": "Commercial Umbrella and Excess Liability",
