@@ -27,6 +27,9 @@ export class GoCommercialProperty {
                         console.log(`${dataKey} is present`)
                         await textInput(dataKey)
                     }
+                    else{
+                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
+                    }
                 }
                 await cllLocationPopup_New.cllCPBuildingPopupOk.click()
                 i++
@@ -61,6 +64,9 @@ export class GoCommercialProperty {
                     else if (pcfType.textInput.includes(dataKey)) {
                         console.log(`${dataKey} is present`)
                         await textInput(dataKey)
+                    }
+                    else{
+                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
                     }
                 }
                 await cllLocationPopup_New.cllLocationPopupLocationOk.click()
