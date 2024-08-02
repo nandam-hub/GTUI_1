@@ -1,0 +1,9 @@
+{
+    "defaultDataSet": {
+        "WorkPlanFilter": "All open activities"
+    },
+    "workPlan_01": {
+        "WorkPlanFilter": "All activities",
+        "Status": "Complete"
+    }
+}
