@@ -28,11 +28,11 @@ Feature: Homeowner new submission
         And the user issue the new submission from actions menu for homeowner policy
         Then the policy is issued
 
-    @VerifyingUIErrormessages
+    @error_messages_submission_ho
     Scenario: User Verifying UI Error messages on Homeowners policy
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"
         And the user creates personal account
-        And the user initiates the quote
-        Then the user validates error messages in GWHomeownersLine screen
-        And the user validates error messages in Section II coverages screen
+        And the user initiate homeowner quote
+        Then the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen
+        And the user validates error messages without selecting any coverage in Homeowners policy

@@ -238,7 +238,7 @@ Then(/^the policy gets issued and the summary page is displayed/, async function
     await newSubmissionScenario.viewPolicy()
 })
 
-When(/^the user initiates the quote/, async function () {
+When(/^the user initiate homeowner quote/, async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -247,12 +247,14 @@ When(/^the user initiates the quote/, async function () {
     await newSubmissionScenario.clickNext()
 })
 
-Then(/^the user validates error messages in GWHomeownersLine screen/, async function () {
-    await newSubmissionScenario.verifyingGWHomeownersLineScreen()
+Then(/^the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen/, async function () {
+    await newSubmissionScenario.verifyingRefusalTypeErrorMsg()
 })
 
-Then(/^the user validates error messages in Section II coverages screen/, async function () {
+Then(/^the user validates error messages without selecting any coverage in Homeowners policy/, async function () {
     await newSubmissionScenario.gWHomeownersLineScreen()
-    await navigationScenario.navigateGWHomeownersLineTab('SectionIICoverages')
-    await newSubmissionScenario.verifyingSectionIICoveragesScreen()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyingHomeownersCoverageErrorMsg()
 })

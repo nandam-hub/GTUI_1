@@ -14,8 +14,7 @@ import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
 import { USAPersonalAuto } from "../../../util/gw/USAPersonalAuto"
 import world from "../../../util/gw/world"
-import { SectionIICoveragesPopup_New } from "./scenarioPages/popup/Organization/SectionIICoveragesPopup_New.js";
-
+import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -29,7 +28,7 @@ const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizar
 const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
 const usaPersonalAuto = new USAPersonalAuto()
-const sectionIICoveragesPopup_New = new SectionIICoveragesPopup_New()
+const webMessageWorksheet_New = new WebMessageWorksheet_New()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -165,12 +164,11 @@ export class NewSubmissionScenario {
     await submissionWizard_New.submissionWizardBusinessType.selectOptionByLabel(world.dataMap.get('BusinessType'))
   }
 
-  async verifyingGWHomeownersLineScreen() {
-    await t.expect(await submissionWizard_New.SubmissionWizard_HLLGwHomeownersLineScreen_msgs_0_0.component.innerText).contains(world.dataMap.get('RefusalTypeErrorMessage'))
+  async verifyingRefusalTypeErrorMsg() {
+    await t.expect(await submissionWizard_New.submissionWizard_RefusalType_ErrorMsg.component.innerText).contains(world.dataMap.get('RefusalTypeErrorMessage'))
   }
 
-  async verifyingSectionIICoveragesScreen() {
-    await submissionWizard_New.HLLGwHomeownersLineScreen_QuoteTypeToolbarButtonSet_Quote.click()
-    await t.expect(await sectionIICoveragesPopup_New.WebMessageWorksheetScreen_grpMsgs_0_0.component.innerText).eql(world.dataMap.get('CoverageErrorMessage'))
+  async verifyingHomeownersCoverageErrorMsg() {
+    await t.expect(await webMessageWorksheet_New.webMessageWorksheet_NoCoverageError.component.innerText).eql(world.dataMap.get('CoverageErrorMessage'))
   }
 }
