@@ -157,6 +157,7 @@
         "AddressType": "Billing",
         "Organization": "a",
         "OrganizationType": "Common ownership",
+        "LocationAdded":"3: 789 Main st, Pewaukee, ID",
         "Coverage": {
             "EachLossCausedByWind": "check",
             "EachLossCausedByWindLimit": "1000",
@@ -174,6 +175,18 @@
             "Building3": {
                 "BuildingDescription": "Building3",
                 "YearBuilt": "2000"
+            }
+        },
+        "Locations": {
+            "Location1": {
+                "CllLocationPopupAddress1": "345 Main st",
+                "CllLocationPopupCity": "Pewaukee",
+                "CllLocationPopupZipCode": "53075-0000"
+            },
+            "Location2": {
+                "CllLocationPopupAddress1": "789 Main st",
+                "CllLocationPopupCity": "Pewaukee",
+                "CllLocationPopupZipCode": "53077-0000"
             }
         }
     }

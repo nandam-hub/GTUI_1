@@ -61,6 +61,16 @@ export async function checkBox(fieldName) {
             if (checkAction === 'uncheck' && (await ModIdentifier.building[camelfieldName].isChecked()))
                 await ModIdentifier.building[camelfieldName].click()
             break;
+
+        case ('Location'):
+            if (checkAction === 'check' || checkAction === 'update') {
+                if (!(await ModIdentifier.building[camelfieldName].isChecked()))
+                    await ModIdentifier.building[camelfieldName].click()
+            }
+            if (checkAction === 'uncheck' && (await ModIdentifier.building[camelfieldName].isChecked()))
+                await ModIdentifier.building[camelfieldName].click()
+            break;
+
         default:
             throw new Error('Incorrect module provided')
     }
@@ -81,6 +91,9 @@ export async function textInput(fieldName) {
         case ('Building'):
             await ModIdentifier.building[camelfieldName].setValue(t.ctx.BuildingData)
             break;
+        case ('Location'):
+            await ModIdentifier.building[camelfieldName].setValue(t.ctx.LocationData)
+            break;
         default:
             throw new Error('Incorrect module provided')
     }
@@ -100,6 +113,9 @@ export async function selectInput(fieldName) {
             break;
         case ('Building'):
             await ModIdentifier.building[camelfieldName].selectOptionByLabel(t.ctx.BuildingData)
+            break;
+        case ('Location'):
+            await ModIdentifier.building[camelfieldName].selectOptionByLabel(t.ctx.LocationData)
             break;
         default:
             throw new Error('Incorrect module provided')
