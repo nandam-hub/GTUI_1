@@ -28,10 +28,13 @@ export class SubmissionWizard_New {
 	SubmissionWizard_AddPersonalVehicle = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALPersonalVehicleScreen-UALPersonalVehicleListPanelSet-AddPersonalVehicle')
 	//#endregion
 	
-	//edit policy
 	submissionWizardEditPolicy = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-EditPolicy')
-	submissionWizardLOBCommercial = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-CLLWizardStepGroup')
+	submissionWizardLOBCommercial1 = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-CLLWizardStepGroup')
+	
+	submissionWizardLOBCommercial = PcfButton('#PolicyFile-PolicyFileAcceleratedMenuActions-PolicyMenuItemSet-PolicyMenuItemSet_GOCommercialPropertyLine')
 	submissionWizardCheckBox = PcfCheckBox ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-3-CoverageInputSet-CovPatternInputGroup-_checkbox_checkboxDiv')
 	submissionQuote = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote')
-	submissionValidateCoverage = PcfComponent ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-1-CoverageInputSet-CovPatternInputGroup > div.gw-InputGroup--header > div.gw-InputGroup--header--label')
+	//submissionValidateCoverageOfCommercialLine = PcfComponent ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-1-CoverageInputSet-CovPatternInputGroup > div.gw-InputGroup--header > div.gw-InputGroup--header--label')
+
+	submissionValidateCoverageOfCommercialLine = PcfComponent ('#PolicyFile_CLLCPLTypeName1-PolicyFile_CLLCPLTypeName1Screen-PolicyFile_CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-1-CoverageInputSet-CovPatternInputGroup > div.gw-InputGroup--header > div.gw-InputGroup--header--label')
 }
