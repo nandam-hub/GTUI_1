@@ -7,7 +7,7 @@ import { t } from "testcafe";
 const fs = require('fs').promises;
 
 let pcfCategory;
-let camelfieldName;
+let camelFieldName;
 const lobWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
 const cllLocationPopup_New = new CLLLocationPopup_New()
@@ -32,35 +32,45 @@ export async function loadPcfCategory() {
 export async function checkBox(fieldName) {
     const checkAction = world.coverageDataMap.get(fieldName)
     //To convert pascal casing input to camel casing as per css standard
-    camelfieldName = pascalToCamel(fieldName)
+    camelFieldName = pascalToCamel(fieldName)
 
     switch (t.ctx.module) {
         case ('Coverage'):
             if (checkAction === 'check' || checkAction === 'update') {
-                if (!(await ModIdentifier.coverage[camelfieldName].isChecked()))
-                    await ModIdentifier.coverage[camelfieldName].click()
+                if (!(await ModIdentifier.coverage[camelFieldName].isChecked()))
+                    await ModIdentifier.coverage[camelFieldName].click()
             }
-            if (checkAction === 'uncheck' && (await ModIdentifier.coverage[camelfieldName].isChecked()))
-                await ModIdentifier.coverage[camelfieldName].click()
+            if (checkAction === 'uncheck' && (await ModIdentifier.coverage[camelFieldName].isChecked()))
+                await ModIdentifier.coverage[camelFieldName].click()
             break;
 
         case ('Vehicles'):
             if (checkAction === 'check' || checkAction === 'update') {
-                if (!(await ModIdentifier.vehicle[camelfieldName].isChecked()))
-                    await ModIdentifier.vehicle[camelfieldName].click()
+                if (!(await ModIdentifier.vehicle[camelFieldName].isChecked()))
+                    await ModIdentifier.vehicle[camelFieldName].click()
             }
-            if (checkAction === 'uncheck' && (await ModIdentifier.vehicle[camelfieldName].isChecked()))
-                await ModIdentifier.vehicle[camelfieldName].click()
+            if (checkAction === 'uncheck' && (await ModIdentifier.vehicle[camelFieldName].isChecked()))
+                await ModIdentifier.vehicle[camelFieldName].click()
             break;
 
         case ('Building'):
             if (checkAction === 'check' || checkAction === 'update') {
-                if (!(await ModIdentifier.building[camelfieldName].isChecked()))
-                    await ModIdentifier.building[camelfieldName].click()
+                if (!(await ModIdentifier.building[camelFieldName].isChecked()))
+                    await ModIdentifier.building[camelFieldName].click()
             }
-            if (checkAction === 'uncheck' && (await ModIdentifier.building[camelfieldName].isChecked()))
-                await ModIdentifier.building[camelfieldName].click()
+            if (checkAction === 'uncheck' && (await ModIdentifier.building[camelFieldName].isChecked()))
+                await ModIdentifier.building[camelFieldName].click()
             break;
+
+        case ('Location'):
+            if (checkAction === 'check' || checkAction === 'update') {
+                if (!(await ModIdentifier.building[camelFieldName].isChecked()))
+                    await ModIdentifier.building[camelFieldName].click()
+            }
+            if (checkAction === 'uncheck' && (await ModIdentifier.building[camelFieldName].isChecked()))
+                await ModIdentifier.building[camelFieldName].click()
+            break;
+
         default:
             throw new Error('Incorrect module provided')
     }
@@ -69,17 +79,20 @@ export async function checkBox(fieldName) {
 //Function to type in input box
 export async function textInput(fieldName) {
     //To convert pascal casing input to camel casing as per css standard
-    camelfieldName = pascalToCamel(fieldName)
+    camelFieldName = pascalToCamel(fieldName)
 
     switch (t.ctx.module) {
         case ('Coverage'):
-            await ModIdentifier.coverage[camelfieldName].setValue(world.coverageDataMap.get(fieldName))
+            await ModIdentifier.coverage[camelFieldName].setValue(world.coverageDataMap.get(fieldName))
             break;
         case ('Vehicles'):
-            await ModIdentifier.vehicle[camelfieldName].setValue(t.ctx.VehicleData)
+            await ModIdentifier.vehicle[camelFieldName].setValue(t.ctx.VehicleData)
             break;
         case ('Building'):
-            await ModIdentifier.building[camelfieldName].setValue(t.ctx.BuildingData)
+            await ModIdentifier.building[camelFieldName].setValue(t.ctx.BuildingData)
+            break;
+        case ('Location'):
+            await ModIdentifier.building[camelFieldName].setValue(t.ctx.LocationData)
             break;
         default:
             throw new Error('Incorrect module provided')
@@ -89,17 +102,20 @@ export async function textInput(fieldName) {
 //Function to select value from dropdown by label
 export async function selectInput(fieldName) {
     //To convert pascal casing input to camel casing as per css standard
-    camelfieldName = pascalToCamel(fieldName)
+    camelFieldName = pascalToCamel(fieldName)
 
     switch (t.ctx.module) {
         case ('Coverage'):
-            await ModIdentifier.coverage[camelfieldName].selectOptionByLabel(world.coverageDataMap.get(fieldName))
+            await ModIdentifier.coverage[camelFieldName].selectOptionByLabel(world.coverageDataMap.get(fieldName))
             break;
         case ('Vehicles'):
-            await ModIdentifier.vehicle[camelfieldName].selectOptionByLabel(t.ctx.VehicleData)
+            await ModIdentifier.vehicle[camelFieldName].selectOptionByLabel(t.ctx.VehicleData)
             break;
         case ('Building'):
-            await ModIdentifier.building[camelfieldName].selectOptionByLabel(t.ctx.BuildingData)
+            await ModIdentifier.building[camelFieldName].selectOptionByLabel(t.ctx.BuildingData)
+            break;
+        case ('Location'):
+            await ModIdentifier.building[camelFieldName].selectOptionByLabel(t.ctx.LocationData)
             break;
         default:
             throw new Error('Incorrect module provided')
@@ -125,6 +141,9 @@ export async function coverageFilter() {
             else if (pcfType.checkBox.includes(key)) {
                 console.log(`${key} is present`)
                 await checkBox(key)
+            }
+            else{
+                throw new Error(`${key} is NOT present in pcfCategory.json file`)
             }
         }
     }

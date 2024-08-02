@@ -18,7 +18,7 @@
     "ContentsOfOtherStructuresLimit"
   ],
   "textInput": [
-    "VIN",
+    "VinNumber",
     "Year",
     "Make",
     "Model",
@@ -28,7 +28,10 @@
     "OutsideObjectsAndStructuresDeductible",
     "ContentsOfOtherStructuresDeductible",
     "BuildingDescription",
-    "YearBuilt"
+    "YearBuilt",
+    "CllLocationPopupAddress1",
+    "CllLocationPopupCity",
+    "CllLocationPopupZipCode"
   ],
   "checkBox": [
     "LiabilityBodilyInjuryAndPropertyDamage",

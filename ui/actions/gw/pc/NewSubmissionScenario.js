@@ -167,9 +167,13 @@ export class NewSubmissionScenario {
     await submissionWizard_New.submissionWizardBusinessType.selectOptionByLabel(world.dataMap.get('BusinessType'))
   }
 
-  async addLocation() {
+  async addLocation(locationNum = "1") {
     await submissionWizard_New.submissionWizardAddLocation.click()
     await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
+    await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
+    await cllLocationPopup_New.cllLocationPopupNewLocation.click()
+    await goCommercialProperty.addLocation()
+    console.log(`Added ${locationNum} location(s) successfully`)
   }
 
   async addBuilding(buildingNum = "1") {
