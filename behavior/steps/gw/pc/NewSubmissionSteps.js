@@ -238,6 +238,27 @@ Then(/^the policy gets issued and the summary page is displayed/, async function
     await newSubmissionScenario.viewPolicy()
 })
 
+When(/^the user initiate homeowner quote/, async function () {
+    await navigationScenario.navigateNewSubmissionScreen()
+    await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+})
+
+Then(/^the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen/, async function () {
+    await newSubmissionScenario.verifyingRefusalTypeErrorMsg()
+})
+
+Then(/^the user validates error messages without selecting any coverage in Homeowners policy/, async function () {
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyingHomeownersCoverageErrorMsg()
+})
+
 When(/^the user issue the new submission for commercial property with (.*) building/, async function (t, stepArguments) {
     await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
