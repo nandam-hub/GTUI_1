@@ -13,7 +13,7 @@ export class USAPersonalAuto {
     //To load vehicle data from json input and add single or multiple vehicle
     async addVehicle() {
         const pcfType = await loadPcfCategory()
-        console.log(pcfType)
+
         if (!(world.vehicleDataMap === undefined) && Array.from(world.vehicleDataMap.keys()).length > 0) {
             t.ctx.module = 'Vehicles'
             console.log(`The current module is ${t.ctx.module}`)
@@ -29,6 +29,9 @@ export class USAPersonalAuto {
                     else if (pcfType.textInput.includes(dataKey)) {
                         console.log(`${dataKey} is present`)
                         await textInput(dataKey)
+                    }
+                    else{
+                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
                     }
                 }
                 await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()

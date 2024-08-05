@@ -12,7 +12,9 @@ import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizar
 import { JobWizardInfoBarSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/JobWizardInfoBarSubmissionWizard_Ext";
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
-import { USAPersonalAuto} from "../../../util/gw/USAPersonalAuto"
+import { USAPersonalAuto } from "../../../util/gw/USAPersonalAuto"
+import { GoCommercialProperty } from "../../../util/gw/GoCommercialProperty.js";
+import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import world from "../../../util/gw/world"
 
 
@@ -28,6 +30,8 @@ const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizar
 const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
 const usaPersonalAuto = new USAPersonalAuto()
+const goCommercialProperty = new GoCommercialProperty()
+const cllLocationPopup_New = new CLLLocationPopup_New
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -121,8 +125,7 @@ export class NewSubmissionScenario {
     await submissionWizard_New.submissionWizard_Quote.click()
   }
 
-  async returnToQuote()
-  {
+  async returnToQuote() {
     await submissionWizard_New.submissionWizard_Premium.click()
     await ratingCostDetailPopup.ratingCostDetailPopup__crumb__.click()
   }
@@ -155,12 +158,28 @@ export class NewSubmissionScenario {
 
   async commercialUmbrellaAccessliability() {
     console.log("On Commercial Umbrella And Excess Liability screen")
-    await lOBWizardStepGroupSubmissionWizard_Ext.UmbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
-    await lOBWizardStepGroupSubmissionWizard_Ext.UmbrellaLiabilityUmbrellaCoverages.click()
+    await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
+    await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityUmbrellaCoverages.click()
   }
 
   async smallBusinessBusinessType() {
     console.log("On Small Business screen")
     await submissionWizard_New.submissionWizardBusinessType.selectOptionByLabel(world.dataMap.get('BusinessType'))
+  }
+
+  async addLocation(locationNum = "1") {
+    await submissionWizard_New.submissionWizardAddLocation.click()
+    await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
+    await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
+    await cllLocationPopup_New.cllLocationPopupNewLocation.click()
+    await goCommercialProperty.addLocation()
+    console.log(`Added ${locationNum} location(s) successfully`)
+  }
+
+  async addBuilding(buildingNum = "1") {
+    await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
+    await goCommercialProperty.addBuidling()
+    console.log(`Added ${buildingNum} buidling(s) successfully`)
+    await cllLocationPopup_New.cllLocationPopupOk.click()
   }
 }

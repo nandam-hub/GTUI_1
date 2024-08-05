@@ -7,6 +7,7 @@ import { SearchTabBar_Ext } from "./scenarioPages/navigation/tabBar/SearchTabBar
 import { ContactTabBar } from "../../../pages/gw/generated/policysolutions/pages/navigation/tabBar/ContactTabBar"
 import { ContactSearch_Ext } from "./scenarioPages/search/ContactSearch_Ext"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
+import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
@@ -24,6 +25,7 @@ const submissionWizard_New = new SubmissionWizard_New()
 const contactTabBar = new ContactTabBar();
 const contactSearch_Ext = new ContactSearch_Ext()
 const accountMenuActions_Ext = new AccountMenuActions_Ext()
+const cllLocationPopup_New = new CLLLocationPopup_New()
 
 export class NavigationScenario {
 
@@ -128,5 +130,9 @@ export class NavigationScenario {
     await summary_Ext.policyDetailsDetailViewTileChangePolicy.click()
     await policyChangeWizard_New.changePolicyNext.click()
     await t.scrollIntoView('#PolicyChangeWizard-LOBWizardStepGroup-PolicyChangeWizard_PolicyInfoScreen-PolicyChangeWizard_PolicyInfoDV-AccountInfoInputSet-ChangePolicyAddressButton_Input')
+  }
+
+  async clickNewSubmissionOk() {
+    await cllLocationPopup_New.cllLocationPopupOk.click()
   }
 }
