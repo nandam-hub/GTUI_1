@@ -28,8 +28,8 @@ Feature: Homeowner new submission
         And the user issue the new submission from actions menu for homeowner policy
         Then the policy is issued
 
-    @error_messages_submission_ho
-    Scenario: User Verifying UI Error messages on Homeowners policy
+    @error_messages_validation_ho
+    Scenario: Verifying UI Error messages on Homeowners policy
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"
         And the user creates personal account
