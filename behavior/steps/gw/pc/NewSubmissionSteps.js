@@ -1,7 +1,7 @@
 const { When, Then } = require('@cucumber/cucumber')
 import { NewSubmissionScenario } from '../../../../ui/actions/gw/pc/NewSubmissionScenario'
 import { NavigationScenario } from '../../../../ui/actions/gw/pc/NavigationScenario'
-import {coverageFilter }from '../../../../ui/util/gw/ActionHelper'
+import { coverageFilter } from '../../../../ui/util/gw/ActionHelper'
 import { t } from 'testcafe'
 
 const newSubmissionScenario = new NewSubmissionScenario()
@@ -257,4 +257,38 @@ Then(/^the user validates error messages without selecting any coverage in Homeo
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
     await newSubmissionScenario.verifyingHomeownersCoverageErrorMsg()
+})
+
+When(/^the user issue the new submission for commercial property with (.*) building/, async function (t, stepArguments) {
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addCpBlanket()
+    await newSubmissionScenario.addLocation()
+    await newSubmissionScenario.addBuilding(stepArguments[0])
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+When(/^the user issue the new submission for commercial property with (.*) location/, async function (t, stepArguments) {
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addCpBlanket()
+    await newSubmissionScenario.addLocation(stepArguments[0])
+    await navigationScenario.clickNewSubmissionOk()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
 })

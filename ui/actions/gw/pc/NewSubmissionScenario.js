@@ -13,6 +13,8 @@ import { JobWizardInfoBarSubmissionWizard_Ext } from "./scenarioPages/navigation
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
 import { USAPersonalAuto } from "../../../util/gw/USAPersonalAuto"
+import { GoCommercialProperty } from "../../../util/gw/GoCommercialProperty.js";
+import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 
@@ -29,6 +31,8 @@ const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
 const usaPersonalAuto = new USAPersonalAuto()
 const webMessageWorksheet_New = new WebMessageWorksheet_New()
+const goCommercialProperty = new GoCommercialProperty()
+const cllLocationPopup_New = new CLLLocationPopup_New
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -155,8 +159,8 @@ export class NewSubmissionScenario {
 
   async commercialUmbrellaAccessliability() {
     console.log("On Commercial Umbrella And Excess Liability screen")
-    await lOBWizardStepGroupSubmissionWizard_Ext.UmbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
-    await lOBWizardStepGroupSubmissionWizard_Ext.UmbrellaLiabilityUmbrellaCoverages.click()
+    await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
+    await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityUmbrellaCoverages.click()
   }
 
   async smallBusinessBusinessType() {
@@ -170,5 +174,20 @@ export class NewSubmissionScenario {
 
   async verifyingHomeownersCoverageErrorMsg() {
     await t.expect(await webMessageWorksheet_New.webMessageWorksheet_NoCoverageError.component.innerText).eql(world.dataMap.get('CoverageErrorMessage'))
+
+  async addLocation(locationNum = "1") {
+    await submissionWizard_New.submissionWizardAddLocation.click()
+    await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
+    await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
+    await cllLocationPopup_New.cllLocationPopupNewLocation.click()
+    await goCommercialProperty.addLocation()
+    console.log(`Added ${locationNum} location(s) successfully`)
+  }
+
+  async addBuilding(buildingNum = "1") {
+    await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
+    await goCommercialProperty.addBuidling()
+    console.log(`Added ${buildingNum} buidling(s) successfully`)
+    await cllLocationPopup_New.cllLocationPopupOk.click()
   }
 }
