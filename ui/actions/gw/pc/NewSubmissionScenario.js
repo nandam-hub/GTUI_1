@@ -174,7 +174,7 @@ export class NewSubmissionScenario {
 
   async verifyingHomeownersCoverageErrorMsg() {
     await t.expect(await webMessageWorksheet_New.webMessageWorksheet_NoCoverageError.component.innerText).eql(world.dataMap.get('CoverageErrorMessage'))
-
+  }
   async addLocation(locationNum = "1") {
     await submissionWizard_New.submissionWizardAddLocation.click()
     await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
