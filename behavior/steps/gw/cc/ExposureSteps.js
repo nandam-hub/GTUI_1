@@ -5,32 +5,32 @@ import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
 import { searchTableRecord } from "../../../../ui/util/gw/helper";
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
+import { ExposureScenario } from "../../../../ui/actions/gw/cc/ExposureScenario";
 
 const fnolScenario = new FnolScenario()
 const searchScenario = new SearchScenario()
 const navigationScenario = new NavigationScenario()
 const claimSummaryScenario = new ClaimSummaryScenario()
+const exposureScenario = new ExposureScenario()
 
-When(/^the user creates new FNOL/, async function () {
+When(/^the user create new FNOL for Auto policy/, async function () {
     await navigationScenario.navigateToNewClaimWizard()
     await fnolScenario.searchOrCreatePolicy()
     await fnolScenario.newPerson()
     await fnolScenario.clickNext()
     await fnolScenario.basicInformation()
     await fnolScenario.clickNext()
-    await fnolScenario.addPropertyClaimInformation()
+    await fnolScenario.addAutoClaimInformation()
     await fnolScenario.clickNext()
     await fnolScenario.clickNext()
     await fnolScenario.saveAndAssignClaim()
     await fnolScenario.readClaimNumber()
 });
 
-When(/^the user search with claim number/, async function () {
-    await navigationScenario.openClaim(t.ctx.claimNo);
+When(/^the user creates BI Liability exposure/, async function () {
+    await exposureScenario.createBILiabilityExposure()
 });
 
-Then(/^the FNOL is added successfully/, async function () {
-    await searchScenario.claimSimpleSearch(t.ctx.claimNo)
-    await searchTableRecord(3, t.ctx.claimNo)
-    await claimSummaryScenario.verifySummaryHeader()
+When(/^the user validates BI Liability exposure/, async function () {
+    await exposureScenario.validateBILiabilityExposure()
 });
