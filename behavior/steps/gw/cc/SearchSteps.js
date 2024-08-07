@@ -48,6 +48,6 @@ Then(/^the check details are loaded/, async function () {
 });
 
 When(/^the user searches the claim on advance search page/, async function (t) {
-    await navigationScenario.clickAdvanceSearch();
+    await navigationScenario.navigateToAdvanceSearch();
     await searchScenario.advanceSearchClaimWithName();
 });
