@@ -49,4 +49,5 @@ export class LOBWizardStepGroupSubmissionWizard_Ext extends LOBWizardStepGroupSu
     propertyProtectionInsurancePropertyProtectionLimits = PcfSelectInput('[id$="LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-LineStandardCoveragesCovPatterns-CoverageCategoryInputSet-7-CoverageInputSet-CovPatternInputGroup-0-CovTermInputSet-OptionTermInput"]')
 	liabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage = PcfSelectInput('[id$="SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-LineStandardCoveragesCovPatterns-CoverageCategoryInputSet-0-CoverageInputSet-CovPatternInputGroup-0-CovTermInputSet-TypekeyTermInput"]')
 	//#endregion
+	forAnyOneTreeShrubOrPlant = PcfCheckBox('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-3-CoverageInputSet-CovPatternInputGroup-_checkbox_checkboxDiv')
 }
