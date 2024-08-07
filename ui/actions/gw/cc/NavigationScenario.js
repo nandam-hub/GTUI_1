@@ -25,4 +25,11 @@ export class NavigationScenario {
     await searchTabBar_Ext.tabBarSearchTab.click()
     console.log('On Search Claims Screen')
   }
+
+  async clickAdvanceSearch() {
+    await searchTabBar_Ext.tabBarSearchChevron.click()
+    await searchTabBar_Ext.claimSearchesExpandButton.click()
+    await searchTabBar_Ext.claimSearchesExpandButton.click()
+    await searchTabBar_Ext.tabBarSearchTabSearch_ClaimSearchesGroupClaimSearchesGroup_ClaimSearch.click()
+  }
 }

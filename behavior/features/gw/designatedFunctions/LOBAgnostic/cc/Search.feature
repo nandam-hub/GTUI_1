@@ -38,6 +38,5 @@ Feature: Search menu in claim center
         Scenario: Searching claim by name in advance search
         Given the user logs into the claims center as "superuser"
         And the user loads "cc" data "advanceSearch_01" from json "SearchTestData"
-        When the user navigates to advance search page
-        And the user searches the claim by name
+        When the user searches the claim on advance search page
         Then the claim details are loaded successfully
