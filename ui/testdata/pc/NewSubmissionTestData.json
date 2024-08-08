@@ -235,6 +235,9 @@
                 "DriverZipCode": "53075-0000",
                 "DriverAddressType": "Home"
             }
-        }
+        },
+        "PolicyDriverMenuIcon":"[id*='PolicyDriver-PolicyDriverMenuIcon']",
+        "AvailableContacts":"[id*='PolicyDriver-availableContacts']",
+        "OtherContact": "[id*='OtherContact']"
     }
 }

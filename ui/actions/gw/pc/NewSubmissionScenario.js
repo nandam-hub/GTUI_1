@@ -201,15 +201,14 @@ export class NewSubmissionScenario {
   }
 
   async addDriversInPersonalAutoScreen(driverNum = 1) {
-    await t.debug()
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
       await enterDataInTable(1, `${i}`)
-      await performClickInTable('[id*="PolicyDriver-PolicyDriverMenuIcon"]')
-      await performHoverInTable('[id*="PolicyDriver-availableContacts"]')
-      await performClickInTable('[id*="OtherContact"]')
+      await performClickInTable(world.dataMap.get('PolicyDriverMenuIcon'))
+      await performHoverInTable(world.dataMap.get('AvailableContacts'))
+      await performClickInTable(world.dataMap.get('OtherContact'))
     }
   }
 
