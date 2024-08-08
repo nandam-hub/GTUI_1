@@ -142,4 +142,9 @@ export class NavigationScenario {
     await policyMenuActions_Ext.policyFileUALPersonalAutoLine.click()
     await policyMenuActions_Ext.policyFileUALPersonalAutoMenu.click()
   }
+  
+  async editPolicyCommercialNavigation() {
+    await submissionWizard_New.submissionWizardEditPolicy.click()
+    await submissionWizard_New.submissionWizardLOBCommercial1.click()
+  }
 }

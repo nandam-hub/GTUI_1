@@ -46,3 +46,8 @@ Then(/^the user search the check/, async function () {
 Then(/^the check details are loaded/, async function () {
     await searchScenario.validateCheckDetailsHeader();
 });
+
+When(/^the user searches the claim on advance search page/, async function (t) {
+    await navigationScenario.navigateToAdvanceSearch();
+    await searchScenario.advanceSearchClaimWithName();
+});

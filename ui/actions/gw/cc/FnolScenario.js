@@ -10,7 +10,7 @@ const newContactPopup = new NewContactPopup()
 const newClaimSaved_Ext = new NewClaimSaved_Ext()
 
 export class FnolScenario {
-    async newFnolCreation() {
+    async searchOrCreatePolicy() {
         console.log("On Step 1: Search or Create Policy screen")
         await fNOLWizard_Ext.fnolWizardCreateUnverifiedPolicy.click()
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetPolicyNumber.setValue(world.dataMap.get('PolicyNumber'))
@@ -21,23 +21,41 @@ export class FnolScenario {
         await fNOLWizard_Ext.newClaimPolicyGeneralDVExpirationDate.setValue(dateFunction(world.dataMap.get('ExpirationDate')))
         await fNOLWizard_Ext.fNOLWizardNameMenuIcon.click()
         await fNOLWizard_Ext.fnolWizardNameMenuSelection.click()
+    }
+
+    async newPerson() {
         console.log("On New Person screen")
         t.ctx.insuredName = generateRandomStringFunction(4)
         await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVPersonNameInputSetGlobalPersonNameInputSetLastName.setValue(t.ctx.insuredName)
         await newContactPopup.newContactPopupContactDetailScreenContactBasicsDV_tbContactDetailToolbarButtonSetCustomUpdateButton.click()
-        console.log("On Step 1: Search or Create Policy screen")
+    }
+
+    async clickNext() {
         await fNOLWizard_Ext.fNOLWizardNext.click()
+    }
+
+    async addBasicInformation() {
         console.log("On Step 2 of 5: Basic information screen")
         await fNOLWizard_Ext.fnolWizardNameDropdown.selectOptionByLabel(t.ctx.insuredName)
-        await fNOLWizard_Ext.fNOLWizardNext.click()
+    }
+
+    async addPropertyClaimInformation() {
         console.log("On Step 3 of 5: Add claim information screen")
         await fNOLWizard_Ext.fNOLWizard_NewLossDetailsPanelSetClaim_LossCause.selectOptionByLabel(world.dataMap.get('LossCause'))
         await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsPanelFNOLWizard_NewLossDetailsPanelSetCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetCity.setValue(world.dataMap.get('City'))
         await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsPanelFNOLWizard_NewLossDetailsPanelSetCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetState.click()
         await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsPanelFNOLWizard_NewLossDetailsPanelSetCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetState.selectOptionByLabel(world.dataMap.get('State'))
-        await fNOLWizard_Ext.fNOLWizardNext.click()
-        console.log("On Step 4 of 5: Services screen")
-        await fNOLWizard_Ext.fNOLWizardNext.click()
+    }
+
+    async addAutoClaimInformation() {
+        console.log("On Step 3 of 5: Add claim information screen")
+        await fNOLWizard_Ext.lossDetailsAddressDVClaim_LossCause.selectOptionByLabel(world.dataMap.get('LossCause'))
+        await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsAddressDVAddressDetailInputSetRefCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetCity.setValue(world.dataMap.get('City'))
+        await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsAddressDVAddressDetailInputSetRefCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetState.click()
+        await fNOLWizard_Ext.fNOLWizardFullWizardStepSetFNOLWizard_NewLossDetailsScreenLossDetailsAddressDVAddressDetailInputSetRefCCAddressInputSetglobalAddressContainerglobalAddressGlobalAddressInputSetState.selectOptionByLabel(world.dataMap.get('State'))
+    }
+
+    async saveAndAssignClaim() {
         console.log("On Step 5 of 5: Save and Assign Claim screen")
         await fNOLWizard_Ext.fNOLWizardFinish.click()
     }
