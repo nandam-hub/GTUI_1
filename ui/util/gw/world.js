@@ -3,5 +3,6 @@ module.exports = {
     coverageDataMap: new Map(),
     vehicleDataMap: new Map(),
     buildingDataMap: new Map(),
-    locationDataMap: new Map()
+    locationDataMap: new Map(),
+    driverDataMap: new Map()
 }
