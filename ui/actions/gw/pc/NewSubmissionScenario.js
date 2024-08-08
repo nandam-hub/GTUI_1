@@ -212,10 +212,12 @@ export class NewSubmissionScenario {
     }
   }
 
-  async validatedAddedDrivers() {
-    let driverName = await validateTableRecord("Internal Request ID", "2", 6)
-    console.log("1st " + driverName)
-    let driverNameTwo = await validateTableRecord("Internal Request ID", "1", 6)
-    console.log("2nd" + driverNameTwo)
+  async validatedAddedDriversInPolicyFile(driverNum=1) {
+    if (typeof (driverNum) !== 'number')
+      driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
+    for(let i=1;i<=driverNum;i++)
+    {      
+      await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(world.dataMap.get(`Driver${i}`))
+    }    
   }
 }

@@ -2,12 +2,14 @@ const { Then } = require("@cucumber/cucumber")
 import { EditPolicyTransactionScenario } from "../../../../ui/actions/gw/pc/EditPolicyTransactionScenario"
 import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario"
 import { NewSubmissionScenario } from "../../../../ui/actions/gw/pc/NewSubmissionScenario"
+import { PolicyFileScenario } from "../../../../ui/actions/gw/pc/PolicyFileScenario"
 import { coverageFilter } from "../../../../ui/util/gw/ActionHelper";
 import { t } from "testcafe";
 
 const editPolicyTransactionScenario = new EditPolicyTransactionScenario();
 const navigationScenario = new NavigationScenario();
 const newSubmissionScenario = new NewSubmissionScenario()
+const policyFileScenario = new PolicyFileScenario()
 
 Then(/^the user updates coverage through edit policy transaction/, async function () {
     await navigationScenario.editPolicyCommercialNavigation()
@@ -19,7 +21,3 @@ Then(/^the user proceeds to quote and issue the policy with the updated changes/
     await newSubmissionScenario.issuePolicy()
 });
 
-Then(/^the coverage is successfully updated for commercial property policy/, async function () {
-    await navigationScenario.openPolicy(t.ctx.PolicyNumber)
-    await editPolicyTransactionScenario.validateCoverageOfCommercialPolicy()
-});

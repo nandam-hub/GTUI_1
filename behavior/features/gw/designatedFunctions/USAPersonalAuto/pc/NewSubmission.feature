@@ -43,4 +43,4 @@ Feature: Personal auto new submission
         And the user creates personal account
         And the user issue the new submission for personal auto with "2" drivers
         Then the policy is issued
-        And drivers are added successfully
+        And "2" drivers are added successfully

@@ -1,4 +1,5 @@
 import { SubmissionWizard_New } from "../../../../ui/actions/gw/pc/scenarioPages/navigation//submissionWizard/SubmissionWizard_New"
+import { PolicyMenuActions } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuActions/PolicyMenuActions"
 import { t } from "testcafe"
 import world from "../../../util/gw/world"
 
@@ -9,10 +10,5 @@ export class EditPolicyTransactionScenario {
 
     async quoteUpdatedPolicy() {
         await submissionWizard_New.submissionQuote.click()
-    }
-
-    async validateCoverageOfCommercialPolicy() {
-        await submissionWizard_New.submissionWizardLOBCommercial.click()
-        await t.expect(await submissionWizard_New.submissionValidateCoverageOfCommercialLine.component.textContent).eql(world.dataMap.get('UpdatedCoverage'))
     }
 }

@@ -3,7 +3,7 @@
 Feature: Edit policy transaction in policy center
     As a user, I want to perform edit policy transaction in policy center
  
-    @editpolicy
+    @edit_policy
     Scenario: Update coverage through edit policy transaction after quote
         Given the user logs into the policy center as "superuser"
         And the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"

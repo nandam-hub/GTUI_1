@@ -311,10 +311,4 @@ When(/^the user issue the new submission for personal auto with (.*) drivers/, a
     await newSubmissionScenario.issuePolicy()
 })
 
-Then(/^drivers are added successfully/, async function () {
-    await navigationScenario.openPolicy(t.ctx.PolicyNumber)
-    await navigationScenario.navigatePolicyFilePersonalAutoScreen()
-    await newSubmissionScenario.validatedAddedDrivers()
-})
-
 

@@ -44,5 +44,4 @@ export class SubmissionWizard_New {
 	submissionWizardCheckBox = PcfCheckBox ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-3-CoverageInputSet-CovPatternInputGroup-_checkbox_checkboxDiv')
 	submissionQuote = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote')
 	//#endregion
-	submissionValidateCoverageOfCommercialLine = PcfComponent ('#PolicyFile_CLLCPLTypeName1-PolicyFile_CLLCPLTypeName1Screen-PolicyFile_CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-1-CoverageInputSet-CovPatternInputGroup > div.gw-InputGroup--header > div.gw-InputGroup--header--label')
 }

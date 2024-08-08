@@ -67,7 +67,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
 //targetColumnIndex - provide the column number or index where the value has to be retrieved
 export async function validateTableRecord(headerNameOrIndex, referenceCellValue, targetColumnIndex) {
     await t.wait(1000)
-    const tableRows = Selector('table').nth(0).find('tr');
+    const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
     //To find "headerNameOrIndex" is string or index
