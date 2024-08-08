@@ -1,8 +1,11 @@
 import { ClaimTabBar_Ext } from "./scenarioPages/navigation/tabBar/ClaimTabBar_Ext"
 import { SearchTabBar_Ext } from "./scenarioPages/search/claimSearchesGroup/SearchTabBar_Ext"
+import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
+import {t} from "testcafe"
 
 const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
+const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 
 export class NavigationScenario {
 
@@ -24,5 +27,10 @@ export class NavigationScenario {
   async navigateSearchPolicyScreen() {
     await searchTabBar_Ext.tabBarSearchTab.click()
     console.log('On Search Claims Screen')
+  }
+
+  async navigateCoverageType() {
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
+    await t.hover(claimMenuActions_Ext.newExposureMenuItemSetByCoverageType.component)
   }
 }

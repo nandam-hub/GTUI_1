@@ -13,24 +13,14 @@ const navigationScenario = new NavigationScenario()
 const claimSummaryScenario = new ClaimSummaryScenario()
 const exposureScenario = new ExposureScenario()
 
-When(/^the user create new FNOL for Auto policy/, async function () {
-    await navigationScenario.navigateToNewClaimWizard()
-    await fnolScenario.searchOrCreatePolicy()
-    await fnolScenario.newPerson()
-    await fnolScenario.clickNext()
-    await fnolScenario.basicInformation()
-    await fnolScenario.clickNext()
-    await fnolScenario.addAutoClaimInformation()
-    await fnolScenario.clickNext()
-    await fnolScenario.clickNext()
-    await fnolScenario.saveAndAssignClaim()
-    await fnolScenario.readClaimNumber()
-});
-
 When(/^the user creates BI Liability exposure/, async function () {
-    await exposureScenario.createBILiabilityExposure()
+    await navigationScenario.navigateCoverageType()
+    await exposureScenario.selectBodilyInjury()
+    await exposureScenario.newExposure()
+    await exposureScenario.injuryIncident()
+    await exposureScenario.clickOnUpdate()
 });
 
-When(/^the user validates BI Liability exposure/, async function () {
+Then(/^the user validates BI Liability exposure/, async function () {
     await exposureScenario.validateBILiabilityExposure()
 });

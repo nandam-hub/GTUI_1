@@ -34,7 +34,7 @@ export class FnolScenario {
         await fNOLWizard_Ext.fNOLWizardNext.click()
     }
 
-    async basicInformation() {
+    async addBasicInformation() {
         console.log("On Step 2 of 5: Basic information screen")
         await fNOLWizard_Ext.fnolWizardNameDropdown.selectOptionByLabel(t.ctx.insuredName)
     }
