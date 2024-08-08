@@ -16,7 +16,7 @@ import { USAPersonalAuto } from "../../../util/gw/USAPersonalAuto"
 import { GoCommercialProperty } from "../../../util/gw/GoCommercialProperty.js";
 import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import world from "../../../util/gw/world"
-
+import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -30,6 +30,7 @@ const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizar
 const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
 const usaPersonalAuto = new USAPersonalAuto()
+const webMessageWorksheet_New = new WebMessageWorksheet_New()
 const goCommercialProperty = new GoCommercialProperty()
 const cllLocationPopup_New = new CLLLocationPopup_New
 
@@ -167,9 +168,20 @@ export class NewSubmissionScenario {
     await submissionWizard_New.submissionWizardBusinessType.selectOptionByLabel(world.dataMap.get('BusinessType'))
   }
 
-  async addLocation() {
+  async verifyingRefusalTypeErrorMsg() {
+    await t.expect(await submissionWizard_New.submissionWizard_RefusalType_ErrorMsg.component.innerText).contains(world.dataMap.get('RefusalTypeErrorMessage'))
+  }
+
+  async verifyingHomeownersCoverageErrorMsg() {
+    await t.expect(await webMessageWorksheet_New.webMessageWorksheet_NoCoverageError.component.innerText).eql(world.dataMap.get('CoverageErrorMessage'))
+  }
+  async addLocation(locationNum = "1") {
     await submissionWizard_New.submissionWizardAddLocation.click()
     await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
+    await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
+    await cllLocationPopup_New.cllLocationPopupNewLocation.click()
+    await goCommercialProperty.addLocation()
+    console.log(`Added ${locationNum} location(s) successfully`)
   }
 
   async addBuilding(buildingNum = "1") {

@@ -1,0 +1,7 @@
+import { PcfComponent, PcfSelectInput, PcfButton } from '@gtui/gt-ui-framework';
+import { NewExposure } from '../../../../../pages/gw/generated/claimsolutions/pages/other/NewExposure';
+
+export class NewExposure_Ext extends NewExposure {
+    newExposureDVClaimantPickerExt = PcfSelectInput('#NewExposure-NewExposureScreen-NewExposureDV-Claimant_Picker');
+    newExposureInjuryIncidentMenuIcon = PcfComponent("#NewExposure-NewExposureScreen-NewExposureDV-BIDamageInputSet-Injury_Incident-Injury_IncidentMenuIcon")
+}

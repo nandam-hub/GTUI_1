@@ -13,7 +13,29 @@ const claimSummaryScenario = new ClaimSummaryScenario()
 
 When(/^the user creates new FNOL/, async function () {
     await navigationScenario.navigateToNewClaimWizard()
-    await fnolScenario.newFnolCreation()
+    await fnolScenario.searchOrCreatePolicy()
+    await fnolScenario.newPerson()
+    await fnolScenario.clickNext()
+    await fnolScenario.addBasicInformation()
+    await fnolScenario.clickNext()
+    await fnolScenario.addPropertyClaimInformation()
+    await fnolScenario.clickNext()
+    await fnolScenario.clickNext()
+    await fnolScenario.saveAndAssignClaim()
+    await fnolScenario.readClaimNumber()
+});
+
+When(/^the user create new FNOL for USAPersonalAuto/, async function () {
+    await navigationScenario.navigateToNewClaimWizard()
+    await fnolScenario.searchOrCreatePolicy()
+    await fnolScenario.newPerson()
+    await fnolScenario.clickNext()
+    await fnolScenario.addBasicInformation()
+    await fnolScenario.clickNext()
+    await fnolScenario.addAutoClaimInformation()
+    await fnolScenario.clickNext()
+    await fnolScenario.clickNext()
+    await fnolScenario.saveAndAssignClaim()
     await fnolScenario.readClaimNumber()
 });
 

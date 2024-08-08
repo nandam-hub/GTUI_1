@@ -12,6 +12,7 @@ import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolution
 import { searchTableRecord } from "../../../../ui/util/gw/helper";
 import { t } from "testcafe"
 import world from '../../../util/gw/world'
+import { ClaimSearch } from "../../../pages/gw/generated/claimsolutions/pages/search/claimSearchesGroup/ClaimSearch"
 
 const searchTabBar = new SearchTabBar()
 const simpleClaimSearch = new SimpleClaimSearch()
@@ -24,6 +25,7 @@ const recoverySearch = new RecoverySearch();
 const newContactPopup = new NewContactPopup()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext();
 const newRecoverySet_Ext = new NewRecoverySet_Ext();
+const claimSearch = new ClaimSearch();
 
 export class SearchScenario {
     async claimSimpleSearch(claimNumber) {
@@ -90,5 +92,11 @@ export class SearchScenario {
         await newRecoverySet_Ext.recoveryAmount.setValue(world.dataMap.get('Amount'))
         await newRecoverySet_Ext.newRecoveryScreenUpdate.click()
         await t.setNativeDialogHandler(() => true);
+    }
+
+    async advanceSearchClaimWithName() {
+        await claimSearch.claimSearchRequiredInputSetSearchFor.selectOptionByValue(world.dataMap.get('SearchFor'))
+        await claimSearch.claimSearchClaimSearchScreenClaimSearchDVClaimSearchRequiredInputSetGlobalPersonNameInputSetLastName.setValue(world.dataMap.get('LastName'));     
+        await claimSearch.claimSearchClaimSearchScreenClaimSearchDVClaimSearchAndResetInputSetSearch.click()
     }
 }

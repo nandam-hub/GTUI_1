@@ -1,10 +1,15 @@
 import { ClaimTabBar_Ext } from "./scenarioPages/navigation/tabBar/ClaimTabBar_Ext"
 import { SearchTabBar_Ext } from "./scenarioPages/search/claimSearchesGroup/SearchTabBar_Ext"
 import { ClaimMenuLinks } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/menuLinks/ClaimMenuLinks"
+import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
+import {t} from "testcafe"
 
 const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
 const claimMenuLinks = new ClaimMenuLinks()
+const claimTabBar_Ext = new ClaimTabBar_Ext()
+const searchTabBar_Ext = new SearchTabBar_Ext()
+const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 
 export class NavigationScenario {
 
@@ -31,5 +36,17 @@ export class NavigationScenario {
   async navigateClaimWorkplan()
   {
     await claimMenuLinks.menuLinksClaim_ClaimWorkplan.click()
+  }
+  
+  async navigateCoverageType() {
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
+    await t.hover(claimMenuActions_Ext.newExposureMenuItemSetByCoverageType.component)
+  }
+
+  async navigateToAdvanceSearch() {
+    await searchTabBar_Ext.tabBarSearchChevron.click()
+    await searchTabBar_Ext.claimSearchesExpandButton.click()
+    await searchTabBar_Ext.claimSearchesExpandButton.click()
+    await searchTabBar_Ext.tabBarSearchTabSearch_ClaimSearchesGroupClaimSearchesGroup_ClaimSearch.click()
   }
 }

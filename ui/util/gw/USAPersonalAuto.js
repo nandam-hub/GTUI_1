@@ -30,6 +30,9 @@ export class USAPersonalAuto {
                         console.log(`${dataKey} is present`)
                         await textInput(dataKey)
                     }
+                    else{
+                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
+                    }
                 }
                 await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()
                 i++

@@ -91,7 +91,7 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
     for (let i = 1; i < rowCount; i++) {
         const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
         if (cellText.includes(referenceCellValue)) {
-            actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget')).textContent;
+            actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget, div.gw-label')).textContent;
             break;
         }
     }
