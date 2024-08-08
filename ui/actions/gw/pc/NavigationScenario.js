@@ -135,4 +135,9 @@ export class NavigationScenario {
   async clickNewSubmissionOk() {
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
+
+  async editPolicyCommercialNavigation() {
+    await submissionWizard_New.submissionWizardEditPolicy.click()
+    await submissionWizard_New.submissionWizardLOBCommercial1.click()
+  }
 }

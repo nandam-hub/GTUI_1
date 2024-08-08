@@ -53,5 +53,10 @@
         "Type": "Contact",
         "LastName": "test",
         "Name": "driver test"
+    },
+    "advanceSearch_01": {
+        "SearchFor": "insured",
+        "LastName": "rjbf",
+        "ClaimNo": "000-00-002399"
     }
 }

@@ -3,4 +3,5 @@ import { SearchTabBar} from '../../../../../../pages/gw/generated/claimsolutions
 
 export class SearchTabBar_Ext extends SearchTabBar{
 	tabBarSearchTabChevron = PcfComponent('#TabBar-SearchTab > div:nth-child(3)');
+	claimSearchesExpandButton = PcfComponent('#TabBar-SearchTab-Search_ClaimSearchesGroup > div.gw-action--expand-button');
 }
