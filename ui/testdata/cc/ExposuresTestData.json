@@ -1,0 +1,12 @@
+{
+    "defaultDataSet":{
+        "Claimant": 1,
+        "LossParty": "insured",
+        "Status": "Open"
+    },
+    "BI_Liability_Exposure":{
+        "Claimant": 1,
+        "LossParty": "insured",
+        "Status": "Open"
+    }
+}
