@@ -11,5 +11,5 @@ Feature: Edit policy transaction in policy center
         And the user quote the new submission for commercial property
         And the user loads "pc" data "editPolicy_01" from json "EditPolicyTransactionTestData"
         And the user updates coverage through edit policy transaction
-        Then the user contniue to quote and issue the policy with the updated changes
+        Then the user proceeds to quote and issue the policy with the updated changes
         And the coverage is successfully updated for commercial property policy
