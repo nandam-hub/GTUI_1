@@ -5,7 +5,7 @@ import { PolicyInfoScreen } from "../../../pages/gw/generated/policysolutions/pa
 import { UALPersonalVehiclePopup_New } from "./scenarioPages/other/UALPersonalVehiclePopup_New.js";
 import { NewAPDPolicyInvolvedPartyPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/New/NewAPDPolicyInvolvedPartyPopup.js";
 import { NewSubmission_Ext } from "./scenarioPages/policy/NewSubmission_Ext.js";
-import { generateRandomStringFunction } from '../../../util/gw/helper'
+import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable } from '../../../util/gw/helper'
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWizard/CLLCpBlanketPopup_New"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
@@ -17,6 +17,7 @@ import { GoCommercialProperty } from "../../../util/gw/GoCommercialProperty.js";
 import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
+import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -32,7 +33,8 @@ const ratingCostDetailPopup = new RatingCostDetailPopup()
 const usaPersonalAuto = new USAPersonalAuto()
 const webMessageWorksheet_New = new WebMessageWorksheet_New()
 const goCommercialProperty = new GoCommercialProperty()
-const cllLocationPopup_New = new CLLLocationPopup_New
+const cllLocationPopup_New = new CLLLocationPopup_New()
+const policyInfoScreen_Ext = new PolicyInfoScreen_Ext()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -189,5 +191,33 @@ export class NewSubmissionScenario {
     await goCommercialProperty.addBuidling()
     console.log(`Added ${buildingNum} buidling(s) successfully`)
     await cllLocationPopup_New.cllLocationPopupOk.click()
+  }
+
+  async addDrivers(driverNum = "1") {
+    await policyInfoScreen.namedInsuredsLV_tbAddContactsButton.click()
+    await policyInfoScreen_Ext.newPersonMenuItem.click()
+    await usaPersonalAuto.addDriver()
+    console.log(`Added ${driverNum} driver(s) successfully`)
+  }
+
+  async addDriversInPersonalAutoScreen(driverNum = 1) {
+    if (typeof (driverNum) !== 'number')
+      driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
+    for (let i = 1; i <= driverNum; i++) {
+      await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
+      await enterDataInTable(1, `${i}`)
+      await performClickInTable(world.dataMap.get('PolicyDriverMenuIcon'))
+      await performHoverInTable(world.dataMap.get('AvailableContacts'))
+      await performClickInTable(world.dataMap.get('OtherContact'))
+    }
+  }
+
+  async validatedAddedDriversInPolicyFile(driverNum=1) {
+    if (typeof (driverNum) !== 'number')
+      driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
+    for(let i=1;i<=driverNum;i++)
+    {      
+      await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(world.dataMap.get(`Driver${i}`))
+    }    
   }
 }

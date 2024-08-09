@@ -14,4 +14,5 @@ When(/^the user loads (.*) data (.*) from json (.*)/, async function (t, stepArg
     world.vehicleDataMap = world.dataMap.get('Vehicles')
     world.buildingDataMap = world.dataMap.get('Buildings')
     world.locationDataMap = world.dataMap.get('Locations')
+    world.driverDataMap = world.dataMap.get('Drivers')
 });

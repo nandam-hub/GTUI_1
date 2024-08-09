@@ -17,7 +17,7 @@ Feature: Search menu in claim center
         And the user searches the contact
         Then the search contact details are loaded
 
-    @searchPolicy_cc
+    @search_policy_cc
     Scenario Outline: Seaching with policy from search claims
         Given the user logs into the claims center as "superuser"
         When the user loads "cc" data "searchPolicy_01" from json "SearchTestData"
@@ -34,7 +34,7 @@ Feature: Search menu in claim center
         And the user searches for the recovery details with claim number
         Then the recovery details are loaded
 
-    @advanceSearch
+    @advance_search_claim
         Scenario: Searching claim by name in advance search
         Given the user logs into the claims center as "superuser"
         And the user loads "cc" data "advanceSearch_01" from json "SearchTestData"

@@ -1,6 +1,7 @@
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "../../actions/gw/pc/scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { UALPersonalVehiclePopup_New } from "../../actions/gw/pc/scenarioPages/other/UALPersonalVehiclePopup_New";
 import { CLLLocationPopup_New } from "../../actions/gw/pc/scenarioPages/popup/CLLCP/CLLLocationPopup_New";
+import { NewAdditionalNamedInsuredPopup_Ext } from "../../actions/gw/pc/scenarioPages/popup/New/NewAdditionalNamedInsuredPopup_Ext";
 import world from "./world"
 import { pascalToCamel } from "./helper";
 import { t } from "testcafe";
@@ -11,11 +12,13 @@ let camelFieldName;
 const lobWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
 const cllLocationPopup_New = new CLLLocationPopup_New()
+const newAdditionalNamedInsuredPopup_Ext = new NewAdditionalNamedInsuredPopup_Ext()
 
 const ModIdentifier = {
     coverage: lobWizardStepGroupSubmissionWizard_Ext,
     vehicle: ualPersonalVehiclePopup_New,
-    building: cllLocationPopup_New
+    building: cllLocationPopup_New,
+    driver: newAdditionalNamedInsuredPopup_Ext
 };
 
 export async function loadPcfCategory() {
@@ -70,7 +73,6 @@ export async function checkBox(fieldName) {
             if (checkAction === 'uncheck' && (await ModIdentifier.building[camelFieldName].isChecked()))
                 await ModIdentifier.building[camelFieldName].click()
             break;
-
         default:
             throw new Error('Incorrect module provided')
     }
@@ -94,6 +96,9 @@ export async function textInput(fieldName) {
         case ('Location'):
             await ModIdentifier.building[camelFieldName].setValue(t.ctx.LocationData)
             break;
+        case ('Drivers'):
+            await ModIdentifier.driver[camelFieldName].setValue(t.ctx.DriverData)
+            break;
         default:
             throw new Error('Incorrect module provided')
     }
@@ -116,6 +121,10 @@ export async function selectInput(fieldName) {
             break;
         case ('Location'):
             await ModIdentifier.building[camelFieldName].selectOptionByLabel(t.ctx.LocationData)
+            break;
+        case ('Drivers'):
+            await ModIdentifier.driver[camelFieldName].click()
+            await ModIdentifier.driver[camelFieldName].selectOptionByLabel(t.ctx.DriverData)
             break;
         default:
             throw new Error('Incorrect module provided')
@@ -142,7 +151,7 @@ export async function coverageFilter() {
                 console.log(`${key} is present`)
                 await checkBox(key)
             }
-            else{
+            else {
                 throw new Error(`${key} is NOT present in pcfCategory.json file`)
             }
         }

@@ -1,5 +1,6 @@
 const moment = require('moment');
 import { t, Selector } from 'testcafe';
+import { PcfComponent } from '@gtui/gt-ui-framework';
 
 //To generate date from current date in MMDDYYYY format
 export function dateFunction(noOfDays, dateFormat = 'MMDDYYYY') {
@@ -66,7 +67,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
 //targetColumnIndex - provide the column number or index where the value has to be retrieved
 export async function validateTableRecord(headerNameOrIndex, referenceCellValue, targetColumnIndex) {
     await t.wait(1000)
-    const tableRows = Selector('table').nth(0).find('tr');
+    const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
     //To find "headerNameOrIndex" is string or index
@@ -101,4 +102,34 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
 export function pascalToCamel(inputString) {
     if (typeof inputString == 'string')
         return inputString.charAt(0).toLowerCase() + inputString.slice(1)
+}
+
+//To enter data in input field of a table
+export async function enterDataInTable(columnIndex, inputString) {
+    //Locate Table
+    const table = Selector('table.gw-ListViewWidget--table');
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    // Locate the input field and type
+    const inputField = lastrow.find('td').nth(columnIndex).find('input[type="text"]');
+    await t
+        .expect(table.exists).ok()
+        .typeText(inputField, inputString);
+}
+
+//To click on an element in last row of a table
+export async function performClickInTable(webElement) {
+    // Locate Table
+    const table = Selector('table.gw-ListViewWidget--table')
+    // Locate the webelement to be clicked in last row
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    await t.click(lastrow.find(webElement).nth(-1));
+}
+
+//To hover on an element in last row of a table
+export async function performHoverInTable(webElement) {
+    // Locate Table
+    const table = Selector('table.gw-ListViewWidget--table')
+    // Locate the webelement to be hover in last row
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    await t.hover(lastrow.find(webElement));
 }

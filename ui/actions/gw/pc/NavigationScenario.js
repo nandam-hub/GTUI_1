@@ -11,6 +11,7 @@ import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPop
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
+import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext";
 import { t } from "testcafe";
 
 const summary_Ext = new Summary_Ext()
@@ -26,6 +27,7 @@ const contactTabBar = new ContactTabBar();
 const contactSearch_Ext = new ContactSearch_Ext()
 const accountMenuActions_Ext = new AccountMenuActions_Ext()
 const cllLocationPopup_New = new CLLLocationPopup_New()
+const policyMenuActions_Ext = new PolicyMenuActions_Ext()
 
 export class NavigationScenario {
 
@@ -136,6 +138,11 @@ export class NavigationScenario {
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
 
+  async navigatePolicyFilePersonalAutoScreen() {
+    await policyMenuActions_Ext.policyFileUALPersonalAutoLine.click()
+    await policyMenuActions_Ext.policyFileUALPersonalAutoMenu.click()
+  }
+  
   async editPolicyCommercialNavigation() {
     await submissionWizard_New.submissionWizardEditPolicy.click()
     await submissionWizard_New.submissionWizardLOBCommercial1.click()
