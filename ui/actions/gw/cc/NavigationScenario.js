@@ -4,8 +4,6 @@ import { ClaimMenuLinks } from "../../../../ui/pages/gw/generated/claimsolutions
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
 import {t} from "testcafe"
 
-const claimTabBar_Ext = new ClaimTabBar_Ext()
-const searchTabBar_Ext = new SearchTabBar_Ext()
 const claimMenuLinks = new ClaimMenuLinks()
 const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
