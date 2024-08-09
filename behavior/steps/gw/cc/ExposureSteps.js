@@ -21,6 +21,18 @@ When(/^the user creates BI Liability exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
+When(/^the user creates medical payments exposure/, async function () {
+    await navigationScenario.navigateCoverageType()
+    await exposureScenario.selectMedicalPayments()
+    await exposureScenario.newExposure()
+    await exposureScenario.injuryIncident()
+    await exposureScenario.clickOnUpdate()
+});
+
 Then(/^the user validates BI Liability exposure/, async function () {
     await exposureScenario.validateBILiabilityExposure()
+});
+
+Then(/^the user validates medical payments exposure/, async function () {
+    await exposureScenario.validateMedicalPaymentsExposure()
 });

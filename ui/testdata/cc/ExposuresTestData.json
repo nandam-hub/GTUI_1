@@ -8,5 +8,10 @@
         "Claimant": 1,
         "LossParty": "insured",
         "Status": "Open"
+    },
+    "Medical_Payments_Exposure":{
+        "Claimant": 1,
+        "LossParty": "insured",
+        "Status": "Open"
     }
 }
