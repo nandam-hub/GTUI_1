@@ -4,12 +4,7 @@
         "LossParty": "insured",
         "Status": "Open"
     },
-    "BI_Liability_Exposure":{
-        "Claimant": 1,
-        "LossParty": "insured",
-        "Status": "Open"
-    },
-    "Medical_Payments_Exposure":{
+    "Exposure_01":{
         "Claimant": 1,
         "LossParty": "insured",
         "Status": "Open"
