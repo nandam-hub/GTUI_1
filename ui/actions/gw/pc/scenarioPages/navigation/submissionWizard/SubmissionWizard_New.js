@@ -1,5 +1,5 @@
-import { PcfButton, PcfCheckBox, PcfComponent, PcfSelectInput, PcfTextInput} from '@gtui/gt-ui-framework';
-import { Selector } from 'testcafe';
+import { PcfButton, PcfCheckBox, PcfComponent, PcfSelectInput, PcfTextInput } from '@gtui/gt-ui-framework';
+
 export class SubmissionWizard_New {
 	submissionWizard_Quote = PcfButton('#SubmissionWizard-SubmissionWizard_PolicyReviewScreen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote');
 	submissionWizard_QuoteStatus = PcfComponent('#SubmissionWizard-JobWizardInfoBar-JobLabel ')
@@ -29,19 +29,15 @@ export class SubmissionWizard_New {
 	//#region USA personal Auto
 	SubmissionWizard_LineStandardCoveragesTab = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-LineStandardCoveragesTab')
 	SubmissionWizard_AddPersonalVehicle = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALPersonalVehicleScreen-UALPersonalVehicleListPanelSet-AddPersonalVehicle')
-	submissionWizardUALPolicyDriverMVRListAdd= PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-Add')
-	submissionWizardPolicyDriverMenu = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-0-PolicyDriver-PolicyDriverMenuIcon')
-	submissionWizardOtherContacts=  PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-0-PolicyDriver-availableContacts')
-	otherContactsNewDriver = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-0-PolicyDriver-availableContacts-0-OtherContact')
-	//internetRequestId = Selector('[$id="PolicyChangeWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet"]')
+	submissionWizardUALPolicyDriverMVRListAdd = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-Add')
 	//#endregion	
-	
+
 	//#region Go commercial property
 	submissionWizardAddLocation = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLLocationScreen-CLLLocationListPanelSet-AddLocation')
-  submissionWizardEditPolicy = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-EditPolicy')
-	submissionWizardLOBCommercial1 = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-CLLWizardStepGroup')	
+	submissionWizardEditPolicy = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-EditPolicy')
+	submissionWizardLOBCommercial1 = PcfButton('#SubmissionWizard-LOBWizardStepGroup-CLLWizardStepGroup')
 	submissionWizardLOBCommercial = PcfButton('#PolicyFile-PolicyFileAcceleratedMenuActions-PolicyMenuItemSet-PolicyMenuItemSet_GOCommercialPropertyLine')
-	submissionWizardCheckBox = PcfCheckBox ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-3-CoverageInputSet-CovPatternInputGroup-_checkbox_checkboxDiv')
-	submissionQuote = PcfButton ('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote')
+	submissionWizardCheckBox = PcfCheckBox('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-CLLCPLTypeName1PanelSet-SupplementalCovCovPatterns-CoverageCategoryInputSet-3-CoverageInputSet-CovPatternInputGroup-_checkbox_checkboxDiv')
+	submissionQuote = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-CLLWizardStepGroup-CLLCPLTypeName1Screen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote')
 	//#endregion
 }
