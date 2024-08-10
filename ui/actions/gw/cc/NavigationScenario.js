@@ -35,10 +35,14 @@ export class NavigationScenario {
   {
     await claimMenuLinks.menuLinksClaim_ClaimWorkplan.click()
   }
-  
+  //TODO: We can remove this method as this is replaced by navigateAndClickSubmenu helper
   async navigateCoverageType() {
     await claimMenuActions_Ext.claimClaimMenuActions.click()
     await t.hover(claimMenuActions_Ext.newExposureMenuItemSetByCoverageType.component)
+  }
+
+  async ClickClaimMenuAction() {
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
   }
 
   async navigateToAdvanceSearch() {

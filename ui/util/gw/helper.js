@@ -133,3 +133,15 @@ export async function performHoverInTable(webElement) {
     const lastrow = table.find('tbody').find('tr').nth(-1)
     await t.hover(lastrow.find(webElement));
 }
+
+// Recursive function to navigate through nested submenus and click a specific option
+export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
+    let currentSelector = Selector('div.gw-subMenu.gw-open');
+    
+    // Iterate through the menu path to hover over each submenu
+    for (let i = 0; i < menuPath.length; i++) {
+        await t.hover(currentSelector.find(`div[aria-label='${menuPath[i]}']`));
+    }
+    // After navigating through the submenus, click the desired final option
+    await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
+}
