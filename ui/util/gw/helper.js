@@ -136,8 +136,8 @@ export async function performHoverInTable(webElement) {
 
 /**
  * Recursive function to navigate through nested submenus and click a specific option
- * @param {Array string} menuPath 
- * @param {string} finalOptionText 
+ * @param {Array string} menuPath - list of options in sequence
+ * @param {string} finalOptionText - final option to click
  */
 export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
     let currentSelector = Selector('div.gw-subMenu.gw-open');
