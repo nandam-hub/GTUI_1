@@ -2,7 +2,7 @@ const { When, Then } = require("@cucumber/cucumber")
 import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario";
 import { SearchScenario } from "../../../../ui/actions/gw/pc/SearchScenario";
 import { AccountSummaryScenario } from "../../../../ui/actions/gw/pc/AccountSummaryScenario";
-import { searchTableRecord } from "../../../../ui/util/gw/helper";
+import { clickTableRecord, searchTableRecord } from "../../../../ui/util/gw/helper";
 import world from "../../../../ui/util/gw/world";
 import { t } from "testcafe"
 
@@ -16,7 +16,7 @@ When(/^the user searches for the policy with policy number/, async function () {
 });
 
 Then(/^the policy details are loaded successfully/, async function () {
-    await searchTableRecord(2, t.ctx.PolicyNumber)
+    await clickTableRecord(2, t.ctx.PolicyNumber)
     await searchScenario.verifyPolicySummaryHeader()
 });
 
