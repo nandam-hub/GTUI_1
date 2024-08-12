@@ -1,15 +1,14 @@
 {
     "defaultDataSet":{
-        "Title": "RETURN",
+        "Title": "EXAM1",
         "Type": "General",
         "Claims": "00000002818",
-        "Associations": "RETURN"
+        "Associations": "EXAM1"
     },
     "Association":{
-        "Title": "RETURN",
+        "Title": "EXAM1",
         "Type": "General",
         "Claims": "00000002818",
-        "Associations":"RETURN"
-
+        "Associations":"EXAM1"
     }
 }
