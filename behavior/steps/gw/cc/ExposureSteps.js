@@ -2,11 +2,17 @@ const { When, Then } = require("@cucumber/cucumber")
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
 import { ExposureScenario } from "../../../../ui/actions/gw/cc/ExposureScenario";
 import { navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
+import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
+import { t } from "testcafe";
+import { searchTableRecord } from "../../../../ui/util/gw/helper";
 
 const navigationScenario = new NavigationScenario()
 const exposureScenario = new ExposureScenario()
+const searchScenario = new SearchScenario()
 
 When(/^the user creates BI Liability exposure/, async function () {
+    await searchScenario.claimSimpleSearch(t.ctx.claimNo)
+    await searchTableRecord(3, t.ctx.claimNo)
     await navigationScenario.ClickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type', 'U'], 'Uninsured Motorist - Bodily Injury')
     await exposureScenario.newExposure()
@@ -24,8 +30,15 @@ When(/^the user creates medical payments exposure/, async function () {
 
 Then(/^the user validates BI Liability exposure/, async function () {
     await exposureScenario.validateBILiabilityExposure()
+    
 });
 
 Then(/^the user validates medical payments exposure/, async function () {
     await exposureScenario.validateMedicalPaymentsExposure()
+});
+
+Then(/^the user selects and validates the BI liability and Medical Payment exposure's/, async function () {
+    console.log("BI Liability, Medical Payment exposure's are selected")
+    await exposureScenario.verifyExposureHeader()
+    await exposureScenario.selectExposure()
 });
