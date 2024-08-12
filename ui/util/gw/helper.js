@@ -85,7 +85,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
  */
 export async function validateTableRecord(headerNameOrIndex, referenceCellValue, targetColumnIndex) {
     await t.wait(1000)
-    const tableRows = Selector('table').nth(0).find('tr');
+    const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
     //To find "headerNameOrIndex" is string or index
@@ -129,12 +129,11 @@ export function pascalToCamel(inputString) {
 /** 
  * To click on a specific record in a table.
  * @param {string, Number} refHeaderNameOrIndex -Column name or column index of reference cell value
- * @param {string} stringValue - Cell text value on which click action should be performed 
+ * @param {string} stringValue - Cell text value or id of the text on which click action should be performed 
  * @param {string} referenceCellValue - Reference cell value
  * @param {number} targetColumnIndex - Column index where stringValue is present
  */
 export async function clickTableRecord(refHeaderNameOrIndex, stringValue, referenceCellValue = "", targetColumnIndex = "") {
-    await t.wait(1000)
     const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
     const tablecols = tableRows.nth(0).find('td');
     const rowCount = await tableRows.count;
@@ -164,7 +163,6 @@ export async function clickTableRecord(refHeaderNameOrIndex, stringValue, refere
         if (referenceCellValue == "") {
             if (cellText.includes(stringValue)) {
                 await t.click(tableRows.nth(i).find('td').nth(Number.parseInt(refHeaderNameOrIndex)).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'));
-                await t.wait(2000)
                 break;
             }
         }
@@ -176,8 +174,20 @@ export async function clickTableRecord(refHeaderNameOrIndex, stringValue, refere
             catch (e) {
                 console.log(' withText did not work. Trying with id')
                 await t.click((path.find('div').find(`[id*="${stringValue}"]`)))
+                break;
             }
         }
-        break;
+
     }
+}
+/**
+ * To return specific cell value based on row and column
+ * @param {Number} rowIndex - row number of the actual value. By default considers last row
+ * @param {Number} columnIndex - column number of the actual value
+ * @returns - specific cellText
+ */
+export async function returnDataFromTable(columnIndex, rowIndex = -1) {
+    //Locate Table
+    const table = Selector('table.gw-ListViewWidget--table');
+    return table.find('tbody').find('tr').nth(rowIndex).find('td').nth(columnIndex).textContent;
 }

@@ -11,6 +11,8 @@ import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPop
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
+import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks";
+import { RiskAnalysis_Ext } from "./scenarioPages/policy/RiskAnalysis_Ext";
 import { t } from "testcafe";
 
 const summary_Ext = new Summary_Ext()
@@ -26,6 +28,8 @@ const contactTabBar = new ContactTabBar();
 const contactSearch_Ext = new ContactSearch_Ext()
 const accountMenuActions_Ext = new AccountMenuActions_Ext()
 const cllLocationPopup_New = new CLLLocationPopup_New()
+const policyMenuLinks = new PolicyMenuLinks()
+const riskAnalysis_Ext = new RiskAnalysis_Ext()
 
 export class NavigationScenario {
 
@@ -139,5 +143,19 @@ export class NavigationScenario {
   async editPolicyCommercialNavigation() {
     await submissionWizard_New.submissionWizardEditPolicy.click()
     await submissionWizard_New.submissionWizardLOBCommercial1.click()
+  }
+
+  async navigateToPolicyFileRiskAnalysis() {
+    await policyMenuLinks.menuLinksPolicyFile_PolicyFile_RiskAnalysis.click()
+  }
+
+  async navigateRiskAnalysisTab(tabSection) {
+    switch (tabSection) {
+      case ('UWIssues'):
+        await riskAnalysis_Ext.policyFile_RiskAnalysisCVPolicyFile_EvaluationIssuesCardTab.click()
+        break;
+      default:
+        await riskAnalysis_Ext.policyFile_RiskAnalysisCVPolicyFile_UWReferralReasonCardTab.click()
+    }
   }
 }

@@ -13,4 +13,4 @@ Feature: Manage Risk Analysis
         And the user manually adds "2" UW
         And the user approves the UW issues
         And the user proceeds and issues policy
-        Then the policy is issued
+        Then UW issue is in approved status
