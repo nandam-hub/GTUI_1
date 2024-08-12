@@ -2,12 +2,15 @@ import { ClaimTabBar_Ext } from "./scenarioPages/navigation/tabBar/ClaimTabBar_E
 import { SearchTabBar_Ext } from "./scenarioPages/search/claimSearchesGroup/SearchTabBar_Ext"
 import { ClaimMenuLinks } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/menuLinks/ClaimMenuLinks"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
+import { ClaimMenuLinks_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/ClaimMenuLinks_Ext"
 import {t} from "testcafe"
 
 const claimMenuLinks = new ClaimMenuLinks()
 const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
+const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
+
 
 export class NavigationScenario {
 
@@ -50,5 +53,11 @@ export class NavigationScenario {
     await searchTabBar_Ext.claimSearchesExpandButton.click()
     await searchTabBar_Ext.claimSearchesExpandButton.click()
     await searchTabBar_Ext.tabBarSearchTabSearch_ClaimSearchesGroupClaimSearchesGroup_ClaimSearch.click()
+  }
+
+  async navigateToAssocaite() {
+    await claimMenuLinks_Ext.claimLossDetailsGroup.click()
+    await claimMenuLinks_Ext.claim_ClaimLossDetailsGroupClaimLossDetailsGroup_ClaimAssociations.click()
+  
   }
 }
