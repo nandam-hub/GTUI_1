@@ -1,29 +1,22 @@
 const { When, Then } = require("@cucumber/cucumber")
-import { t } from "testcafe";
-import { FnolScenario } from "../../../../ui/actions/gw/cc/FNOLScenario";
-import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
-import { searchTableRecord } from "../../../../ui/util/gw/helper";
-import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
 import { ExposureScenario } from "../../../../ui/actions/gw/cc/ExposureScenario";
+import { navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
 
-const fnolScenario = new FnolScenario()
-const searchScenario = new SearchScenario()
 const navigationScenario = new NavigationScenario()
-const claimSummaryScenario = new ClaimSummaryScenario()
 const exposureScenario = new ExposureScenario()
 
 When(/^the user creates BI Liability exposure/, async function () {
-    await navigationScenario.navigateCoverageType()
-    await exposureScenario.selectBodilyInjury()
+    await navigationScenario.ClickClaimMenuAction()
+    await navigateAndClickSubmenu(['Choose by Coverage Type', 'U'], 'Uninsured Motorist - Bodily Injury')
     await exposureScenario.newExposure()
     await exposureScenario.injuryIncident()
     await exposureScenario.clickOnUpdate()
 });
 
 When(/^the user creates medical payments exposure/, async function () {
-    await navigationScenario.navigateCoverageType()
-    await exposureScenario.selectMedicalPayments()
+    await navigationScenario.ClickClaimMenuAction()
+    await navigateAndClickSubmenu(['Choose by Coverage Type', 'M'], 'Medical Payments')
     await exposureScenario.newExposure()
     await exposureScenario.injuryIncident()
     await exposureScenario.clickOnUpdate()
