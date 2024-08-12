@@ -1,5 +1,6 @@
 const moment = require('moment');
 import { t, Selector } from 'testcafe';
+import { PcfComponent } from '@gtui/gt-ui-framework';
 
 /**
  * To generate date from current date in MMDDYYYY format
@@ -180,6 +181,7 @@ export async function clickTableRecord(refHeaderNameOrIndex, stringValue, refere
 
     }
 }
+
 /**
  * To return specific cell value based on row and column
  * @param {Number} rowIndex - row number of the actual value. By default considers last row
@@ -190,4 +192,50 @@ export async function returnDataFromTable(columnIndex, rowIndex = -1) {
     //Locate Table
     const table = Selector('table.gw-ListViewWidget--table');
     return table.find('tbody').find('tr').nth(rowIndex).find('td').nth(columnIndex).textContent;
+}
+
+//To enter data in input field of a table
+export async function enterDataInTable(columnIndex, inputString) {
+    //Locate Table
+    const table = Selector('table.gw-ListViewWidget--table');
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    // Locate the input field and type
+    const inputField = lastrow.find('td').nth(columnIndex).find('input[type="text"]');
+    await t
+        .expect(table.exists).ok()
+        .typeText(inputField, inputString);
+}
+
+//To click on an element in last row of a table
+export async function performClickInTable(webElement) {
+    // Locate Table
+    const table = Selector('table.gw-ListViewWidget--table')
+    // Locate the webelement to be clicked in last row
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    await t.click(lastrow.find(webElement).nth(-1));
+}
+
+//To hover on an element in last row of a table
+export async function performHoverInTable(webElement) {
+    // Locate Table
+    const table = Selector('table.gw-ListViewWidget--table')
+    // Locate the webelement to be hover in last row
+    const lastrow = table.find('tbody').find('tr').nth(-1)
+    await t.hover(lastrow.find(webElement));
+}
+
+/**
+ * Recursive function to navigate through nested submenus and click a specific option
+ * @param {Array string} menuPath - list of options in sequence
+ * @param {string} finalOptionText - final option to click
+ */
+export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
+    let currentSelector = Selector('div.gw-subMenu.gw-open');
+
+    // Iterate through the menu path to hover over each submenu
+    for (let i = 0; i < menuPath.length; i++) {
+        await t.hover(currentSelector.find(`div[aria-label='${menuPath[i]}']`));
+    }
+    // After navigating through the submenus, click the desired final option
+    await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
 }

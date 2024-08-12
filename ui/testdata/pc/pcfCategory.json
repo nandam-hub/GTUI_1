@@ -15,7 +15,9 @@
     "UmbrellaLiabilityUmbrellaCoverageForm",
     "UmbrellaLiabilitySelfInsuredRetention",
     "UmbrellaLiabilityorExcessLiability",
-    "ContentsOfOtherStructuresLimit"
+    "ContentsOfOtherStructuresLimit",
+    "DriverState",
+    "DriverAddressType"
   ],
   "textInput": [
     "VinNumber",
@@ -31,7 +33,12 @@
     "YearBuilt",
     "CllLocationPopupAddress1",
     "CllLocationPopupCity",
-    "CllLocationPopupZipCode"
+    "CllLocationPopupZipCode",
+    "FirstName",
+    "LastName",
+    "DriverAddress1",
+    "DriverCity",
+    "DriverZipCode"
   ],
   "checkBox": [
     "LiabilityBodilyInjuryAndPropertyDamage",
