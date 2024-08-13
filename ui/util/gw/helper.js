@@ -127,59 +127,32 @@ export function pascalToCamel(inputString) {
 }
 
 /** 
- * To click on a specific record in a table.
- * @param {string, Number} refHeaderNameOrIndex -Column name or column index of reference cell value
- * @param {string} stringValue - Cell text value or id of the text on which click action should be performed 
- * @param {string} referenceCellValue - Reference cell value
- * @param {number} targetColumnIndex - Column index where stringValue is present
+ * To click on a record in a table with a specific text.
+ * @param {string, Number} referenceCellValueOrIndex -Reference Cell text or column index
+ * @param {string} stringValue - Cell text value or id of the text on which click action should be performed
  */
-export async function clickTableRecord(refHeaderNameOrIndex, stringValue, referenceCellValue = "", targetColumnIndex = "") {
+export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
     const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
-    const tablecols = tableRows.nth(0).find('td');
-    const rowCount = await tableRows.count;
-    //To find "refHeaderNameOrIndex" is string or index
-    if (typeof refHeaderNameOrIndex === 'string') {
-        const colsCount = await tablecols.count;
-        for (let i = 0; i < colsCount; i++) {
-            let cellText
-            try {
-                cellText = await tablecols.nth(i).find('div.gw-label, div.gw-value-readonly-wrapper').textContent;
-                console.log("The cell text is ", cellText)
-            }
-            catch (e) {
-                // Skip a loop if no lable found - checkbox/empty title
-                continue;
-            }
-            if (refHeaderNameOrIndex.includes(cellText) && cellText.trim() !== '' && cellText.trim() !== null) {
-                refHeaderNameOrIndex = i;
-                console.log("headerNameOrIndex ", refHeaderNameOrIndex)
-                break;
-            }
+    if ((typeof referenceCellValueOrIndex) === 'string') {
+        let tablePath = tableRows.withText(referenceCellValueOrIndex).find('td')
+        try {
+            await t.click(tablePath.find('div').nth(-1).withText(stringValue))
+        }
+        catch (e) {
+            console.log('withText did not work. Trying with id')
+            await t.click(tablePath.find('div').find(`[id*="${stringValue}"]`))
         }
     }
-
-    for (let i = 1; i < rowCount; i++) {
-        const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(refHeaderNameOrIndex)).textContent;
-        if (referenceCellValue == "") {
-            if (cellText.includes(stringValue)) {
-                await t.click(tableRows.nth(i).find('td').nth(Number.parseInt(refHeaderNameOrIndex)).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'));
-                break;
-            }
+    else {
+        for (let i = 1; i <= await tableRows.count; i++) {
+            let currentCell = tableRows.nth(i).find('td').nth(referenceCellValueOrIndex)
+            if ((await (currentCell.textContent)).includes(stringValue))
+                await t.click(currentCell.find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'))
+            break;
         }
-        else if (cellText.includes(referenceCellValue)) {
-            var path = tableRows.nth(i).find('td').nth(Number.parseInt(targetColumnIndex))
-            try {
-                await t.click((path.find('div').nth(-1).withText(stringValue)))
-            }
-            catch (e) {
-                console.log(' withText did not work. Trying with id')
-                await t.click((path.find('div').find(`[id*="${stringValue}"]`)))
-                break;
-            }
-        }
-
     }
 }
+
 /**
  * To return specific cell value based on row and column
  * @param {Number} rowIndex - row number of the actual value. By default considers last row

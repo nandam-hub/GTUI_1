@@ -15,7 +15,6 @@ export class RiskAnalysisScenario {
 
     async addManualUW(issuesNum = "1") {
         let iterationNum = convertToInt(issuesNum.replace(/["]/g, ""))
-        console.log(iterationNum)
         for (let i = 1; i <= iterationNum; i++) {
             await riskAnalysis_Ext.addUWIssue.click()
             await newManualUWIssuePopup.newUWIssueDelegateDVIssueType.selectOptionByLabel(world.dataMap.get(`IssueType${i}`))
@@ -25,10 +24,8 @@ export class RiskAnalysisScenario {
     }
 
     async clickApproveOrRejectUWIssue() {
-        await clickTableRecord(world.dataMap.get('ReferenceColumnHeader'),
-            world.dataMap.get('ReferenceCellString'),
-            world.dataMap.get('ExpectedCellString'),
-            world.dataMap.get('TargetColumnIndex'))
+        await clickTableRecord(world.dataMap.get('ExpectedCellString'),
+            world.dataMap.get('ReferenceCellString'))
     }
 
     async riskApprovalDetails() {
@@ -37,6 +34,6 @@ export class RiskAnalysisScenario {
     }
 
     async validateUWStatus() {
-        await t.expect(await returnDataFromTable(1, 4)).eql(world.dataMap.get('ExpectedCellString'))
+        await t.expect(await returnDataFromTable(1, 4)).eql(world.dataMap.get('ReferenceCellString'))
     }
 }

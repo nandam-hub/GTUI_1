@@ -15,8 +15,8 @@ When(/^the user searches for the policy with policy number/, async function () {
     await searchScenario.searchWithPolicyNumber(t.ctx.PolicyNumber)
 });
 
-Then(/^the policy details are loaded successfully/, async function () {
-    await clickTableRecord(2, t.ctx.PolicyNumber)
+Then(/^the policy details are loaded successfully/, async function () {    
+    await clickTableRecord(t.ctx.PolicyNumber, 2)
     await searchScenario.verifyPolicySummaryHeader()
 });
 

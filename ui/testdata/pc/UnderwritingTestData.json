@@ -9,8 +9,8 @@
         "IssueType2": "Test manually triggered issue that is informational",
         "IssueDescription2": "UW2",
         "ReferenceColumnHeader": "Blocking Quote",
-        "ReferenceCellString":"Approve",
-        "ExpectedCellString": "UW1",
+        "ReferenceCellString":"UW1",
+        "ExpectedCellString": "Approve",
         "TargetColumnIndex": 4,
         "ValidUntil": "One Year"
 
