@@ -8,5 +8,10 @@
         "Claimant": 1,
         "LossParty": "insured",
         "Status": "Open"
+    },
+    "Exposure_02":{
+        "Claimant": 1,
+        "PropertyName": 1,
+        "Status": "Open"
     }
 }

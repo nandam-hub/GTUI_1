@@ -4,4 +4,6 @@ import { NewExposure } from '../../../../../pages/gw/generated/claimsolutions/pa
 export class NewExposure_Ext extends NewExposure {
     newExposureDVClaimantPickerExt = PcfSelectInput('#NewExposure-NewExposureScreen-NewExposureDV-Claimant_Picker');
     newExposureInjuryIncidentMenuIcon = PcfComponent("#NewExposure-NewExposureScreen-NewExposureDV-BIDamageInputSet-Injury_Incident-Injury_IncidentMenuIcon")
+    newExposurePropertyIncidentMenuIcon = PcfComponent("#NewExposure-NewExposureScreen-NewExposureDV-NewClaimPropertyDamageDV-NewClaimIncidentInputSet-Property_Incident-Property_IncidentMenuIcon")
+    newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVClaimant_PickerExt = PcfSelectInput('#NewExposure-NewExposureScreen-NewExposureDV-NewClaimPropertyDamageDV-Claimant_Picker');
 }

@@ -22,10 +22,22 @@ When(/^the user creates medical payments exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
+When(/^the user creates property exposure/, async function () {
+    await navigationScenario.ClickClaimMenuAction()
+    await navigateAndClickSubmenu(['Choose by Coverage Type'], 'Building Coverage')
+    await exposureScenario.newExposureProperty()
+    await exposureScenario.propertyIncident()
+    await exposureScenario.clickOnUpdate()
+});
+
 Then(/^the user validates BI Liability exposure/, async function () {
     await exposureScenario.validateBILiabilityExposure()
 });
 
 Then(/^the user validates medical payments exposure/, async function () {
     await exposureScenario.validateMedicalPaymentsExposure()
+});
+
+Then(/^the user validates property exposure/, async function () {
+    await exposureScenario.validatePropertyExposure()
 });

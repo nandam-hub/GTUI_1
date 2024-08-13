@@ -7,6 +7,7 @@ import { t } from "testcafe"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
 import { NewExposure_Ext } from "./scenarioPages/other/NewExposure_Ext"
 import { NewInjuryIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewInjuryIncidentPopup"
+import { NewFixedPropertyIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewFixedPropertyIncidentPopup"
 
 const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
@@ -14,6 +15,7 @@ const newClaimSaved_Ext = new NewClaimSaved_Ext()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const newExposure_Ext = new NewExposure_Ext()
 const newInjuryIncidentPopup = new NewInjuryIncidentPopup()
+const newFixedPropertyIncidentPopup = new NewFixedPropertyIncidentPopup()
 
 export class ExposureScenario {
     async selectBodilyInjury() {
@@ -32,9 +34,20 @@ export class ExposureScenario {
         await newExposure_Ext.newExposureNewExposureScreenNewExposureDVBIDamageInputSetInjury_IncidentBodilyInjuryDamageDV_NewIncidentMenuItem.click()
     }
 
+    async newExposureProperty() {
+        await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVClaimant_PickerExt.selectNthOption(world.dataMap.get('Claimant'))
+        await newExposure_Ext.newExposurePropertyIncidentMenuIcon.click()
+        await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVNewClaimIncidentInputSetProperty_IncidentNewClaimPropertyDamageDV_NewIncidentMenuItem.click()
+    }
+
     async injuryIncident() {
         await newInjuryIncidentPopup.newInjuryIncidentPopupNewInjuryIncidentScreenInjuryIncidentDVInjuryIncidentInputSetLossParty.selectOptionByValue(world.dataMap.get('LossParty'))
         await newInjuryIncidentPopup.newInjuryIncidentScreenUpdate.click()
+    }
+
+    async propertyIncident() {
+        await newFixedPropertyIncidentPopup.newFixedPropertyIncidentPopupNewFixedPropertyIncidentScreenFixPropIncidentDetailDVFixedPropertyIncidentDVCCAddressInputSetglobalAddressContainerAddress_Picker.selectNthOption(world.dataMap.get('PropertyName'))
+        await newFixedPropertyIncidentPopup.newFixedPropertyIncidentScreenUpdate.click()
     }
 
     async clickOnUpdate() {
@@ -47,5 +60,9 @@ export class ExposureScenario {
 
     async validateMedicalPaymentsExposure() {
         await t.expect(await validateTableRecord("Type", "Med Pay", 6)).eql(world.dataMap.get('Status'))
+    }
+
+    async validatePropertyExposure() {
+        await t.expect(await validateTableRecord("Type", "Property", 6)).eql(world.dataMap.get('Status'))
     }
 }
