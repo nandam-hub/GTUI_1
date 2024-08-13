@@ -305,6 +305,24 @@ When(/^the user initiates quote for small business/, async function () {
     await newSubmissionScenario.clickNext()
 })
 
+When(/^the user issue the new submission for personal auto with (.*) drivers/, async function (t, stepArguments) {
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.addDrivers(stepArguments[0])
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.addDriversInPersonalAutoScreen(stepArguments[0])
+    await newSubmissionScenario.usaPersonalAutoStandardCoverages()
+    await coverageFilter()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.personalVehicle()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
 When(/^the user proceeds and issues policy/, async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()

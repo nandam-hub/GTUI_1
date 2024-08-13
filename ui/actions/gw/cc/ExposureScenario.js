@@ -21,6 +21,11 @@ export class ExposureScenario {
         await claimMenuActions_Ext.newExposureMenuItemSetByCoverageTypeUninsuredMotoristBodilyInjury.click()
     }
 
+    async selectMedicalPayments() {
+        await t.hover(claimMenuActions_Ext.newExposureMenuItemSetByCoverageTypeM.component)
+        await claimMenuActions_Ext.newExposureMenuItemSetByCoverageTypeMedicalPayments.click()
+    }
+
     async newExposure() {
         await newExposure_Ext.newExposureDVClaimantPickerExt.selectNthOption(world.dataMap.get('Claimant'))
         await newExposure_Ext.newExposureInjuryIncidentMenuIcon.click()
@@ -38,5 +43,9 @@ export class ExposureScenario {
 
     async validateBILiabilityExposure() {
         await t.expect(await validateTableRecord("Type", "Bodily Injury", 6)).eql(world.dataMap.get('Status'))
+    }
+
+    async validateMedicalPaymentsExposure() {
+        await t.expect(await validateTableRecord("Type", "Med Pay", 6)).eql(world.dataMap.get('Status'))
     }
 }

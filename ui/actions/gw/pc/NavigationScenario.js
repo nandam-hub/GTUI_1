@@ -13,6 +13,7 @@ import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizar
 import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/AccountMenuActions";
 import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks";
 import { RiskAnalysis_Ext } from "./scenarioPages/policy/RiskAnalysis_Ext";
+import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext";
 import { t } from "testcafe";
 
 const summary_Ext = new Summary_Ext()
@@ -30,6 +31,7 @@ const accountMenuActions_Ext = new AccountMenuActions_Ext()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const policyMenuLinks = new PolicyMenuLinks()
 const riskAnalysis_Ext = new RiskAnalysis_Ext()
+const policyMenuActions_Ext = new PolicyMenuActions_Ext()
 
 export class NavigationScenario {
 
@@ -140,6 +142,11 @@ export class NavigationScenario {
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
 
+  async navigatePolicyFilePersonalAutoScreen() {
+    await policyMenuActions_Ext.policyFileUALPersonalAutoLine.click()
+    await policyMenuActions_Ext.policyFileUALPersonalAutoMenu.click()
+  }
+  
   async editPolicyCommercialNavigation() {
     await submissionWizard_New.submissionWizardEditPolicy.click()
     await submissionWizard_New.submissionWizardLOBCommercial1.click()

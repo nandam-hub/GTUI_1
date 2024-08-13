@@ -9,4 +9,6 @@ export class ClaimMenuActions_Ext extends ClaimMenuActions {
     newExposureMenuItemSetByCoverageTypeU = PcfComponent("#Claim-ClaimMenuActions-ClaimMenuActions_NewExposure-NewExposureMenuItemSet-NewExposureMenuItemSet_ByCoverageType-8-item")
     newExposureMenuItemSetByCoverageTypeUnderinsuredMotoristBodilyInjury = PcfComponent("#Claim-ClaimMenuActions-ClaimMenuActions_NewExposure-NewExposureMenuItemSet-NewExposureMenuItemSet_ByCoverageType-8-item-0-item")
     newExposureMenuItemSetByCoverageTypeUninsuredMotoristBodilyInjury = PcfComponent("#Claim-ClaimMenuActions-ClaimMenuActions_NewExposure-NewExposureMenuItemSet-NewExposureMenuItemSet_ByCoverageType-8-item-2-item")
+    newExposureMenuItemSetByCoverageTypeM = PcfComponent("#Claim-ClaimMenuActions-ClaimMenuActions_NewExposure-NewExposureMenuItemSet-NewExposureMenuItemSet_ByCoverageType-4-item")
+    newExposureMenuItemSetByCoverageTypeMedicalPayments = PcfComponent("#Claim-ClaimMenuActions-ClaimMenuActions_NewExposure-NewExposureMenuItemSet-NewExposureMenuItemSet_ByCoverageType-4-item-1-item")
 }
