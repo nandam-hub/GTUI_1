@@ -154,6 +154,7 @@ export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
     }
 }
 
+
 /**
  * To return specific cell value based on row and column
  * @param {Number} rowIndex - row number of the actual value. By default considers last row
