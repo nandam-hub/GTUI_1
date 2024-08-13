@@ -3,12 +3,14 @@ import { t } from "testcafe"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
 import { NewExposure_Ext } from "./scenarioPages/other/NewExposure_Ext"
 import { NewInjuryIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewInjuryIncidentPopup"
+import { NewFixedPropertyIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewFixedPropertyIncidentPopup"
 import { ClaimExposures_Ext } from "./scenarioPages/claim/ClaimExposures_Ext"
 import { validateTableRecord } from "../../../util/gw/helper"
 
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const newExposure_Ext = new NewExposure_Ext()
 const newInjuryIncidentPopup = new NewInjuryIncidentPopup()
+const newFixedPropertyIncidentPopup = new NewFixedPropertyIncidentPopup()
 const claimExposures_Ext = new ClaimExposures_Ext()
 
 export class ExposureScenario {
@@ -28,9 +30,20 @@ export class ExposureScenario {
         await newExposure_Ext.newExposureNewExposureScreenNewExposureDVBIDamageInputSetInjury_IncidentBodilyInjuryDamageDV_NewIncidentMenuItem.click()
     }
 
+    async newExposureProperty() {
+        await newExposure_Ext.newExposureClaimant_Picker.selectNthOption(world.dataMap.get('Claimant'))
+        await newExposure_Ext.newExposurePropertyIncidentMenuIcon.click()
+        await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVNewClaimIncidentInputSetProperty_IncidentNewClaimPropertyDamageDV_NewIncidentMenuItem.click()
+    }
+
     async injuryIncident() {
         await newInjuryIncidentPopup.newInjuryIncidentPopupNewInjuryIncidentScreenInjuryIncidentDVInjuryIncidentInputSetLossParty.selectOptionByValue(world.dataMap.get('LossParty'))
         await newInjuryIncidentPopup.newInjuryIncidentScreenUpdate.click()
+    }
+
+    async propertyIncident() {
+        await newFixedPropertyIncidentPopup.newFixedPropertyIncidentPopupNewFixedPropertyIncidentScreenFixPropIncidentDetailDVFixedPropertyIncidentDVCCAddressInputSetglobalAddressContainerAddress_Picker.selectNthOption(world.dataMap.get('PropertyName'))
+        await newFixedPropertyIncidentPopup.newFixedPropertyIncidentScreenUpdate.click()
     }
 
     async clickOnUpdate() {
@@ -45,6 +58,10 @@ export class ExposureScenario {
         await t.expect(await validateTableRecord("Type", "Med Pay", 6)).eql(world.dataMap.get('Status'))
     }
 
+    async validatePropertyExposure() {
+        await t.expect(await validateTableRecord("Type", "Property", 6)).eql(world.dataMap.get('Status'))
+    }
+  
     async selectExposure(){
         await claimExposures_Ext.claimExposuresScreenClaimExposures_BICheckBox.click()
         await claimExposures_Ext.claimExposuresScreenClaimExposures_MedPayCheckBox.click()

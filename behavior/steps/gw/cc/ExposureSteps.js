@@ -28,13 +28,25 @@ When(/^the user creates medical payments exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
-Then(/^the user validates BI Liability exposure/, async function () {
+When(/^the user creates property exposure/, async function () {
+    await navigationScenario.ClickClaimMenuAction()
+    await navigateAndClickSubmenu(['Choose by Coverage Type'], 'Building Coverage')
+    await exposureScenario.newExposureProperty()
+    await exposureScenario.propertyIncident()
+    await exposureScenario.clickOnUpdate()
+});
+
+Then(/^the BI Liability exposure is created successfully/, async function () {
     await exposureScenario.validateBILiabilityExposure()
     
 });
 
-Then(/^the user validates medical payments exposure/, async function () {
+Then(/^the medical payment exposure is created successfully/, async function () {
     await exposureScenario.validateMedicalPaymentsExposure()
+});
+
+Then(/^the property exposure is created successfully/, async function () {
+    await exposureScenario.validatePropertyExposure()
 });
 
 Then(/^the user selects and validates the BI liability and Medical Payment exposure's/, async function () {
