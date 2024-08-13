@@ -32,7 +32,8 @@ export class AssociationScenario {
     async updateAssociation() {
         await newClaimAssociation_Ext.claimAssociationDetailScreenUpdate.click()
     }
-       
+    
+    //TODO: Currently failing. Need to check and update
     async validateAssociation() {   
         await t.expect (await validateTableRecord("Claims",(world.dataMap.get('Claims')),1)).eql(world.dataMap.get('Associations'))
         //await searchTableRecord(1, world.dataMap.get('Associations'))
