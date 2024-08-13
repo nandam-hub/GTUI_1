@@ -31,7 +31,7 @@ export class ExposureScenario {
     }
 
     async newExposureProperty() {
-        await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVClaimant_PickerExt.selectNthOption(world.dataMap.get('Claimant'))
+        await newExposure_Ext.newExposureClaimant_Picker.selectNthOption(world.dataMap.get('Claimant'))
         await newExposure_Ext.newExposurePropertyIncidentMenuIcon.click()
         await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVNewClaimIncidentInputSetProperty_IncidentNewClaimPropertyDamageDV_NewIncidentMenuItem.click()
     }

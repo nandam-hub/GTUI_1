@@ -36,16 +36,16 @@ When(/^the user creates property exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
-Then(/^the user validates BI Liability exposure/, async function () {
+Then(/^the BI Liability exposure is created successfully/, async function () {
     await exposureScenario.validateBILiabilityExposure()
     
 });
 
-Then(/^the user validates medical payments exposure/, async function () {
+Then(/^the medical payment exposure is created successfully/, async function () {
     await exposureScenario.validateMedicalPaymentsExposure()
 });
 
-Then(/^the user validates property exposure/, async function () {
+Then(/^the property exposure is created successfully/, async function () {
     await exposureScenario.validatePropertyExposure()
 });
 

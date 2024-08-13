@@ -10,7 +10,9 @@ Feature: Creating and selecting exposure in Claim center
         When the user loads "cc" data "Exposure_01" from json "ExposuresTestData"
         And the user creates BI Liability exposure
         And the user creates medical payments exposure
-        Then the user validates medical payments exposure
+        Then the BI Liability exposure is created successfully
+        And the medical payment exposure is created successfully
+        And the user selects and validates the BI liability and Medical Payment exposure's
 
     @property_exposure
     Scenario: Creating property exposure
@@ -20,7 +22,5 @@ Feature: Creating and selecting exposure in Claim center
         Then the FNOL is added successfully
         When the user loads "cc" data "Exposure_02" from json "ExposuresTestData"
         And the user creates property exposure
-        Then the user validates property exposure
-        Then the user validates BI Liability exposure
-        And the user validates medical payments exposure
-        And the user selects and validates the BI liability and Medical Payment exposure's
+        Then the property exposure is created successfully
+        
