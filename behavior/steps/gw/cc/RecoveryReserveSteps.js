@@ -18,6 +18,6 @@ When(/^the user creates recovery reserve/, async function () {
     await recoveryReserveScenario.addRecoveryReserve()
 });
 
-Then(/^the user validates recovery reserve/, async function () {
+Then(/^the recovery reserve is created successfully/, async function () {
     await recoveryReserveScenario.validateRecoveryReserve()
 });
