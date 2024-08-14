@@ -204,6 +204,7 @@ export async function performHoverInTable(webElement) {
  */
 export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
     let currentSelector = Selector('div.gw-subMenu.gw-open');
+    await t.hover(currentSelector.find(`div[aria-label='New ...']`));
 
     // Iterate through the menu path to hover over each submenu
     for (let i = 0; i < menuPath.length; i++) {

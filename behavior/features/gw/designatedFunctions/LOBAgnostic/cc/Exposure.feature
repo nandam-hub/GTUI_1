@@ -1,6 +1,6 @@
 @claimcenter @designatedfunction
-Feature: Creating and selecting exposure in Claim center
-    As a user, I want to create and select exposure's in claim center
+Feature: Add or Update Exposure
+    As a user, I want to add or update exposure in claim center
 
     @bi_liability_exposure @medical_payments_exposure @select_exposure
     Scenario: Creating and selecting the BI Liability and Medical Payment exposure's
