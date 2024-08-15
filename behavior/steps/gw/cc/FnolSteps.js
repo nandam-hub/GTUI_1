@@ -55,3 +55,7 @@ Then(/^the catastrophe is displayed in loss details/, async function () {
     await navigationScenario.navigateToLossDetails()
     await claimLossDetailsScenario.verifyClaimLossDetails()
 });
+
+Then(/^the activities on the claim is updated in claim history screen/, async function () {
+    await navigationScenario.navigateToClaimHistoryScreen()
+});

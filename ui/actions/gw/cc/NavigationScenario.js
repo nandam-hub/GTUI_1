@@ -63,4 +63,8 @@ export class NavigationScenario {
   async navigateToLossDetails() {
     await claimMenuLinks_Ext.claimLossDetailsGroup.click()
   }
+
+  async navigateToClaimHistoryScreen() {
+    await claimMenuLinks_Ext.menuLinksClaim_ClaimHistory.click()
+  }
 }
