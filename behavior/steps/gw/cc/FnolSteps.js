@@ -5,11 +5,13 @@ import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
 import { searchTableRecord } from "../../../../ui/util/gw/helper";
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
+import { ClaimLossDetailsScenario } from "../../../../ui/actions/gw/cc/ClaimLossDetailsScenario";
 
 const fnolScenario = new FnolScenario()
 const searchScenario = new SearchScenario()
 const navigationScenario = new NavigationScenario()
 const claimSummaryScenario = new ClaimSummaryScenario()
+const claimLossDetailsScenario = new ClaimLossDetailsScenario()
 
 When(/^the user creates new FNOL/, async function () {
     await navigationScenario.navigateToNewClaimWizard()
@@ -47,4 +49,9 @@ Then(/^the FNOL is added successfully/, async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await claimSummaryScenario.verifySummaryHeader()
+});
+
+Then(/^the catastrophe is displayed in loss details/, async function () {
+    await navigationScenario.navigateToLossDetails()
+    await claimLossDetailsScenario.verifyClaimLossDetails()
 });

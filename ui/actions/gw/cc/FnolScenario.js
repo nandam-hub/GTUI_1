@@ -16,7 +16,7 @@ export class FnolScenario {
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetPolicyNumber.setValue(world.dataMap.get('PolicyNumber'))
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetType.click()
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetType.selectOptionByLabel(world.dataMap.get('Type'))
-        await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetClaim_LossDate.setValue(dateFunction(world.dataMap.get('LossDate')))
+        await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetClaim_LossDate.setValue(await world.dataMap.get('LossDate').includes('/') ? world.dataMap.get('LossDate') : dateFunction(world.dataMap.get('LossDate')))
         await fNOLWizard_Ext.newClaimPolicyGeneralDVEffectiveDate.setValue(dateFunction(world.dataMap.get('EffectiveDate')))
         await fNOLWizard_Ext.newClaimPolicyGeneralDVExpirationDate.setValue(dateFunction(world.dataMap.get('ExpirationDate')))
         await fNOLWizard_Ext.fNOLWizardNameMenuIcon.click()
