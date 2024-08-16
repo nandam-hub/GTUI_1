@@ -58,6 +58,13 @@ export class NavigationScenario {
   async navigateToAssocaite() {
     await claimMenuLinks_Ext.claimLossDetailsGroup.click()
     await claimMenuLinks_Ext.claim_ClaimLossDetailsGroupClaimLossDetailsGroup_ClaimAssociations.click()
-  
+  }
+
+  async navigateToLossDetails() {
+    await claimMenuLinks_Ext.claimLossDetailsGroup.click()
+  }
+
+  async navigateToClaimHistoryScreen() {
+    await claimMenuLinks_Ext.menuLinksClaim_ClaimHistory.click()
   }
 }

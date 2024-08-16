@@ -21,7 +21,9 @@
         "Name": "New Person",
         "LossCause": "Fire",
         "City": "Pewaukee",
-        "State": "Wisconsin"
+        "State": "Wisconsin",
+        "Description": "New claim saved",
+        "Assigned": "Assigned to user"
     },
     "createActivity_02": {
         "PolicyNumber": "2416558655",
@@ -34,5 +36,18 @@
         "LossCause": "Fire",
         "City": "Pewaukee",
         "State": "Wisconsin"
+    },
+    "createActivity_03": {
+        "PolicyNumber": "2416558655",
+        "SearchCreatePolicy": "Create Unverified Policy",
+        "Type": "Personal Auto",
+        "LossDate": "09/08/2003",
+        "EffectiveDate": "-2",
+        "ExpirationDate": "+366",
+        "Name": "New Person",
+        "LossCause": "Fire",
+        "City": "Los Angeles",
+        "State": "California",
+        "Catastrophe": "163 - LA earthquake - 09/06/2003 - 09/11/2003"
     }
 }
