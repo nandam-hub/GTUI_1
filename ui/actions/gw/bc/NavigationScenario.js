@@ -8,6 +8,12 @@ const searchTabBar = new SearchTabBar()
 const searchGroupMenuLinks = new SearchGroupMenuLinks()
 const policyGroupMenuLinks = new PolicyGroupMenuLinks()
 
+import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
+import world from "../../../util/gw/world.js"
+
+const accountGroupMenuLinks = new AccountGroupMenuLinks();
+const accountsTabBar_Ext = new AccountsTabBar_Ext()
+
 export class NavigationScenario {
 
   async navigateToInvoices() {
@@ -23,4 +29,10 @@ export class NavigationScenario {
   async navigateToCommissionsScreen() {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailCommissions.click()
   }
+
+  async navigateToAccountScreen() {
+    await accountsTabBar_Ext.accountsTab_ExpandButton.click()
+    await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
+    await accountsTabBar_Ext.accountSearch_Button.click()
+   }
 }
