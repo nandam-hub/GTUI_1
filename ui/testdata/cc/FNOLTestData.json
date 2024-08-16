@@ -21,7 +21,9 @@
         "Name": "New Person",
         "LossCause": "Fire",
         "City": "Pewaukee",
-        "State": "Wisconsin"
+        "State": "Wisconsin",
+        "Description": "New claim saved",
+        "Assigned": "Assigned to user"
     },
     "createActivity_02": {
         "PolicyNumber": "2416558655",

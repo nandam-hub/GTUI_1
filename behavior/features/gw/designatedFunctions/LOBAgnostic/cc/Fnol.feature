@@ -9,7 +9,7 @@ Feature: Capturing first notice of loss
         And the user creates new FNOL
         Then the FNOL is added successfully
 
-    @fnol @catastrophe
+    @catastrophe
     Scenario: Creating a new fnol with auto policy for catastrophe
         Given the user logs into the claims center as "superuser"
         When the user loads "cc" data "createActivity_03" from json "FNOLTestData"
@@ -17,7 +17,7 @@ Feature: Capturing first notice of loss
         Then the FNOL is added successfully
         And the catastrophe is displayed in loss details
 
-    @fnol @claimhistory
+    @claimhistory
     Scenario: Verify that key activities on the claim is updated in history screen
         Given the user logs into the claims center as "superuser"
         When the user loads "cc" data "createActivity_01" from json "FNOLTestData"

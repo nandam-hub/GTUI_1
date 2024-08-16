@@ -5,7 +5,7 @@ import world from "../../../util/gw/world";
 const claimLossDetails_Ext = new ClaimLossDetails_Ext()
 
 export class ClaimLossDetailsScenario {
-    async verifyClaimLossDetails() {
+    async verifyCatastropheDetails() {
         await t.expect(claimLossDetails_Ext.catastropheTextValue.component.textContent).eql(world.dataMap.get('Catastrophe'))
     }
 }
