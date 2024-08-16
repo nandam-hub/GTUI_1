@@ -8,3 +8,9 @@ Feature: Capturing first notice of loss
         When the user loads "cc" data "createActivity_01" from json "FNOLTestData"
         And the user creates new FNOL
         Then the FNOL is added successfully
+
+    @add_rental_service
+    Scenario: To add rental service for an auto claim
+        Given the user logs into the claims center as "superuser"
+        When the user loads "cc" data "createActivity_03" from json "FNOLTestData"
+        And the user creates new claim with rental

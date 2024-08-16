@@ -34,5 +34,19 @@
         "LossCause": "Fire",
         "City": "Pewaukee",
         "State": "Wisconsin"
+    },
+    "createActivity_03": {
+        "PolicyNumber": "2416558655",
+        "SearchCreatePolicy": "Create Unverified Policy",
+        "Type": "Personal Auto",
+        "LossDate": "-1",
+        "EffectiveDate": "-2",
+        "ExpirationDate": "+366",
+        "Name": "New Person",
+        "LossCause": "Fire",
+        "City": "Pewaukee",
+        "State": "Wisconsin",
+        "ClaimVehicleMake1": "Kia",
+        "ClaimVehicleModel1": "Daz"
     }
 }

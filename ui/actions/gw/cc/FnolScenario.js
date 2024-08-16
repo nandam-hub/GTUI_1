@@ -1,13 +1,16 @@
 import { FNOLWizard_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/FNOLWizard_Ext"
-import { dateFunction, splitFunction, generateRandomStringFunction } from "../../../../ui/util/gw/helper"
+import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable } from "../../../../ui/util/gw/helper"
 import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolutions/pages/popup/New/NewContactPopup"
 import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
+import { NewClaimWizard_NewPolicyVehiclePopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewClaimWizard_NewPolicyVehiclePopup"
 import world from "../../../../ui/util/gw/world"
 import { t } from "testcafe"
 
 const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
 const newClaimSaved_Ext = new NewClaimSaved_Ext()
+const newClaimWizard_NewPolicyVehiclePopup = new NewClaimWizard_NewPolicyVehiclePopup()
+
 
 export class FnolScenario {
     async searchOrCreatePolicy() {
@@ -63,5 +66,19 @@ export class FnolScenario {
     async readClaimNumber() {
         t.ctx.claimNo = splitFunction(await newClaimSaved_Ext.newClaimDVAssignedHeader.component.innerText, " ", 1)
         console.log("The claim number is: " + t.ctx.claimNo)
+    }
+
+    async addVehicle(){
+        let vehicleNum =1
+        for(let i=1;i<=vehicleNum; i++){
+            await  fNOLWizard_Ext.newClaimVehiclesLV_tbAdd.click()
+            await newClaimWizard_NewPolicyVehiclePopup.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVNumber.setValue(`${i}`)
+            await newClaimWizard_NewPolicyVehiclePopup.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVMake.setValue(world.dataMap.get(`ClaimVehicleMake${i}`))
+            await newClaimWizard_NewPolicyVehiclePopup.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVModel.setValue(world.dataMap.get(`ClaimVehicleModel${i}`))
+            await newClaimWizard_NewPolicyVehiclePopup.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleCoverageListDetailEditableVehicleCoveragesLV_tbAdd.click()
+        }
+
+        await selectDropdownInTable()
+       
     }
 }

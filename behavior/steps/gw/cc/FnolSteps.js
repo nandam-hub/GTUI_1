@@ -3,7 +3,7 @@ import { t } from "testcafe";
 import { FnolScenario } from "../../../../ui/actions/gw/cc/FNOLScenario";
 import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
-import { searchTableRecord } from "../../../../ui/util/gw/helper";
+import { searchTableRecord, findTable } from "../../../../ui/util/gw/helper";
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
 
 const fnolScenario = new FnolScenario()
@@ -11,7 +11,7 @@ const searchScenario = new SearchScenario()
 const navigationScenario = new NavigationScenario()
 const claimSummaryScenario = new ClaimSummaryScenario()
 
-When(/^the user creates new FNOL/, async function () {
+When('the user creates new FNOL', async function () {
     await navigationScenario.navigateToNewClaimWizard()
     await fnolScenario.searchOrCreatePolicy()
     await fnolScenario.newPerson()
@@ -47,4 +47,20 @@ Then(/^the FNOL is added successfully/, async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await claimSummaryScenario.verifySummaryHeader()
+});
+
+When('the user creates new claim with rental', async function () {
+    await navigationScenario.navigateToNewClaimWizard()
+    await fnolScenario.searchOrCreatePolicy()
+    await fnolScenario.newPerson()
+    await fnolScenario.addVehicle()
+    await findTable("Type")
+    // await fnolScenario.clickNext()
+    // await fnolScenario.addBasicInformation()
+    // await fnolScenario.clickNext()
+    // await fnolScenario.addAutoClaimInformation()
+    // await fnolScenario.clickNext()
+    // await fnolScenario.clickNext()
+    // await fnolScenario.saveAndAssignClaim()
+    // await fnolScenario.readClaimNumber()
 });

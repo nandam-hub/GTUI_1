@@ -213,3 +213,32 @@ export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
     // After navigating through the submenus, click the desired final option
     await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
 }
+
+//To select a value in a dropdwon inside a table
+export async function selectDropdownInTable(webElement) {
+    // Locate Table
+    //const table = Selector('table.gw-ListViewWidget--table')
+    //const table = findTable('Type')
+    // Locate the webelement to be clicked in last row
+    // const lastrow = table.find('tbody').find('tr').nth(-1)
+    // await t.click(lastrow.find(webElement).nth(-1));
+}
+export async function findTable(columnName) {
+    // Get all tables
+    const tables = Selector('table'); 
+    let foundTable;
+ 
+    // Iterate through all tables to find the one with the text
+    for (let i = 0; i < await tables.count; i++) {
+        const currentTable = tables.nth(i);
+        const cellWithText = currentTable.find('td div').withText(columnName);
+ 
+        if (await cellWithText.exists) {
+            foundTable = currentTable;
+            break;
+        }
+    }
+    const lastrow = foundTable.find('tr').nth(-1)
+    await t.click(lastrow.find('[id="NewClaimWizard_NewPolicyVehiclePopup-NewClaimWizard_NewPolicyVehicleScreen-PolicyVehicleDetailPanelSet-PolicyVehicleCoverageListDetail-EditableVehicleCoveragesLV-0-CoverageType"]').nth(-1));
+    await t.debug()
+}
