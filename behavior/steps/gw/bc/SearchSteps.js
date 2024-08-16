@@ -12,7 +12,7 @@ const navigationScenario = new NavigationScenario()
 const accountSummaryScenario = new AccountSummaryScenario()
 const searchScenario = new SearchScenario()
 
-When(/^the user searches for policy with policy number/, async function () {
+When(/^the user loads the policy with policy number/, async function () {
     await navigationScenario.navigateSearchPolicyScreen()
     await searchScenario.searchWithPolicy(world.dataMap.get('PolicyNumber'))
 });
