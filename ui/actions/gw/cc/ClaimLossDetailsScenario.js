@@ -1,12 +1,11 @@
-import { ClaimLossDetails } from "../../../pages/gw/generated/claimsolutions/pages/claim/claimLossDetailsGroup/ClaimLossDetails";
+import { ClaimLossDetails_Ext } from "../../../actions/gw/cc/scenarioPages/claim/claimLossDetailsGroup/ClaimLossDetails_Ext";
 import { t } from 'testcafe'
 import world from "../../../util/gw/world";
 
-const claimLossDetails = new ClaimLossDetails()
+const claimLossDetails_Ext = new ClaimLossDetails_Ext()
 
 export class ClaimLossDetailsScenario {
     async verifyClaimLossDetails() {
-        //await claimLossDetails.claimLossDetailsClaimLossDetailsScreenLossDetailsPanelSetLossDetailsCardCVLossDetailsDVCatastrophe_CatastropheNumber.eql(world.dataMap.get('ClaimStatus'))
-        await t.expect(claimLossDetails.claimLossDetailsClaimLossDetailsScreenLossDetailsPanelSetLossDetailsCardCVLossDetailsDVCatastrophe_CatastropheNumber.component.textContent).eql(world.dataMap.get('CatastropheNumber'))
+        await t.expect(claimLossDetails_Ext.catastropheTextValue.component.textContent).eql(world.dataMap.get('Catastrophe'))
     }
 }
