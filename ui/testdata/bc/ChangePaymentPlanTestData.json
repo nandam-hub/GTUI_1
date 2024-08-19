@@ -3,7 +3,7 @@
         "PolicyNumber": "2416558655",
         "PaymentPlan": "QA1PAYMENTPLAN01"
     },
-    "change_payment_plan": {
+    "changePaymentPlan_01": {
         "PolicyNumber": "2416558655",
         "PaymentPlan": "QA1PAYMENTPLAN01"
     }

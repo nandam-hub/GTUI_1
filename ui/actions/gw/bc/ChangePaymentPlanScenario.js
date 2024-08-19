@@ -13,6 +13,6 @@ export class ChangePaymentPlanScenario {
     }
 
     async validatePaymentPlan() {
-        await t.expect(await policyDetailPayments_Ext.policyDetailPaymentsScreenPaymentPlanExt.component.innerText).eql(world.dataMap.get('PaymentPlan'))
+        await t.expect(await policyDetailPayments_Ext.paymentPlan.component.innerText).eql(world.dataMap.get('PaymentPlan'))
     }
 }
