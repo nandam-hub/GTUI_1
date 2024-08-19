@@ -1,0 +1,10 @@
+{
+    "defaultDataSet": {
+        "PolicyNumber": "2416558655",
+        "PaymentPlan": "QA1PAYMENTPLAN01"
+    },
+    "change_payment_plan": {
+        "PolicyNumber": "2416558655",
+        "PaymentPlan": "QA1PAYMENTPLAN01"
+    }
+}
