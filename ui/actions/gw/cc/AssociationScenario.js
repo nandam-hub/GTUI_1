@@ -5,7 +5,7 @@ import { ClaimSearchPopup } from "../../../pages/gw/generated/claimsolutions/pag
 import { ClaimSearchPopup_New } from "./scenarioPages/claim/ClaimSearchPopup_new"
 import world from "../../../util/gw/world"
 import { t } from "testcafe"
-import { searchTableRecord, validateTableRecord } from "../../../util/gw/helper"
+import { generateRandomStringFunction, searchTableRecord, validateTableRecord } from "../../../util/gw/helper"
 
 const claimMenuLinks_Ext = new ClaimMenuLinks_Ext();
 const claimAssociations = new ClaimAssociations();
@@ -16,9 +16,10 @@ const claimSearchPopup_New = new ClaimSearchPopup_New();
 export class AssociationScenario {
     async addAssociation() {
         await claimAssociations.claimAssociationsScreenClaimAssociations_NewButton.click()
-        await newClaimAssociation_Ext.claimAssociationDetailDVTitle.setValue(world.dataMap.get('Title'))
+        t.ctx.ClaimsTitle = `${world.dataMap.get('Title')}${generateRandomStringFunction(2)}`;
+        await newClaimAssociation_Ext.claimAssociationDetailDVTitle.setValue(await t.ctx.ClaimsTitle)
         await newClaimAssociation_Ext.claimAssociationDetailDVType.selectOptionByLabel(world.dataMap.get('Type'))
-        await newClaimAssociation_Ext.editableClaimsInAssociationLV_tbAdd .click()
+        await newClaimAssociation_Ext.editableClaimsInAssociationLV_tbAdd.click()
         await newClaimAssociation_Ext.newClaimAssociationClaimAssociationDetailScreen.click()
     }
 
@@ -28,15 +29,13 @@ export class AssociationScenario {
         await claimSearchPopup.claimSearchPopupClaimSearchScreenClaimSearchDVClaimSearchAndResetInputSetSearch.click()
         await claimSearchPopup_New.claimSearchPopup.click()
     }
-    
+
     async updateAssociation() {
         await newClaimAssociation_Ext.claimAssociationDetailScreenUpdate.click()
     }
-    
+
     //TODO: Currently failing. Need to check and update
-    async validateAssociation() {   
-        await t.expect (await validateTableRecord("Claims",(world.dataMap.get('Claims')),1)).eql(world.dataMap.get('Associations'))
-        //await searchTableRecord(1, world.dataMap.get('Associations'))
-        //await t.expect(await newClaimAssociation_Ext.claimAssociateScreen.component.textContent).eql(world.dataMap.get('Associations'))
-        }
+    async validateAssociation() {
+        await t.expect(await validateTableRecord("Claims", world.dataMap.get('Claims'), 1)).eql(await t.ctx.ClaimsTitle)
     }
+}
