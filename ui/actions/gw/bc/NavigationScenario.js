@@ -4,12 +4,14 @@ import { SearchGroupMenuLinks } from '../../../pages/gw/generated/billingsolutio
 import { PolicyGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/PolicyGroupMenuLinks';
 import world from "../../../util/gw/world.js"
 import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
+import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
 const searchTabBar = new SearchTabBar()
 const searchGroupMenuLinks = new SearchGroupMenuLinks()
 const policyGroupMenuLinks = new PolicyGroupMenuLinks()
 const accountsTabBar_Ext = new AccountsTabBar_Ext()
+const policyDetailPayments = new PolicyDetailPayments()
 
 export class NavigationScenario {
   async navigateToInvoices() {
@@ -30,5 +32,10 @@ export class NavigationScenario {
     await accountsTabBar_Ext.accountsTab_ExpandButton.click()
     await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
     await accountsTabBar_Ext.accountSearch_Button.click()
+  }
+
+  async navigateToChangePaymentPlan() {
+    await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
+    await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
   }
 }
