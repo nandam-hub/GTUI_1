@@ -9,4 +9,4 @@ Feature: Change payment plan in billing center
         When the user loads the policy with policy number
         And the user loads the change payment plan screen
         And the user changes the payment plan
-        Then New payment plan is validated
+        Then the payment plan is updated successfully

@@ -14,6 +14,6 @@ When(/^the user changes the payment plan/, async function () {
     await changePaymentPlanScenario.changePaymentPlan()
 });
 
-Then(/^New payment plan is validated/, async function () {
+Then(/^the payment plan is updated successfully/, async function () {
     await changePaymentPlanScenario.validatePaymentPlan()
 });
