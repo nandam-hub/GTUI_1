@@ -1,13 +1,11 @@
 {
     "defaultDataSet": {
-        "AccountNumber": "3311682528",
         "Amount": "100",
         "DistributionAmount":"100",
         "Due": "$20.00",
         "InvoiceNumber":"1000012522"
     },
     "overrideDistribution_01": {
-       "AccountNumber": "3311682528",
        "Amount": "100",
        "DistributionAmount":"100",
        "Due": "$20.00",

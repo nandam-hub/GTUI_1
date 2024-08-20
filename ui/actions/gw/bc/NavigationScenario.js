@@ -18,8 +18,14 @@ export class NavigationScenario {
     await accountsTabBar_Ext.accountsTab_ExpandButton.click()
     await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
     await accountsTabBar_Ext.accountSearch_Button.click()
-   }
-
+  }
+   
+   async openAccount(accountNumber) {
+    await accountsTabBar_Ext.accountsTab_ExpandButton.click()
+    await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(accountNumber);
+    await accountsTabBar_Ext.accountSearch_Button.click()
+  }
+   
    async navigateToOverrideDistributionTab() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click()
     await accountGroupMenuActions.accountDetailMenuActionsAccountDetailMenuActions_Payments.click()
@@ -27,3 +33,5 @@ export class NavigationScenario {
     await accountGroupMenuActions.accountDetailMenuActions_PaymentsAccountDetailMenuActions_NewDirectBillPayment.click()
    }
   }
+
+

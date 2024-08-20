@@ -1,5 +1,6 @@
 import { PcfComponent } from '@gtui/gt-ui-framework';
 
+
 export class AccountGroupMenuLinks {
 	menuLinksAccountGroup_AccountCollateral = PcfComponent('#AccountGroup-MenuLinks-AccountGroup_AccountCollateral');
 	menuLinksAccountGroup_AccountDetailCharges = PcfComponent('#AccountGroup-MenuLinks-AccountGroup_AccountDetailCharges');

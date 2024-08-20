@@ -1,16 +1,16 @@
 const { When, Then } = require("@cucumber/cucumber");
-import { t } from "testcafe";
 import { NavigationScenario } from "../../../../ui/actions/gw/bc/NavigationScenario"
 import { OverrideDistributionScenario } from "../../../../ui/actions/gw/bc/OverrideDistributionScenario"
+import { t } from "testcafe";
 
 const navigationScenario = new NavigationScenario();
 const overrideDistributionScenario = new OverrideDistributionScenario()
 
-When(/^the user search with the account number/, async function (t) {
-    await navigationScenario.navigateToAccountScreen()
+When(/^the user search with the account number/, async function () {
+    await navigationScenario.openAccount(t.ctx.AccountNumber)
 });
 
-When(/^the user makes payment in new direct bill payment from action tab/, async function (t) {
+When(/^the user makes payment in new direct bill payment from action tab/, async function () {
     await navigationScenario.navigateToOverrideDistributionTab()
     await overrideDistributionScenario.overrideDistribution()
 });

@@ -4,8 +4,11 @@ Feature: Override distribution
 
     @override_distribution
     Scenario: Override distribution in new direct bill payment
-        Given the user logs into the billing center as "superuser"
-        When the user loads "bc" data "overrideDistribution_01" from json "OverrideDistributionTestData"
+        Given the user logs into the policy center as "superuser"
+        When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
+        And the user creates commercial account
+        And the user logs into the billing center as "superuser"
+        And the user loads "bc" data "overrideDistribution_01" from json "OverrideDistributionTestData"
         And the user search with the account number
         And the user makes payment in new direct bill payment from action tab
         Then the override distribution is applied successfully
