@@ -5,7 +5,7 @@ import { PolicyGroupMenuLinks } from '../../../pages/gw/generated/billingsolutio
 import world from "../../../util/gw/world.js"
 import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
 import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
-import { navigateAndClickSubmenu } from "../../../util/gw/helper.js";
+import { navigateAndClickSubmenu,dateFunction } from "../../../util/gw/helper.js";
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
 
 
@@ -42,7 +42,7 @@ export class NavigationScenario {
   async navigateToDisbursement() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
     await navigateAndClickSubmenu(['New Transaction'], 'Disbursement');
-
+  }
   async navigateToChangePaymentPlan() {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
     await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
