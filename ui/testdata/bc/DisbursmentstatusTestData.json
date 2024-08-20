@@ -3,23 +3,16 @@
         "PolicyNumber": "1420157613",
         "AccountNumber": "2879191413"
     },
-    "Disbursment_Status": {
+    "disbursment_Status": {
         "PolicyNumber": "1420157613",
         "AccountNumber": "2879191413",
         "Amount": "50",
-        "Date":"08/19/2024",
-        "DisbursedAmount":"$10.00",
-        "Reason":"Overpayment"
-
+        "Date": "08/20/2024",
+        "DisbursedAmount": "$10.00",
+        "Reason": "Overpayment"
     },
-    "Commissionstatement": {
+    "commissionStatement": {
         "PolicyNumber": "3598418047",
-        "AccountNumber": "6597708868",
-        "Amount": "17,250"
-
+        "AccountNumber": "6597708868"
     }
-
-
-
-
 }
