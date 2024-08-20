@@ -4,7 +4,7 @@ import { AccountGroupMenuActions_Ext } from '../../../pages/gw/generated/billing
 import { NewDirectBillPayment } from '../../../pages/gw/generated/billingsolutions/pages/other/NewDirectBillPayment.js';
 import { AccountGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/AccountGroupMenuLinks.js';
 import { ProducerDetailGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/ProducerDetailGroupMenuLinks.js';
-import { returnDataFromTable } from "../../../../ui/util/gw/helper";
+import { returnDataFromTable,dateFunction } from "../../../../ui/util/gw/helper";
 import { startsWith } from "lodash";
 import { PolicySummary_Ext } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/policyOverview/PolicySummary_Ext.js';
 
@@ -21,7 +21,7 @@ export class DisbursementScenario {
     }
     async disbursementDetails() {
         await accountGroupMenuActions_Ext.createDisbursementDetailDV_amount.setValue(world.dataMap.get('DisbursedAmount'));
-        await accountGroupMenuActions_Ext.createDisbursementDetailEffectiveDate.setValue(world.dataMap.get('Date'));
+        await accountGroupMenuActions_Ext.createDisbursementDetailEffectiveDate.setValue(dateFunction(0));
         await accountGroupMenuActions_Ext.createDisbursementDetailReason.selectOptionByLabel(world.dataMap.get('Reason'));
         await accountGroupMenuActions_Ext.accountCreateDisbursementWizard_Next.click();
         await accountGroupMenuActions_Ext.disbursementFinish.click();
@@ -38,6 +38,3 @@ export class DisbursementScenario {
         await t.expect(world.dataMap.get('DisbursedAmount')).contains(await returnDataFromTable(7))
     }
 }
-
-
-
