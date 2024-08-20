@@ -1,5 +1,5 @@
 @billingcenter @designatedfunction
-Feature: disbursment status
+Feature: Disbursment status
     As a user, I want to manage Disbursements in billing center
 
     @disbursement_status

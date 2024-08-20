@@ -23,10 +23,3 @@ When(/^the user navigates to producer tab/, async function (t) {
 Then(/^the commision statement is displayed/, async function (t) {
     await disbursementScenario.displayedCommissionStatement();
 })
-
-
-
-
-
-
-

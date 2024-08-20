@@ -9,9 +9,5 @@
         "Amount": "$300",
         "DisbursedAmount": "$25.00",
         "Reason": "Overpayment"
-    },
-    "commissionStatement": {
-        "PolicyNumber": "3598418047",
-        "AccountNumber": "6597708868"
     }
 }
