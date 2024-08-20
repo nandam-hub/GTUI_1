@@ -1,6 +1,6 @@
 @billingcenter @designatedfunction
 Feature: disbursment status
-    As a user, I want to verify disbursmant status in billing center
+    As a user, I want to manage Disbursements in billing center
 
     @disbursment_status
     Scenario: Verifying disbursment status
@@ -11,7 +11,7 @@ Feature: disbursment status
         Then the disbursement created successfully
 
     @Commissionstatement
-    Scenario: Verifying commissionStatement 
+    Scenario: Verifying commissionstatement
         Given the user logs into the billing center as "superuser"
         When the user loads "bc" data "commissionStatement" from json "DisbursmentstatusTestData"
         And the user loads the policy with policy number
