@@ -42,7 +42,7 @@ export class NavigationScenario {
   async navigateToDisbursement() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
     await navigateAndClickSubmenu(['New Transaction'], 'Disbursement');
-
+  }
   async navigateToChangePaymentPlan() {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
     await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
