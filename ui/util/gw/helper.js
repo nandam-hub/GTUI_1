@@ -94,14 +94,8 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
         const colsCount = await tablecols.count;
         for (let i = 0; i < colsCount; i++) {
             let cellText
-            try {
-                cellText = await tablecols.nth(i).find('div.gw-label').textContent;
-            }
-            catch (e) {
-                // Skip a loop if no lable found - checkbox/empty title
-                continue;
-            }
-            if (headerNameOrIndex.includes(cellText) && cellText.trim() !== '' && cellText.trim() !== null) {
+                cellText = await tablecols.nth(i).textContent;
+            if (cellText.includes(headerNameOrIndex) && cellText.trim() !== '' && cellText.trim() !== null) {
                 headerNameOrIndex = i;
                 break;
             }

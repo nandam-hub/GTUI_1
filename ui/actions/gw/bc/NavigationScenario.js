@@ -6,6 +6,8 @@ import world from "../../../util/gw/world.js"
 import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
 import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
 import { navigateAndClickSubmenu } from "../../../util/gw/helper.js";
+import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
+
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
 const searchTabBar = new SearchTabBar()
@@ -13,6 +15,8 @@ const searchGroupMenuLinks = new SearchGroupMenuLinks()
 const policyGroupMenuLinks = new PolicyGroupMenuLinks()
 const accountsTabBar_Ext = new AccountsTabBar_Ext()
 const accountGroupMenuActions = new AccountGroupMenuActions();
+const policyDetailPayments = new PolicyDetailPayments()
+
 export class NavigationScenario {
   async navigateToInvoices() {
     await accountGroupMenuLinks.menuLinksAccountGroup_AccountDetailInvoices.click();
@@ -30,6 +34,7 @@ export class NavigationScenario {
     await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
     await accountsTabBar_Ext.accountSearch_Button.click()
   }
+
   async navigateToNewpaymet() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
     await navigateAndClickSubmenu(['New Payment'], 'New Direct Bill Payment');
@@ -37,5 +42,9 @@ export class NavigationScenario {
   async navigateToDisbursement() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
     await navigateAndClickSubmenu(['New Transaction'], 'Disbursement');
+
+  async navigateToChangePaymentPlan() {
+    await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
+    await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
   }
 }
