@@ -12,5 +12,6 @@ Feature: Capturing first notice of loss
     @add_rental_service
     Scenario: To add rental service for an auto claim
         Given the user logs into the claims center as "superuser"
-        When the user loads "cc" data "createActivity_03" from json "FNOLTestData"
+        When the user loads "cc" data "createActivity_04" from json "FNOLTestData"
         And the user creates new claim with rental
+        Then claim is created with rental service

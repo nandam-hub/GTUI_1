@@ -46,7 +46,26 @@
         "LossCause": "Fire",
         "City": "Pewaukee",
         "State": "Wisconsin",
-        "ClaimVehicleMake1": "Kia",
-        "ClaimVehicleModel1": "Daz"
+        "Vehicles": {
+            "Vehicle1": {
+                "ClaimVehicleMake": "Kia",
+                "ClaimVehicleModel": "Daz",
+                "VehicleCoverage1": "Rental Reimbursement",
+                "VehicleExposureLimit1": "2000",
+                "VehicleIncidentLimit1": "100",
+                "VehicleCoverage2": "Towing and Labor",
+                "VehicleExposureLimit2": "2000",
+                "VehicleIncidentLimit2": "200"
+            },
+            "Vehicle2": {
+                "ClaimVehicleMake": "Honda",
+                "ClaimVehicleModel": "Accord"                
+            }
+        },
+        "IncludedVehicle1": "Kia",
+        "RentalDailyRate":"25",
+        "PickUpLocation":"Pewaukee, WI",
+        "VendorTaxId":"569-89-7897",
+        "RentalText" :"Other - Car rental"
     }
 }
