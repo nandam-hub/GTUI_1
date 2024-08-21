@@ -5,6 +5,7 @@ import { PolicyGroupMenuLinks } from '../../../pages/gw/generated/billingsolutio
 import world from "../../../util/gw/world.js"
 import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
+import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
 const searchTabBar = new SearchTabBar()
@@ -12,6 +13,7 @@ const searchGroupMenuLinks = new SearchGroupMenuLinks()
 const policyGroupMenuLinks = new PolicyGroupMenuLinks()
 const accountsTabBar_Ext = new AccountsTabBar_Ext()
 const policyDetailPayments = new PolicyDetailPayments()
+const accountGroupMenuActions = new AccountGroupMenuActions()
 
 export class NavigationScenario {
   async navigateToInvoices() {
@@ -38,4 +40,15 @@ export class NavigationScenario {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
     await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
   }
+
+  async navigateToPaymentRequest(){
+    await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click()
+    await accountGroupMenuActions.accountDetailMenuActionsAccountDetailMenuActions_Payments.click()
+    await accountGroupMenuActions.accountDetailMenuActionsAccountDetailMenuActions_Payments.click()
+    await accountGroupMenuActions.accountDetailMenuActions_PaymentsAccountDetailMenuActions_NewPaymentRequest.click()
+
+  }
+
+
+
 }
