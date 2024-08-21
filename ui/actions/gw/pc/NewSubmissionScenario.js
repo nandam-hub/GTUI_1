@@ -18,6 +18,7 @@ import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPop
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
+import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -41,6 +42,7 @@ export class NewSubmissionScenario {
     await t.click(Selector('td').withExactText(world.dataMap.get('ProductName')).parent().child('td:nth-child(1)'))
   }
   async clickNext() {
+    await t.setNativeDialogHandler(() => true);
     await nextSubmissionWizard_Ext.submissionWizardNext.click()
   }
 
@@ -51,6 +53,14 @@ export class NewSubmissionScenario {
 
   async usaPersonalAutoStandardCoverages() {
     await submissionWizard_New.SubmissionWizard_LineStandardCoveragesTab.click()
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("LiabilityBodilyInjuryAndPropertyDamage")
+      await selectInput("LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage")
+      await checkBox("PropertyProtectionInsurance")
+      await selectInput("PropertyProtectionInsurancePropertyProtectionLimits")
+    }
   }
 
   async personalVehicle(vehicleNum = "1") {
@@ -163,6 +173,16 @@ export class NewSubmissionScenario {
     console.log("On Commercial Umbrella And Excess Liability screen")
     await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
     await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityUmbrellaCoverages.click()
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("UmbrellaLiability")
+      await selectInput("UmbrellaLiabilityOccurrenceLimit")
+      await selectInput("UmbrellaLiabilityAggregateLimit")
+      await selectInput("UmbrellaLiabilityProductandCompletedOperationsAggregateLImit")
+      await selectInput("UmbrellaLiabilityUmbrellaCoverageForm")
+      await selectInput("UmbrellaLiabilitySelfInsuredRetention")
+    }
   }
 
   async smallBusinessBusinessType() {
@@ -213,13 +233,27 @@ export class NewSubmissionScenario {
     }
   }
 
-  async validatedAddedDriversInPolicyFile(driverNum=2) {
+ async validatedAddedDriversInPolicyFile(driverNum = 2) {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
-    for(let i=1;i<=driverNum;i++)
-    {     
-      console.log(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)) 
+    for (let i = 1; i <= driverNum; i++) {
       await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(world.dataMap.get(`Driver${i}`))
-    }    
+    }
+  }
+
+  async commercialPropertyCoverage(){
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("EachLossCausedByWind")
+      await textInput("EachLossCausedByWindLimit")
+      await textInput("EachLossCausedByWindDeductible")
+      await checkBox("ContentsOfOtherStructures")
+      await selectInput("ContentsOfOtherStructuresLimit")
+      await textInput("ContentsOfOtherStructuresDeductible")
+      await checkBox("OutsideObjectsAndStructures")
+      await textInput("OutsideObjectsAndStructuresLimit")
+      await textInput("OutsideObjectsAndStructuresDeductible")
+    }
   }
 }

@@ -37,16 +37,15 @@ When(/^the user creates property exposure/, async function () {
 });
 
 Then(/^the BI Liability exposure is created successfully/, async function () {
-    await exposureScenario.validateBILiabilityExposure()
-    
+    await exposureScenario.validateExposure("Bodily Injury") 
 });
 
 Then(/^the medical payment exposure is created successfully/, async function () {
-    await exposureScenario.validateMedicalPaymentsExposure()
+    await exposureScenario.validateExposure("Med Pay")
 });
 
 Then(/^the property exposure is created successfully/, async function () {
-    await exposureScenario.validatePropertyExposure()
+    await exposureScenario.validateExposure("Property")
 });
 
 Then(/^the user selects and validates the BI liability and Medical Payment exposure's/, async function () {
