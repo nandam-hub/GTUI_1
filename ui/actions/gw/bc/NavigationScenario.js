@@ -7,6 +7,8 @@ import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ex
 import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
 import { navigateAndClickSubmenu,dateFunction } from "../../../util/gw/helper.js";
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
+import {PoliciesTabBar_Ext } from './scenarioPages/navigation/tabBar/PoliciesTabBar_Ext'
+import { PolicySummary_Ext } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/policyOverview/PolicySummary.js';
 
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
@@ -16,6 +18,7 @@ const policyGroupMenuLinks = new PolicyGroupMenuLinks()
 const accountsTabBar_Ext = new AccountsTabBar_Ext()
 const accountGroupMenuActions = new AccountGroupMenuActions();
 const policyDetailPayments = new PolicyDetailPayments()
+const policiesTabBar_Ext = new PoliciesTabBar_Ext()
 
 export class NavigationScenario {
   async navigateToInvoices() {
@@ -46,5 +49,11 @@ export class NavigationScenario {
   async navigateToChangePaymentPlan() {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
     await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
+  }
+
+  async openPolicy(policyNumber) {
+    await policiesTabBar_Ext.tabBarPolicyDropDown.click()
+    await policiesTabBar_Ext.tabBarpolicyNumberSearchItem.setValue(policyNumber)
+    await policiesTabBar_Ext.searchButton.click()
   }
 }
