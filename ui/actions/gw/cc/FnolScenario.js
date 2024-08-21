@@ -2,7 +2,6 @@ import { FNOLWizard_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim
 import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable } from "../../../../ui/util/gw/helper"
 import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolutions/pages/popup/New/NewContactPopup"
 import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
-import { NewClaimWizard_NewPolicyVehiclePopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewClaimWizard_NewPolicyVehiclePopup"
 import { NewClaimWizard_NewPolicyVehiclePopup_Ext } from "./scenarioPages/popup/New/NewClaimWizard_NewPolicyVehiclePopup_Ext"
 import world from "../../../../ui/util/gw/world"
 import { t } from "testcafe"
@@ -10,7 +9,6 @@ import { t } from "testcafe"
 const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
 const newClaimSaved_Ext = new NewClaimSaved_Ext()
-const newClaimWizard_NewPolicyVehiclePopup = new NewClaimWizard_NewPolicyVehiclePopup()
 const newClaimWizard_NewPolicyVehiclePopup_Ext = new NewClaimWizard_NewPolicyVehiclePopup_Ext()
 
 
