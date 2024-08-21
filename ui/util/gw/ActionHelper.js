@@ -14,6 +14,13 @@ const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const newAdditionalNamedInsuredPopup_Ext = new NewAdditionalNamedInsuredPopup_Ext()
 
+const ModIdentifier = {
+    coverage: lobWizardStepGroupSubmissionWizard_Ext,
+    vehicle: ualPersonalVehiclePopup_New,
+    building: cllLocationPopup_New,
+    driver: newAdditionalNamedInsuredPopup_Ext
+};
+
 export async function loadPcfCategory() {
     try {
         const data = await fs.readFile('ui/testdata/pc/pcfCategory.json', 'utf8');
@@ -24,12 +31,7 @@ export async function loadPcfCategory() {
     }
 }
 
-const ModIdentifier = {
-    coverage: lobWizardStepGroupSubmissionWizard_Ext,
-    vehicle: ualPersonalVehiclePopup_New,
-    building: cllLocationPopup_New,
-    driver: newAdditionalNamedInsuredPopup_Ext
-};
+
 
 //Function to check and uncheck checkbox
 export async function checkBox(fieldName) {
