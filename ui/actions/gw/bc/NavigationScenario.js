@@ -7,6 +7,7 @@ import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ex
 import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
 import { navigateAndClickSubmenu } from "../../../util/gw/helper.js";
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
+import { t } from 'testcafe';
 
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
@@ -34,6 +35,12 @@ export class NavigationScenario {
     await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
     await accountsTabBar_Ext.accountSearch_Button.click()
   }
+  // ToDo - needs to be reviewed later - navigateToAccountScreenDuplicate()
+  async navigateToAccountScreenDuplicate(AccountNumber) {
+    await accountsTabBar_Ext.accountsTab_ExpandButton.click()
+    await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(AccountNumber)
+    await accountsTabBar_Ext.accountSearch_Button.click()
+  }
 
   async navigateToNewpaymet() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
@@ -46,5 +53,8 @@ export class NavigationScenario {
   async navigateToChangePaymentPlan() {
     await policyGroupMenuLinks.menuLinksPolicyGroup_PolicyDetailPayments.click()
     await policyDetailPayments.policyDetailPaymentsScreenChangePaymentPlan.click()
+  }
+  async navigateToPaymentsScreen() {
+    await accountGroupMenuLinks.menuLinksAccountGroup_AccountDetailPayments.click()
   }
 }
