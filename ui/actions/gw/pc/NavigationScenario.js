@@ -15,7 +15,9 @@ import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pag
 import { RiskAnalysis_Ext } from "./scenarioPages/policy/RiskAnalysis_Ext";
 import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext";
 import { checkBox, selectInput } from "../../../util/gw/ActionHelper.js";
+
 import { t } from "testcafe";
+import { navigateAndClickSubmenu } from "../../../util/gw/helper";
 
 const summary_Ext = new Summary_Ext()
 const policyChangeWizard_New = new PolicyChangeWizard_New()
@@ -178,5 +180,10 @@ export class NavigationScenario {
       default:
         await riskAnalysis_Ext.policyFile_RiskAnalysisCVPolicyFile_UWReferralReasonCardTab.click()
     }
+  }
+
+  async navigatePreRenewalScreen(){
+    await policyMenuActions_Ext.policyFilePolicyFileMenuActions.click()
+    await navigateAndClickSubmenu((['Pre-Renewal Direction']))
   }
 }

@@ -12,6 +12,11 @@ export class Renewal_New {
 	RenewalWizardOptionalCoverages =PcfComponent('#RenewalWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-OptionalCoveragesTab')
 	RenewalWizardExclusionsConditions = PcfComponent('#RenewalWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-ExclusionsAndconditionsTab')
 	RenewalWizardGWHomeownersLine = PcfComponent('#RenewalWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-detailsTab')
+	preRenewalEditButton = PcfButton('#PreRenewalDirectionPage-PreRenewalDirectionScreen-Edit')
+	preRenewalDirectionDropdown =PcfSelectInput('#PreRenewalDirectionPage-PreRenewalDirectionScreen-PreRenewalDirection')
+	preRenewalAssignTo = PcfSelectInput('#PreRenewalDirectionPage-PreRenewalDirectionScreen-PreRenewalOwner')
+	preRenewalTextArea = PcfComponent('#PreRenewalDirectionPage-PreRenewalDirectionScreen-Text div textarea')
+	preRenewalUpdate = PcfComponent('#PreRenewalDirectionPage-PreRenewalDirectionScreen-Update')
 	//#region small business
 	RenewalWizardSmallBusienssTab = PcfComponent('#RenewalWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-detailsTab')
 	RenewalWizardSmallBusinessLineCoveragesTab = PcfComponent('#RenewalWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-SBLLineCoveragesTab')
