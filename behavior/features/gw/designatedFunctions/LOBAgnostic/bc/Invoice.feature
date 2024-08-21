@@ -18,15 +18,15 @@ Feature: Invoice in billing center
         And the user resends invoice
         Then the invoice resent confirmation message is displayed
 
-    @searchInvoices_PaymentPlan @issue_submission_pa
+    @searchInvoices_PaymentPlan
     Scenario:  Validate the created invoices as per the selected Payment plan
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         And the user creates personal account
         And the user issue the new submission from actions menu for personal auto with "1" vehicles
         When the user logs into the billing center as "superuser"
-        And the user loads "bc" data "changePaymentPlan_02" from json "ChangePaymentPlanTestData"
-        And the user opens the policy with policy number
+        And the user loads "bc" data "changePaymentPlan_01" from json "ChangePaymentPlanTestData"
+        And the user loads the policy with policy number
         And the user loads the change payment plan screen
         And the user changes the payment plan
         Then the invoice details are validated as per the payplan successfully

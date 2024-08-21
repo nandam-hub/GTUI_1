@@ -7,11 +7,11 @@ import { t } from "testcafe"
 const navigationScenario = new NavigationScenario()
 const searchScenario = new SearchScenario()
 
-When(/^the user loads the policy with policy number/, async function () {
+When(/^the user loads the existing policy number/, async function () {
     await navigationScenario.navigateSearchPolicyScreen()
     await searchScenario.searchWithPolicy(world.dataMap.get('PolicyNumber'))
 });
 
-When(/^the user opens the policy with policy number/, async function () {
+When(/^the user loads the policy with policy number/, async function () {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
 });
