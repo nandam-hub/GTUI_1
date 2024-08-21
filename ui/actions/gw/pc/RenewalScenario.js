@@ -1,5 +1,4 @@
 import { t } from "testcafe";
-import { PolicyMenuActions } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/menuActions/PolicyMenuActions.js"
 import { NavigationScenario } from "./NavigationScenario.js";
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { RenewalWizard_RenewalPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/Renewal/RenewalWizard_RenewalPopup.js";
@@ -8,7 +7,6 @@ import { checkBox, selectInput, textInput } from "../../../util/gw/ActionHelper.
 import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext.js";
 import world from "../../../../ui/util/gw/world"
 
-const policyMenuActions = new PolicyMenuActions()
 const navigationScenario = new NavigationScenario()
 const renewal_New = new Renewal_New()
 const renewalWizard_RenewalPopup = new RenewalWizard_RenewalPopup()
@@ -17,8 +15,8 @@ const policyMenuActions_Ext = new PolicyMenuActions_Ext()
 export class RenewalScenario {
 
   async initiatePolicyRenewal() {
-    await policyMenuActions.policyFilePolicyFileMenuActions.click()
-    await policyMenuActions.policyFileMenuActions_NewWorkOrderPolicyFileMenuActions_RenewPolicy.click()
+    await policyMenuActions_Ext.policyFilePolicyFileMenuActions.click()
+    await policyMenuActions_Ext.policyFileMenuActions_NewWorkOrderPolicyFileMenuActions_RenewPolicy.click()
     await t.eval(() => location.reload(true))
   }
 
