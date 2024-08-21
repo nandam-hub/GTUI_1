@@ -79,7 +79,7 @@ export async function searchTableRecord(headerNameOrIndex, stringValue) {
     }
 }
 /**To return a specific cell value from a table
- * @param {string, Number} headerNameOrIndex - Column name or column index of reference cell value
+ * @param {string|Number} headerNameOrIndex - Column name or column index of reference cell value
  * @param {string} referenceCellValue - Reference cell value
  * @param {Number} targetColumnIndex - Column index where stringValue is present
  * @returns - Table cell value
@@ -161,34 +161,41 @@ export async function returnDataFromTable(columnIndex, rowIndex = -1) {
     return table.find('tbody').find('tr').nth(rowIndex).find('td').nth(columnIndex).textContent;
 }
 
-//To enter data in input field of a table
-export async function enterDataInTable(columnIndex, inputString) {
-    //Locate Table
-    const table = Selector('table.gw-ListViewWidget--table');
-    const lastrow = table.find('tbody').find('tr').nth(-1)
-    // Locate the input field and type
-    const inputField = lastrow.find('td').nth(columnIndex).find('input[type="text"]');
-    await t
-        .expect(table.exists).ok()
-        .typeText(inputField, inputString);
+/**
+ * To enter data in input field of a table
+ * @param {*} component Pass the component identifier in string format
+ * @param {*} inputString String value that needs to be entered
+ * @param {*} rowIndex (optional field) - Row index on which component is present. By default takes last row
+ */
+export async function enterDataInTable(component, inputString, rowIndex=-1) {
+    let foundTable = await findTable(t.ctx.TableIdentifier)
+    let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
+    const inputField = lastRow.find(component).find('input')
+    await t.typeText(inputField, inputString);
 }
 
-//To click on an element in last row of a table
-export async function performClickInTable(webElement) {
-    // Locate Table
-    const table = Selector('table.gw-ListViewWidget--table')
-    // Locate the webelement to be clicked in last row
-    const lastrow = table.find('tbody').find('tr').nth(-1)
-    await t.click(lastrow.find(webElement).nth(-1));
+/**
+ * To click on an component in a table
+ * @param {*} component Pass the component identifier in string format
+ * @param {*} rowIndex (optional field) - Row index on which component is present. By default takes last row
+ */
+export async function performClickInTable(component, rowIndex=-1) {
+    let foundTable = await findTable(t.ctx.TableIdentifier)
+    let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
+    await t.click(lastRow.find(component).nth(-1));
 }
 
-//To hover on an element in last row of a table
-export async function performHoverInTable(webElement) {
+/**
+ * To perform hover on a component in a table
+ * @param {string} component - Pass the component identifier in string format
+ * @param {Number} rowIndex(optional field) - Row index on which component is present. By default takes last row
+ */
+export async function performHoverInTable(component, rowIndex=-1) {
     // Locate Table
-    const table = Selector('table.gw-ListViewWidget--table')
+    let foundTable = await findTable(t.ctx.TableIdentifier)
+    let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
     // Locate the webelement to be hover in last row
-    const lastrow = table.find('tbody').find('tr').nth(-1)
-    await t.hover(lastrow.find(webElement));
+    await t.hover(lastRow.find(component));
 }
 
 /**
@@ -196,15 +203,54 @@ export async function performHoverInTable(webElement) {
  * @param {Array string} menuPath - list of options in sequence
  * @param {string} finalOptionText - final option to click
  */
-export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
+export async function navigateAndClickSubmenu(menuPath, finalOptionText = null) {
     let currentSelector = Selector('div.gw-subMenu.gw-open');
     if (await (currentSelector.find(`div[aria-label='New ...']`)).exists)
         await t.hover(currentSelector.find(`div[aria-label='New ...']`));
-
+ 
     // Iterate through the menu path to hover over each submenu
     for (let i = 0; i < menuPath.length; i++) {
-        await t.hover(currentSelector.find(`div[aria-label='${menuPath[i]}']`));
+        const menuItem = currentSelector.find(`div[aria-label='${menuPath[i]}']`);
+        await t.hover(menuItem);
+ 
+        // If finalOptionText is not provided, click the last item in menuPath
+        if ((!finalOptionText) && i === menuPath.length - 1) {
+            await t.click(menuItem);
+        }
     }
-    // After navigating through the submenus, click the desired final option
-    await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
+ 
+    // Click the desired finalOptionText if provided
+    if (finalOptionText) {
+        await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
+    }
+}
+
+/**
+ * To select dropdown value in a table 
+ * @param {string} component - Pass the dropdown identifier in string format
+ * @param {string} optionLabel - Label value to be selected from dropdown
+ * @param {Number} rowIndex(optional field) - Row index on which component is present. By default takes last row
+ */
+export async function selectDropdownInTable(component, optionLabel, rowIndex = -1) {
+    let foundTable = await findTable(t.ctx.TableIdentifier)
+    let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
+    await t.click(lastRow.find(component))
+        .click(lastRow.find(component).find('option').withText(optionLabel))
+}
+
+async function findTable(identifierColumnHeader) {
+    const allTable = Selector('table.gw-ListViewWidget--table')
+    let foundTable;
+
+    for (let i = 0; i < await allTable.count; i++) {
+        const table = allTable.nth(i).find('tr').find('td[role="columnheader"]')
+        const component = table.find('div.gw-label');
+
+        if (await component.exists)
+            if ((await (component.textContent)).includes(identifierColumnHeader)) {
+                foundTable = allTable.nth(i)
+                break;
+            }
+    }
+    return foundTable;
 }

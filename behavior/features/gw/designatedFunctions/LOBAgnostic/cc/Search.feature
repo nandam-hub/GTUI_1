@@ -24,7 +24,7 @@ Feature: Search menu in claim center
         And the user searches for the policy in Search Claims
         Then the claim details are loaded successfully
 
-    @search_recovery
+    @search_recovery @create_recovery
     Scenario: Searching recovery in claim center
         Given the user logs into the claims center as "superuser"
         When the user loads "cc" data "searchRecovery_01" from json "SearchTestData"
