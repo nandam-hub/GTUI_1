@@ -5,6 +5,7 @@ import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { RenewalWizard_RenewalPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/Renewal/RenewalWizard_RenewalPopup.js";
 import { JobComplete_New } from "../../../../ui/actions/gw/pc/scenarioPages/other/JobComplete_New.js";
 import { checkBox, selectInput, textInput } from "../../../util/gw/ActionHelper.js";
+import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext.js";
 import world from "../../../../ui/util/gw/world"
 
 const policyMenuActions = new PolicyMenuActions()
@@ -12,6 +13,7 @@ const navigationScenario = new NavigationScenario()
 const renewal_New = new Renewal_New()
 const renewalWizard_RenewalPopup = new RenewalWizard_RenewalPopup()
 const jobComplete_New = new JobComplete_New()
+const policyMenuActions_Ext = new PolicyMenuActions_Ext()
 export class RenewalScenario {
 
   async initiatePolicyRenewal() {
@@ -91,12 +93,25 @@ export class RenewalScenario {
     }
   }
 
-  async renewalCoverage(){
+  async renewalCoverage() {
     t.ctx.module = 'Coverage'
     console.log(`The current module is ${t.ctx.module}`)
     await checkBox("OutsideObjectsAndStructures")
     await checkBox("EachLossCausedByWind")
     await textInput("EachLossCausedByWindLimit")
     await checkBox("Terrorism")
+  }
+
+  async updatePreRenewalDirection() {
+    await renewal_New.preRenewalEditButton.click()
+    await renewal_New.preRenewalDirectionDropdown.selectOptionByValue(world.dataMap.get('Direction'))
+    await renewal_New.preRenewalAssignTo.selectOptionByLabel(world.dataMap.get('AssignTo'))
+    await t.typeText(renewal_New.preRenewalTextArea.component, world.dataMap.get('PreRenewalText'))
+    await renewal_New.preRenewalUpdate.click()
+  }
+
+  async validatePreRenewalDirection() {
+    await t.expect(await policyMenuActions_Ext.policyFilePreRenewalDirectionText.component.textContent).eql(world.dataMap.get('PreRenwalValidationText'))
+
   }
 }
