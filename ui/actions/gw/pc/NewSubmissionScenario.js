@@ -225,14 +225,15 @@ export class NewSubmissionScenario {
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
-      await enterDataInTable(1, `${i}`)
-      await performClickInTable(world.dataMap.get('PolicyDriverMenuIcon'))
-      await performHoverInTable(world.dataMap.get('AvailableContacts'))
-      await performClickInTable(world.dataMap.get('OtherContact'))
+      t.ctx.TableIdentifier="Internal Request ID"
+      await enterDataInTable(submissionWizard_New.submissionWizardInternetRequestId, i.toString())
+      await performClickInTable(submissionWizard_New.submissionWizardPolicyDriverMenuIcon)
+      await performHoverInTable(submissionWizard_New.submissionWizardAvailableContacts)
+      await performClickInTable(submissionWizard_New.submissionWizardOtherContact)
     }
   }
 
-  async validatedAddedDriversInPolicyFile(driverNum = 1) {
+ async validatedAddedDriversInPolicyFile(driverNum = 2) {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
