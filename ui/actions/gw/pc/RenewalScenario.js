@@ -4,7 +4,7 @@ import { NavigationScenario } from "./NavigationScenario.js";
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { RenewalWizard_RenewalPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/Renewal/RenewalWizard_RenewalPopup.js";
 import { JobComplete_New } from "../../../../ui/actions/gw/pc/scenarioPages/other/JobComplete_New.js";
-import { checkBox, selectInput } from "../../../util/gw/ActionHelper.js";
+import { checkBox, selectInput, textInput } from "../../../util/gw/ActionHelper.js";
 import world from "../../../../ui/util/gw/world"
 
 const policyMenuActions = new PolicyMenuActions()
@@ -96,7 +96,7 @@ export class RenewalScenario {
     console.log(`The current module is ${t.ctx.module}`)
     await checkBox("OutsideObjectsAndStructures")
     await checkBox("EachLossCausedByWind")
-    await selectInput("EachLossCausedByWindLimit")
+    await textInput("EachLossCausedByWindLimit")
     await checkBox("Terrorism")
   }
 }

@@ -7,11 +7,22 @@ import { pascalToCamel } from "./helper";
 import { t } from "testcafe";
 const fs = require('fs').promises;
 
+let pcfCategory;
 let camelFieldName;
 const lobWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const newAdditionalNamedInsuredPopup_Ext = new NewAdditionalNamedInsuredPopup_Ext()
+
+export async function loadPcfCategory() {
+    try {
+        const data = await fs.readFile('ui/testdata/pc/pcfCategory.json', 'utf8');
+        pcfCategory = JSON.parse(data);
+        return pcfCategory
+    } catch (error) {
+        console.error('Error reading the pcfCategory JSON file:', error);
+    }
+}
 
 const ModIdentifier = {
     coverage: lobWizardStepGroupSubmissionWizard_Ext,

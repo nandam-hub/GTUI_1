@@ -42,6 +42,7 @@ export class NewSubmissionScenario {
     await t.click(Selector('td').withExactText(world.dataMap.get('ProductName')).parent().child('td:nth-child(1)'))
   }
   async clickNext() {
+    await t.setNativeDialogHandler(() => true);
     await nextSubmissionWizard_Ext.submissionWizardNext.click()
   }
 
@@ -247,7 +248,7 @@ export class NewSubmissionScenario {
       await textInput("EachLossCausedByWindLimit")
       await textInput("EachLossCausedByWindDeductible")
       await checkBox("ContentsOfOtherStructures")
-      await textInput("ContentsOfOtherStructuresLimit")
+      await selectInput("ContentsOfOtherStructuresLimit")
       await textInput("ContentsOfOtherStructuresDeductible")
       await checkBox("OutsideObjectsAndStructures")
       await textInput("OutsideObjectsAndStructuresLimit")
