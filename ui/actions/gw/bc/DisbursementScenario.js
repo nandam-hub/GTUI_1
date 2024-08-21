@@ -6,7 +6,7 @@ import { AccountGroupMenuLinks } from '../../../pages/gw/generated/billingsoluti
 import { ProducerDetailGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/ProducerDetailGroupMenuLinks.js';
 import { returnDataFromTable,dateFunction } from "../../../../ui/util/gw/helper";
 import { startsWith } from "lodash";
-import { PolicySummary_Ext } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/policyOverview/PolicySummary_Ext.js';
+import { PolicySummary_Ext } from './scenarioPages/policyGroup/policyOverview/PolicySummary_Ext.js';
 
 const accountGroupMenuActions_Ext = new AccountGroupMenuActions_Ext();
 const newDirectBillPayment = new NewDirectBillPayment();
