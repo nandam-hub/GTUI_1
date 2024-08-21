@@ -14,6 +14,7 @@ import { AccountMenuActions_Ext } from "./scenarioPages/navigation/menuActions/A
 import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks";
 import { RiskAnalysis_Ext } from "./scenarioPages/policy/RiskAnalysis_Ext";
 import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext";
+import { checkBox, selectInput } from "../../../util/gw/ActionHelper.js";
 import { t } from "testcafe";
 
 const summary_Ext = new Summary_Ext()
@@ -89,12 +90,17 @@ export class NavigationScenario {
   }
 
   async navigateSmallBusinessTabSelection(tabSection) {
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
     switch (tabSection) {
       case ('SmallBusiness'):
         await submissionWizard_New.submissionWizardSmallBusienssTab.click()
         break;
       case ('SmallBusinessLineCoverages'):
         await submissionWizard_New.submissionWizardSmallBusinessLineCoveragesTab.click()
+        await checkBox("GeneralLiability");
+        await selectInput("GeneralLiabilityOccurrenceLImit")
+        await selectInput("GeneralLiabilityAggregateLimit")
         break;
       case ('SmallBusinessLineAdditionalCoverages'):
         await submissionWizard_New.submissionWizardSmallBusinessLineAdditionalCoveragesTab.click()
@@ -108,9 +114,14 @@ export class NavigationScenario {
   }
 
   async navigateGWHomeownersLineTab(tabSection) {
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
     switch (tabSection) {
       case ('AdditionalCoverges'):
         await submissionWizard_New.submissionWizardAdditionalCoverage.click()
+        await checkBox("IdentityTheftProtection")
+        await selectInput("IdentityTheftProtectionLimit")
+        await selectInput("IdentityTheftProtectionDeductible")
         break;
       case ('SectionIICoverages'):
         await submissionWizard_New.submissionWizardSectionIICoverages.click()
@@ -150,6 +161,9 @@ export class NavigationScenario {
   async editPolicyCommercialNavigation() {
     await submissionWizard_New.submissionWizardEditPolicy.click()
     await submissionWizard_New.submissionWizardLOBCommercial1.click()
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
+    await checkBox("ForAnyOneTreeShrubOrPlant");
   }
 
   async navigateToPolicyFileRiskAnalysis() {

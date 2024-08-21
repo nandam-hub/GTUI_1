@@ -31,22 +31,27 @@ export async function loadPcfCategory() {
     }
 }
 
+
+
 //Function to check and uncheck checkbox
 export async function checkBox(fieldName) {
-    const checkAction = world.coverageDataMap.get(fieldName)
+    // TODO: How are we setting action for modules other than coverage
+    let checkAction = 'check'
     //To convert pascal casing input to camel casing as per css standard
     camelFieldName = pascalToCamel(fieldName)
 
     switch (t.ctx.module) {
         case ('Coverage'):
-            if (checkAction === 'check' || checkAction === 'update') {
-                if (!(await ModIdentifier.coverage[camelFieldName].isChecked()))
+            if (world.coverageDataMap.has(fieldName)) {
+                checkAction = world.coverageDataMap.get(fieldName)
+                if ((checkAction === 'check' || checkAction === 'update') && !(await ModIdentifier.coverage[camelFieldName].isChecked())) {
+                    // if (!(await ModIdentifier.coverage[camelFieldName].isChecked()))
+                    await ModIdentifier.coverage[camelFieldName].click()
+                }
+                if (checkAction === 'uncheck' && (await ModIdentifier.coverage[camelFieldName].isChecked()))
                     await ModIdentifier.coverage[camelFieldName].click()
             }
-            if (checkAction === 'uncheck' && (await ModIdentifier.coverage[camelFieldName].isChecked()))
-                await ModIdentifier.coverage[camelFieldName].click()
             break;
-
         case ('Vehicles'):
             if (checkAction === 'check' || checkAction === 'update') {
                 if (!(await ModIdentifier.vehicle[camelFieldName].isChecked()))
@@ -85,7 +90,8 @@ export async function textInput(fieldName) {
 
     switch (t.ctx.module) {
         case ('Coverage'):
-            await ModIdentifier.coverage[camelFieldName].setValue(world.coverageDataMap.get(fieldName))
+            if (world.coverageDataMap.has(fieldName))
+                await ModIdentifier.coverage[camelFieldName].setValue(world.coverageDataMap.get(fieldName))
             break;
         case ('Vehicles'):
             await ModIdentifier.vehicle[camelFieldName].setValue(t.ctx.VehicleData)
@@ -111,7 +117,8 @@ export async function selectInput(fieldName) {
 
     switch (t.ctx.module) {
         case ('Coverage'):
-            await ModIdentifier.coverage[camelFieldName].selectOptionByLabel(world.coverageDataMap.get(fieldName))
+            if (world.coverageDataMap.has(fieldName))
+                await ModIdentifier.coverage[camelFieldName].selectOptionByLabel(world.coverageDataMap.get(fieldName))
             break;
         case ('Vehicles'):
             await ModIdentifier.vehicle[camelFieldName].selectOptionByLabel(t.ctx.VehicleData)
@@ -128,36 +135,5 @@ export async function selectInput(fieldName) {
             break;
         default:
             throw new Error('Incorrect module provided')
-    }
-}
-
-//To load the coverage data from json input and to perform action on provided coverage
-export async function coverageFilter() {
-    const pcfType = await loadPcfCategory()
-    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
-        t.ctx.module = 'Coverage'
-        console.log(`The current module is ${t.ctx.module}`)
-
-        for (const [key, value] of world.coverageDataMap) {
-            if (pcfType.selectInput.includes(key)) {
-                console.log(`${key} is present`)
-                await selectInput(key)
-            }
-            else if (pcfType.textInput.includes(key)) {
-                console.log(`${key} is present`)
-                await textInput(key)
-            }
-            else if (pcfType.checkBox.includes(key)) {
-                console.log(`${key} is present`)
-                await checkBox(key)
-            }
-            else {
-                throw new Error(`${key} is NOT present in pcfCategory.json file`)
-            }
-        }
-    }
-    else {
-        console.log(`Coverage Data is ${world.coverageDataMap}`)
-        throw new Error('world.coverageDataMap is undefined or empty')
     }
 }
