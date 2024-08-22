@@ -1,0 +1,10 @@
+@claimcenter @designatedfunction
+Feature: Address book in Claim center
+    As a user, I want to manage Address book in claim center
+
+    @addressbook_search
+    Scenario: Searching an existing contact in address book
+        Given the user logs into the claims center as "superuser"
+        When the user loads "cc" data "addressbook_01" from json "AddressBookTestData"
+        And the user searches an existing contact
+        Then the contact is displayed successfully

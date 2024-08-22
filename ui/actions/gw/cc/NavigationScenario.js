@@ -3,6 +3,7 @@ import { SearchTabBar_Ext } from "./scenarioPages/search/claimSearchesGroup/Sear
 import { ClaimMenuLinks } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/menuLinks/ClaimMenuLinks"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
 import { ClaimMenuLinks_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/ClaimMenuLinks_Ext"
+import { AddressBookTabBar } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/tabBar/AddressBookTabBar"
 import {t} from "testcafe"
 
 const claimMenuLinks = new ClaimMenuLinks()
@@ -10,6 +11,7 @@ const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
+const addressBookTabBar = new AddressBookTabBar()
 
 
 export class NavigationScenario {
@@ -70,5 +72,9 @@ export class NavigationScenario {
   
   async navigateToLitigation(){
     await claimMenuLinks_Ext.menuLinksClaim_ClaimMatters.click()
+  }
+
+  async navigateToAddressBookSearch(){
+    await addressBookTabBar.tabBarAddressBookTab.click()
   }
 }
