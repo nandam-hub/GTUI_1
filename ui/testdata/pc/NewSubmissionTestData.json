@@ -236,9 +236,6 @@
                 "DriverAddressType": "Home"
             }
         },
-        "PolicyDriverMenuIcon":"[id*='PolicyDriver-PolicyDriverMenuIcon']",
-        "AvailableContacts":"[id*='PolicyDriver-availableContacts']",
-        "OtherContact": "[id*='OtherContact']",
         "Driver1": "Bethany last",
         "Driver2": "Anthony last",
         "ColumnIdentifier": "Internal Request ID"

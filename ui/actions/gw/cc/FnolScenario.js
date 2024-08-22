@@ -1,13 +1,16 @@
 import { FNOLWizard_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/FNOLWizard_Ext"
-import { dateFunction, splitFunction, generateRandomStringFunction } from "../../../../ui/util/gw/helper"
+import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable } from "../../../../ui/util/gw/helper"
 import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolutions/pages/popup/New/NewContactPopup"
 import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
+import { NewClaimWizard_NewPolicyVehiclePopup_Ext } from "./scenarioPages/popup/New/NewClaimWizard_NewPolicyVehiclePopup_Ext"
 import world from "../../../../ui/util/gw/world"
 import { t } from "testcafe"
 
 const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
 const newClaimSaved_Ext = new NewClaimSaved_Ext()
+const newClaimWizard_NewPolicyVehiclePopup_Ext = new NewClaimWizard_NewPolicyVehiclePopup_Ext()
+
 
 export class FnolScenario {
     async searchOrCreatePolicy() {
@@ -63,5 +66,60 @@ export class FnolScenario {
     async readClaimNumber() {
         t.ctx.claimNo = splitFunction(await newClaimSaved_Ext.newClaimDVAssignedHeader.component.innerText, " ", 1)
         console.log("The claim number is: " + t.ctx.claimNo)
+    }
+
+    async addVehicleWithCoverage(vehicleNum) {
+        for (let i = 1; i <= vehicleNum; i++) {
+            await fNOLWizard_Ext.newClaimVehiclesLV_tbAdd.click()
+            let vehicleMap = world.vehicleDataMap.get(`Vehicle${i}`)
+            await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVNumber.setValue(`${i}`)
+            await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVMake.setValue(vehicleMap[`ClaimVehicleMake`])
+            await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleDetailDVModel.setValue(vehicleMap[`ClaimVehicleModel`])
+            for (let i = 1; ; i++) {
+                if (vehicleMap[`VehicleCoverage${i}`]) {
+                    t.ctx.TableIdentifier = "Type"
+                    await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleCoverageListDetailEditableVehicleCoveragesLV_tbAdd.click()
+                    await selectDropdownInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardCoverageType, vehicleMap[`VehicleCoverage${i}`])
+                    await enterDataInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardExposureLimit, vehicleMap[`VehicleExposureLimit${i}`])
+                    await enterDataInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardIncidentLimit, vehicleMap[`VehicleIncidentLimit${i}`])
+                }
+                else {
+                    break;
+                }
+            }
+            await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehicleScreenUpdate.click()
+        }
+    }
+
+    async selectInvolvedVehicle() {
+        for (let i = 1; ; i++) {
+            if (world.dataMap.get(`IncludedVehicle${i}`))
+                await t.click(`[role='checkbox'][aria-label^='${world.dataMap.get(`IncludedVehicle${i}`)}']`)
+            else {
+                break;
+            }
+        }
+    }
+
+    async selectRentalServices() {
+        await fNOLWizard_Ext.fnolWizardRentalCheckbox.click()
+        await fNOLWizard_Ext.fnolWizardRentalBeginDate.setValue(dateFunction(0))
+        await fNOLWizard_Ext.fnolWizardRentalEndDate.setValue(dateFunction(0, "MM/DD/YYYY"))
+    }
+
+    async addNewVendorCompany() {
+        await fNOLWizard_Ext.fnolWizardRentalAgencyMenu.click()
+        await fNOLWizard_Ext.fnolWizardRentalAgencyMenu.click()
+        await fNOLWizard_Ext.fnolWizardNewVendor.click()
+        await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVOrganizationNameGlobalContactNameInputSetName.setValue(generateRandomStringFunction(5))
+        await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVV_EIN.setValue(world.dataMap.get('VendorTaxId'))
+        await newContactPopup.newContactPopupContactDetailScreenContactBasicsDV_tbContactDetailToolbarButtonSetCustomUpdateButton.click()
+        await fNOLWizard_Ext.fnolWizardPickUpLocation.selectOptionByLabel(world.dataMap.get('PickUpLocation'))
+        await fNOLWizard_Ext.fnolWizardRentalDailyRate.setValue(world.dataMap.get('RentalDailyRate'))
+        await t.wait(1000)
+    }
+
+    async validateRentalServices() {
+        await t.expect(await returnDataFromTable(3, 1)).eql(world.dataMap.get('RentalText'))
     }
 }
