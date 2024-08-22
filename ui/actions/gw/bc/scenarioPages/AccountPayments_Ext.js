@@ -2,6 +2,6 @@ import { AccountPayments } from "../../../../pages/gw/generated/billingsolutions
 import { PcfComponent } from "@gtui/gt-ui-framework";
 
 export class AccountPayments_Ext extends AccountPayments {
-   paymentsActions = PcfComponent('#AccountPayments-AccountDetailPaymentsScreen-DirectBillPaymentsListDetail-AccountDBPaymentsLV-0-ActionButton')
+   paymentAction = '[id*="-ActionButton"]'
    reversePayment = PcfComponent('#AccountPayments-AccountDetailPaymentsScreen-DirectBillPaymentsListDetail-AccountDBPaymentsLV-0-ActionButton-ReversePayment')
 }

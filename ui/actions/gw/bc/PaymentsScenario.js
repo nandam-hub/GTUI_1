@@ -14,7 +14,8 @@ export class PaymentsScenario {
     }
     //ToDo - Needs to be updated with performClickInTable()
     async paymentReversal() {
-        await accountPayments_Ext.paymentsActions.click()
+        t.ctx.TableIdentifier = "Payment Date"
+        await performClickInTable(accountPayments_Ext.paymentAction)
         await accountPayments_Ext.reversePayment.click()
         await dBPaymentReversalConfirmationPopup.dBPaymentReversalConfirmationPopupReason.selectOptionByLabel(world.dataMap.get('Reason'))
         await dBPaymentReversalConfirmationPopup.dBPaymentReversalConfirmationPopupUpdate.click()

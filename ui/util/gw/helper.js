@@ -94,7 +94,7 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
         const colsCount = await tablecols.count;
         for (let i = 0; i < colsCount; i++) {
             let cellText
-                cellText = await tablecols.nth(i).textContent;
+            cellText = await tablecols.nth(i).textContent;
             if (cellText.includes(headerNameOrIndex) && cellText.trim() !== '' && cellText.trim() !== null) {
                 headerNameOrIndex = i;
                 break;
@@ -167,7 +167,7 @@ export async function returnDataFromTable(columnIndex, rowIndex = -1) {
  * @param {*} inputString String value that needs to be entered
  * @param {*} rowIndex (optional field) - Row index on which component is present. By default takes last row
  */
-export async function enterDataInTable(component, inputString, rowIndex=-1) {
+export async function enterDataInTable(component, inputString, rowIndex = -1) {
     let foundTable = await findTable(t.ctx.TableIdentifier)
     let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
     const inputField = lastRow.find(component).find('input')
@@ -179,10 +179,10 @@ export async function enterDataInTable(component, inputString, rowIndex=-1) {
  * @param {*} component Pass the component identifier in string format
  * @param {*} rowIndex (optional field) - Row index on which component is present. By default takes last row
  */
-export async function performClickInTable(component, rowIndex=-1) {
+export async function performClickInTable(component, rowIndex = -1) {
     let foundTable = await findTable(t.ctx.TableIdentifier)
     let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
-    await t.click(lastRow.find(component).nth(-1));
+    await t.click(lastRow.find(component));
 }
 
 /**
@@ -190,7 +190,7 @@ export async function performClickInTable(component, rowIndex=-1) {
  * @param {string} component - Pass the component identifier in string format
  * @param {Number} rowIndex(optional field) - Row index on which component is present. By default takes last row
  */
-export async function performHoverInTable(component, rowIndex=-1) {
+export async function performHoverInTable(component, rowIndex = -1) {
     // Locate Table
     let foundTable = await findTable(t.ctx.TableIdentifier)
     let lastRow = foundTable.find('tbody').find('tr').nth(rowIndex)
@@ -240,17 +240,21 @@ export async function selectDropdownInTable(component, optionLabel, rowIndex = -
 
 async function findTable(identifierColumnHeader) {
     const allTable = Selector('table.gw-ListViewWidget--table')
-    let foundTable;
+    let foundTable = null;
 
     for (let i = 0; i < await allTable.count; i++) {
-        const table = allTable.nth(i).find('tr').find('td[role="columnheader"]')
-        const component = table.find('div.gw-label');
+        const columnHeader = allTable.nth(i).find('tr').find('td[role="columnheader"]')
+        for (let j = 0; j < await columnHeader.count; j++) {
+            const component = columnHeader.nth(j).find('div.gw-label');
 
-        if (await component.exists)
-            if ((await (component.textContent)).includes(identifierColumnHeader)) {
-                foundTable = allTable.nth(i)
-                break;
-            }
+            if (await component.exists)
+                if ((await (component.textContent)).includes(identifierColumnHeader)) {
+                    foundTable = allTable.nth(i)
+                    break;
+                }
+        }
+        if (foundTable)
+            break;
     }
     return foundTable;
 }
