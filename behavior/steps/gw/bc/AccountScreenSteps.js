@@ -11,11 +11,6 @@ When(/^the user navigate to account screen from account tab/, async function (t)
     await navigationScenario.navigateToAccountScreen();
 });
 
-// ToDo - needs to be reviewed later - navigateToAccountScreenDuplicate()
-When(/^the user navigate to account screen/, async function (t) {
-    await navigationScenario.navigateToAccountScreenDuplicate(t.ctx.AccountNumber)
-});
-
 Then(/^the account summary screen loaded successfully/, async function () {
     await accountScreenScenario.validateAccountScreen()
 });

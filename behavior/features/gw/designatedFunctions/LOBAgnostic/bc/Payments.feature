@@ -11,7 +11,6 @@ Feature: Verifying payments in billing center
         Then the policy is issued
         When the user logs into the billing center as "superuser"
         And the user loads "bc" data "payments_01" from json "PaymentsTestData"
-        And the user navigate to account screen
         And the user makes new payment
         And the user loads the payments screen
         Then payment details are updated successfully

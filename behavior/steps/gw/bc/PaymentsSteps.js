@@ -7,7 +7,9 @@ const navigationScenario = new NavigationScenario()
 const disbursementScenario = new DisbursementScenario()
 const paymentsScenario = new PaymentsScenario()
 
+// ToDo - needs to be reviewed later - navigateToAccountScreenDuplicate()
 When(/^the user makes new payment/, async function (t) {
+    await navigationScenario.navigateToAccountScreenDuplicate(t.ctx.AccountNumber)
     await navigationScenario.navigateToNewpaymet();
     await disbursementScenario.newPaymentDetails();
 })
