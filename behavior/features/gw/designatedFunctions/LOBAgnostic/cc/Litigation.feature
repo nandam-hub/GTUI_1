@@ -5,8 +5,7 @@ Feature: Litigation in Claim center
     @add_litigation
     Scenario: Adding the litigation
         Given the user logs into the claims center as "superuser"
-        When the user loads "cc" data "addLitigation_01" from json "AddLitigationTestData"
+        When the user loads "cc" data "addLitigation_01" from json "LitigationTestData"
         And the user creates new FNOL
-        And the user search with claim number
         And the user adds new litigation
         Then the litigation is added successfully
