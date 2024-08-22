@@ -1,0 +1,10 @@
+{
+    "defaultDataSet": {
+        "ClaimNo": "000-00-003419",
+        "CaseNumber": "12345"
+    },
+    "addLitigation_01": {
+        "ClaimNo": "000-00-003419",
+        "CaseNumber": "12345"
+    }
+}

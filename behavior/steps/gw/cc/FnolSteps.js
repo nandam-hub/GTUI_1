@@ -7,6 +7,7 @@ import { searchTableRecord, findTable } from "../../../../ui/util/gw/helper";
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
 import { ClaimLossDetailsScenario } from "../../../../ui/actions/gw/cc/ClaimLossDetailsScenario";
 import { ClaimHistoryScenario } from "../../../../ui/actions/gw/cc/ClaimHistoryScenario";
+import world from "../../../../ui/util/gw/world"
 
 const fnolScenario = new FnolScenario()
 const searchScenario = new SearchScenario()
@@ -84,4 +85,8 @@ Then(/^the activities on the claim is updated in claim history screen/, async fu
     await navigationScenario.navigateToClaimHistoryScreen()
     await claimHistoryScenario.validateNewClaimSaved()
     await claimHistoryScenario.validateAssignedTo()
+});
+
+When(/^the user opens an existing claim/, async function () {
+    await navigationScenario.openClaim(world.dataMap.get('ClaimNo'));
 });

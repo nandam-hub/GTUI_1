@@ -67,4 +67,8 @@ export class NavigationScenario {
   async navigateToClaimHistoryScreen() {
     await claimMenuLinks_Ext.menuLinksClaim_ClaimHistory.click()
   }
+  
+  async navigateToLitigation(){
+    await claimMenuLinks_Ext.menuLinksClaim_ClaimMatters.click()
+  }
 }
