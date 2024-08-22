@@ -216,7 +216,7 @@ When(/^the user adds specific coverges to homeowner policy/, async function () {
     await newSubmissionScenario.quote()
 })
 
-When(/^the forms are added successfully/, async function () {
+Then(/^the forms are added successfully/, async function () {
     await newSubmissionScenario.formsValidation()
 })
 
