@@ -17,7 +17,7 @@ export class PaymentRequestScenario {
     await accountPaymentRequests_Ext.accountDetailNewPayment_PaymentInstrument.click()
     await newPaymentInstrumentPopup.newPaymentInstrumentPopupPaymentMethod.selectOptionByLabel(world.dataMap.get('PaymentMethod'));
     await newPaymentInstrumentPopup.newPaymentInstrumentPopupUpdate.click()
-    await accountPaymentRequests_Ext.accpuntDetailNewPayment_Next.click()
+    await accountPaymentRequests_Ext.accountDetailNewPayment_Next.click()
     await accountPaymentRequests_Ext.accountDetailNewPayment_Finish.click()
     await accountGroupMenuLinks.menuLinksAccountGroup_AccountDetailPayments.click()
     await accountGroupMenuLinks.accountGroup_AccountDetailPaymentsAccountDetailPayments_AccountPaymentRequests.click()

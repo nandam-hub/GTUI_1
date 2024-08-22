@@ -5,6 +5,6 @@ import { AccountPaymentRequests } from '../../../../../../pages/gw/generated/bil
 export class AccountPaymentRequests_Ext extends AccountPaymentRequests {
 	accountDetailNewPayment_Amount = PcfTextInput('#AccountDetailNewPaymentRequestWizard-NewPaymentRequestScreen-PaymentRequestDV-amount');
     accountDetailNewPayment_PaymentInstrument = PcfComponent ('#AccountDetailNewPaymentRequestWizard-NewPaymentRequestScreen-PaymentRequestDV-PaymentInstrument-CreateNewPaymentInstrument')
-    accpuntDetailNewPayment_Next = PcfButton('#AccountDetailNewPaymentRequestWizard-Next')
+    accountDetailNewPayment_Next = PcfButton('#AccountDetailNewPaymentRequestWizard-Next')
     accountDetailNewPayment_Finish = PcfButton('#AccountDetailNewPaymentRequestWizard-Finish')
 }

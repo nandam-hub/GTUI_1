@@ -196,14 +196,24 @@ export async function performHoverInTable(webElement) {
  * @param {Array string} menuPath - list of options in sequence
  * @param {string} finalOptionText - final option to click
  */
-export async function navigateAndClickSubmenu(menuPath, finalOptionText) {
+export async function navigateAndClickSubmenu(menuPath, finalOptionText = null) {
     let currentSelector = Selector('div.gw-subMenu.gw-open');
-    await t.hover(currentSelector.find(`div[aria-label='New ...']`));
-
+    if (await (currentSelector.find(`div[aria-label='New ...']`)).exists)
+        await t.hover(currentSelector.find(`div[aria-label='New ...']`));
+ 
     // Iterate through the menu path to hover over each submenu
     for (let i = 0; i < menuPath.length; i++) {
-        await t.hover(currentSelector.find(`div[aria-label='${menuPath[i]}']`));
+        const menuItem = currentSelector.find(`div[aria-label='${menuPath[i]}']`);
+        await t.hover(menuItem);
+ 
+        // If finalOptionText is not provided, click the last item in menuPath
+        if ((!finalOptionText) && i === menuPath.length - 1) {
+            await t.click(menuItem);
+        }
     }
-    // After navigating through the submenus, click the desired final option
-    await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
+ 
+    // Click the desired finalOptionText if provided
+    if (finalOptionText) {
+        await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
+    }
 }
