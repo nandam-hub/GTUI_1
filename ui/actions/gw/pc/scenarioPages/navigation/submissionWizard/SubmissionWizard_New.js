@@ -1,7 +1,7 @@
 import { PcfButton, PcfCheckBox, PcfComponent, PcfSelectInput, PcfTextInput } from '@gtui/gt-ui-framework';
 
 export class SubmissionWizard_New {
-	submissionWizard_Quote = PcfButton('#SubmissionWizard-SubmissionWizard_PolicyReviewScreen-JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote');
+	submissionWizard_Quote = PcfButton('[id$="JobWizardToolbarButtonSet-QuoteTypeToolbarButtonSet-Quote"]');
 	submissionWizard_QuoteStatus = PcfComponent('#SubmissionWizard-JobWizardInfoBar-JobLabel ')
 	submissionWizard_Bind = PcfComponent('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-BindOptions')
 	submissionWizard_IssuePolicy = PcfComponent('#SubmissionWizard-SubmissionWizard_QuoteScreen-JobWizardToolbarButtonSet-BindOptions-BindAndIssue')
@@ -18,6 +18,7 @@ export class SubmissionWizard_New {
 	submissionWizardGWHomeownersLine = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-detailsTab')
 	submissionWizard_Premium = PcfButton('#SubmissionWizard-SubmissionWizard_QuoteScreen-RatingCumulDetailsPanelSet-0-0-Type_button')
 	submissionWizard_RefusalType_ErrorMsg = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-_msgs-0-0')
+	submissionWizardAddExclusionsOrCondition= PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-HLLWizardStepGroup-HLLGwHomeownersLineScreen-HLLGwHomeownersLinePanelSet-AdditionalExclusionsAndConditionsPanelSet-AddExclusionsOrCondition')
 	//#endregion
 	//#region small business
 	submissionWizardSmallBusienssTab = PcfComponent('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-SBLWizardStepGroup-SBLSmallBusinessScreen-SBLSmallBusinessPanelSet-detailsTab')
