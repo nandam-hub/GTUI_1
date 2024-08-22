@@ -30,6 +30,10 @@ export class SubmissionWizard_New {
 	SubmissionWizard_LineStandardCoveragesTab = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-LineStandardCoveragesTab')
 	SubmissionWizard_AddPersonalVehicle = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALPersonalVehicleScreen-UALPersonalVehicleListPanelSet-AddPersonalVehicle')
 	submissionWizardUALPolicyDriverMVRListAdd = PcfButton('#SubmissionWizard-LOBWizardStepGroup-LineWizardStepSet-UALWizardStepGroup-UALUsaPersonalAutoScreen-UALUsaPersonalAutoPanelSet-UALPolicyDriverMVRListPanelSet-Add')
+	submissionWizardInternetRequestId = "[id*='-MVRID']"
+	submissionWizardPolicyDriverMenuIcon = "[id*='PolicyDriver-PolicyDriverMenuIcon']"
+	submissionWizardAvailableContacts = "[id*='PolicyDriver-availableContacts']"
+	submissionWizardOtherContact = "[id*='OtherContact']"
 	//#endregion	
 
 	//#region Go commercial property
