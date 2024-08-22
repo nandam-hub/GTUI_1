@@ -7,7 +7,6 @@ import { searchTableRecord, findTable } from "../../../../ui/util/gw/helper";
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
 import { ClaimLossDetailsScenario } from "../../../../ui/actions/gw/cc/ClaimLossDetailsScenario";
 import { ClaimHistoryScenario } from "../../../../ui/actions/gw/cc/ClaimHistoryScenario";
-import world from "../../../../ui/util/gw/world"
 
 const fnolScenario = new FnolScenario()
 const searchScenario = new SearchScenario()
