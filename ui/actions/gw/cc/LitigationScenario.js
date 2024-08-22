@@ -7,7 +7,7 @@ import world from "../../../util/gw/world"
 const claimMatters = new ClaimMatters()
 const newMatter = new NewMatter()
 
-export class AddLitigationScenario {
+export class LitigationScenario {
 
     async litigationValidation() {
         await t.expect(await validateTableRecord("Name", t.ctx.Name, 2)).eql(world.dataMap.get('CaseNumber'))

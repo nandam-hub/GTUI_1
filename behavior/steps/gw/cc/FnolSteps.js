@@ -86,7 +86,3 @@ Then(/^the activities on the claim is updated in claim history screen/, async fu
     await claimHistoryScenario.validateNewClaimSaved()
     await claimHistoryScenario.validateAssignedTo()
 });
-
-When(/^the user opens an existing claim/, async function () {
-    await navigationScenario.openClaim(world.dataMap.get('ClaimNo'));
-});

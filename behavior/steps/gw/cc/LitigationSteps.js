@@ -1,16 +1,16 @@
 const { When, Then } = require("@cucumber/cucumber")
-import { AddLitigationScenario } from "../../../../ui/actions/gw/cc/AddLitigationScenario"
+import { LitigationScenario } from "../../../../ui/actions/gw/cc/LitigationScenario"
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario"
 
 const navigationScenario = new NavigationScenario()
-const addLitigationScenario = new AddLitigationScenario()
+const litigationScenario = new LitigationScenario()
 
 When(/^the user adds new litigation/, async function () {
    await navigationScenario.navigateToLitigation()
-   await addLitigationScenario.addNewLitigation()
+   await litigationScenario.addNewLitigation()
 });
 
 Then(/^the litigation is added successfully/, async function () {
     await navigationScenario.navigateToLitigation()
-    await addLitigationScenario.litigationValidation()
+    await litigationScenario.litigationValidation()
 });
