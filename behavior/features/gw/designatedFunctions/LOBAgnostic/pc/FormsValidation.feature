@@ -1,9 +1,9 @@
 @policycenter @designatedfunction
 
 Feature: Validate forms
-    As a user, I want to add coverages and validate forms
+    As a user, I want to validate forms
 
-    @validate_Forms
+    @validate_coverage_forms
     Scenario: Verify forms by adding specific coverages from Homeowners LOB
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"
