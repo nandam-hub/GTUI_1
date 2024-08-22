@@ -127,6 +127,10 @@ export class NavigationScenario {
         break;
       case ('SectionIICoverages'):
         await submissionWizard_New.submissionWizardSectionIICoverages.click()
+        await checkBox("CoverageEPersonalLiability")
+        await selectInput("CoverageEPersonalLiabilityLimit")
+        await checkBox("CoverageFMedicalPayments")
+        await selectInput("CoverageFMedicalPaymentsLimit")
         break;
       case ('Optional Coverages'):
         await submissionWizard_New.submissionWizardOptionalCoverages.click()
@@ -159,7 +163,7 @@ export class NavigationScenario {
     await policyMenuActions_Ext.policyFileUALPersonalAutoLine.click()
     await policyMenuActions_Ext.policyFileUALPersonalAutoMenu.click()
   }
-  
+
   async editPolicyCommercialNavigation() {
     await submissionWizard_New.submissionWizardEditPolicy.click()
     await submissionWizard_New.submissionWizardLOBCommercial1.click()
@@ -182,7 +186,7 @@ export class NavigationScenario {
     }
   }
 
-  async navigatePreRenewalScreen(){
+  async navigatePreRenewalScreen() {
     await policyMenuActions_Ext.policyFilePolicyFileMenuActions.click()
     await navigateAndClickSubmenu((['Pre-Renewal Direction']))
   }

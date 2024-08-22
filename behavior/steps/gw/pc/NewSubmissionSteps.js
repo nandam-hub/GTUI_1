@@ -203,6 +203,23 @@ When(/^the user issue the new submission from actions menu for homeowner policy/
     await newSubmissionScenario.issuePolicy()
 })
 
+When(/^the user adds specific coverges to homeowner policy/, async function () {
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.gWHomeownersLineScreen()
+    await navigationScenario.navigateGWHomeownersLineTab('SectionIICoverages')
+    await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await navigationScenario.navigateGWHomeownersLineTab('Exclusions&Conditions')
+    await newSubmissionScenario.homeOwnersAddExclusionOrConditionScreen()
+    await newSubmissionScenario.quote()
+})
+
+Then(/^the forms are added successfully/, async function () {
+    await newSubmissionScenario.formsValidation()
+})
+
 When(/^the user quote the new submission for commercial property/, async function (t) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)

@@ -5,7 +5,7 @@ import { PolicyInfoScreen } from "../../../pages/gw/generated/policysolutions/pa
 import { UALPersonalVehiclePopup_New } from "./scenarioPages/other/UALPersonalVehiclePopup_New.js";
 import { NewAPDPolicyInvolvedPartyPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/New/NewAPDPolicyInvolvedPartyPopup.js";
 import { NewSubmission_Ext } from "./scenarioPages/policy/NewSubmission_Ext.js";
-import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable } from '../../../util/gw/helper'
+import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable, navigateAndClickSubmenu } from '../../../util/gw/helper'
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWizard/CLLCpBlanketPopup_New"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
@@ -19,6 +19,8 @@ import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
 import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
+import {CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
+import { FormsSubmissionWizard} from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -36,6 +38,8 @@ const webMessageWorksheet_New = new WebMessageWorksheet_New()
 const goCommercialProperty = new GoCommercialProperty()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const policyInfoScreen_Ext = new PolicyInfoScreen_Ext()
+const coveragePatternSearchPopup_Ext = new CoveragePatternSearchPopup_Ext()
+const formsSubmissionWizard = new FormsSubmissionWizard()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -167,6 +171,22 @@ export class NewSubmissionScenario {
 
   async gWHomeownersLineScreen() {
     await submissionWizard_New.submissionWizardRefusalType.selectOptionByLabel(world.dataMap.get('RefusalType'))
+  }
+  
+  async homeOwnersAddExclusionOrConditionScreen() {
+    await submissionWizard_New.submissionWizardAddExclusionsOrCondition.click()
+    await coveragePatternSearchPopup_Ext.coveragePatternSearchPopupCoveragePatternSearchScreenCoveragePatternSearchDVSearchAndResetInputSetSearchLinksInputSetSearch.click()
+    await coveragePatternSearchPopup_Ext.fireDepartmentSubscription.click()
+    await coveragePatternSearchPopup_Ext.computerDamageExclusion.click()
+    await coveragePatternSearchPopup_Ext.addSelectedExclusionsAndConditions.click()
+  }
+
+  async formsValidation()
+  {
+    await formsSubmissionWizard.submissionWizardForms.click()
+    console.log("Forms HO DP 00, HOP 08 FL are added successfully");
+    await t.expect(await validateTableRecord("Form #", "HO DP 00", 1)).contains(world.dataMap.get('Form1Description'))
+    await t.expect(await validateTableRecord("Form #", "HOP 08 FL", 1)).contains(world.dataMap.get('Form2Description'))
   }
 
   async commercialUmbrellaAccessliability() {
