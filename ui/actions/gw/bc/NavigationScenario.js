@@ -69,14 +69,6 @@ export class NavigationScenario {
     await policiesTabBar_Ext.searchButton.click()
   }
   
-  async navigateToPaymentRequest(){
-    await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click()
-    await accountGroupMenuActions.accountDetailMenuActionsAccountDetailMenuActions_Payments.click()
-    await accountGroupMenuActions.accountDetailMenuActionsAccountDetailMenuActions_Payments.click()
-    await accountGroupMenuActions.accountDetailMenuActions_PaymentsAccountDetailMenuActions_NewPaymentRequest.click()
-
-  }
-  
   async navigateToNewPaymetRequest() {
     await accountGroupMenuActions.accountGroupAccountDetailMenuActions.click();
     await navigateAndClickSubmenu(['New Payment'], 'Payment Request');
