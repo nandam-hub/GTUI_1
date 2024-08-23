@@ -4,15 +4,19 @@ import { AccountGroupMenuActions_Ext } from '../../../pages/gw/generated/billing
 import { NewDirectBillPayment } from '../../../pages/gw/generated/billingsolutions/pages/other/NewDirectBillPayment.js';
 import { AccountGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/AccountGroupMenuLinks.js';
 import { ProducerDetailGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/ProducerDetailGroupMenuLinks.js';
-import { returnDataFromTable,dateFunction } from "../../../../ui/util/gw/helper";
+import { returnDataFromTable, dateFunction } from "../../../../ui/util/gw/helper";
 import { startsWith } from "lodash";
 import { PolicySummary_Ext } from '../../../../ui/actions/gw/bc/scenarioPages/policyGroup/policyOverview/PolicySummary_Ext.js';
+import { BatchProcessInfo_Ext } from './scenarioPages/BatchProcessInfo_Ext.js';
+import { ServerToolsMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/ServerToolsMenuActions.js';
 
 const accountGroupMenuActions_Ext = new AccountGroupMenuActions_Ext();
 const newDirectBillPayment = new NewDirectBillPayment();
 const policySummary_Ext = new PolicySummary_Ext();
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
 const producerDetailGroupMenuLinks = new ProducerDetailGroupMenuLinks();
+const batchProcessInfo_Ext = new BatchProcessInfo_Ext()
+const serverToolsMenuActions = new ServerToolsMenuActions()
 
 export class DisbursementScenario {
     async newPaymentDetails() {
@@ -36,5 +40,17 @@ export class DisbursementScenario {
     }
     async validateDisbursement() {
         await t.expect(world.dataMap.get('DisbursedAmount')).contains(await returnDataFromTable(7))
+    }
+    async automaticDisbursementBatchJob() {
+        await batchProcessInfo_Ext.automaticDisbursementJob.click()
+        await serverToolsMenuActions.serverToolsInternalToolsMenuActions.click()
+        await serverToolsMenuActions.internalToolsMenuActionsReturnToApp.click()
+    }
+    async clickOnDisbursementMenu() {
+        await accountGroupMenuLinks.menuLinksAccountGroup_AccountDetailDisbursements.click();
+    }
+    async validateAutomaticDisbursement() {
+        await t.expect(await returnDataFromTable(5)).eql(world.dataMap.get('Status'))
+        console.log("Automatic disbursement is created successfully")
     }
 }

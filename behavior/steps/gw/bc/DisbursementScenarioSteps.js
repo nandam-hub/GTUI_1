@@ -23,3 +23,17 @@ When(/^the user navigates to producer tab/, async function (t) {
 Then(/^the commision statement is displayed/, async function (t) {
     await disbursementScenario.displayedCommissionStatement();
 })
+
+When(/^the user runs automatic disbursement batch job/, async function (t) {
+    await navigationScenario.navigateToBatchProcessInfoScreen()
+    await disbursementScenario.automaticDisbursementBatchJob()
+})
+
+When(/^the user loads the disbursement screen/, async function (t) {
+    await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
+    await disbursementScenario.clickOnDisbursementMenu()
+})
+
+Then(/^automatic disbursement is created successfully/, async function (t) {
+    await disbursementScenario.validateAutomaticDisbursement()
+})
