@@ -7,11 +7,11 @@ const navigationScenario = new NavigationScenario();
 const overrideDistributionScenario = new OverrideDistributionScenario()
 
 When(/^the user search with the account number/, async function () {
-    await navigationScenario.openAccount(t.ctx.AccountNumber)
+    await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
 });
 
 When(/^the user makes payment in new direct bill payment from action tab/, async function () {
-    await navigationScenario.navigateToOverrideDistributionTab()
+    await navigationScenario.navigateToNewpaymet()
     await overrideDistributionScenario.overrideDistribution()
 });
 

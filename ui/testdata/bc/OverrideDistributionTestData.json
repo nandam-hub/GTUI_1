@@ -1,14 +1,14 @@
 {
     "defaultDataSet": {
-        "Amount": "100",
-        "DistributionAmount":"100",
-        "Due": "$20.00",
-        "InvoiceNumber":"1000012522"
+        "Amount": "120",
+        "IncludeOnly":"Up to amount under contract",
+        "DistributionAmount":"10",
+        "Due": "$12.50"
     },
     "overrideDistribution_01": {
-       "Amount": "100",
-       "DistributionAmount":"100",
-       "Due": "$20.00",
-       "InvoiceNumber":"1000012522"
+       "Amount": "120",
+       "IncludeOnly":"Up to amount under contract",
+       "DistributionAmount":"10",
+       "Due": "$12.50"
     }
 }
