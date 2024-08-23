@@ -5,13 +5,15 @@ import { NewExposure_Ext } from "./scenarioPages/other/NewExposure_Ext"
 import { NewInjuryIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewInjuryIncidentPopup"
 import { NewFixedPropertyIncidentPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/New/NewFixedPropertyIncidentPopup"
 import { ClaimExposures_Ext } from "./scenarioPages/claim/ClaimExposures_Ext"
-import { validateTableRecord } from "../../../util/gw/helper"
+import { CloseExposurePopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/Close/CloseExposurePopup"
+import { clickTableRecord, validateTableRecord } from "../../../util/gw/helper"
 
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const newExposure_Ext = new NewExposure_Ext()
 const newInjuryIncidentPopup = new NewInjuryIncidentPopup()
 const newFixedPropertyIncidentPopup = new NewFixedPropertyIncidentPopup()
 const claimExposures_Ext = new ClaimExposures_Ext()
+const closeExposurePopup = new CloseExposurePopup()
 
 export class ExposureScenario {
     async selectBodilyInjury() {
@@ -50,16 +52,31 @@ export class ExposureScenario {
         await newExposure_Ext.newExposureScreenUpdate.click()
     }
 
-    async validateExposure(exposureType, columnIndex=6) {
+    async validateExposure(exposureType, columnIndex = 6) {
         await t.expect(await validateTableRecord("Type", exposureType, columnIndex)).eql(world.dataMap.get('Status'))
     }
 
-    async selectExposure(){
+    async selectExposure() {
         await claimExposures_Ext.claimExposuresScreenClaimExposures_BICheckBox.click()
         await claimExposures_Ext.claimExposuresScreenClaimExposures_MedPayCheckBox.click()
     }
 
     async verifyExposureHeader() {
         await t.expect((claimExposures_Ext.claimExposuresScreenClaimExposures_Header).component.exists).ok();
+    }
+
+    async closeExposure() {
+        for (let i = 1; ; i++) {
+            if (world.dataMap.has(`ExposureCoverage${i}`)) {
+                await clickTableRecord("_Checkbox", world.dataMap.get(`ExposureCoverage${i}`))
+                await claimExposures_Ext.claimExposuresScreenClaimExposures_CloseExposure.click()
+                await t.typeText(claimExposures_Ext.claimExposureCloseTextArea.component, world.dataMap.get('ExposureCloseText'))
+                await closeExposurePopup.closeExposureInfoDVOutcome.selectOptionByLabel(world.dataMap.get('ExposureOutcome'))
+                await closeExposurePopup.closeExposureScreenUpdate.click()
+            }
+            else {
+                break;
+            }
+        }
     }
 }

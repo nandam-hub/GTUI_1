@@ -139,12 +139,13 @@ export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
         }
     }
     else {
-        for (let i = 1; i <= await tableRows.count; i++) {
+        for (let i = 1; i <= await tableRows.count; i++) {            
             let currentCell = tableRows.nth(i).find('td').nth(referenceCellValueOrIndex)
             if ((await (currentCell.textContent)).includes(stringValue))
                 await t.click(currentCell.find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'))
             break;
-        }
+            }
+        
     }
 }
 
@@ -238,19 +239,23 @@ export async function selectDropdownInTable(component, optionLabel, rowIndex = -
         .click(lastRow.find(component).find('option').withText(optionLabel))
 }
 
-async function findTable(identifierColumnHeader) {
+export async function findTable(identifierColumnHeader) {
     const allTable = Selector('table.gw-ListViewWidget--table')
-    let foundTable;
+    let foundTable = null;
 
     for (let i = 0; i < await allTable.count; i++) {
-        const table = allTable.nth(i).find('tr').find('td[role="columnheader"]')
-        const component = table.find('div.gw-label');
+        const columnHeader = allTable.nth(i).find('tr').find('td[role="columnheader"]')
+        for (let j = 0; j < await columnHeader.count; j++) {
+            const component = columnHeader.nth(j).find('div.gw-label');
 
-        if (await component.exists)
-            if ((await (component.textContent)).includes(identifierColumnHeader)) {
-                foundTable = allTable.nth(i)
-                break;
-            }
+            if (await component.exists)
+                if ((await (component.textContent)).includes(identifierColumnHeader)) {
+                    foundTable = allTable.nth(i)
+                    break;
+                }
+        }
+        if (foundTable)
+            break;
     }
     return foundTable;
 }

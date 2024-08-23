@@ -27,7 +27,21 @@ Feature: Capturing first notice of loss
     @claimhistory
     Scenario: Verify that key activities on the claim is updated in history screen
         Given the user logs into the claims center as "superuser"
-        When the user loads "cc" data "createActivity_01" from json "FNOLTestData"
-        And the user creates new FNOL
+        And the user loads "cc" data "createActivity_01" from json "FNOLTestData"
+        When the user creates new FNOL
         Then the FNOL is added successfully
         And the activities on the claim is updated in claim history screen
+
+    @close_claim
+    Scenario: To close a claim by closing all the items associated within the claim (exposure, payments , activities, litigation)
+        Given the user logs into the claims center as "superuser"
+        And the user loads "cc" data "addActivity_01" from json "AddActivityTestData"
+        And the user creates new FNOL
+        And the user adds an activity
+        And the user loads "cc" data "Exposure_02" from json "ExposuresTestData"
+        And the user creates property exposure
+        When the user loads "cc" data "createActivity_05" from json "FNOLTestData"
+        And the user closes the exposure
+        And the user completes all workplan activities
+        And the user closes the claim
+        Then claim is closed successfully
