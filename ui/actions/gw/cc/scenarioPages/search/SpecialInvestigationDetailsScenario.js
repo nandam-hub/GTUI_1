@@ -11,38 +11,39 @@ const sIDetails = new SIDetails();
 
 export class SpecialInvestigationDetailsScenario {
 
-    async sIDetailsScreen() {
+    async updateSIDDetails() {
         await claimMenuLinks.claim_ClaimLossDetailsGroupClaimLossDetailsGroup_SIDetails.click();
         await sIDetails.sIDetailsScreenEdit.click();
-        await this.specialInvestigation(0, 'yes')
-        await this.specialInvestigation(1, 'yes')
-        await this.specialInvestigation(2, 'yes')
-        await this.specialInvestigation(3, 'yes')
-        await this.specialInvestigation(4, 'yes')
-        await this.specialInvestigation(5, 'yes')
-        await this.specialInvestigation(6, 'yes')
-        await this.specialInvestigation(7, 'yes')
-        await this.specialInvestigation(8, 'yes')
-        await this.specialInvestigation(9, 'yes')
-        await this.specialInvestigation(11, 'yes')
-        await this.specialInvestigation(12, 'yes')
-        await this.specialInvestigation(13, 'yes')
+        await this.updateGeneralSIUQuestionnaire(0, 'yes')
+        await this.updateGeneralSIUQuestionnaire(1, 'yes')
+        await this.updateGeneralSIUQuestionnaire(2, 'yes')
+        await this.updateGeneralSIUQuestionnaire(3, 'yes')
+        await this.updateGeneralSIUQuestionnaire(4, 'yes')
+        await this.updateGeneralSIUQuestionnaire(5, 'yes')
+        await this.updateGeneralSIUQuestionnaire(6, 'yes')
+        await this.updateGeneralSIUQuestionnaire(7, 'yes')
+        await this.updateGeneralSIUQuestionnaire(8, 'yes')
+        await this.updateGeneralSIUQuestionnaire(9, 'yes')
+        await this.updateGeneralSIUQuestionnaire(11, 'yes')
+        await this.updateGeneralSIUQuestionnaire(12, 'yes')
+        await this.updateGeneralSIUQuestionnaire(13, 'yes')
         await sIDetails.sIUTotalScoreSIinfo_SIescalateSIU.selectOptionByLabel(world.dataMap.get('Review'));
         await sIDetails.sIUTotalScoreSIinfo_SIEscalateSIUNote.setValue(world.dataMap.get('Reason'));
         await sIDetails.sIDetailsScreenUpdate.click();
     }
 
-    async validateSid() {
+    async validateSID() {
         await t.expect((await returnDataFromTable(6, 2))).contains("Special Investigation")
+        await t.wait(1000);
     }
 
-    async specialInvestigation(questionno, radio) {
+    async updateGeneralSIUQuestionnaire(questionNo, radioInput) {
 
-        if (radio == 'yes')
-            radio = 0
+        if (radioInput == 'yes')
+            radioInput = 0
         else
-            radio = 1
-        let Button = (`#SIDetails-SIDetailsScreen-SectionTwo-0-QuestionSetLV-${questionno}-QuestionRowSet-QuestionRangeRadioInput_${radio}`);
-        await t.click(Button)
+        radioInput = 1
+        let sIDRadioGroup = (`#SIDetails-SIDetailsScreen-SectionTwo-0-QuestionSetLV-${questionNo}-QuestionRowSet-QuestionRangeRadioInput_${radioInput}`);
+        await t.click(sIDRadioGroup)
     }
 }

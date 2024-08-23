@@ -6,11 +6,12 @@ import { SpecialInvestigationDetailsScenario } from "../../../../ui/actions/gw/c
 const navigationScenario = new NavigationScenario();
 const specialInvestigationDetailsScenario = new SpecialInvestigationDetailsScenario();
 
-When(/^the user navigates to SIU screen through lossdetails/, async function () {
+When(/^the user updates special investigation details/, async function () {
+    await navigationScenario.openClaim(t.ctx.claimNo);
     await navigationScenario.navigateToLossDetails();
-    await specialInvestigationDetailsScenario.sIDetailsScreen();
-    await navigationScenario.navigateClaimWorkplan();
+    await specialInvestigationDetailsScenario.updateSIDDetails();
 });
-Then(/^the user verify in the workplan screen/, async function () {
-    await specialInvestigationDetailsScenario.validateSid();
+Then(/^special investigation details is updated successfully in workplan/, async function () {
+    await navigationScenario.navigateClaimWorkplan();
+    await specialInvestigationDetailsScenario.validateSID();
 });
