@@ -89,6 +89,9 @@
         "ExposureOutcome": "Completed",
         "CloseClaimText": "Closing claim",
         "CloseClaimOutcome": "Completed",
-        "ClaimStatus": "Closed"
+        "ClaimStatus": "Closed",
+        "Litigation1":"12345",
+        "CloseLitigationText" :"Closing Litigation",
+        "CloseLitigationResolution" :"Dismissed"
     }
 }

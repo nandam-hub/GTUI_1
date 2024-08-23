@@ -33,15 +33,18 @@ Feature: Capturing first notice of loss
         And the activities on the claim is updated in claim history screen
 
     @close_claim
-    Scenario: To close a claim by closing all the items associated within the claim (exposure, payments , activities, litigation)
+    Scenario: To close a claim by closing all the items associated within the claim (exposure, activities, litigation)
         Given the user logs into the claims center as "superuser"
-        And the user loads "cc" data "addActivity_01" from json "AddActivityTestData"
+        And the user loads "cc" data "addLitigation_01" from json "LitigationTestData"
         And the user creates new FNOL
+        And the user adds new litigation
+        And the user loads "cc" data "addActivity_01" from json "AddActivityTestData"
         And the user adds an activity
         And the user loads "cc" data "Exposure_02" from json "ExposuresTestData"
         And the user creates property exposure
         When the user loads "cc" data "createActivity_05" from json "FNOLTestData"
         And the user closes the exposure
         And the user completes all workplan activities
+        And the user closes the litigation matter
         And the user closes the claim
         Then claim is closed successfully

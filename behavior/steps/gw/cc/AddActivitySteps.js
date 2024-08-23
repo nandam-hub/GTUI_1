@@ -7,7 +7,7 @@ import world from "../../../../ui/util/gw/world";
 const addActivityScenario = new AddActivityScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the user adds an activity/, async function () {
+When(/^the user adds an activity/, async function (t) {
    await navigationScenario.openClaim(t.ctx.claimNo);
    await addActivityScenario.addAutoPilotActionRequiredActivity()
 });
