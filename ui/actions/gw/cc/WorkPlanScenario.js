@@ -25,6 +25,4 @@ export class WorkPlanScenario {
         }
         await claimWorkplan_Ext.claimWorkplanScreenClaimWorkplan_CompleteButton.click()
     }
-    
-
 }
