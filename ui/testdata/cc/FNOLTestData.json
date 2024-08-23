@@ -37,7 +37,7 @@
         "City": "Pewaukee",
         "State": "Wisconsin"
     },
-"createActivity_03": {
+    "createActivity_03": {
         "PolicyNumber": "2416558655",
         "SearchCreatePolicy": "Create Unverified Policy",
         "Type": "Personal Auto",
@@ -50,7 +50,7 @@
         "State": "California",
         "Catastrophe": "163 - LA earthquake - 09/06/2003 - 09/11/2003"
     },
-  "createActivity_04": {
+    "createActivity_04": {
         "PolicyNumber": "2416558655",
         "SearchCreatePolicy": "Create Unverified Policy",
         "Type": "Personal Auto",
@@ -74,13 +74,21 @@
             },
             "Vehicle2": {
                 "ClaimVehicleMake": "Honda",
-                "ClaimVehicleModel": "Accord"                
+                "ClaimVehicleModel": "Accord"
             }
         },
         "IncludedVehicle1": "Kia",
-        "RentalDailyRate":"25",
-        "PickUpLocation":"Pewaukee, WI",
-        "VendorTaxId":"569-89-7897",
-        "RentalText" :"Other - Car rental"
-    }    
+        "RentalDailyRate": "25",
+        "PickUpLocation": "Pewaukee, WI",
+        "VendorTaxId": "569-89-7897",
+        "RentalText": "Other - Car rental"
+    },
+    "createActivity_05": {
+        "ExposureCoverage1":"Building Coverage",
+        "ExposureCloseText": "Close exposure",
+        "ExposureOutcome": "Completed",
+        "CloseClaimText": "Closing claim",
+        "CloseClaimOutcome": "Completed",
+        "ClaimStatus": "Closed"
+    }
 }

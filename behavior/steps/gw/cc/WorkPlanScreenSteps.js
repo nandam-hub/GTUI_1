@@ -6,10 +6,15 @@ const workPlanScenario = new WorkPlanScenario()
 const navigationScenario = new NavigationScenario()
 
 When(/^the user completes the activity work plan/, async function () {
-    navigationScenario.navigateClaimWorkplan()
+    await navigationScenario.navigateClaimWorkplan()
     await workPlanScenario.workPlanActivity()
 });
 
 Then(/^the activity work plan status is completed/, async function () {
     await workPlanScenario.workPlanActivityStatusValidation()
+});
+
+When('the user completes all workplan activities', async function () { 
+    await navigationScenario.navigateClaimWorkplan()
+    await workPlanScenario.closeAllWorkPlanActivities()
 });

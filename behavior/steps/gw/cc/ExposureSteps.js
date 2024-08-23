@@ -53,3 +53,7 @@ Then(/^the user selects and validates the BI liability and Medical Payment expos
     await exposureScenario.verifyExposureHeader()
     await exposureScenario.selectExposure()
 });
+
+When(/^the user closes the exposure/, async function () {
+    await exposureScenario.closeExposure()
+});

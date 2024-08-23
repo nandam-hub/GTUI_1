@@ -85,3 +85,12 @@ Then(/^the activities on the claim is updated in claim history screen/, async fu
     await claimHistoryScenario.validateNewClaimSaved()
     await claimHistoryScenario.validateAssignedTo()
 });
+
+When(/^the user closes the claim/, async function () {
+   await fnolScenario.closeClaim()
+});
+
+Then(/^claim is closed successfully/, async function () {
+    await navigationScenario.openClaim(t.ctx.claimNo)
+    await claimSummaryScenario.verifyClaimStatus()
+});

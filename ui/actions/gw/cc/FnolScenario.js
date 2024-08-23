@@ -1,8 +1,10 @@
 import { FNOLWizard_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/FNOLWizard_Ext"
-import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable } from "../../../../ui/util/gw/helper"
+import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable, navigateAndClickSubmenu } from "../../../../ui/util/gw/helper"
 import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolutions/pages/popup/New/NewContactPopup"
 import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
 import { NewClaimWizard_NewPolicyVehiclePopup_Ext } from "./scenarioPages/popup/New/NewClaimWizard_NewPolicyVehiclePopup_Ext"
+import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
+import { CloseClaimPopup_Ext } from "./scenarioPages/popup/New/Close/CloseClaimPopup_Ext"
 import world from "../../../../ui/util/gw/world"
 import { t } from "testcafe"
 
@@ -10,6 +12,8 @@ const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
 const newClaimSaved_Ext = new NewClaimSaved_Ext()
 const newClaimWizard_NewPolicyVehiclePopup_Ext = new NewClaimWizard_NewPolicyVehiclePopup_Ext()
+const claimMenuActions_Ext = new ClaimMenuActions_Ext()
+const closeClaimPopup_Ext = new CloseClaimPopup_Ext()
 
 
 export class FnolScenario {
@@ -121,5 +125,13 @@ export class FnolScenario {
 
     async validateRentalServices() {
         await t.expect(await returnDataFromTable(3, 1)).eql(world.dataMap.get('RentalText'))
+    }
+
+    async closeClaim() {
+        await claimMenuActions_Ext.claimMenuActions.click();
+        await navigateAndClickSubmenu(['Close Claim'])
+        await t.typeText(closeClaimPopup_Ext.closeClaimPopupTextArea.component, world.dataMap.get('CloseClaimText'))
+        await closeClaimPopup_Ext.closeClaimInfoDVOutcome.selectOptionByLabel(world.dataMap.get('CloseClaimOutcome'))
+        await closeClaimPopup_Ext.closeClaimScreenUpdate.click()
     }
 }

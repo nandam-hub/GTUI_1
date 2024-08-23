@@ -139,12 +139,13 @@ export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
         }
     }
     else {
-        for (let i = 1; i <= await tableRows.count; i++) {
+        for (let i = 1; i <= await tableRows.count; i++) {            
             let currentCell = tableRows.nth(i).find('td').nth(referenceCellValueOrIndex)
             if ((await (currentCell.textContent)).includes(stringValue))
                 await t.click(currentCell.find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'))
             break;
-        }
+            }
+        
     }
 }
 
@@ -238,7 +239,7 @@ export async function selectDropdownInTable(component, optionLabel, rowIndex = -
         .click(lastRow.find(component).find('option').withText(optionLabel))
 }
 
-async function findTable(identifierColumnHeader) {
+export async function findTable(identifierColumnHeader) {
     const allTable = Selector('table.gw-ListViewWidget--table')
     let foundTable = null;
 
