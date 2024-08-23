@@ -1,7 +1,7 @@
 const { When, Then } = require("@cucumber/cucumber")
 import { t } from "testcafe";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
-import { SpecialInvestigationDetailsScenario } from "../../../../ui/actions/gw/cc/scenarioPages/search/SpecialInvestigationDetailsScenario";
+import { SpecialInvestigationDetailsScenario } from "../../../../ui/actions/gw/cc/SpecialInvestigationDetailsScenario";
 
 const navigationScenario = new NavigationScenario();
 const specialInvestigationDetailsScenario = new SpecialInvestigationDetailsScenario();
