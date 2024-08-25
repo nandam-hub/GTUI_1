@@ -139,13 +139,15 @@ export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
         }
     }
     else {
-        for (let i = 1; i <= await tableRows.count; i++) {            
+        for (let i = 1; i <= await tableRows.count; i++) {
             let currentCell = tableRows.nth(i).find('td').nth(referenceCellValueOrIndex)
-            if ((await (currentCell.textContent)).includes(stringValue))
+            if ((await (currentCell.textContent)).includes(stringValue)) {
                 await t.click(currentCell.find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget'))
-            break;
+                break;
             }
-        
+
+        }
+
     }
 }
 
@@ -208,18 +210,18 @@ export async function navigateAndClickSubmenu(menuPath, finalOptionText = null) 
     let currentSelector = Selector('div.gw-subMenu.gw-open');
     if (await (currentSelector.find(`div[aria-label='New ...']`)).exists)
         await t.hover(currentSelector.find(`div[aria-label='New ...']`));
- 
+
     // Iterate through the menu path to hover over each submenu
     for (let i = 0; i < menuPath.length; i++) {
         const menuItem = currentSelector.find(`div[aria-label='${menuPath[i]}']`);
         await t.hover(menuItem);
- 
+
         // If finalOptionText is not provided, click the last item in menuPath
         if ((!finalOptionText) && i === menuPath.length - 1) {
             await t.click(menuItem);
         }
     }
- 
+
     // Click the desired finalOptionText if provided
     if (finalOptionText) {
         await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
