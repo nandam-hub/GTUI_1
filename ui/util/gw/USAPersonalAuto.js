@@ -1,5 +1,5 @@
 
-import { textInput, selectInput, loadPcfCategory } from './ActionHelper'
+import { textInput, selectInput } from './ActionHelper'
 import { UALPersonalVehiclePopup_New } from '../../actions/gw/pc/scenarioPages/other/UALPersonalVehiclePopup_New'
 import { NewAdditionalNamedInsuredPopup } from '../../pages/gw/generated/policysolutions/pages/popup/New/NewAdditionalNamedInsuredPopup'
 import { PolicyInfoScreen_Ext } from '../../actions/gw/pc/scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext'
@@ -16,28 +16,19 @@ export class USAPersonalAuto {
 
     //To load vehicle data from json input and add single or multiple vehicle
     async addVehicle() {
-        const pcfType = await loadPcfCategory()
-
         if (!(world.vehicleDataMap === undefined) && Array.from(world.vehicleDataMap.keys()).length > 0) {
             t.ctx.module = 'Vehicles'
             console.log(`The current module is ${t.ctx.module}`)
             let i = 0
-
             for (const [key, value] of world.vehicleDataMap) {
-                for (const dataKey of Object.keys(value)) {
-                    t.ctx.VehicleData = value[dataKey]
-                    if (pcfType.selectInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await selectInput(dataKey)
-                    }
-                    else if (pcfType.textInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await textInput(dataKey)
-                    }
-                    else {
-                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
-                    }
-                }
+                const currentVehicleMap = new Map(Object.entries(value))
+                await selectInput('BodyType', currentVehicleMap)
+                await selectInput('LicenseState', currentVehicleMap)
+                await textInput('VinNumber', currentVehicleMap)
+                await textInput('Year', currentVehicleMap)
+                await textInput('Make', currentVehicleMap)
+                await textInput('Model', currentVehicleMap)
+
                 await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()
                 i++
                 if (i < world.vehicleDataMap.size) {
@@ -54,28 +45,20 @@ export class USAPersonalAuto {
 
     //To load driver data from json input and add single or multiple driver
     async addDriver() {
-        const pcfType = await loadPcfCategory()
-
         if (!(world.driverDataMap === undefined) && Array.from(world.driverDataMap.keys()).length > 0) {
             t.ctx.module = 'Drivers'
             console.log(`The current module is ${t.ctx.module}`)
             let i = 0
-
             for (const [key, value] of world.driverDataMap) {
-                for (const dataKey of Object.keys(value)) {
-                    t.ctx.DriverData = value[dataKey]
-                    if (pcfType.selectInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await selectInput(dataKey)
-                    }
-                    else if (pcfType.textInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await textInput(dataKey)
-                    }
-                    else {
-                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
-                    }
-                }
+                const currentDriverMap = new Map(Object.entries(value))
+                await textInput('FirstName', currentDriverMap)
+                await textInput('LastName', currentDriverMap)
+                await textInput('DriverAddress1', currentDriverMap)
+                await textInput('DriverCity', currentDriverMap)
+                await selectInput('DriverState', currentDriverMap)
+                await textInput('DriverZipCode', currentDriverMap)
+                await selectInput('DriverAddressType', currentDriverMap)
+
                 await newAdditionalNamedInsuredPopup.newAdditionalNamedInsuredPopupContactDetailScreenForceDupCheckUpdate.click()
                 i++
                 if (i < world.driverDataMap.size) {

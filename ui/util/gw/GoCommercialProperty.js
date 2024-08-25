@@ -1,4 +1,4 @@
-import { textInput, selectInput, loadPcfCategory } from './ActionHelper'
+import { textInput } from './ActionHelper'
 import { CLLLocationPopup_New } from '../../actions/gw/pc/scenarioPages/popup/CLLCP/CLLLocationPopup_New'
 import world from "./world"
 import { t } from 'testcafe'
@@ -8,29 +8,16 @@ const cllLocationPopup_New = new CLLLocationPopup_New()
 export class GoCommercialProperty {
 
     //To load building data from json input and add single or multiple building
-    async addBuidling() {
-        const pcfType = await loadPcfCategory()
-
+    async addBuilding() {
         if (!(world.buildingDataMap === undefined) && Array.from(world.buildingDataMap.keys()).length > 0) {
             t.ctx.module = 'Building'
             console.log(`The current module is ${t.ctx.module}`)
             let i = 0
+            for (const [key,value] of world.buildingDataMap) {
+                const currentBuildingMap = new Map(Object.entries(value))
+                await textInput('BuildingDescription', currentBuildingMap)
+                await textInput('YearBuilt', currentBuildingMap)
 
-            for (const [key, value] of world.buildingDataMap) {
-                for (const dataKey of Object.keys(value)) {
-                    t.ctx.BuildingData = value[dataKey]
-                    if (pcfType.selectInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await selectInput(dataKey)
-                    }
-                    else if (pcfType.textInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await textInput(dataKey)
-                    }
-                    else{
-                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
-                    }
-                }
                 await cllLocationPopup_New.cllCPBuildingPopupOk.click()
                 i++
                 if (i < world.buildingDataMap.size) {
@@ -47,28 +34,16 @@ export class GoCommercialProperty {
 
     //To load building data from json input and add single or multiple building
     async addLocation() {
-        const pcfType = await loadPcfCategory()
-
         if (!(world.locationDataMap === undefined) && Array.from(world.locationDataMap.keys()).length > 0) {
             t.ctx.module = 'Location'
             console.log(`The current module is ${t.ctx.module}`)
             let i = 0
+            for (const [key,value] of world.locationDataMap) {
+                const currentLocationMap = new Map(Object.entries(value))
+                await textInput('CllLocationPopupAddress1', currentLocationMap)
+                await textInput('CllLocationPopupCity', currentLocationMap)
+                await textInput('CllLocationPopupZipCode', currentLocationMap)
 
-            for (const [key, value] of world.locationDataMap) {
-                for (const dataKey of Object.keys(value)) {
-                    t.ctx.LocationData = value[dataKey]
-                    if (pcfType.selectInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await selectInput(dataKey)
-                    }
-                    else if (pcfType.textInput.includes(dataKey)) {
-                        console.log(`${dataKey} is present`)
-                        await textInput(dataKey)
-                    }
-                    else{
-                        throw new Error(`${dataKey} is NOT present in pcfCategory.json file`)
-                    }
-                }
                 await cllLocationPopup_New.cllLocationPopupLocationOk.click()
                 i++
                 if (i < world.locationDataMap.size) {

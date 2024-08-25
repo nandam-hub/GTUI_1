@@ -19,8 +19,8 @@ import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
 import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
-import {CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
-import { FormsSubmissionWizard} from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
+import { CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
+import { FormsSubmissionWizard } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -172,7 +172,7 @@ export class NewSubmissionScenario {
   async gWHomeownersLineScreen() {
     await submissionWizard_New.submissionWizardRefusalType.selectOptionByLabel(world.dataMap.get('RefusalType'))
   }
-  
+
   async homeOwnersAddExclusionOrConditionScreen() {
     await submissionWizard_New.submissionWizardAddExclusionsOrCondition.click()
     await coveragePatternSearchPopup_Ext.coveragePatternSearchPopupCoveragePatternSearchScreenCoveragePatternSearchDVSearchAndResetInputSetSearchLinksInputSetSearch.click()
@@ -181,8 +181,7 @@ export class NewSubmissionScenario {
     await coveragePatternSearchPopup_Ext.addSelectedExclusionsAndConditions.click()
   }
 
-  async formsValidation()
-  {
+  async formsValidation() {
     await formsSubmissionWizard.submissionWizardForms.click()
     console.log("Forms HO DP 00, HOP 08 FL are added successfully");
     await t.expect(await validateTableRecord("Form #", "HO DP 00", 1)).contains(world.dataMap.get('Form1Description'))
@@ -228,7 +227,7 @@ export class NewSubmissionScenario {
 
   async addBuilding(buildingNum = "1") {
     await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
-    await goCommercialProperty.addBuidling()
+    await goCommercialProperty.addBuilding()
     console.log(`Added ${buildingNum} buidling(s) successfully`)
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
@@ -245,7 +244,7 @@ export class NewSubmissionScenario {
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
-      t.ctx.TableIdentifier="Internal Request ID"
+      t.ctx.TableIdentifier = "Internal Request ID"
       await enterDataInTable(submissionWizard_New.submissionWizardInternetRequestId, i.toString())
       await performClickInTable(submissionWizard_New.submissionWizardPolicyDriverMenuIcon)
       await performHoverInTable(submissionWizard_New.submissionWizardAvailableContacts)
@@ -253,7 +252,7 @@ export class NewSubmissionScenario {
     }
   }
 
- async validatedAddedDriversInPolicyFile(driverNum = 2) {
+  async validatedAddedDriversInPolicyFile(driverNum = 2) {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
@@ -261,7 +260,7 @@ export class NewSubmissionScenario {
     }
   }
 
-  async commercialPropertyCoverage(){
+  async commercialPropertyCoverage() {
     if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
       t.ctx.module = 'Coverage'
       console.log(`The current module is ${t.ctx.module}`)
