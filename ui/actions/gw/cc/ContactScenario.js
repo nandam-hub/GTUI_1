@@ -10,7 +10,7 @@ const claimContacts_Ext = new ClaimContacts_Ext()
 export class ContactScenario {
 
     async editContact() {
-        newClaimSaved.newClaimSavedDVGoToClaim.click()
+        await newClaimSaved.newClaimSavedDVGoToClaim.click()
         await claimMenuLinks_Ext.partiesInvolved.click()
         await navigateAndClickSubmenu(['Contacts'], '')
         await claimMenuLinks_Ext.editContactCheckBox.click()
@@ -22,6 +22,6 @@ export class ContactScenario {
 
     async verifyContactDetails() {
         await t.expect((claimMenuLinks_Ext.contactsHeader).component.exists).ok();
-        await t.expect(claimContacts_Ext.personName.component.innerText).eql(await t.ctx.editLastName)
+        await t.expect(claimContacts_Ext.personLastName.component.innerText).eql(await t.ctx.editLastName)
     }
 }
