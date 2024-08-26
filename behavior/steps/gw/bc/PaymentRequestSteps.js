@@ -8,9 +8,7 @@ const navigationScenario = new NavigationScenario();
 const paymentRequestScenario = new PaymentRequestScenario()
 
 When(/^the user search with the account number/, async function () {
-    await navigationScenario.navigateToAccountScreen()
-    //TO DO- TO UPDATE SCENARIO WITH RUNTIME POLICY
-    //await navigationScenario.navigateToAccountScreenWithNewPolicy()
+    await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
 });
 
 When(/^the user creates a payment request for EFT policy/, async function () {
