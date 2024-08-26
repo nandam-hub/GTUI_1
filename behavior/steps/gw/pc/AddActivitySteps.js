@@ -1,3 +1,4 @@
+import { t } from "testcafe";
 import { AddActivityScenario } from "../../../../ui/actions/gw/pc/AddActivityScenario";
 
 const { When, Then } = require("@cucumber/cucumber")

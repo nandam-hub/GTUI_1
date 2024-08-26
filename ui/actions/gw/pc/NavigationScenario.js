@@ -190,4 +190,9 @@ export class NavigationScenario {
     await policyMenuActions_Ext.policyFilePolicyFileMenuActions.click()
     await navigateAndClickSubmenu((['Pre-Renewal Direction']))
   }
+
+  async navigateToNewActivity()
+  {
+    await navigateAndClickSubmenu(['New Activity', 'Interview'], 'Meet with Insured')
+  }
 }
