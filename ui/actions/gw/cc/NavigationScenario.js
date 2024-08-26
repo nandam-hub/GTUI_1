@@ -2,16 +2,19 @@ import { ClaimTabBar_Ext } from "./scenarioPages/navigation/tabBar/ClaimTabBar_E
 import { SearchTabBar_Ext } from "./scenarioPages/search/claimSearchesGroup/SearchTabBar_Ext"
 import { ClaimMenuLinks } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/menuLinks/ClaimMenuLinks"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
-import { ClaimMenuLinks_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/ClaimMenuLinks_Ext"
 import { AddressBookTabBar } from "../../../../ui/pages/gw/generated/claimsolutions/pages/navigation/tabBar/AddressBookTabBar"
-import {t} from "testcafe"
+import { NewClaimSaved } from "../../../../ui/pages/gw/generated/claimsolutions/pages/other/NewClaimSaved"
+import { navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
+import { ClaimMenuLinks_Ext } from "./scenarioPages/navigation/menuLinks/ClaimMenuLinks_Ext"
+import { t } from "testcafe"
 
 const claimMenuLinks = new ClaimMenuLinks()
 const claimTabBar_Ext = new ClaimTabBar_Ext()
 const searchTabBar_Ext = new SearchTabBar_Ext()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
-const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
 const addressBookTabBar = new AddressBookTabBar()
+const newClaimSaved = new NewClaimSaved()
+const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
 
 
 export class NavigationScenario {
@@ -36,8 +39,7 @@ export class NavigationScenario {
     console.log('On Search Claims Screen')
   }
 
-  async navigateClaimWorkplan()
-  {
+  async navigateClaimWorkplan() {
     await claimMenuLinks.menuLinksClaim_ClaimWorkplan.click()
   }
   //TODO: We can remove this method as this is replaced by navigateAndClickSubmenu helper
@@ -69,12 +71,20 @@ export class NavigationScenario {
   async navigateToClaimHistoryScreen() {
     await claimMenuLinks_Ext.menuLinksClaim_ClaimHistory.click()
   }
-  
-  async navigateToLitigation(){
+
+  async navigateToLitigation() {
     await claimMenuLinks_Ext.menuLinksClaim_ClaimMatters.click()
   }
 
-  async navigateToAddressBookSearch(){
+  async navigateToAddressBookSearch() {
     await addressBookTabBar.tabBarAddressBookTab.click()
+  }
+
+  async goToClaim() {
+    await newClaimSaved.newClaimSavedDVGoToClaim.click()
+  }
+  async navigateToContacts() {
+    await claimMenuLinks_Ext.partiesInvolved.click()
+    await navigateAndClickSubmenu(['Contacts'])
   }
 }
