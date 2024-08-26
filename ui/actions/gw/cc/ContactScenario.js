@@ -1,6 +1,7 @@
 import { ClaimMenuLinks_Ext } from './scenarioPages/navigation/menuLinks/ClaimMenuLinks_Ext'
 import { t } from 'testcafe'
 import { generateRandomStringFunction, clickTableRecord } from "../../../../ui/util/gw/helper";
+import world from "../../../../ui/util/gw/world"
 
 import {ClaimContacts_Ext} from "./scenarioPages/claim/claimPartiesGroup/ClaimContacts_Ext"
 const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
@@ -9,7 +10,7 @@ const claimContacts_Ext = new ClaimContacts_Ext()
 export class ContactScenario {
 
     async editContact() {
-        await clickTableRecord('_Checkbox_checkboxDiv', "Insured, Main Contact, Reporter")
+        await clickTableRecord('_Checkbox_checkboxDiv', world.dataMap.get('ContactRole'))
         await claimMenuLinks_Ext.editButton.click()
         t.ctx.editLastName= generateRandomStringFunction(5)
         await claimContacts_Ext.claimContactsClaimContactsScreenPeopleInvolvedDetailedListDetailContactBasicsDVPersonNameInputSetGlobalPersonNameInputSetLastName.setValue(t.ctx.editLastName)
