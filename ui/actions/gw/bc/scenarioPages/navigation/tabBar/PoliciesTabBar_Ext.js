@@ -6,3 +6,4 @@ export class PoliciesTabBar_Ext extends PoliciesTabBar{
 	searchButton = PcfButton('#TabBar-PoliciesTab-PolicyNumberSearchItem_Button');
     tabBarpolicyNumberSearchItem = PcfTextInput('#TabBar-PoliciesTab-PolicyNumberSearchItem');
 }
+
