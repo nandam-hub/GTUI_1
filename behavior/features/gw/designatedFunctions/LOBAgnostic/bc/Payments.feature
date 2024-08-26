@@ -17,10 +17,10 @@ Feature: Verifying payments in billing center
 
     @payment_request
     Scenario: Create Payment request for EFT policies
-        #Given the user logs into the policy center as "superuser"
-        #When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
-        #And the user creates commercial account
-        #And the user creates commercial policy
+        Given the user logs into the policy center as "superuser"
+        When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
+        And the user creates commercial account
+        And the user creates commercial policy
         Given the user logs into the billing center as "superuser"
         When the user loads "bc" data "paymentRequest_01" from json "PaymentRequestTestData"
         And the user search with the account number

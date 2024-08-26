@@ -5,10 +5,7 @@ import { PolicyGroupMenuLinks } from '../../../pages/gw/generated/billingsolutio
 import world from "../../../util/gw/world.js"
 import { AccountsTabBar_Ext } from './scenarioPages/navigation/AccountsTabBar_Ext';
 import { AccountGroupMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions.js';
-import { navigateAndClickSubmenu,dateFunction } from "../../../util/gw/helper.js";
-import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
 import { t } from 'testcafe';
-import { PolicySummary_Ext } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/policyOverview/PolicySummary.js';
 import { navigateAndClickSubmenu, dateFunction } from "../../../util/gw/helper.js";
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
 import { PoliciesTabBar_Ext } from './scenarioPages/navigation/tabBar/PoliciesTabBar_Ext.js';
