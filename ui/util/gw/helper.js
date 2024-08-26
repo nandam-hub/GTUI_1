@@ -124,7 +124,7 @@ export function pascalToCamel(inputString) {
 /** 
  * To click on a record in a table with a specific text.
  * @param {string, Number} referenceCellValueOrIndex -Reference Cell text or column index
- * @param {string} stringValue - Cell text value or id of the text on which click action should be performed
+ * @param {string} stringValue - Cell text value or css component of the text on which click action should be performed
  */
 export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
     const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
@@ -154,14 +154,14 @@ export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
 
 /**
  * To return specific cell value based on row and column
- * @param {Number} rowIndex - row number of the actual value. By default considers last row
  * @param {Number} columnIndex - column number of the actual value
+ * @param {Number} rowIndex - row number of the actual value. By default considers last row * 
  * @returns - specific cellText
  */
 export async function returnDataFromTable(columnIndex, rowIndex = -1) {
     //Locate Table
     const table = Selector('table.gw-ListViewWidget--table');
-    return table.find('tbody').find('tr').nth(rowIndex).find('td').nth(columnIndex).textContent;
+    return await table.find('tbody').find('tr').nth(rowIndex).find('td').nth(columnIndex).textContent;
 }
 
 /**
@@ -251,7 +251,7 @@ export async function findTable(identifierColumnHeader) {
             const component = columnHeader.nth(j).find('div.gw-label');
 
             if (await component.exists)
-                if ((await (component.textContent)).includes(identifierColumnHeader)) {
+                if ((await (component.textContent)).startsWith(identifierColumnHeader)) {
                     foundTable = allTable.nth(i)
                     break;
                 }
