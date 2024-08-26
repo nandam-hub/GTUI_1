@@ -34,6 +34,6 @@ export class RiskAnalysisScenario {
     }
 
     async validateUWStatus() {
-        await t.expect(await returnDataFromTable(1, 4)).eql(world.dataMap.get('ReferenceCellString'))
+        await t.expect(await returnDataFromTable(1)).eql(world.dataMap.get('ReferenceCellString'))
     }
 }
