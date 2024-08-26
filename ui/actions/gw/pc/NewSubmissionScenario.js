@@ -12,8 +12,6 @@ import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizar
 import { JobWizardInfoBarSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/JobWizardInfoBarSubmissionWizard_Ext";
 import { JobComplete_New } from "./scenarioPages/other/JobComplete_New"
 import { RatingCostDetailPopup } from "../../../../ui/pages/gw/generated/policysolutions/pages/popup/Rating/RatingCostDetailPopup"
-import { USAPersonalAuto } from "../../../util/gw/USAPersonalAuto"
-import { GoCommercialProperty } from "../../../util/gw/GoCommercialProperty.js";
 import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
@@ -21,10 +19,11 @@ import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyI
 import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
 import { CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
 import { FormsSubmissionWizard } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
+import { NewAdditionalNamedInsuredPopup } from '../../../../ui/pages/gw/generated/policysolutions/pages/popup/New/NewAdditionalNamedInsuredPopup'
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
-const uALPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
+const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
 const newAPDPolicyInvolvedPartyPopup = new NewAPDPolicyInvolvedPartyPopup()
 const newSubmission_Ext = new NewSubmission_Ext()
 const lOBWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
@@ -33,13 +32,12 @@ const submissionWizard_New = new SubmissionWizard_New()
 const jobWizardInfoBarSubmissionWizard_Ext = new JobWizardInfoBarSubmissionWizard_Ext()
 const jobComplete_New = new JobComplete_New()
 const ratingCostDetailPopup = new RatingCostDetailPopup()
-const usaPersonalAuto = new USAPersonalAuto()
 const webMessageWorksheet_New = new WebMessageWorksheet_New()
-const goCommercialProperty = new GoCommercialProperty()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const policyInfoScreen_Ext = new PolicyInfoScreen_Ext()
 const coveragePatternSearchPopup_Ext = new CoveragePatternSearchPopup_Ext()
 const formsSubmissionWizard = new FormsSubmissionWizard()
+const newAdditionalNamedInsuredPopup = new NewAdditionalNamedInsuredPopup()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -69,15 +67,15 @@ export class NewSubmissionScenario {
 
   async personalVehicle(vehicleNum = "1") {
     await submissionWizard_New.SubmissionWizard_AddPersonalVehicle.click()
-    await usaPersonalAuto.addVehicle()
+    await this.addVehicle()
     console.log(`Added ${vehicleNum} vehicle(s) successfully`)
   }
 
   async vehicleDriver() {
-    await uALPersonalVehiclePopup_New.UALPersonalVehiclePopup_VehicleDriverExposureCardTab.click()
-    await uALPersonalVehiclePopup_New.UALPersonalVehiclePopup_AddDriver.click()
-    await uALPersonalVehiclePopup_New.UALPersonalVehiclePopup_PolicyDriverMenuIcon.click()
-    await uALPersonalVehiclePopup_New.UALPersonalVehiclePopup_NewPerson.click()
+    await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_VehicleDriverExposureCardTab.click()
+    await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_AddDriver.click()
+    await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_PolicyDriverMenuIcon.click()
+    await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_NewPerson.click()
     await newAPDPolicyInvolvedPartyPopup.newAPDPolicyInvolvedPartyPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVPolicyContactRoleNameInputSetGlobalPersonNameInputSetFirstName.setValue(generateRandomStringFunction(5))
     await newAPDPolicyInvolvedPartyPopup.newAPDPolicyInvolvedPartyPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVPolicyContactRoleNameInputSetGlobalPersonNameInputSetLastName.setValue(generateRandomStringFunction(5))
     await newAPDPolicyInvolvedPartyPopup.NewAPDPolicyInvolvedPartyPopup_LinkAddressMenuMenuIcon.click()
@@ -221,13 +219,13 @@ export class NewSubmissionScenario {
     await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
     await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
     await cllLocationPopup_New.cllLocationPopupNewLocation.click()
-    await goCommercialProperty.addLocation()
+    await this.addLocation();
     console.log(`Added ${locationNum} location(s) successfully`)
   }
 
   async addBuilding(buildingNum = "1") {
     await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
-    await goCommercialProperty.addBuilding()
+    await this.addBuilding()
     console.log(`Added ${buildingNum} buidling(s) successfully`)
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
@@ -235,7 +233,7 @@ export class NewSubmissionScenario {
   async addDrivers(driverNum = "1") {
     await policyInfoScreen.namedInsuredsLV_tbAddContactsButton.click()
     await policyInfoScreen_Ext.newPersonMenuItem.click()
-    await usaPersonalAuto.addDriver()
+    await this.addDriver()
     console.log(`Added ${driverNum} driver(s) successfully`)
   }
 
@@ -273,6 +271,117 @@ export class NewSubmissionScenario {
       await checkBox("OutsideObjectsAndStructures")
       await textInput("OutsideObjectsAndStructuresLimit")
       await textInput("OutsideObjectsAndStructuresDeductible")
+    }
+  }
+
+  async addLocation() {
+    if (!(world.locationDataMap === undefined) && Array.from(world.locationDataMap.keys()).length > 0) {
+      t.ctx.module = 'Location'
+      console.log(`The current module is ${t.ctx.module}`)
+      let i = 0
+      for (const [key, value] of world.locationDataMap) {
+        const currentLocationMap = new Map(Object.entries(value))
+        await textInput('CllLocationPopupAddress1', currentLocationMap)
+        await textInput('CllLocationPopupCity', currentLocationMap)
+        await textInput('CllLocationPopupZipCode', currentLocationMap)
+
+        await cllLocationPopup_New.cllLocationPopupLocationOk.click()
+        i++
+        if (i < world.locationDataMap.size) {
+          await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
+          await cllLocationPopup_New.cllLocationPopupNewLocation.click()
+          console.log("ADDING NEXT LOCATION")
+        }
+      }
+    }
+    else {
+      console.log(`Location Data is ${world.locationDataMap}`)
+      throw new Error('world.locationDataMap is undefined or empty')
+    }
+  }
+
+  //To load building data from json input and add single or multiple building
+  async addBuilding() {
+    if (!(world.buildingDataMap === undefined) && Array.from(world.buildingDataMap.keys()).length > 0) {
+      t.ctx.module = 'Building'
+      console.log(`The current module is ${t.ctx.module}`)
+      let i = 0
+      for (const [key, value] of world.buildingDataMap) {
+        const currentBuildingMap = new Map(Object.entries(value))
+        await textInput('BuildingDescription', currentBuildingMap)
+        await textInput('YearBuilt', currentBuildingMap)
+
+        await cllLocationPopup_New.cllCPBuildingPopupOk.click()
+        i++
+        if (i < world.buildingDataMap.size) {
+          await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
+          console.log("ADDING NEXT BUILDING")
+        }
+      }
+    }
+    else {
+      console.log(`Building Data is ${world.buildingDataMap}`)
+      throw new Error('world.buildingDataMap is undefined or empty')
+    }
+  }
+
+  //To load vehicle data from json input and add single or multiple vehicle
+  async addVehicle() {
+    if (!(world.vehicleDataMap === undefined) && Array.from(world.vehicleDataMap.keys()).length > 0) {
+      t.ctx.module = 'Vehicles'
+      console.log(`The current module is ${t.ctx.module}`)
+      let i = 0
+      for (const [key, value] of world.vehicleDataMap) {
+        const currentVehicleMap = new Map(Object.entries(value))
+        await selectInput('BodyType', currentVehicleMap)
+        await selectInput('LicenseState', currentVehicleMap)
+        await textInput('VinNumber', currentVehicleMap)
+        await textInput('Year', currentVehicleMap)
+        await textInput('Make', currentVehicleMap)
+        await textInput('Model', currentVehicleMap)
+
+        await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()
+        i++
+        if (i < world.vehicleDataMap.size) {
+          await submissionWizard_New.SubmissionWizard_AddPersonalVehicle.click()
+          console.log("ADDING NEXT VEHICLE")
+        }
+      }
+    }
+    else {
+      console.log(`Vehicle Data is ${world.vehicleDataMap}`)
+      throw new Error('world.vehicleDataMap is undefined or empty')
+    }
+  }
+
+  //To load driver data from json input and add single or multiple driver
+  async addDriver() {
+    if (!(world.driverDataMap === undefined) && Array.from(world.driverDataMap.keys()).length > 0) {
+      t.ctx.module = 'Drivers'
+      console.log(`The current module is ${t.ctx.module}`)
+      let i = 0
+      for (const [key, value] of world.driverDataMap) {
+        const currentDriverMap = new Map(Object.entries(value))
+        await textInput('FirstName', currentDriverMap)
+        await textInput('LastName', currentDriverMap)
+        await textInput('DriverAddress1', currentDriverMap)
+        await textInput('DriverCity', currentDriverMap)
+        await selectInput('DriverState', currentDriverMap)
+        await textInput('DriverZipCode', currentDriverMap)
+        await selectInput('DriverAddressType', currentDriverMap)
+
+        await newAdditionalNamedInsuredPopup.newAdditionalNamedInsuredPopupContactDetailScreenForceDupCheckUpdate.click()
+        i++
+        if (i < world.driverDataMap.size) {
+          await policyInfoScreen_Ext.namedInsuredsLV_tbAddContactsButton.click()
+          await policyInfoScreen_Ext.newPersonMenuItem.click()
+          console.log("ADDING NEXT DRIVER")
+        }
+      }
+    }
+    else {
+      console.log(`Driver Data is ${world.vehicleDataMap}`)
+      throw new Error('world.driverDataMap is undefined or empty')
     }
   }
 }
