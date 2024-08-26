@@ -16,3 +16,8 @@ Then(/^the litigation is added successfully/, async function () {
     await navigationScenario.navigateToLitigation()
     await litigationScenario.litigationValidation()
 });
+
+When(/^the user closes the litigation matter/, async function () {
+    await navigationScenario.navigateToLitigation()
+    await litigationScenario.closeLitigation()
+});
