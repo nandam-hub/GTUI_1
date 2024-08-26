@@ -23,7 +23,6 @@ const ModIdentifier = {
 
 //Function to check and uncheck checkbox
 export async function checkBox(fieldName, dataMap = null) {
-    // TODO: How are we setting action for modules other than coverage
     let checkAction = 'check'
     //To convert pascal casing input to camel casing as per css standard
     camelFieldName = pascalToCamel(fieldName)
