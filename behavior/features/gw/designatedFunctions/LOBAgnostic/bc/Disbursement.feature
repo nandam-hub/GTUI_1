@@ -10,7 +10,6 @@ Feature: Creating and verifying disbursment
         And the user issue the new submission from actions menu for homeowner policy
         Given the user logs into the billing center as "superuser"
         When the user loads "bc" data "disbursmentStatus" from json "DisbursementTestData"
-        And the user navigate to account screen from account tab
         And the user creates a disbursement
         Then the disbursement created successfully
 

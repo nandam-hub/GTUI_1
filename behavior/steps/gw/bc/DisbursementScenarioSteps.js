@@ -7,6 +7,7 @@ const disbursementScenario = new DisbursementScenario();
 const navigationScenario = new NavigationScenario();
 
 When(/^the user creates a disbursement/, async function () {
+    await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
     await navigationScenario.navigateToNewpaymet();
     await disbursementScenario.newPaymentDetails();
     await navigationScenario.navigateToDisbursement();
