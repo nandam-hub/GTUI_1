@@ -8,7 +8,7 @@ const navigationScenario = new NavigationScenario();
 const accountScreenScenario = new AccountScreenScenario()
 
 When(/^the user navigate to account screen from account tab/, async function (t) {
-    await navigationScenario.navigateToAccountScreen();
+    await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
 });
 
 Then(/^the account summary screen loaded successfully/, async function () {
