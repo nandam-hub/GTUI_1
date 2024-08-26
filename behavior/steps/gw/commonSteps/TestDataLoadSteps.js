@@ -1,10 +1,10 @@
-const { When } = require("@cucumber/cucumber")
+const { Given } = require("@cucumber/cucumber")
 import world from "../../../../ui/util/gw/world"
 import { ReadTestDataFiles } from "../../../../ui/util/gw/ReadTestDataFiles";
 
 const readTestDataFiles = new ReadTestDataFiles()
 
-When(/^the user loads (.*) data (.*) from json (.*)/, async function (t, stepArguments) {
+Given(/^the user loads (.*) data (.*) from json (.*)/, async function (t, stepArguments) {
     const module = stepArguments[0].replace(/["]/g, "")
     const identifier = stepArguments[1].replace(/["]/g, "")
     const jsonFileName = stepArguments[2].replace(/["]/g, "")

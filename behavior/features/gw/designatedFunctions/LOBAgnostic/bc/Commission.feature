@@ -13,7 +13,7 @@ Feature: Commissions in billing center
     @commission_statement
     Scenario: Verify commission statement is displayed
         Given the user logs into the billing center as "superuser"
-        When the user loads "bc" data "commissionStatement" from json "DisbursementTestData"
-        And the user loads the existing policy number
+        And the user loads "bc" data "commissionStatement" from json "DisbursementTestData"
+        When the user loads the existing policy number
         And the user navigates to producer tab
         Then the commision statement is displayed
