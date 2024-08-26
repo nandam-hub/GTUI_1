@@ -17,7 +17,6 @@ export class WorkPlanScenario {
     }
 
     async closeAllWorkPlanActivities() {
-        await t.debug()
         t.ctx.TableIdentifier = "Due"
         let foundTable = await findTable(t.ctx.TableIdentifier)
         const rowCount = await foundTable.find('tr').count
@@ -25,6 +24,5 @@ export class WorkPlanScenario {
             await performClickInTable(`[id*="${i - 1}-_Checkbox_checkboxDiv"]`, i)
         }
         await claimWorkplan_Ext.claimWorkplanScreenClaimWorkplan_CompleteButton.click()
-        await t.debug()
     }
 }
