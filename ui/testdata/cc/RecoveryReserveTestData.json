@@ -1,0 +1,14 @@
+{
+    "defaultDataSet":{
+        "CostType": "Unspecified Cost Type",
+        "CostCategory": "Unspecified Cost Category",
+        "RecoveryCategory": "Credit to expense",
+        "NewOpenRecoveryReserves": "10"
+    },
+    "recoveryReserve_01":{
+       "CostType": "Unspecified Cost Type",
+        "CostCategory": "Unspecified Cost Category",
+        "RecoveryCategory": "Credit to expense",
+        "NewOpenRecoveryReserves": "10"
+    }
+}

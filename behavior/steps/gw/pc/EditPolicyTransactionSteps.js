@@ -10,7 +10,6 @@ const newSubmissionScenario = new NewSubmissionScenario()
 
 Then(/^the user updates coverage through edit policy transaction/, async function () {
     await navigationScenario.editPolicyCommercialNavigation()
-    await coverageFilter()
 });
 
 Then(/^the user proceeds to quote and issue the policy with the updated changes/, async function () {

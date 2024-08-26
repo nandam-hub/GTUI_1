@@ -50,18 +50,10 @@ export class ExposureScenario {
         await newExposure_Ext.newExposureScreenUpdate.click()
     }
 
-    async validateBILiabilityExposure() {
-        await t.expect(await validateTableRecord("Type", "Bodily Injury", 6)).eql(world.dataMap.get('Status'))
+    async validateExposure(exposureType, columnIndex=6) {
+        await t.expect(await validateTableRecord("Type", exposureType, columnIndex)).eql(world.dataMap.get('Status'))
     }
 
-    async validateMedicalPaymentsExposure() {
-        await t.expect(await validateTableRecord("Type", "Med Pay", 6)).eql(world.dataMap.get('Status'))
-    }
-
-    async validatePropertyExposure() {
-        await t.expect(await validateTableRecord("Type", "Property", 6)).eql(world.dataMap.get('Status'))
-    }
-  
     async selectExposure(){
         await claimExposures_Ext.claimExposuresScreenClaimExposures_BICheckBox.click()
         await claimExposures_Ext.claimExposuresScreenClaimExposures_MedPayCheckBox.click()

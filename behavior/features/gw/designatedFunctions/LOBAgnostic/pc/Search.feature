@@ -19,7 +19,7 @@ Feature: Search menu in policy center
         Then the contact details are loaded successfully
 
     @searchPolicy_pc
-    Scenario: Seaching with policy from Search tab
+    Scenario: Searching with policy from Search tab
         Given the user logs into the policy center as "superuser"
         When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
         When the user creates commercial account

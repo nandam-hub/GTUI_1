@@ -55,12 +55,18 @@
         "Organization": "a",
         "RefusalType": "Cancelled",
         "Coverage": {
+            "CoverageEPersonalLiability": "check",
+            "CoverageEPersonalLiabilityLimit": "500,000",
+            "CoverageFMedicalPayments": "check",
+            "CoverageFMedicalPaymentsLimit":"10,000",
             "IdentityTheftProtection": "check",
             "IdentityTheftProtectionLimit": "15,000",
             "IdentityTheftProtectionDeductible": "500"
         },
         "RefusalTypeErrorMessage": "Refusal Type : Missing required field",
-        "CoverageErrorMessage": "Cannot quote a(n) GW Homeowners Line policy with no coverages."
+        "CoverageErrorMessage": "Cannot quote a(n) GW Homeowners Line policy with no coverages.",
+        "Form1Description": "Homeowners Declarations",
+        "Form2Description": "Florida Amendatory Endorsement"
     },
     "newSubmission_03": {
         "ProductName": "Commercial Umbrella and Excess Liability",
@@ -236,9 +242,6 @@
                 "DriverAddressType": "Home"
             }
         },
-        "PolicyDriverMenuIcon":"[id*='PolicyDriver-PolicyDriverMenuIcon']",
-        "AvailableContacts":"[id*='PolicyDriver-availableContacts']",
-        "OtherContact": "[id*='OtherContact']",
         "Driver1": "Bethany last",
         "Driver2": "Anthony last",
         "ColumnIdentifier": "Internal Request ID"

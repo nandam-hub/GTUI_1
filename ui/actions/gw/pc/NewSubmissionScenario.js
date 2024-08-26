@@ -5,7 +5,7 @@ import { PolicyInfoScreen } from "../../../pages/gw/generated/policysolutions/pa
 import { UALPersonalVehiclePopup_New } from "./scenarioPages/other/UALPersonalVehiclePopup_New.js";
 import { NewAPDPolicyInvolvedPartyPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/New/NewAPDPolicyInvolvedPartyPopup.js";
 import { NewSubmission_Ext } from "./scenarioPages/policy/NewSubmission_Ext.js";
-import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable } from '../../../util/gw/helper'
+import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable, navigateAndClickSubmenu } from '../../../util/gw/helper'
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWizard/CLLCpBlanketPopup_New"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
@@ -18,6 +18,9 @@ import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPop
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
+import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
+import {CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
+import { FormsSubmissionWizard} from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -35,12 +38,15 @@ const webMessageWorksheet_New = new WebMessageWorksheet_New()
 const goCommercialProperty = new GoCommercialProperty()
 const cllLocationPopup_New = new CLLLocationPopup_New()
 const policyInfoScreen_Ext = new PolicyInfoScreen_Ext()
+const coveragePatternSearchPopup_Ext = new CoveragePatternSearchPopup_Ext()
+const formsSubmissionWizard = new FormsSubmissionWizard()
 
 export class NewSubmissionScenario {
   async selectProduct() {
     await t.click(Selector('td').withExactText(world.dataMap.get('ProductName')).parent().child('td:nth-child(1)'))
   }
   async clickNext() {
+    await t.setNativeDialogHandler(() => true);
     await nextSubmissionWizard_Ext.submissionWizardNext.click()
   }
 
@@ -51,6 +57,14 @@ export class NewSubmissionScenario {
 
   async usaPersonalAutoStandardCoverages() {
     await submissionWizard_New.SubmissionWizard_LineStandardCoveragesTab.click()
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("LiabilityBodilyInjuryAndPropertyDamage")
+      await selectInput("LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage")
+      await checkBox("PropertyProtectionInsurance")
+      await selectInput("PropertyProtectionInsurancePropertyProtectionLimits")
+    }
   }
 
   async personalVehicle(vehicleNum = "1") {
@@ -158,11 +172,37 @@ export class NewSubmissionScenario {
   async gWHomeownersLineScreen() {
     await submissionWizard_New.submissionWizardRefusalType.selectOptionByLabel(world.dataMap.get('RefusalType'))
   }
+  
+  async homeOwnersAddExclusionOrConditionScreen() {
+    await submissionWizard_New.submissionWizardAddExclusionsOrCondition.click()
+    await coveragePatternSearchPopup_Ext.coveragePatternSearchPopupCoveragePatternSearchScreenCoveragePatternSearchDVSearchAndResetInputSetSearchLinksInputSetSearch.click()
+    await coveragePatternSearchPopup_Ext.fireDepartmentSubscription.click()
+    await coveragePatternSearchPopup_Ext.computerDamageExclusion.click()
+    await coveragePatternSearchPopup_Ext.addSelectedExclusionsAndConditions.click()
+  }
+
+  async formsValidation()
+  {
+    await formsSubmissionWizard.submissionWizardForms.click()
+    console.log("Forms HO DP 00, HOP 08 FL are added successfully");
+    await t.expect(await validateTableRecord("Form #", "HO DP 00", 1)).contains(world.dataMap.get('Form1Description'))
+    await t.expect(await validateTableRecord("Form #", "HOP 08 FL", 1)).contains(world.dataMap.get('Form2Description'))
+  }
 
   async commercialUmbrellaAccessliability() {
     console.log("On Commercial Umbrella And Excess Liability screen")
     await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityorExcessLiability.selectOptionByLabel(world.dataMap.get('UmbrellaLiabilityorExcessLiability'))
     await lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityUmbrellaCoverages.click()
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("UmbrellaLiability")
+      await selectInput("UmbrellaLiabilityOccurrenceLimit")
+      await selectInput("UmbrellaLiabilityAggregateLimit")
+      await selectInput("UmbrellaLiabilityProductandCompletedOperationsAggregateLImit")
+      await selectInput("UmbrellaLiabilityUmbrellaCoverageForm")
+      await selectInput("UmbrellaLiabilitySelfInsuredRetention")
+    }
   }
 
   async smallBusinessBusinessType() {
@@ -205,19 +245,35 @@ export class NewSubmissionScenario {
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
-      await enterDataInTable(1, `${i}`)
-      await performClickInTable(world.dataMap.get('PolicyDriverMenuIcon'))
-      await performHoverInTable(world.dataMap.get('AvailableContacts'))
-      await performClickInTable(world.dataMap.get('OtherContact'))
+      t.ctx.TableIdentifier="Internal Request ID"
+      await enterDataInTable(submissionWizard_New.submissionWizardInternetRequestId, i.toString())
+      await performClickInTable(submissionWizard_New.submissionWizardPolicyDriverMenuIcon)
+      await performHoverInTable(submissionWizard_New.submissionWizardAvailableContacts)
+      await performClickInTable(submissionWizard_New.submissionWizardOtherContact)
     }
   }
 
-  async validatedAddedDriversInPolicyFile(driverNum=1) {
+ async validatedAddedDriversInPolicyFile(driverNum = 2) {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
-    for(let i=1;i<=driverNum;i++)
-    {      
+    for (let i = 1; i <= driverNum; i++) {
       await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(world.dataMap.get(`Driver${i}`))
-    }    
+    }
+  }
+
+  async commercialPropertyCoverage(){
+    if (!(world.coverageDataMap === undefined) && Array.from(world.coverageDataMap.keys()).length > 0) {
+      t.ctx.module = 'Coverage'
+      console.log(`The current module is ${t.ctx.module}`)
+      await checkBox("EachLossCausedByWind")
+      await textInput("EachLossCausedByWindLimit")
+      await textInput("EachLossCausedByWindDeductible")
+      await checkBox("ContentsOfOtherStructures")
+      await selectInput("ContentsOfOtherStructuresLimit")
+      await textInput("ContentsOfOtherStructuresDeductible")
+      await checkBox("OutsideObjectsAndStructures")
+      await textInput("OutsideObjectsAndStructuresLimit")
+      await textInput("OutsideObjectsAndStructuresDeductible")
+    }
   }
 }

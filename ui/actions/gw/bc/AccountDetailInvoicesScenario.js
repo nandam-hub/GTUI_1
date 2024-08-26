@@ -1,8 +1,11 @@
 import { AccountDetailInvoices_Ext } from '../../../../ui/actions/gw/bc/scenarioPages/navigation/AccountDetailInvoices_Ext'
 import { dateFunction } from "../../../../ui/util/gw/helper"
 import { t } from 'testcafe'
+import { PolicySummary_Ext } from './scenarioPages/policyGroup/policyOverview/PolicySummary_Ext';
+import { navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
 
 const accountDetailInvoices_Ext = new AccountDetailInvoices_Ext();
+const policySummary_Ext = new PolicySummary_Ext()
 
 export class AccountDetailInvoicesScenario {
 
@@ -19,5 +22,11 @@ export class AccountDetailInvoicesScenario {
 
     async validateInvoiceResentMessageDisplayed() {
         await accountDetailInvoices_Ext.accountDetailInvoicesScreenAccountDetailInvoices_InvoiceSentAlertBar.isAvailable();
+    }
+
+    async validateInvoices()
+    {
+        await policySummary_Ext.policyInfoBarAccountNumberLink.click()
+        await navigateAndClickSubmenu((['Invoices'], ''))
     }
 }

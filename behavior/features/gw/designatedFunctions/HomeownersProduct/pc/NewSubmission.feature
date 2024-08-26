@@ -36,3 +36,11 @@ Feature: Homeowner new submission
         And the user initiate homeowner quote
         Then the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen
         And the user validates error messages without selecting any coverage in Homeowners policy
+
+    @validate_coverage_forms
+    Scenario: Verify forms by adding specific coverages from Homeowners LOB
+        Given the user logs into the policy center as "superuser"
+        When the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"
+        And the user creates personal account
+        And the user adds specific coverges to homeowner policy
+        Then the forms are added successfully

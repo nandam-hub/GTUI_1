@@ -1,0 +1,14 @@
+{
+    "defaultDataSet": {
+        "PolicyNumber": "2416558655",
+        "CommissionRate": "10.00%"
+    },
+    "commission_rate": {
+        "PolicyNumber": "2416558655",
+        "CommissionRate": "10.00%"
+    },
+    "commissionStatement": {
+        "PolicyNumber": "3598418047",
+        "AccountNumber": "6597708868"
+    }
+}
