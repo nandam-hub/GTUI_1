@@ -34,7 +34,7 @@ export class SubmissionWizard_New {
 	submissionWizardInternetRequestId = "[id*='-MVRID']"
 	submissionWizardPolicyDriverMenuIcon = "[id*='PolicyDriver-PolicyDriverMenuIcon']"
 	submissionWizardAvailableContacts = "[id*='PolicyDriver-availableContacts']"
-	submissionWizardOtherContact = "[id*='OtherContact']"
+	submissionWizardOtherContact = "[id*='-0-OtherContact']"
 	//#endregion	
 
 	//#region Go commercial property

@@ -244,12 +244,13 @@ export class NewSubmissionScenario {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
+      let driverMap = world.driverDataMap.get(`Driver${i}`)
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
       t.ctx.TableIdentifier="Internal Request ID"
       await enterDataInTable(submissionWizard_New.submissionWizardInternetRequestId, i.toString())
       await performClickInTable(submissionWizard_New.submissionWizardPolicyDriverMenuIcon)
       await performHoverInTable(submissionWizard_New.submissionWizardAvailableContacts)
-      await performClickInTable(submissionWizard_New.submissionWizardOtherContact)
+      await performClickInTable(`[aria-label*=${driverMap['FirstName']}]`)
     }
   }
 
