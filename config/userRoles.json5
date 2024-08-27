@@ -22,8 +22,8 @@
     },
       {
         userrole: "adjuster",
-        username: "",
-        password: ""
+        username: "su",
+        password: "gw"
       },
       {
         userrole: "supervisor",
