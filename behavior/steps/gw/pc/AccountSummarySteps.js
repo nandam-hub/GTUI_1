@@ -5,10 +5,10 @@ import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScena
 const accountSummaryScenario = new AccountSummaryScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the view account summary details are loaded/, async function () {
+When('the view account summary details are loaded', async function () {
     await accountSummaryScenario.viewAccountSummary();
 })
 
-When(/^the user search with an account number/, async function (t) {
+When('the user search with an account number', async function (t) {
     await navigationScenario.openAccount(t.ctx.AccountNumber)
 })

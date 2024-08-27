@@ -9,45 +9,45 @@ const searchScenario = new SearchScenario();
 const navigationScenario = new NavigationScenario()
 const claimSummaryScenario = new ClaimSummaryScenario()
 
-When(/^the user searches for the policy in Search Claims/, async function () {
+When('the user searches for the policy in Search Claims', async function () {
     await navigationScenario.navigateSearchPolicyScreen()
     await searchScenario.searchWithPolicy(world.dataMap.get('PolicyNumber'))
 });
 
-Then(/^the claim details are loaded successfully/, async function () {
+Then('the claim details are loaded successfully', async function () {
     await searchTableRecord("Claim", world.dataMap.get('ClaimNo'))
     await claimSummaryScenario.verifySummaryHeader()
 });
 
-When(/^the user searches the contact/, async function () {
+When('the user searches the contact', async function () {
     await searchScenario.searchContact()
 });
 
-When(/^the user creates the recovery/, async function () {
+When('the user creates the recovery', async function () {
     await searchScenario.recoveryCreation();
 });
 
-Then(/^the user searches for the recovery details/, async function (t) {
+Then('the user searches for the recovery details', async function (t) {
     await searchScenario.searchRecovery(t.ctx.claimNo);
 });
 
-When(/^the recovery details are loaded/, async function () {
+When('the recovery details are loaded', async function () {
     await searchScenario.validateRecovery()
 });
 
-Then(/^the search contact details are loaded/, async function () {
+Then('the search contact details are loaded', async function () {
     await searchScenario.searchValidation();
 });
 
-Then(/^the user search the check/, async function () {
+Then('the user search the check', async function () {
     await searchScenario.searchCheck();
 });
 
-Then(/^the check details are loaded/, async function () {
+Then('the check details are loaded', async function () {
     await searchScenario.validateCheckDetailsHeader();
 });
 
-When(/^the user searches the claim on advance search page/, async function (t) {
+When('the user searches the claim on advance search page', async function (t) {
     await navigationScenario.navigateToAdvanceSearch();
     await searchScenario.advanceSearchClaimWithName();
 });

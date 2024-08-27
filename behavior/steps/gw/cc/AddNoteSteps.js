@@ -5,12 +5,12 @@ import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScena
 const addNoteScenario = new AddNoteScenario();
 const navigationScenario = new NavigationScenario()
 
-When(/^the user creates the note/, async function (t) {
+When('the user creates the note', async function (t) {
     await navigationScenario.openClaim(t.ctx.claimNo);
     await addNoteScenario.noteScenario();
 });
 
-Then(/^the note is added successfully to claim/, async function (t) {
+Then('the note is added successfully to claim', async function (t) {
     await navigationScenario.openClaim(t.ctx.claimNo);
     await addNoteScenario.validateAddedNote();
 });  

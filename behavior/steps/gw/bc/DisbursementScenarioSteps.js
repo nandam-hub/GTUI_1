@@ -6,7 +6,7 @@ import { NavigationScenario } from "../../../../ui/actions/gw/bc/NavigationScena
 const disbursementScenario = new DisbursementScenario();
 const navigationScenario = new NavigationScenario();
 
-When(/^the user creates a disbursement/, async function () {
+When('the user creates a disbursement', async function () {
     await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
     await navigationScenario.navigateToNewpaymet();
     await disbursementScenario.newPaymentDetails();
@@ -14,28 +14,28 @@ When(/^the user creates a disbursement/, async function () {
     await disbursementScenario.disbursementDetails();
 })
 
-Then(/^the disbursement created successfully/, async function () {
+Then('the disbursement created successfully', async function () {
     await disbursementScenario.validateDisbursement();
 })
 
-When(/^the user navigates to producer tab/, async function () {
+When('the user navigates to producer tab', async function () {
     await disbursementScenario.producerDetails();
 })
 
-Then(/^the commision statement is displayed/, async function () {
+Then('the commision statement is displayed', async function () {
     await disbursementScenario.displayedCommissionStatement();
 })
 
-When(/^the user runs automatic disbursement batch job/, async function () {
+When('the user runs automatic disbursement batch job', async function () {
     await navigationScenario.navigateToBatchProcessInfoScreen()
     await disbursementScenario.automaticDisbursementBatchJob()
 })
 
-When(/^the user loads the disbursement screen/, async function () {
+When('the user loads the disbursement screen', async function () {
     await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
     await disbursementScenario.clickOnDisbursementMenu()
 })
 
-Then(/^automatic disbursement is created successfully/, async function () {
+Then('automatic disbursement is created successfully', async function () {
     await disbursementScenario.validateAutomaticDisbursement()
 })

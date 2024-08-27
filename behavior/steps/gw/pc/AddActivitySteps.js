@@ -3,10 +3,10 @@ import { AddActivityScenario } from "../../../../ui/actions/gw/pc/AddActivitySce
 const { When, Then } = require("@cucumber/cucumber")
 const addActivityScenario = new AddActivityScenario()
 
-When(/^the user performs add activity transaction/, async function () {
+When('the user performs add activity transaction', async function () {
   await addActivityScenario.addActivity();
 });
 
-Then(/^the activity is added successfully/, async function () {
+Then('the activity is added successfully', async function () {
   await addActivityScenario.activityValidation();
 });

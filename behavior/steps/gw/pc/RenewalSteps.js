@@ -5,11 +5,11 @@ import { RenewalScenario } from "../../../../ui/actions/gw/pc/RenewalScenario"
 const navigationScenario = new NavigationScenario()
 const renewalScenario = new RenewalScenario()
 
-When(/^the renewal is applied successfully/, async function () {
+When('the renewal is applied successfully', async function () {
     await renewalScenario.verifyRenewal()
 })
 
-When(/^the user performs renewal on commercial policy/, async function (t) {
+When('the user performs renewal on commercial policy', async function (t) {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
     await renewalScenario.initiatePolicyRenewal()
     await renewalScenario.editPolicyTransaction()
@@ -23,7 +23,7 @@ When(/^the user performs renewal on commercial policy/, async function (t) {
     await renewalScenario.selectRenewalCode()
 })
 
-When(/^the user performs renewal on homeowners policy/, async function (t) {
+When('the user performs renewal on homeowners policy', async function (t) {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
     await renewalScenario.initiatePolicyRenewal()
     await renewalScenario.editPolicyTransaction()
@@ -35,7 +35,7 @@ When(/^the user performs renewal on homeowners policy/, async function (t) {
     await renewalScenario.selectRenewalCode()
 })
 
-When(/^the user performs renewal on commercial umbrella and excess liability policy/, async function (t) {
+When('the user performs renewal on commercial umbrella and excess liability policy', async function (t) {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
     await renewalScenario.initiatePolicyRenewal()
     await renewalScenario.editPolicyTransaction()
@@ -47,7 +47,7 @@ When(/^the user performs renewal on commercial umbrella and excess liability pol
     await renewalScenario.selectRenewalCode()
 })
 
-When(/^the user performs renewal on USAPersonalAuto policy/, async function (t) {
+When('the user performs renewal on USAPersonalAuto policy', async function (t) {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
     await renewalScenario.initiatePolicyRenewal()
     await renewalScenario.editPolicyTransaction()
@@ -59,7 +59,7 @@ When(/^the user performs renewal on USAPersonalAuto policy/, async function (t) 
     await renewalScenario.selectRenewalCode()
 })
 
-When(/^the user performs renewal on small business policy/, async function (t) {
+When('the user performs renewal on small business policy', async function (t) {
     await navigationScenario.openPolicy(t.ctx.PolicyNumber)
     await renewalScenario.initiatePolicyRenewal()
     await renewalScenario.editPolicyTransaction()

@@ -10,7 +10,7 @@ const navigationScenario = new NavigationScenario()
 const exposureScenario = new ExposureScenario()
 const searchScenario = new SearchScenario()
 
-When(/^the user creates BI Liability exposure/, async function () {
+When('the user creates BI Liability exposure', async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await navigationScenario.ClickClaimMenuAction()
@@ -20,7 +20,7 @@ When(/^the user creates BI Liability exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
-When(/^the user creates medical payments exposure/, async function () {
+When('the user creates medical payments exposure', async function () {
     await navigationScenario.ClickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type', 'M'], 'Medical Payments')
     await exposureScenario.newExposure()
@@ -28,7 +28,7 @@ When(/^the user creates medical payments exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
-When(/^the user creates property exposure/, async function () {
+When('the user creates property exposure', async function () {
     await navigationScenario.ClickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type'], 'Building Coverage')
     await exposureScenario.newExposureProperty()
@@ -36,15 +36,15 @@ When(/^the user creates property exposure/, async function () {
     await exposureScenario.clickOnUpdate()
 });
 
-Then(/^the BI Liability exposure is created successfully/, async function () {
+Then('the BI Liability exposure is created successfully', async function () {
     await exposureScenario.validateExposure("Bodily Injury") 
 });
 
-Then(/^the medical payment exposure is created successfully/, async function () {
+Then('the medical payment exposure is created successfully', async function () {
     await exposureScenario.validateExposure("Med Pay")
 });
 
-Then(/^the property exposure is created successfully/, async function () {
+Then('the property exposure is created successfully', async function () {
     await exposureScenario.validateExposure("Property")
 });
 
@@ -54,6 +54,6 @@ Then(/^the user selects and validates the BI liability and Medical Payment expos
     await exposureScenario.selectExposure()
 });
 
-When(/^the user closes the exposure/, async function () {
+When('the user closes the exposure', async function () {
     await exposureScenario.closeExposure()
 });

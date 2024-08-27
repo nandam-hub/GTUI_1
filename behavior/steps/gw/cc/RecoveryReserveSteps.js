@@ -10,7 +10,7 @@ const recoveryReserveScenario = new RecoveryReserveScenario()
 const searchScenario = new SearchScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the user creates recovery reserve/, async function () {
+When('the user creates recovery reserve', async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await navigationScenario.ClickClaimMenuAction()
@@ -18,6 +18,6 @@ When(/^the user creates recovery reserve/, async function () {
     await recoveryReserveScenario.addRecoveryReserve()
 });
 
-Then(/^the recovery reserve is created successfully/, async function () {
+Then('the recovery reserve is created successfully', async function () {
     await recoveryReserveScenario.validateRecoveryReserve()
 });

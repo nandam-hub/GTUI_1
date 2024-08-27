@@ -6,7 +6,7 @@ import { NavigationScenario } from '../../../../ui/actions/gw/bc/NavigationScena
 const accountsTabBarScenario = new AccountsTabBarScenario();
 const navigationScenario = new NavigationScenario();
 
-Given(/^the user navigates to invoices on billing center home page/, async function (t, stepArguments) {
+Given('the user navigates to invoices on billing center home page', async function () {
     await accountsTabBarScenario.openExistingAccount(world.dataMap.get('AccountNumber'));
     await navigationScenario.navigateToInvoices();
 });

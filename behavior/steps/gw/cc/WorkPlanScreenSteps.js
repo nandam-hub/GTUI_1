@@ -5,12 +5,12 @@ import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScena
 const workPlanScenario = new WorkPlanScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the user completes the activity work plan/, async function () {
+When('the user completes the activity work plan', async function () {
     await navigationScenario.navigateClaimWorkplan()
     await workPlanScenario.workPlanActivity()
 });
 
-Then(/^the activity work plan status is completed/, async function () {
+Then('the activity work plan status is completed', async function () {
     await workPlanScenario.workPlanActivityStatusValidation()
 });
 

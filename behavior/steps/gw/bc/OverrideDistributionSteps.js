@@ -6,15 +6,15 @@ import { t } from "testcafe";
 const navigationScenario = new NavigationScenario();
 const overrideDistributionScenario = new OverrideDistributionScenario()
 
-When(/^the user search with the account number/, async function () {
+When('the user search with the account number', async function () {
     await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
 });
 
-When(/^the user makes payment in new direct bill payment from action tab/, async function () {
+When('the user makes payment in new direct bill payment from action tab', async function () {
     await navigationScenario.navigateToNewpaymet()
     await overrideDistributionScenario.overrideDistribution()
 });
 
-Then(/^the override distribution is applied successfully/, async function () {
+Then('the override distribution is applied successfully', async function () {
     await overrideDistributionScenario.validateOverrideDistribution()
 });

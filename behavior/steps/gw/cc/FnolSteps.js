@@ -29,7 +29,7 @@ When('the user creates new FNOL', async function () {
     await fnolScenario.readClaimNumber()
 });
 
-When(/^the user create new FNOL for USAPersonalAuto/, async function () {
+When('the user create new FNOL for USAPersonalAuto', async function () {
     await navigationScenario.navigateToNewClaimWizard()
     await fnolScenario.searchOrCreatePolicy()
     await fnolScenario.newPerson()
@@ -43,11 +43,11 @@ When(/^the user create new FNOL for USAPersonalAuto/, async function () {
     await fnolScenario.readClaimNumber()
 });
 
-When(/^the user search with claim number/, async function () {
+When('the user search with claim number', async function () {
     await navigationScenario.openClaim(t.ctx.claimNo);
 });
 
-Then(/^the FNOL is added successfully/, async function () {
+Then('the FNOL is added successfully', async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await claimSummaryScenario.verifySummaryHeader()
@@ -71,26 +71,26 @@ When('the user creates new claim with rental', async function () {
     await fnolScenario.readClaimNumber()
 });
 
-Then(/^claim is created with rental service/, async function () {
+Then('claim is created with rental service', async function () {
     await fnolScenario.validateRentalServices()
   });
 
-Then(/^the catastrophe is displayed in loss details/, async function () {
+Then('the catastrophe is displayed in loss details', async function () {
     await navigationScenario.navigateToLossDetails()
     await claimLossDetailsScenario.verifyCatastropheDetails()
 });
 
-Then(/^the activities on the claim is updated in claim history screen/, async function () {
+Then('the activities on the claim is updated in claim history screen', async function () {
     await navigationScenario.navigateToClaimHistoryScreen()
     await claimHistoryScenario.validateNewClaimSaved()
     await claimHistoryScenario.validateAssignedTo()
 });
 
-When(/^the user closes the claim/, async function () {
+When('the user closes the claim', async function () {
    await fnolScenario.closeClaim()
 });
 
-Then(/^claim is closed successfully/, async function () {
+Then('claim is closed successfully', async function () {
     await navigationScenario.openClaim(t.ctx.claimNo)
     await claimSummaryScenario.verifyClaimStatus()
 });

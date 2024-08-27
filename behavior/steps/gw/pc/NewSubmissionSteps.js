@@ -1,22 +1,21 @@
 const { When, Then } = require('@cucumber/cucumber')
 import { NewSubmissionScenario } from '../../../../ui/actions/gw/pc/NewSubmissionScenario'
 import { NavigationScenario } from '../../../../ui/actions/gw/pc/NavigationScenario'
-import { coverageFilter } from '../../../../ui/util/gw/ActionHelper'
 import { t } from 'testcafe'
 
 const newSubmissionScenario = new NewSubmissionScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the user bind the new submission/, async function () {
+When('the user bind the new submission', async function () {
     await newSubmissionScenario.bindPolicy()
 })
 
-Then(/^the policy is bound successfully/, async function () {
+Then('the policy is bound successfully', async function () {
     await newSubmissionScenario.verifyIssue()
     await newSubmissionScenario.viewSubmission()
 })
 
-When(/^the user quote the new submission for personal auto/, async function () {
+When('the user quote the new submission for personal auto', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -31,7 +30,7 @@ When(/^the user quote the new submission for personal auto/, async function () {
     await newSubmissionScenario.verifyQuote()
 })
 
-When(/^the user quote the new submission for homeowners/, async function () {
+When('the user quote the new submission for homeowners', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -45,7 +44,7 @@ When(/^the user quote the new submission for homeowners/, async function () {
     await newSubmissionScenario.verifyQuote()
 })
 
-When(/^the user quote the new submission for small business/, async function (t) {
+When('the user quote the new submission for small business', async function (t) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -59,7 +58,7 @@ When(/^the user quote the new submission for small business/, async function (t)
     await newSubmissionScenario.verifyQuote()
 })
 
-When(/^the user issue the new submission for small business/, async function (t) {
+When('the user issue the new submission for small business', async function (t) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -74,7 +73,7 @@ When(/^the user issue the new submission for small business/, async function (t)
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user quote the new submission for umbrella liability/, async function () {
+When('the user quote the new submission for umbrella liability', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -88,11 +87,11 @@ When(/^the user quote the new submission for umbrella liability/, async function
     await newSubmissionScenario.verifyQuote()
 })
 
-When(/^the user performs return to quote to the new submission/, async function () {
+When('the user performs return to quote to the new submission', async function () {
     await newSubmissionScenario.returnToQuote()
 })
 
-When(/^the user issue the new submission for umbrella liability/, async function () {
+When('the user issue the new submission for umbrella liability', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -107,11 +106,11 @@ When(/^the user issue the new submission for umbrella liability/, async function
     await newSubmissionScenario.issuePolicy()
 })
 
-Then(/^the quote is saved successfully/, async function () {
+Then('the quote is saved successfully', async function () {
     await newSubmissionScenario.saveQuote()
 })
 
-When(/^the user creates commercial policy/, async function () {
+When('the user creates commercial policy', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -127,7 +126,7 @@ When(/^the user creates commercial policy/, async function () {
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user issue the new submission from actions menu for commercial property/, async function () {
+When('the user issue the new submission from actions menu for commercial property', async function () {
     await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
@@ -174,7 +173,7 @@ When(/^the user issue the new submission from actions menu for personal auto wit
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user issue the new homeowner policy/, async function () {
+When('the user issue the new homeowner policy', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -189,7 +188,7 @@ When(/^the user issue the new homeowner policy/, async function () {
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user issue the new submission from actions menu for homeowner policy/, async function () {
+When('the user issue the new submission from actions menu for homeowner policy', async function () {
     await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
@@ -203,7 +202,7 @@ When(/^the user issue the new submission from actions menu for homeowner policy/
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user adds specific coverges to homeowner policy/, async function () {
+When('the user adds specific coverges to homeowner policy', async function () {
     await navigationScenario.navigateNewSubmissionScreenActionsMenu()
     await newSubmissionScenario.selectProduct()
     await newSubmissionScenario.policyInfo()
@@ -216,11 +215,11 @@ When(/^the user adds specific coverges to homeowner policy/, async function () {
     await newSubmissionScenario.quote()
 })
 
-Then(/^the forms are added successfully/, async function () {
+Then('the forms are added successfully', async function () {
     await newSubmissionScenario.formsValidation()
 })
 
-When(/^the user quote the new submission for commercial property/, async function (t) {
+When('the user quote the new submission for commercial property', async function (t) {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -235,17 +234,17 @@ When(/^the user quote the new submission for commercial property/, async functio
     await newSubmissionScenario.verifyQuote()
 })
 
-Then(/^the policy is issued/, async function () {
+Then('the policy is issued', async function () {
     await newSubmissionScenario.verifyIssue()
     await newSubmissionScenario.viewSubmission()
 })
 
-Then(/^the policy gets issued and the summary page is displayed/, async function () {
+Then('the policy gets issued and the summary page is displayed', async function () {
     await newSubmissionScenario.verifyIssue()
     await newSubmissionScenario.viewPolicy()
 })
 
-When(/^the user initiate homeowner quote/, async function () {
+When('the user initiate homeowner quote', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -254,11 +253,11 @@ When(/^the user initiate homeowner quote/, async function () {
     await newSubmissionScenario.clickNext()
 })
 
-Then(/^the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen/, async function () {
+Then('the user validates error messages for Refusal Type dropdown in GWHomeownersLine screen', async function () {
     await newSubmissionScenario.verifyingRefusalTypeErrorMsg()
 })
 
-Then(/^the user validates error messages without selecting any coverage in Homeowners policy/, async function () {
+Then('the user validates error messages without selecting any coverage in Homeowners policy', async function () {
     await newSubmissionScenario.gWHomeownersLineScreen()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
@@ -300,7 +299,7 @@ When(/^the user issue the new submission for commercial property with (.*) locat
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user initiates quote for small business/, async function () {
+When('the user initiates quote for small business', async function () {
     await navigationScenario.navigateNewSubmissionScreen()
     await newSubmissionScenario.initiateNewSubmissionPolicy(t.ctx.AccountNumber)
     await newSubmissionScenario.selectProduct()
@@ -328,7 +327,7 @@ When(/^the user issue the new submission for personal auto with (.*) drivers/, a
     await newSubmissionScenario.issuePolicy()
 })
 
-When(/^the user proceeds and issues policy/, async function () {
+When('the user proceeds and issues policy', async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
     await newSubmissionScenario.verifyQuote()

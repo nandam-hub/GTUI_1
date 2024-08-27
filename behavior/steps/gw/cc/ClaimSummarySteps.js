@@ -3,6 +3,6 @@ import { ClaimSummaryScenario } from '../../../../ui/actions/gw/cc/ClaimSummaryS
 
 const claimSummaryScenario = new ClaimSummaryScenario()
 
-Then(/^the claim summary details are loaded/, async function () {
+Then('the claim summary details are loaded', async function () {
     await claimSummaryScenario.verifyClaimStatus()
 });

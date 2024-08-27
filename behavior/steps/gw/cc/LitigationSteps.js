@@ -6,18 +6,18 @@ import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScena
 const navigationScenario = new NavigationScenario()
 const litigationScenario = new LitigationScenario()
 
-When(/^the user adds new litigation/, async function () {
+When('the user adds new litigation', async function () {
     await navigationScenario.openClaim(t.ctx.claimNo);
     await navigationScenario.navigateToLitigation()
     await litigationScenario.addNewLitigation()
 });
 
-Then(/^the litigation is added successfully/, async function () {
+Then('the litigation is added successfully', async function () {
     await navigationScenario.navigateToLitigation()
     await litigationScenario.litigationValidation()
 });
 
-When(/^the user closes the litigation matter/, async function () {
+When('the user closes the litigation matter', async function () {
     await navigationScenario.navigateToLitigation()
     await litigationScenario.closeLitigation()
 });

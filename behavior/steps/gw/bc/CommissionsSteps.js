@@ -5,10 +5,10 @@ import { NavigationScenario } from "../../../../ui/actions/gw/bc/NavigationScena
 const commissionsScenario = new CommissionsScenario()
 const navigationScenario = new NavigationScenario()
 
-When(/^the user loads the commissions screen/, async function () {
+When('the user loads the commissions screen', async function () {
     await navigationScenario.navigateToCommissionsScreen()
 });
 
-Then(/^commission rate is validated/, async function () {
+Then('commission rate is validated', async function () {
     await commissionsScenario.validateCommissionRate()
 });
