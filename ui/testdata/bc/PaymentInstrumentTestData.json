@@ -1,0 +1,12 @@
+{
+    "defaultDataSet": {
+        "PaymentMethod": "Credit Card",
+        "Token":"ABC",
+        "PaymentInstrument":"Credit Card (ABC)"
+    },
+    "paymentInstrument_01": {
+        "PaymentMethod":"Credit Card",
+        "Token":"ABC",
+        "PaymentInstrument":"Credit Card (ABC)"
+    }
+}

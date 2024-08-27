@@ -41,3 +41,15 @@ Feature: Verifying payments in billing center
         Then payment details are updated successfully
         When the user performs payment reversal
         Then payment reversal is processed successfully
+
+    @payment_instrument
+    Scenario: Add new payment instrument
+        Given the user logs into the policy center as "superuser"
+        When the user loads "pc" data "newSubmission_04" from json "NewSubmissionTestData"
+        And the user creates commercial account
+        And the user creates commercial policy
+        And the user logs into the billing center as "superuser"
+        And the user loads "bc" data "paymentInstrument_01" from json "PaymentInstrumentTestData"
+        And the user search with the account number
+        And the user adding new payment instrument
+        Then the payment instrument is added successfully
