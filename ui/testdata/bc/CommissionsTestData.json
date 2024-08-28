@@ -3,11 +3,11 @@
         "PolicyNumber": "2416558655",
         "CommissionRate": "10.00%"
     },
-    "commission_rate": {
+    "commissionRate_01": {
         "PolicyNumber": "2416558655",
         "CommissionRate": "10.00%"
     },
-    "commissionStatement": {
+    "commissionStatement_02": {
         "PolicyNumber": "3598418047",
         "AccountNumber": "6597708868"
     }

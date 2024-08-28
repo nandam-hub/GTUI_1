@@ -1,4 +1,4 @@
-@billingcenter @designatedfunction
+@billingcenter @designatedfunction @payments
 Feature: Verifying payments in billing center
     As a user, I want to verify the payments in billing center
 

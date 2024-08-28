@@ -1,4 +1,4 @@
-@billingcenter @designatedfunction
+@billingcenter @designatedfunction @disbursement
 Feature: Creating and verifying disbursment
     As a user, I want to manage Disbursements in billing center
 

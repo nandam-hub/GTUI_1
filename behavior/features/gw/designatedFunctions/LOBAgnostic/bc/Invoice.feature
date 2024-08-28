@@ -1,4 +1,4 @@
-@billingcenter @designatedfunction
+@billingcenter @designatedfunction @invoice
 Feature: Invoice in billing center
     As a user, I want to update invoices in billing center
 
@@ -18,7 +18,7 @@ Feature: Invoice in billing center
         And the user resends invoice
         Then the invoice resent confirmation message is displayed
 
-    @searchinvoices_paymentplan
+    @search_invoices
     Scenario:  Validate the created invoices as per the selected Payment plan
         Given the user logs into the policy center as "superuser"
         And the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
