@@ -28,10 +28,15 @@ Then('the commision statement is displayed', async function () {
 
 When('the user runs automatic disbursement batch job', async function () {
     await navigationScenario.navigateToBatchProcessInfoScreen()
-    await disbursementScenario.automaticDisbursementBatchJob()
+    await disbursementScenario.runAutomaticDisbursementBatchJob()
+})
+
+Then('the automatic disbursement batch job is processed successfully', async function () {
+    await disbursementScenario.verifyAutomaticDisbursementBatchJob()
 })
 
 When('the user loads the disbursement screen', async function () {
+    await disbursementScenario.returnToBillingCenter()
     await navigationScenario.navigateToAccountScreenWithNewPolicy(t.ctx.AccountNumber)
     await disbursementScenario.clickOnDisbursementMenu()
 })
