@@ -15,5 +15,6 @@ export class NewDirectBillPayment_Ext extends NewDirectBillPayment {
     overrideDistributionAmount_7 = PcfTextInput ('#NewDirectBillPayment-EditDBPaymentScreen-DistributionAmountsLV-groups-6-0-OverrideAmount')
     overrideDistributionAmount_8 = PcfTextInput ('#NewDirectBillPayment-EditDBPaymentScreen-DistributionAmountsLV-groups-7-0-OverrideAmount')
     overrideDistributionAmount_9 = PcfTextInput ('#NewDirectBillPayment-EditDBPaymentScreen-DistributionAmountsLV-groups-8-0-OverrideAmount')
+    newDirectBillPayment_Instrument =PcfSelectInput('#NewDirectBillPayment-EditDBPaymentScreen-PaymentDetailsDV-PaymentInstrument')
 
 }
