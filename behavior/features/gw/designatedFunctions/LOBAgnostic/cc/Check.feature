@@ -2,7 +2,7 @@
 Feature: Create checks
     As a user, I want to create check in claim center
 
-    @create_Check
+    @create_check
     Scenario: Creating check from actions menu for commercial policy
        Given the user logs into the claims center as "adjuster"
         And the user loads "cc" data "createActivity_01" from json "FNOLTestData"

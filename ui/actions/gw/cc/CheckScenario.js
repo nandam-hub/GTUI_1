@@ -23,7 +23,6 @@ export class CheckScenario {
     async validateCheckDetails()
     {
         await t.expect((normalCreateCheckWizard_New.financialChecksHeader).component.exists).ok();
-        await t.debug()
         await t.expect(await validateTableRecord("Status", world.dataMap.get('Status'), 2)).eql(world.dataMap.get('GrossAmount'))
     }
 }
