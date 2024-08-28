@@ -49,7 +49,6 @@ Feature: Verifying payments in billing center
         And the user creates commercial account
         And the user creates commercial policy
         And the user logs into the billing center as "superuser"
-        And the user loads "bc" data "paymentInstrument_01" from json "PaymentInstrumentTestData"
-        When the user search with the account number
-        And the user adding new payment instrument
+        And the user loads "bc" data "paymentInstrument_01" from json "PaymentsTestData"
+        When the user adds new payment instrument
         Then the payment instrument is added successfully
