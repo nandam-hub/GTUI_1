@@ -22,7 +22,7 @@ Then('the invoice resent confirmation message is displayed', async function() {
     await accountDetailInvoicesScenario.validateInvoiceResentMessageDisplayed();
 });
 
-//TODO: Need to check with external team on UI flow and navigateAndClickSubmenu to be enhanced
+//TODO: Invoices count should be validated  as per the payment plan. 
 Then('the invoice details are validated as per the payplan successfully', async function() {
     await accountDetailInvoicesScenario.validateInvoices()
 });

@@ -20,6 +20,7 @@ export class CheckScenario {
         normalCreateCheckWizard_New.finsh.click()
     }
 
+    //TODO: Need to check with Architecture team on refreshing the queue on status awaiting approval
     async validateCheckDetails()
     {
         await t.expect((normalCreateCheckWizard_New.financialChecksHeader).component.exists).ok();
