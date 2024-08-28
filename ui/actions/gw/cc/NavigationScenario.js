@@ -87,4 +87,9 @@ export class NavigationScenario {
     await claimMenuLinks_Ext.partiesInvolved.click()
     await navigateAndClickSubmenu(['Contacts'])
   }
+
+  async navigateToCheck(){
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
+    await navigateAndClickSubmenu(['Check'])
+  }
 }

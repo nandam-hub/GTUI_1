@@ -1,0 +1,22 @@
+{
+    "defaultDataSet": {
+        "Type": "Vendor",
+        "ReserveLine":"New...",
+        "CostType":"Unspecified Cost Type",
+        "CostCategory":"Unspecified Cost Category",
+        "paymentType":"Final",
+        "Amount":"100",
+        "Status":"Awaiting submission",
+        "GrossAmount":"$100.00"
+    },
+    "createCheck_01": {
+        "Type": "Vendor",
+        "ReserveLine":"New...",
+        "CostType":"Unspecified Cost Type",
+        "CostCategory":"Unspecified Cost Category",
+        "paymentType":"Final",
+        "Amount":"100",
+        "Status":"Awaiting submission",
+        "GrossAmount":"$100.00"
+    }
+}
