@@ -9,6 +9,7 @@
     "prepareTestCafeLogCorrelationReport": "gt-ui-xml-dd-report-generator",
     "prepareBDDLogCorrelationReport": "gt-ui-bdd-dd-xml-report-generator",
     "gt-ui-tests": "tsc --project config/tsconfig.json &&  gt-ui-tests",
+    "gt-ui-quick-test": "npm run gt-ui-tests -- --cucumberTags='@quick' --envVarsPath=config/local.env",
     "gt-ui-dev-tests": "tsc --project config/tsconfig.json &&  gt-ui-dev-tests",
     "forceResolutions": "npx npm-force-resolutions",
     "prepublishOnly": "node publish-version-timestamp.js",

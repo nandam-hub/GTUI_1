@@ -1,4 +1,4 @@
-@policycenter @designatedfunction @newsubmission @quick
+@policycenter @designatedfunction @newsubmission
 Feature: Commercial property new submission
     As a user, I want to perform create new submission(quote, bind and issue)
 
