@@ -6,4 +6,5 @@ export class ClaimMenuLinks_Ext extends ClaimMenuLinks {
     editButton = PcfButton('#ClaimContacts-ClaimContactsScreen-PeopleInvolvedDetailedListDetail-ContactBasicsDV_tb-ContactDetailToolbarButtonSet-Edit')
     updateContactDetails = PcfButton('#ClaimContacts-ClaimContactsScreen-PeopleInvolvedDetailedListDetail-ContactBasicsDV_tb-ContactDetailToolbarButtonSet-Update')
     contactsHeader = PcfComponent('#ClaimContacts-ClaimContactsScreen-ttlBar')
+    claimLossDetailsGroup = PcfComponent ('#Claim-MenuLinks-Claim_ClaimLossDetailsGroup > div.gw-action--inner')
 }
