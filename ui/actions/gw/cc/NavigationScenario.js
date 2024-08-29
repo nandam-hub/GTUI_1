@@ -42,11 +42,6 @@ export class NavigationScenario {
   async navigateClaimWorkplan() {
     await claimMenuLinks.menuLinksClaim_ClaimWorkplan.click()
   }
-  //TODO: We can remove this method as this is replaced by navigateAndClickSubmenu helper
-  async navigateCoverageType() {
-    await claimMenuActions_Ext.claimClaimMenuActions.click()
-    await t.hover(claimMenuActions_Ext.newExposureMenuItemSetByCoverageType.component)
-  }
 
   async ClickClaimMenuAction() {
     await claimMenuActions_Ext.claimClaimMenuActions.click()
@@ -91,5 +86,10 @@ export class NavigationScenario {
 
   async navigateToReserve() {
     await claimMenuActions_Ext.claimMenuActions_NewTransactionClaimMenuActions_NewTransaction_ReserveSet.click()
+  }
+
+  async navigateToCheck(){
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
+    await navigateAndClickSubmenu(['Check'])
   }
 }

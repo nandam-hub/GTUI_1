@@ -1,4 +1,4 @@
-@billingcenter @designatedfunction
+@billingcenter @designatedfunction @overridedistribution
 Feature: Override distribution 
     As a user, I want to override disribution while making payment
 

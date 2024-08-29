@@ -10,6 +10,7 @@
     },
     "automatic_disbursement":{
         "Amount": "300",
-        "Status": "Approved"
+        "Status": "Approved",
+        "LastRunStatus": "Completed"
     }
 }

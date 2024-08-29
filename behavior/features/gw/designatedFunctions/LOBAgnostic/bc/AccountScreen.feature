@@ -1,4 +1,4 @@
-@billingcenter @designatedfunction
+@billingcenter @designatedfunction @accountscreen
 Feature: Navigate to account screen
     As a user, I want to navigate to account in billing center
 

@@ -1,6 +1,6 @@
 @policycenter @designatedfunction
 Feature: Processing a renewal
-    As a user, I want to perform renewal transaction in policy center
+    As a user, I want to perform renewal transaction on Go commercial property
 
     @renewal
     Scenario: Perform renewal on commercial policy

@@ -1,4 +1,4 @@
-import { t } from 'testcafe'
+import { t, Selector } from 'testcafe'
 import world from "../../../util/gw/world.js";
 import { AccountGroupMenuActions_Ext } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions_Ext.js';
 import { NewDirectBillPayment } from '../../../pages/gw/generated/billingsolutions/pages/other/NewDirectBillPayment.js';
@@ -41,8 +41,16 @@ export class DisbursementScenario {
     async validateDisbursement() {
         await t.expect(world.dataMap.get('DisbursedAmount')).contains(await returnDataFromTable(7))
     }
-    async automaticDisbursementBatchJob() {
+    async runAutomaticDisbursementBatchJob() {
         await batchProcessInfo_Ext.automaticDisbursementJob.click()
+    }
+    async verifyAutomaticDisbursementBatchJob() {
+        await t.wait(5000)
+        await batchProcessInfo_Ext.batchProcessesLV_tbrefresh.click()
+        await t.wait(5000)
+        await t.expect(await batchProcessInfo_Ext.automaticDisbursementLastRunStatus.component.innerText).eql(world.dataMap.get('LastRunStatus'))
+    }
+    async returnToBillingCenter() {
         await serverToolsMenuActions.serverToolsInternalToolsMenuActions.click()
         await serverToolsMenuActions.internalToolsMenuActionsReturnToApp.click()
     }

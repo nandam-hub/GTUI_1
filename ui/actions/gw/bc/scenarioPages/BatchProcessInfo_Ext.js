@@ -4,4 +4,5 @@ import { BatchProcessInfo } from "../../../../pages/gw/generated/billingsolution
 export class BatchProcessInfo_Ext extends BatchProcessInfo {
     automaticDisbursementJob = PcfComponent('#BatchProcessInfo-BatchProcessScreen-BatchProcessesLV-7-RunBatchWithoutNotify')
     batchProcessScreenTtlBar = PcfComponent('#BatchProcessInfo-BatchProcessScreen-ttlBar')
+    automaticDisbursementLastRunStatus = PcfComponent('#BatchProcessInfo-BatchProcessScreen-BatchProcessesLV-7-LastRunStatus')
 }
