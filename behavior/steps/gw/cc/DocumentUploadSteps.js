@@ -6,12 +6,12 @@ import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScena
 const documentUploadScenario = new DocumentUploadScenario();
 const navigationScenario = new NavigationScenario();
 
-When(/^the user upload the document/, async function () {
+When('the user uploads the document', async function () {
     await navigationScenario.openClaim(t.ctx.claimNo);
     await documentUploadScenario.selectUploadDocument();
     await documentUploadScenario.fileSelecting();
 });
-Then(/^the user validate the uploaded document/, async function () {
+Then('the document is uploaded successfully', async function () {
     //TO DO: need to validate the uploaded document //
     await documentUploadScenario.validateDocumentUpload()
 });
