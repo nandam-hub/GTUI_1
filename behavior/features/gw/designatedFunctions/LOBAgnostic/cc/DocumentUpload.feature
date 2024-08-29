@@ -2,7 +2,7 @@
 Feature: user upload document
     As a user, I want to upload document
 
-    @document_upload
+    @Document_upload
     Scenario: user want to upload document in cc
         Given the user logs into the claims center as "superuser"
         When the user loads "cc" data "createClaim_01" from json "AddNoteTestData"
