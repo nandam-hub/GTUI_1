@@ -219,13 +219,13 @@ export class NewSubmissionScenario {
     await cllLocationPopup_New.cllLocationPopupAddress.selectOptionByLabel(world.dataMap.get('Address1'))
     await cllLocationPopup_New.cllLocationPopupAddLocationMenu.click()
     await cllLocationPopup_New.cllLocationPopupNewLocation.click()
-    await this.addLocation();
+    await this.addNewLocation();
     console.log(`Added ${locationNum} location(s) successfully`)
   }
 
   async addBuilding(buildingNum = "1") {
     await cllLocationPopup_New.cllLocationPopupAddBuilding.click()
-    await this.addBuilding()
+    await this.addNewBuilding()
     console.log(`Added ${buildingNum} buidling(s) successfully`)
     await cllLocationPopup_New.cllLocationPopupOk.click()
   }
@@ -275,7 +275,7 @@ export class NewSubmissionScenario {
     }
   }
 
-  async addLocation() {
+  async addNewLocation() {
     if (!(world.locationDataMap === undefined) && Array.from(world.locationDataMap.keys()).length > 0) {
       t.ctx.module = 'Location'
       console.log(`The current module is ${t.ctx.module}`)
@@ -302,7 +302,7 @@ export class NewSubmissionScenario {
   }
 
   //To load building data from json input and add single or multiple building
-  async addBuilding() {
+  async addNewBuilding() {
     if (!(world.buildingDataMap === undefined) && Array.from(world.buildingDataMap.keys()).length > 0) {
       t.ctx.module = 'Building'
       console.log(`The current module is ${t.ctx.module}`)
