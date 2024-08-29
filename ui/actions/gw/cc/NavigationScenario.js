@@ -83,8 +83,13 @@ export class NavigationScenario {
   async goToClaim() {
     await newClaimSaved.newClaimSavedDVGoToClaim.click()
   }
+
   async navigateToContacts() {
     await claimMenuLinks_Ext.partiesInvolved.click()
     await navigateAndClickSubmenu(['Contacts'])
+  }
+
+  async navigateToReserve() {
+    await claimMenuActions_Ext.claimMenuActions_NewTransactionClaimMenuActions_NewTransaction_ReserveSet.click()
   }
 }
