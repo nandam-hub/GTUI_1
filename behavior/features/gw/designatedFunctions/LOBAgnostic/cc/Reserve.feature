@@ -23,7 +23,7 @@ Feature: Create recovery reserve in Claim center
         And the user creates reserve
         Then the reserve is created successfully
 
-    @create_multiplereserve
+    @create_multiple_reserve
     Scenario: Create multiple reserve after exposure is created from actions tab
         Given the user logs into the claims center as "adjuster"
         And the user loads "cc" data "createActivity_02" from json "FNOLTestData"
@@ -34,5 +34,5 @@ Feature: Create recovery reserve in Claim center
         And the user creates UMBI Liability exposure
         And the user creates medical payments exposure
         When the user loads "cc" data "createMultipleReserve_02" from json "ReserveTestData"
-        And the user creates multiple reserve
-        Then the multiple reserves are created successfully
+        And the user creates 6 reserve
+        Then the 6 reserves are created successfully

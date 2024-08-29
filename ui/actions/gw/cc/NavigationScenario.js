@@ -92,8 +92,4 @@ export class NavigationScenario {
     await claimMenuActions_Ext.claimClaimMenuActions.click()
     await navigateAndClickSubmenu(['Check'])
   }
-  
-  async navigateToReserve() {
-    await claimMenuActions_Ext.claimMenuActions_NewTransactionClaimMenuActions_NewTransaction_ReserveSet.click()
-  }
 }

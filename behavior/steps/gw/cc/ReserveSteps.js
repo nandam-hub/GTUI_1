@@ -27,21 +27,21 @@ When('the user creates reserve', async function () {
     await searchTableRecord(3, t.ctx.claimNo)
     await navigationScenario.ClickClaimMenuAction()
     await navigationScenario.navigateToReserve()
-    await reserveScenario.createReserve(1)
+    await reserveScenario.createReserve()
 });
 
 Then('the reserve is created successfully', async function () {
-    await reserveScenario.validateCreateReserve()
+    await reserveScenario.validateReserve()
 });
 
-When('the user creates multiple reserve', async function () {
+When(/^the user creates (.*) reserve/, async function (t, stepArguments) {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
     await navigationScenario.ClickClaimMenuAction()
     await navigationScenario.navigateToReserve()
-    await reserveScenario.createReserve(6)
+    await reserveScenario.createReserve(stepArguments[0])
 });
 
-Then('the multiple reserves are created successfully', async function () {
-    await reserveScenario.validateMultipleCreateReserve()
+Then(/^the (.*) reserves are created successfully/, async function (t, stepArguments) {
+    await reserveScenario.validateReserve(stepArguments[0])
 });
