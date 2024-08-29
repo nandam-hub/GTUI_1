@@ -84,6 +84,10 @@ export class NavigationScenario {
     await navigateAndClickSubmenu(['Contacts'])
   }
 
+  async navigateToReserve() {
+    await claimMenuActions_Ext.claimMenuActions_NewTransactionClaimMenuActions_NewTransaction_ReserveSet.click()
+  }
+
   async navigateToCheck(){
     await claimMenuActions_Ext.claimClaimMenuActions.click()
     await navigateAndClickSubmenu(['Check'])
