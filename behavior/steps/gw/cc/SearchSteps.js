@@ -14,8 +14,8 @@ When('the user searches for the policy in Search Claims', async function () {
     await searchScenario.searchWithPolicy(world.dataMap.get('PolicyNumber'))
 });
 
-Then('the claim details are loaded successfully', async function () {
-    await searchTableRecord("Claim", world.dataMap.get('ClaimNo'))
+Then('the claim details are loaded successfully', async function (t) {
+    await searchTableRecord("Claim", t.ctx.claimNo)
     await claimSummaryScenario.verifySummaryHeader()
 });
 
@@ -27,7 +27,7 @@ When('the user creates the recovery', async function () {
     await searchScenario.recoveryCreation();
 });
 
-Then('the user searches for the recovery details', async function (t) {
+When('the user searches for the recovery details with claim number', async function (t) {
     await searchScenario.searchRecovery(t.ctx.claimNo);
 });
 

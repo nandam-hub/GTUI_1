@@ -96,7 +96,7 @@ export class SearchScenario {
 
     async advanceSearchClaimWithName() {
         await claimSearch.claimSearchRequiredInputSetSearchFor.selectOptionByValue(world.dataMap.get('SearchFor'))
-        await claimSearch.claimSearchClaimSearchScreenClaimSearchDVClaimSearchRequiredInputSetGlobalPersonNameInputSetLastName.setValue(world.dataMap.get('LastName'));     
+        await claimSearch.claimSearchClaimSearchScreenClaimSearchDVClaimSearchRequiredInputSetGlobalPersonNameInputSetLastName.setValue(t.ctx.insuredName);     
         await claimSearch.claimSearchClaimSearchScreenClaimSearchDVClaimSearchAndResetInputSetSearch.click()
     }
 }
