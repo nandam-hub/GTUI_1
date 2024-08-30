@@ -58,6 +58,8 @@ export class DisbursementScenario {
         await accountGroupMenuLinks.menuLinksAccountGroup_AccountDetailDisbursements.click();
     }
     async validateAutomaticDisbursement() {
+        await t.wait(5000)
+        await t.eval(() => location.reload(true))
         await t.expect(await returnDataFromTable(5)).eql(world.dataMap.get('Status'))
         console.log("Automatic disbursement is created successfully")
     }
