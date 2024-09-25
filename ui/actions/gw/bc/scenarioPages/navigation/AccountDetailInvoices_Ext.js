@@ -3,4 +3,5 @@ import { AccountDetailInvoices } from '../../../../../pages/gw/generated/billing
 
 export class AccountDetailInvoices_Ext extends AccountDetailInvoices {
 	accountDetailInvoices_BilledDateUpdated = PcfComponent('#AccountDetailInvoices-AccountDetailInvoicesScreen-DetailPanel-InvoiceDetailDV-AccountInvoiceInformationInputSet-InvoiceDate>div>div');
+	invoiceHeader = PcfComponent('#AccountDetailInvoices-AccountDetailInvoicesScreen-ttlBar > div.gw-TitleBar--titles--container')
 }

@@ -17,8 +17,8 @@
       }],
     CC: [{
       userrole: "superuser",
-      username: "sudharsan",
-      password: "guidewire"
+      username: "vam",
+      password: "gw"
     },
       {
         userrole: "adjuster",
@@ -32,13 +32,13 @@
       }],
     BC: [{
       userrole: "superuser",
-      username: "sudharsan",
-      password: "guidewire"
+      username: "vam",
+      password: "gw"
     }],
     CM: [{
       userrole: "producer",
-      username: "sudharsan",
-      password: "guidewire"
+      username: "vam",
+      password: "gw"
     }]
   }
 }

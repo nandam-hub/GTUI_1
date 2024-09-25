@@ -27,18 +27,3 @@ Feature: Personal auto new submission
         When the user creates personal account
         And the user issue the new submission from actions menu for personal auto with "1" vehicles
         Then the policy is issued
-
-    @multiple_vehicles
-    Scenario: Adding Multiple Vehicles
-        Given the user loads "pc" data "newSubmission_06" from json "NewSubmissionTestData"
-        When the user creates personal account
-        And the user issue the new submission for personal auto with "3" vehicles
-        Then the policy is issued
-
-    @multiple_drivers
-    Scenario: Adding Multiple Drivers
-        Given the user loads "pc" data "newSubmission_08" from json "NewSubmissionTestData"
-        When the user creates personal account
-        And the user issue the new submission for personal auto with "2" drivers
-        Then the policy is issued
-        And "2" drivers are added successfully

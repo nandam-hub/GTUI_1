@@ -1,11 +1,10 @@
-import { t, Selector } from 'testcafe'
+import { t } from 'testcafe'
 import world from "../../../util/gw/world.js";
 import { AccountGroupMenuActions_Ext } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/AccountGroupMenuActions_Ext.js';
 import { NewDirectBillPayment } from '../../../pages/gw/generated/billingsolutions/pages/other/NewDirectBillPayment.js';
 import { AccountGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/AccountGroupMenuLinks.js';
 import { ProducerDetailGroupMenuLinks } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuLinks/ProducerDetailGroupMenuLinks.js';
-import { returnDataFromTable, dateFunction } from "../../../../ui/util/gw/helper";
-import { startsWith } from "lodash";
+import { returnDataFromTable, dateFunction, clickTableRecord } from "../../../../ui/util/gw/helper";
 import { PolicySummary_Ext } from '../../../../ui/actions/gw/bc/scenarioPages/policyGroup/policyOverview/PolicySummary_Ext.js';
 import { BatchProcessInfo_Ext } from './scenarioPages/BatchProcessInfo_Ext.js';
 import { ServerToolsMenuActions } from '../../../pages/gw/generated/billingsolutions/pages/navigation/menuActions/ServerToolsMenuActions.js';
@@ -41,9 +40,11 @@ export class DisbursementScenario {
     async validateDisbursement() {
         await t.expect(world.dataMap.get('DisbursedAmount')).contains(await returnDataFromTable(7))
     }
-    async runAutomaticDisbursementBatchJob() {
-        await batchProcessInfo_Ext.automaticDisbursementJob.click()
+
+    async runAutomaticBatchJob(batchProcess) {
+        await clickTableRecord(batchProcessInfo_Ext.runBatchButton, batchProcess)
     }
+
     async verifyAutomaticDisbursementBatchJob() {
         await t.wait(5000)
         await batchProcessInfo_Ext.batchProcessesLV_tbrefresh.click()

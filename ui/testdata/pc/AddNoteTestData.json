@@ -8,7 +8,8 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a"
+        "Organization": "e",
+        "ProducerCode":"QA1PRODUCER01 QA1PRODUCER01"
     },
     "addNote_01": {
         "Topic": "General",
@@ -19,6 +20,7 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a"
+        "Organization": "e",
+        "ProducerCode":"QA1PRODUCER01 QA1PRODUCER01"
     }
 }

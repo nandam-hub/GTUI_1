@@ -8,7 +8,7 @@ const addressBookSearch = new AddressBookSearch()
 export class AddressBookScenario {
 
     async addressBookValidation() {
-        await t.expect(await validateTableRecord("Name", "a", 8)).eql(world.dataMap.get('AddressType'))
+        await t.expect(await validateTableRecord("Name", "Albertson's", 8)).eql(world.dataMap.get('AddressType'))
     }
 
     async addressBookSearchContact() {

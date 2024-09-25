@@ -1,13 +1,11 @@
-import { ClaimMenuLinks_Ext } from "./scenarioPages/claim/ClaimMenuLinks_Ext"
 import { ClaimAssociations } from "../../../pages/gw/generated/claimsolutions/pages/claim/claimLossDetailsGroup/ClaimAssociations"
 import { NewClaimAssociation_Ext } from "./scenarioPages/claim/NewClaimAssociation_Ext"
 import { ClaimSearchPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/Claim/ClaimSearchPopup"
 import { ClaimSearchPopup_New } from "./scenarioPages/claim/ClaimSearchPopup_new"
 import world from "../../../util/gw/world"
 import { t } from "testcafe"
-import { generateRandomStringFunction, searchTableRecord, validateTableRecord } from "../../../util/gw/helper"
+import { generateRandomStringFunction, validateTableRecord } from "../../../util/gw/helper"
 
-const claimMenuLinks_Ext = new ClaimMenuLinks_Ext();
 const claimAssociations = new ClaimAssociations();
 const newClaimAssociation_Ext = new NewClaimAssociation_Ext();
 const claimSearchPopup = new ClaimSearchPopup();
@@ -34,7 +32,6 @@ export class AssociationScenario {
         await newClaimAssociation_Ext.claimAssociationDetailScreenUpdate.click()
     }
 
-    //TODO: Currently failing. Need to check and update
     async validateAssociation() {
         await t.expect(await validateTableRecord("Claims", world.dataMap.get('Claims'), 1)).eql(await t.ctx.ClaimsTitle)
     }

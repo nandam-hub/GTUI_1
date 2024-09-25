@@ -10,6 +10,8 @@ import { navigateAndClickSubmenu, dateFunction } from "../../../util/gw/helper.j
 import { PolicyDetailPayments } from '../../../pages/gw/generated/billingsolutions/pages/policyGroup/PolicyDetailPayments.js';
 import { PoliciesTabBar_Ext } from './scenarioPages/navigation/tabBar/PoliciesTabBar_Ext.js';
 import { BatchProcessInfo_Ext } from './scenarioPages/BatchProcessInfo_Ext.js';
+import { PolicySummary_Ext } from './scenarioPages/policyGroup/policyOverview/PolicySummary_Ext';
+import { DesktopTabBar } from '../../../pages/gw/generated/billingsolutions/pages/navigation/tabBar/DesktopTabBar.js';
 
 const accountGroupMenuLinks = new AccountGroupMenuLinks();
 const searchTabBar = new SearchTabBar()
@@ -20,6 +22,8 @@ const accountGroupMenuActions = new AccountGroupMenuActions();
 const policyDetailPayments = new PolicyDetailPayments()
 const policiesTabBar_Ext = new PoliciesTabBar_Ext()
 const batchProcessInfo_Ext = new BatchProcessInfo_Ext()
+const policySummary_Ext = new PolicySummary_Ext()
+const desktopTabBar =  new DesktopTabBar();
 
 export class NavigationScenario {
   async navigateToInvoices() {
@@ -37,7 +41,7 @@ export class NavigationScenario {
 
   async navigateToAccountScreen() {
     await accountsTabBar_Ext.accountsTab_ExpandButton.click()
-    await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue(world.dataMap.get('AccountNumber'))
+    await accountsTabBar_Ext.accountsTab_AccountNumberSearchInput.setValue('9444150680')
     await accountsTabBar_Ext.accountSearch_Button.click()
   }
 
@@ -83,5 +87,11 @@ export class NavigationScenario {
     await t.wait(5000)
     await t.expect(await batchProcessInfo_Ext.batchProcessScreenTtlBar.component.exists).ok()
   }
-}
 
+  async accountLinkFromSummary() {
+    await policySummary_Ext.policyInfoBarAccountNumberLink.click()
+  }
+  async navigateToDesktopScreen(){
+    await desktopTabBar.tabBarDesktopTab.click();
+  }
+}

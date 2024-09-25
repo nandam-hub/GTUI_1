@@ -1,4 +1,4 @@
-@policycenter @designatedfunction
+@policycenter @designatedfunction @search
 Feature: Search menu in policy center
     As a user, I want to search for an account or policy or contact
 

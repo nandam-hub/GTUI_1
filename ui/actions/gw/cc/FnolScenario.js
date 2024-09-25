@@ -1,5 +1,5 @@
 import { FNOLWizard_Ext } from "../../../../ui/actions/gw/cc/scenarioPages/claim/FNOLWizard_Ext"
-import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable, navigateAndClickSubmenu } from "../../../../ui/util/gw/helper"
+import { dateFunction, splitFunction, generateRandomStringFunction, selectDropdownInTable, enterDataInTable, returnDataFromTable, navigateAndClickSubmenu, generateRandomNumber } from "../../../../ui/util/gw/helper"
 import { NewContactPopup } from "../../../../ui/pages/gw/generated/claimsolutions/pages/popup/New/NewContactPopup"
 import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
 import { NewClaimWizard_NewPolicyVehiclePopup_Ext } from "./scenarioPages/popup/New/NewClaimWizard_NewPolicyVehiclePopup_Ext"
@@ -15,12 +15,11 @@ const newClaimWizard_NewPolicyVehiclePopup_Ext = new NewClaimWizard_NewPolicyVeh
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const closeClaimPopup_Ext = new CloseClaimPopup_Ext()
 
-
 export class FnolScenario {
-    async searchOrCreatePolicy() {
+    async searchOrCreatePolicy(policyNumber = world.dataMap.get('PolicyNumber')) {
         console.log("On Step 1: Search or Create Policy screen")
         await fNOLWizard_Ext.fnolWizardCreateUnverifiedPolicy.click()
-        await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetPolicyNumber.setValue(world.dataMap.get('PolicyNumber'))
+        await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetPolicyNumber.setValue(policyNumber)
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetType.click()
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetType.selectOptionByLabel(world.dataMap.get('Type'))
         await fNOLWizard_Ext.fNOLWizardFindPolicyPanelSetClaim_LossDate.setValue(await world.dataMap.get('LossDate').includes('/') ? world.dataMap.get('LossDate') : dateFunction(world.dataMap.get('LossDate')))
@@ -83,8 +82,8 @@ export class FnolScenario {
                 if (vehicleMap[`VehicleCoverage${i}`]) {
                     t.ctx.TableIdentifier = "Type"
                     await newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizard_NewPolicyVehiclePopupNewClaimWizard_NewPolicyVehicleScreenPolicyVehicleDetailPanelSetPolicyVehicleCoverageListDetailEditableVehicleCoveragesLV_tbAdd.click()
-                    await selectDropdownInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardCoverageType, vehicleMap[`VehicleCoverage${i}`])
                     await enterDataInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardExposureLimit, vehicleMap[`VehicleExposureLimit${i}`])
+                    await selectDropdownInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardCoverageType, vehicleMap[`VehicleCoverage${i}`])
                     await enterDataInTable(newClaimWizard_NewPolicyVehiclePopup_Ext.newClaimWizardIncidentLimit, vehicleMap[`VehicleIncidentLimit${i}`])
                 }
                 else {
@@ -116,7 +115,7 @@ export class FnolScenario {
         await fNOLWizard_Ext.fnolWizardRentalAgencyMenu.click()
         await fNOLWizard_Ext.fnolWizardNewVendor.click()
         await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVOrganizationNameGlobalContactNameInputSetName.setValue(generateRandomStringFunction(5))
-        await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVV_EIN.setValue(world.dataMap.get('VendorTaxId'))
+        await newContactPopup.newContactPopupContactDetailScreenContactBasicsDVV_EIN.setValue(world.dataMap.get('VendorTaxId') + generateRandomNumber(4))
         await newContactPopup.newContactPopupContactDetailScreenContactBasicsDV_tbContactDetailToolbarButtonSetCustomUpdateButton.click()
         await fNOLWizard_Ext.fnolWizardPickUpLocation.selectOptionByLabel(world.dataMap.get('PickUpLocation'))
         await fNOLWizard_Ext.fnolWizardRentalDailyRate.setValue(world.dataMap.get('RentalDailyRate'))

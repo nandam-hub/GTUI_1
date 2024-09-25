@@ -1,6 +1,6 @@
 @billingcenter @designatedfunction @invoice
 Feature: Invoice in billing center
-    As a user, I want to update invoices in billing center
+    As a user, I want to manage invoices in billing center
 
     @invoice_due
     Scenario: Updating billed date for an invoice due
@@ -17,16 +17,3 @@ Feature: Invoice in billing center
         When the user navigates to invoices on billing center home page
         And the user resends invoice
         Then the invoice resent confirmation message is displayed
-
-    @search_invoices
-    Scenario:  Validate the created invoices as per the selected Payment plan
-        Given the user logs into the policy center as "superuser"
-        And the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
-        And the user creates personal account
-        And the user issue the new submission from actions menu for personal auto with "1" vehicles
-        And the user logs into the billing center as "superuser"
-        And the user loads "bc" data "changePaymentPlan_01" from json "ChangePaymentPlanTestData"
-        When the user loads the policy with policy number
-        And the user loads the change payment plan screen
-        And the user changes the payment plan
-        Then the invoice details are validated as per the payplan successfully

@@ -4,6 +4,7 @@ import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScena
 import { ClaimSummaryScenario } from "../../../../ui/actions/gw/cc/ClaimSummaryScenario";
 import { searchTableRecord } from "../../../../ui/util/gw/helper";
 import world from "../../../../ui/util/gw/world"
+import { t } from "testcafe"
 
 const searchScenario = new SearchScenario();
 const navigationScenario = new NavigationScenario()
@@ -15,6 +16,11 @@ When('the user searches for the policy in Search Claims', async function () {
 });
 
 Then('the claim details are loaded successfully', async function (t) {
+    await searchTableRecord("Claim", world.dataMap.get('ClaimNo'))
+    await claimSummaryScenario.verifySummaryHeader()
+});
+
+Then('the newly created claim details are loaded successfully', async function (t) {
     await searchTableRecord("Claim", t.ctx.claimNo)
     await claimSummaryScenario.verifySummaryHeader()
 });

@@ -22,7 +22,6 @@ export class OverrideDistributionScenario {
     await newDirectBillPayment_Ext.overrideDistributionAmount_6.setValue(world.dataMap.get('DistributionAmount'))
     await newDirectBillPayment_Ext.overrideDistributionAmount_7.setValue(world.dataMap.get('DistributionAmount'))
     await newDirectBillPayment_Ext.overrideDistributionAmount_8.setValue(world.dataMap.get('DistributionAmount'))
-    await newDirectBillPayment_Ext.overrideDistributionAmount_9.setValue(world.dataMap.get('DistributionAmount'))
     await newDirectBillPayment_Ext.newDirectBillPaymentEditDBPaymentScreenUpdate.click()
     await t.scrollIntoView(accountGroupMenuLinks_Ext.menuLinks_AccountDetailInvoiceStreams)
     await accountGroupMenuLinks_Ext.menuLinksAccountGroup_AccountDetailInvoices.click()

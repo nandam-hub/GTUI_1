@@ -5,7 +5,7 @@ import { PolicyInfoScreen } from "../../../pages/gw/generated/policysolutions/pa
 import { UALPersonalVehiclePopup_New } from "./scenarioPages/other/UALPersonalVehiclePopup_New.js";
 import { NewAPDPolicyInvolvedPartyPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/New/NewAPDPolicyInvolvedPartyPopup.js";
 import { NewSubmission_Ext } from "./scenarioPages/policy/NewSubmission_Ext.js";
-import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable, navigateAndClickSubmenu } from '../../../util/gw/helper'
+import { generateRandomStringFunction, validateTableRecord, enterDataInTable, performClickInTable, performHoverInTable } from '../../../util/gw/helper'
 import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import { CLLCpBlanketPopup_New } from "./scenarioPages/navigation/submissionWizard/CLLCpBlanketPopup_New"
 import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizard/SubmissionWizard_New"
@@ -16,10 +16,10 @@ import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPop
 import world from "../../../util/gw/world"
 import { WebMessageWorksheet_New } from "./scenarioPages/popup/Organization/WebMessageWorksheet_New.js";
 import { PolicyInfoScreen_Ext } from "./scenarioPages/IOBWizardStepGroup/policyInfo/PolicyInfoScreen_Ext.js";
-import { selectInput, textInput, checkBox } from "../../../util/gw/ActionHelper.js";
+import { checkBox, setInputValueIfExists, selectOptionByLabelIfExists } from "../../../util/gw/ActionHelper.js";
 import { CoveragePatternSearchPopup_Ext } from "./scenarioPages/popup/Coverage/CoveragePatternSearchPopup_Ext.js"
 import { FormsSubmissionWizard } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/submissionWizard/FormsSubmissionWizard.js"
-import { NewAdditionalNamedInsuredPopup } from '../../../../ui/pages/gw/generated/policysolutions/pages/popup/New/NewAdditionalNamedInsuredPopup'
+import { NewAdditionalNamedInsuredPopup_Ext } from "./scenarioPages/popup/New/NewAdditionalNamedInsuredPopup_Ext.js";
 
 const nextSubmissionWizard_Ext = new NextSubmissionWizard_Ext()
 const policyInfoScreen = new PolicyInfoScreen()
@@ -37,7 +37,7 @@ const cllLocationPopup_New = new CLLLocationPopup_New()
 const policyInfoScreen_Ext = new PolicyInfoScreen_Ext()
 const coveragePatternSearchPopup_Ext = new CoveragePatternSearchPopup_Ext()
 const formsSubmissionWizard = new FormsSubmissionWizard()
-const newAdditionalNamedInsuredPopup = new NewAdditionalNamedInsuredPopup()
+const newAdditionalNamedInsuredPopup_Ext = new NewAdditionalNamedInsuredPopup_Ext()
 
 export class NewSubmissionScenario {
   async selectProduct() {
@@ -59,9 +59,8 @@ export class NewSubmissionScenario {
       t.ctx.module = 'Coverage'
       console.log(`The current module is ${t.ctx.module}`)
       await checkBox("LiabilityBodilyInjuryAndPropertyDamage")
-      await selectInput("LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage")
-      await checkBox("PropertyProtectionInsurance")
-      await selectInput("PropertyProtectionInsurancePropertyProtectionLimits")
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.liabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage, "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage", world.coverageDataMap)
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.medicalLimit, "MedicalLimit", world.coverageDataMap)
     }
   }
 
@@ -171,6 +170,26 @@ export class NewSubmissionScenario {
     await submissionWizard_New.submissionWizardRefusalType.selectOptionByLabel(world.dataMap.get('RefusalType'))
   }
 
+  async addHomeOwnersAdditionalCoverages() {
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
+    await checkBox("IdentityTheftProtection")
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.identityTheftProtectionLimit, "IdentityTheftProtectionLimit", world.coverageDataMap)
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.identityTheftProtectionDeductible, "IdentityTheftProtectionDeductible", world.coverageDataMap)
+    await checkBox("FirstAid")
+    await checkBox("LossAssessment")
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.lossAssessmentLimit, "LossAssessmentLimit", world.coverageDataMap)
+  }
+
+  async addHomeOwnerSectionIICoverages() {
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
+    await checkBox("CoverageEPersonalLiability")
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.coverageEPersonalLiabilityLimit, "CoverageEPersonalLiabilityLimit", world.coverageDataMap)
+    await checkBox("CoverageFMedicalPayments")
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.coverageFMedicalPaymentsLimit, "CoverageFMedicalPaymentsLimit", world.coverageDataMap)
+  }
+
   async homeOwnersAddExclusionOrConditionScreen() {
     await submissionWizard_New.submissionWizardAddExclusionsOrCondition.click()
     await coveragePatternSearchPopup_Ext.coveragePatternSearchPopupCoveragePatternSearchScreenCoveragePatternSearchDVSearchAndResetInputSetSearchLinksInputSetSearch.click()
@@ -194,17 +213,25 @@ export class NewSubmissionScenario {
       t.ctx.module = 'Coverage'
       console.log(`The current module is ${t.ctx.module}`)
       await checkBox("UmbrellaLiability")
-      await selectInput("UmbrellaLiabilityOccurrenceLimit")
-      await selectInput("UmbrellaLiabilityAggregateLimit")
-      await selectInput("UmbrellaLiabilityProductandCompletedOperationsAggregateLImit")
-      await selectInput("UmbrellaLiabilityUmbrellaCoverageForm")
-      await selectInput("UmbrellaLiabilitySelfInsuredRetention")
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityOccurrenceLimit, "UmbrellaLiabilityOccurrenceLimit", world.coverageDataMap)
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityAggregateLimit, "UmbrellaLiabilityAggregateLimit", world.coverageDataMap)
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityProductandCompletedOperationsAggregateLImit, "UmbrellaLiabilityProductandCompletedOperationsAggregateLImit", world.coverageDataMap)
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilityUmbrellaCoverageForm, "UmbrellaLiabilityUmbrellaCoverageForm", world.coverageDataMap)
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.umbrellaLiabilitySelfInsuredRetention, "UmbrellaLiabilitySelfInsuredRetention", world.coverageDataMap)
     }
   }
 
   async smallBusinessBusinessType() {
     console.log("On Small Business screen")
     await submissionWizard_New.submissionWizardBusinessType.selectOptionByLabel(world.dataMap.get('BusinessType'))
+  }
+
+  async addSmallBusinessLineCoverages() {
+    t.ctx.module = 'Coverage'
+    console.log(`The current module is ${t.ctx.module}`)
+    await checkBox("GeneralLiability");
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.generalLiabilityOccurrenceLImit, "GeneralLiabilityOccurrenceLImit", world.coverageDataMap)
+    await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.generalLiabilityAggregateLimit, "GeneralLiabilityAggregateLimit", world.coverageDataMap)
   }
 
   async verifyingRefusalTypeErrorMsg() {
@@ -241,21 +268,20 @@ export class NewSubmissionScenario {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
-      let driverMap = world.driverDataMap.get(`Driver${i}`)
       await submissionWizard_New.submissionWizardUALPolicyDriverMVRListAdd.click()
       t.ctx.TableIdentifier = "Internal Request ID"
       await enterDataInTable(submissionWizard_New.submissionWizardInternetRequestId, i.toString())
       await performClickInTable(submissionWizard_New.submissionWizardPolicyDriverMenuIcon)
       await performHoverInTable(submissionWizard_New.submissionWizardAvailableContacts)
-      await performClickInTable(`[aria-label*=${driverMap['FirstName']}]`)
+      await performClickInTable(`[aria-label*=${t.ctx['drFirstName' + i]}]`)
     }
   }
 
-  async validatedAddedDriversInPolicyFile(driverNum = 2) {
+  async validatedAddedDriversInPolicyFile(driverNum) {
     if (typeof (driverNum) !== 'number')
       driverNum = Number.parseInt(driverNum.replace(/["]/g, ""))
     for (let i = 1; i <= driverNum; i++) {
-      await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(world.dataMap.get(`Driver${i}`))
+      await t.expect(await validateTableRecord(world.dataMap.get('ColumnIdentifier'), `${i}`, 6)).contains(`${t.ctx['drFirstName' + i]}`)
     }
   }
 
@@ -264,28 +290,25 @@ export class NewSubmissionScenario {
       t.ctx.module = 'Coverage'
       console.log(`The current module is ${t.ctx.module}`)
       await checkBox("EachLossCausedByWind")
-      await textInput("EachLossCausedByWindLimit")
-      await textInput("EachLossCausedByWindDeductible")
+      await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.eachLossCausedByWindLimit, "EachLossCausedByWindLimit", world.coverageDataMap)
+      await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.eachLossCausedByWindDeductible, "EachLossCausedByWindDeductible", world.coverageDataMap)
       await checkBox("ContentsOfOtherStructures")
-      await selectInput("ContentsOfOtherStructuresLimit")
-      await textInput("ContentsOfOtherStructuresDeductible")
+      await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.contentsOfOtherStructuresLimit, "ContentsOfOtherStructuresLimit", world.coverageDataMap)
+      await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.contentsOfOtherStructuresDeductible, "ContentsOfOtherStructuresDeductible", world.coverageDataMap)
       await checkBox("OutsideObjectsAndStructures")
-      await textInput("OutsideObjectsAndStructuresLimit")
-      await textInput("OutsideObjectsAndStructuresDeductible")
+      await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.outsideObjectsAndStructuresLimit, "OutsideObjectsAndStructuresLimit", world.coverageDataMap)
+      await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.outsideObjectsAndStructuresDeductible, "OutsideObjectsAndStructuresDeductible", world.coverageDataMap)
     }
   }
 
   async addNewLocation() {
     if (!(world.locationDataMap === undefined) && Array.from(world.locationDataMap.keys()).length > 0) {
-      t.ctx.module = 'Location'
-      console.log(`The current module is ${t.ctx.module}`)
       let i = 0
       for (const [key, value] of world.locationDataMap) {
         const currentLocationMap = new Map(Object.entries(value))
-        await textInput('CllLocationPopupAddress1', currentLocationMap)
-        await textInput('CllLocationPopupCity', currentLocationMap)
-        await textInput('CllLocationPopupZipCode', currentLocationMap)
-
+        await cllLocationPopup_New.cllLocationPopupAddress1.setValue(currentLocationMap.get('CllLocationPopupAddress1'))
+        await cllLocationPopup_New.cllLocationPopupCity.setValue(currentLocationMap.get('CllLocationPopupCity'))
+        await cllLocationPopup_New.cllLocationPopupZipCode.setValue(currentLocationMap.get('CllLocationPopupCity'))
         await cllLocationPopup_New.cllLocationPopupLocationOk.click()
         i++
         if (i < world.locationDataMap.size) {
@@ -304,14 +327,11 @@ export class NewSubmissionScenario {
   //To load building data from json input and add single or multiple building
   async addNewBuilding() {
     if (!(world.buildingDataMap === undefined) && Array.from(world.buildingDataMap.keys()).length > 0) {
-      t.ctx.module = 'Building'
-      console.log(`The current module is ${t.ctx.module}`)
       let i = 0
       for (const [key, value] of world.buildingDataMap) {
         const currentBuildingMap = new Map(Object.entries(value))
-        await textInput('BuildingDescription', currentBuildingMap)
-        await textInput('YearBuilt', currentBuildingMap)
-
+        await cllLocationPopup_New.buildingDescription.setValue(currentBuildingMap.get('BuildingDescription'))
+        await setInputValueIfExists(cllLocationPopup_New.yearBuilt, 'YearBuilt', currentBuildingMap)
         await cllLocationPopup_New.cllCPBuildingPopupOk.click()
         i++
         if (i < world.buildingDataMap.size) {
@@ -334,12 +354,18 @@ export class NewSubmissionScenario {
       let i = 0
       for (const [key, value] of world.vehicleDataMap) {
         const currentVehicleMap = new Map(Object.entries(value))
-        await selectInput('BodyType', currentVehicleMap)
-        await selectInput('LicenseState', currentVehicleMap)
-        await textInput('VinNumber', currentVehicleMap)
-        await textInput('Year', currentVehicleMap)
-        await textInput('Make', currentVehicleMap)
-        await textInput('Model', currentVehicleMap)
+        await ualPersonalVehiclePopup_New.annualMileage.setValue(currentVehicleMap.get('AnnualMileage'))
+        await ualPersonalVehiclePopup_New.personalUse.selectOptionByLabel(currentVehicleMap.get('PersonalUse'))
+        await selectOptionByLabelIfExists(ualPersonalVehiclePopup_New.bodyType, 'BodyType', currentVehicleMap)
+        await selectOptionByLabelIfExists(ualPersonalVehiclePopup_New.bodyType, 'BodyType', currentVehicleMap)
+        await selectOptionByLabelIfExists(ualPersonalVehiclePopup_New.licenseState, 'LicenseState', currentVehicleMap)
+        await setInputValueIfExists(ualPersonalVehiclePopup_New.vinNumber, 'VinNumber', currentVehicleMap)
+        await setInputValueIfExists(ualPersonalVehiclePopup_New.year, 'Year', currentVehicleMap)
+        await setInputValueIfExists(ualPersonalVehiclePopup_New.make, 'Make', currentVehicleMap)
+        await setInputValueIfExists(ualPersonalVehiclePopup_New.model, 'Model', currentVehicleMap)
+        await ualPersonalVehiclePopup_New.personalAutoStandardCoveargeTab.click()
+        await ualPersonalVehiclePopup_New.vehicleComprehensive.selectOptionByLabel('100')
+        await ualPersonalVehiclePopup_New.vehicleCollision.selectOptionByLabel('100')
 
         await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()
         i++
@@ -358,22 +384,25 @@ export class NewSubmissionScenario {
   //To load driver data from json input and add single or multiple driver
   async addDriver() {
     if (!(world.driverDataMap === undefined) && Array.from(world.driverDataMap.keys()).length > 0) {
-      t.ctx.module = 'Drivers'
-      console.log(`The current module is ${t.ctx.module}`)
-      let i = 0
+      let i =1
       for (const [key, value] of world.driverDataMap) {
         const currentDriverMap = new Map(Object.entries(value))
-        await textInput('FirstName', currentDriverMap)
-        await textInput('LastName', currentDriverMap)
-        await textInput('DriverAddress1', currentDriverMap)
-        await textInput('DriverCity', currentDriverMap)
-        await selectInput('DriverState', currentDriverMap)
-        await textInput('DriverZipCode', currentDriverMap)
-        await selectInput('DriverAddressType', currentDriverMap)
-
-        await newAdditionalNamedInsuredPopup.newAdditionalNamedInsuredPopupContactDetailScreenForceDupCheckUpdate.click()
+        let firstName = `drFirstName${i}`
+        let lastName = `drLastName${i}`
+        t.ctx[firstName] = generateRandomStringFunction(5)
+        t.ctx[lastName] = generateRandomStringFunction(3)
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVPolicyContactRoleNameInputSetGlobalPersonNameInputSetFirstName.setValue(t.ctx[firstName])
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVPolicyContactRoleNameInputSetGlobalPersonNameInputSetLastName.setValue(t.ctx[lastName])
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressInputSetglobalAddressContainerGlobalAddressInputSetAddressLine1.setValue(currentDriverMap.get('DriverAddress1'))
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressInputSetglobalAddressContainerGlobalAddressInputSetCity.setValue(currentDriverMap.get('DriverCity'))
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressInputSetglobalAddressContainerGlobalAddressInputSetState.click()
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressInputSetglobalAddressContainerGlobalAddressInputSetState.selectOptionByLabel(currentDriverMap.get('DriverState'))
+        await newAdditionalNamedInsuredPopup_Ext.driverZipCode.setValue(currentDriverMap.get('DriverZipCode'))
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressType.click()
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenNewPolicyContactRoleDetailsCVPolicyContactDetailsDVAddressType.selectOptionByLabel(currentDriverMap.get('DriverAddressType'))
+        await newAdditionalNamedInsuredPopup_Ext.newAdditionalNamedInsuredPopupContactDetailScreenForceDupCheckUpdate.click()
         i++
-        if (i < world.driverDataMap.size) {
+        if (i <= world.driverDataMap.size) {
           await policyInfoScreen_Ext.namedInsuredsLV_tbAddContactsButton.click()
           await policyInfoScreen_Ext.newPersonMenuItem.click()
           console.log("ADDING NEXT DRIVER")

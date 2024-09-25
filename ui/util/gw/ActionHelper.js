@@ -7,7 +7,6 @@ import { pascalToCamel } from "./helper";
 import { t } from "testcafe";
 const fs = require('fs').promises;
 
-let pcfCategory;
 let camelFieldName;
 const lobWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 const ualPersonalVehiclePopup_New = new UALPersonalVehiclePopup_New()
@@ -77,66 +76,18 @@ export async function checkBox(fieldName, dataMap = null) {
     }
 }
 
-//Function to type in input box
-export async function textInput(fieldName, dataMap = null) {
-    //To convert pascal casing input to camel casing as per css standard
-    camelFieldName = pascalToCamel(fieldName)
-
-    switch (t.ctx.module) {
-        case ('Coverage'):
-            if (world.coverageDataMap.has(fieldName))
-                await ModIdentifier.coverage[camelFieldName].setValue(world.coverageDataMap.get(fieldName))
-            break;
-        case ('Vehicles'):
-            if (await dataMap.has(fieldName))
-                await ModIdentifier.vehicle[camelFieldName].setValue(await dataMap.get(fieldName))
-            break;
-        case ('Building'):
-            if (await dataMap.has(fieldName))
-                await ModIdentifier.building[camelFieldName].setValue(await dataMap.get(fieldName))
-            break;
-        case ('Location'):
-            if (await dataMap.has(fieldName))
-                await ModIdentifier.building[camelFieldName].setValue(await dataMap.get(fieldName))
-            break;
-        case ('Drivers'):
-            if (await dataMap.has(fieldName))
-                await ModIdentifier.driver[camelFieldName].setValue(await dataMap.get(fieldName))
-            break;
-        default:
-            throw new Error('Incorrect module provided')
+// Common helper function to set value if test data exists for a given key
+export async function setInputValueIfExists(inputField, key, dataMap) {
+    const value = dataMap.get(key);
+    if (value !== undefined && value !== null) {
+        await inputField.setValue(value);
     }
 }
 
-//Function to select value from dropdown by label
-export async function selectInput(fieldName, dataMap = null) {
-    //To convert pascal casing input to camel casing as per css standard
-    camelFieldName = pascalToCamel(fieldName)
-
-    switch (t.ctx.module) {
-        case ('Coverage'):
-            if (world.coverageDataMap.has(fieldName))
-                await ModIdentifier.coverage[camelFieldName].selectOptionByLabel(world.coverageDataMap.get(fieldName))
-            break;
-        case ('Vehicles'):
-            if (dataMap.has(fieldName))
-                await ModIdentifier.vehicle[camelFieldName].selectOptionByLabel(dataMap.get(fieldName))
-            break;
-        case ('Building'):
-            if (dataMap.has(fieldName))
-                await ModIdentifier.building[camelFieldName].selectOptionByLabel(dataMap.get(fieldName))
-            break;
-        case ('Location'):
-            if (dataMap.has(fieldName))
-                await ModIdentifier.building[camelFieldName].selectOptionByLabel(await dataMap.get(fieldName))
-            break;
-        case ('Drivers'):
-            if (dataMap.has(fieldName)) {
-                await ModIdentifier.driver[camelFieldName].click()
-                await ModIdentifier.driver[camelFieldName].selectOptionByLabel(dataMap.get(fieldName))
-            }
-            break;
-        default:
-            throw new Error('Incorrect module provided')
+// Common helper function to select dropdown option by label if test data exists for a given key
+export async function selectOptionByLabelIfExists(inputField, key, dataMap) {
+    const value = dataMap.get(key);
+    if (value !== undefined && value !== null) {
+        await inputField.selectOptionByLabel(value);
     }
 }

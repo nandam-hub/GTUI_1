@@ -13,6 +13,7 @@ import { searchTableRecord } from "../../../../ui/util/gw/helper";
 import { t } from "testcafe"
 import world from '../../../util/gw/world'
 import { ClaimSearch } from "../../../pages/gw/generated/claimsolutions/pages/search/claimSearchesGroup/ClaimSearch"
+import { validateTableRecord } from '../../../util/gw/helper'
 
 const searchTabBar = new SearchTabBar()
 const simpleClaimSearch = new SimpleClaimSearch()
@@ -48,7 +49,7 @@ export class SearchScenario {
     }
 
     async validateCheckDetailsHeader() {
-        await searchTableRecord(1, world.dataMap.get('Name'))
+        await t.expect(await validateTableRecord("Status", world.dataMap.get('Status'), 2)).eql(world.dataMap.get('Amount'))
         await t.expect((claimFinancialsChecksDetail_New.checkDetailsHeader).component.exists).ok();
     }
 

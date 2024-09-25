@@ -27,7 +27,7 @@ export function splitFunction(value, delimiter, index) {
 /**
  * Generates and returns random string with length provided
  * @param {Number} length - Length of the string to be generated
- * @returns - a random syring with provided length
+ * @returns - a random string with provided length
  */
 export function generateRandomStringFunction(length) {
     let randomString = '';
@@ -38,6 +38,18 @@ export function generateRandomStringFunction(length) {
     }
     return randomString;
 }
+
+/**
+ * Generates and returns random numbers with length provided
+ * @param {*} length Length of the number to be generated
+ * @returns  a random number with provided length
+ */
+export function generateRandomNumber(length) {
+    const min = Math.pow(10, length - 1);
+    const max = Math.pow(10, length) - 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 /** To convert string to Int
  * @param {string} inputString - String value that should be converted
  * @returns - Interger
@@ -105,7 +117,7 @@ export async function validateTableRecord(headerNameOrIndex, referenceCellValue,
     for (let i = 1; i < rowCount; i++) {
         const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
         if (cellText.includes(referenceCellValue)) {
-            actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget, div.gw-label')).textContent;
+            actualValue = await (tableRows.nth(i).find('td').nth(targetColumnIndex).find('div.gw-value-readonly-wrapper, div.gw-ActionValueWidget, div.gw-label, div.gw-actionable--inner')).textContent;
             break;
         }
     }
@@ -123,8 +135,8 @@ export function pascalToCamel(inputString) {
 
 /** 
  * To click on a record in a table with a specific text.
+ * @param {string} stringValue - Cell text value or id of the component on which click action should be performed
  * @param {string, Number} referenceCellValueOrIndex -Reference Cell text or column index
- * @param {string} stringValue - Cell text value or css component of the text on which click action should be performed
  */
 export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
     const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
@@ -226,6 +238,38 @@ export async function navigateAndClickSubmenu(menuPath, finalOptionText = null) 
     if (finalOptionText) {
         await t.click(currentSelector.find(`div[aria-label='${finalOptionText}']`));
     }
+}
+
+/**To return number of records of specific value from a table
+ * @param {string|Number} headerNameOrIndex - Column name or column index of reference cell value
+ * @param {string} referenceCellValue - Reference cell value
+ * @param {Number} targetColumnIndex - Column index where stringValue is present
+ * @returns - Number of matched records
+ */
+export async function getNumberOfTableRecords(headerNameOrIndex, referenceCellValue) {
+    await t.wait(1000)
+    const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');
+    const tablecols = tableRows.nth(0).find('td');
+    const rowCount = await tableRows.count;
+    //To find "headerNameOrIndex" is string or index
+    if (typeof headerNameOrIndex === 'string') {
+        const colsCount = await tablecols.count;
+        for (let i = 0; i < colsCount; i++) {
+            let cellText = await tablecols.nth(i).textContent;
+            if (cellText.includes(headerNameOrIndex) && cellText.trim() !== '' && cellText.trim() !== null) {
+                headerNameOrIndex = i;
+                break;
+            }
+        }
+    }
+    let actualValue = 0;
+    for (let i = 1; i < rowCount; i++) {
+        const cellText = await tableRows.nth(i).find('td').nth(Number.parseInt(headerNameOrIndex)).textContent;
+        if (cellText.includes(referenceCellValue)) {
+            actualValue++
+        }
+    }
+    return actualValue
 }
 
 /**

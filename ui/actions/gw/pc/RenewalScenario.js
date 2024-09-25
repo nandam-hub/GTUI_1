@@ -3,8 +3,9 @@ import { NavigationScenario } from "./NavigationScenario.js";
 import { Renewal_New } from "./scenarioPages/renewalWizard/Renewal_New.js";
 import { RenewalWizard_RenewalPopup } from "../../../pages/gw/generated/policysolutions/pages/popup/Renewal/RenewalWizard_RenewalPopup.js";
 import { JobComplete_New } from "../../../../ui/actions/gw/pc/scenarioPages/other/JobComplete_New.js";
-import { checkBox, selectInput, textInput } from "../../../util/gw/ActionHelper.js";
+import { checkBox, setInputValueIfExists} from "../../../util/gw/ActionHelper.js";
 import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext.js";
+import { LOBWizardStepGroupSubmissionWizard_Ext } from "./scenarioPages/navigation/submissionWizard/LOBWizardStepGroupSubmissionWizard_Ext"
 import world from "../../../../ui/util/gw/world"
 
 const navigationScenario = new NavigationScenario()
@@ -12,6 +13,7 @@ const renewal_New = new Renewal_New()
 const renewalWizard_RenewalPopup = new RenewalWizard_RenewalPopup()
 const jobComplete_New = new JobComplete_New()
 const policyMenuActions_Ext = new PolicyMenuActions_Ext()
+const lOBWizardStepGroupSubmissionWizard_Ext = new LOBWizardStepGroupSubmissionWizard_Ext()
 export class RenewalScenario {
 
   async initiatePolicyRenewal() {
@@ -44,15 +46,12 @@ export class RenewalScenario {
     console.log("Renewal is Successful")
   }
 
-  async gwHomeownersLine(section) {
+  async navigategwHomeownersLineTabSection(section) {
     t.ctx.module = 'Coverage'
     console.log(`The current module is ${t.ctx.module}`)
     switch (section) {
       case ('AdditionalCoverges'):
         await renewal_New.RenewalWizardAdditionalCoverage.click()
-        await checkBox("FirstAid")
-        await checkBox("LossAssessment")
-        await selectInput("LossAssessmentLimit")
         break;
       case ('SectionIICoverages'):
         await renewal_New.RenewalWizardSectionIICoverages.click()
@@ -69,16 +68,12 @@ export class RenewalScenario {
   }
 
   async smallBusinessTabSelection(tabSection) {
-    t.ctx.module = 'Coverage'
-    console.log(`The current module is ${t.ctx.module}`)
     switch (tabSection) {
       case ('SmallBusiness'):
         await renewal_New.RenewalWizardSmallBusienssTab.click()
         break;
       case ('SmallBusinessLineCoverages'):
         await renewal_New.RenewalWizardSmallBusinessLineCoveragesTab.click()
-        await checkBox("GeneralLiability")
-        await selectInput("GeneralLiabilityAggregateLimit")
         break;
       case ('SmallBusinessLineAdditionalCoverages'):
         await renewal_New.RenewalWizardSmallBusinessLineAdditionalCoveragesTab.click()
@@ -96,7 +91,7 @@ export class RenewalScenario {
     console.log(`The current module is ${t.ctx.module}`)
     await checkBox("OutsideObjectsAndStructures")
     await checkBox("EachLossCausedByWind")
-    await textInput("EachLossCausedByWindLimit")
+    await setInputValueIfExists(lOBWizardStepGroupSubmissionWizard_Ext.eachLossCausedByWindLimit, "EachLossCausedByWindLimit", world.coverageDataMap)
     await checkBox("Terrorism")
   }
 

@@ -32,4 +32,8 @@ export class NewAccount_Ext extends NewAccount {
     newAccountScreenNewAccountButton = PcfButton('#NewAccount-NewAccountScreen-NewAccountButton');
     newAccountButtonNewAccount_Company = PcfButton('#NewAccount-NewAccountScreen-NewAccountButton-NewAccount_Company');
     newAccountButtonNewAccount_FromAB = PcfButton('#NewAccount-NewAccountScreen-NewAccountButton-NewAccount_FromAB');
+    createAccountSSN = PcfTextInput('#CreateAccount-CreateAccountScreen-CreateAccountDV-OfficialIDInputSet-OfficialIDDV_Input')
+    createAccountDescription = PcfTextInput('#CreateAccount-CreateAccountScreen-CreateAccountDV-AddressDescription')
+    createAccountOrganizationType = PcfSelectInput('#CreateAccount-CreateAccountScreen-CreateAccountDV-OrgType')
+    createAccountFEIN = PcfTextInput('#CreateAccount-CreateAccountScreen-CreateAccountDV-OfficialIDInputSet-OfficialIDDV_Input')
 }

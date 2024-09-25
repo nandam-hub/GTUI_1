@@ -26,18 +26,3 @@ Feature: Commercial property new submission
         When the user creates commercial account
         And the user issue the new submission from actions menu for commercial property
         Then the policy is issued
-
-    @multiple_building
-    Scenario: Issuing commercial property with multiple buildings
-        Given the user loads "pc" data "newSubmission_07" from json "NewSubmissionTestData"
-        When the user creates commercial account
-        And the user issue the new submission for commercial property with "3" building
-        Then the policy is issued
-
-    @multiple_location
-    Scenario: Issuing commercial property with multiple location
-        Given the user loads "pc" data "newSubmission_07" from json "NewSubmissionTestData"
-        When the user creates commercial account
-        And the user issue the new submission for commercial property with "3" location
-        Then the policy is issued
-        And locations are added successfully

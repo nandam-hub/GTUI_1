@@ -6,6 +6,10 @@ import { AddressBookTabBar } from "../../../../ui/pages/gw/generated/claimsoluti
 import { NewClaimSaved } from "../../../../ui/pages/gw/generated/claimsolutions/pages/other/NewClaimSaved"
 import { navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
 import { ClaimMenuLinks_Ext } from "./scenarioPages/navigation/menuLinks/ClaimMenuLinks_Ext"
+import { ServerToolsMenuActions } from "../../../pages/gw/generated/claimsolutions/pages/navigation/menuActions/ServerToolsMenuActions"
+import { BatchProcessInfo_Ext } from "./scenarioPages/serverTools/BatchProcessInfo_Ext"
+import { ClaimMenuActions } from "../../../pages/gw/generated/claimsolutions/pages/navigation/menuActions/ClaimMenuActions"
+import { ClaimExposures } from "../../../pages/gw/generated/claimsolutions/pages/claim/ClaimExposures"
 import { t } from "testcafe"
 
 const claimMenuLinks = new ClaimMenuLinks()
@@ -15,6 +19,10 @@ const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const addressBookTabBar = new AddressBookTabBar()
 const newClaimSaved = new NewClaimSaved()
 const claimMenuLinks_Ext = new ClaimMenuLinks_Ext()
+const claimMenuActions = new ClaimMenuActions();
+const claimExposures = new ClaimExposures();
+const serverToolsMenuActions = new ServerToolsMenuActions()
+const batchProcessInfo_Ext = new BatchProcessInfo_Ext()
 
 
 export class NavigationScenario {
@@ -43,7 +51,7 @@ export class NavigationScenario {
     await claimMenuLinks.menuLinksClaim_ClaimWorkplan.click()
   }
 
-  async ClickClaimMenuAction() {
+  async clickClaimMenuAction() {
     await claimMenuActions_Ext.claimClaimMenuActions.click()
   }
 
@@ -84,12 +92,43 @@ export class NavigationScenario {
     await navigateAndClickSubmenu(['Contacts'])
   }
 
+  async navigateToExposureScreen(){
+    await claimMenuLinks.menuLinksClaim_ClaimExposures.click();
+  }
+  async navigateToPrintExportScreen(){
+    await claimExposures.claimExposuresScreenClaimExposures_Print.click();
+  }
   async navigateToReserve() {
     await claimMenuActions_Ext.claimMenuActions_NewTransactionClaimMenuActions_NewTransaction_ReserveSet.click()
   }
 
-  async navigateToCheck(){
+  async navigateToCheckFromActions() {
     await claimMenuActions_Ext.claimClaimMenuActions.click()
     await navigateAndClickSubmenu(['Check'])
+  }
+
+  async navigateToDocuments(){
+    await claimMenuLinks.menuLinksClaim_ClaimDocuments.click()
+  }
+
+  async navigateToEvaluationScreen()
+  {
+    await claimMenuActions.claimMenuActions_NewOtherClaimMenuActions_NewEvaluation.click();
+  }
+
+  async returnToClaimCenter() {
+    await serverToolsMenuActions.internalToolsMenuActionsReturnToApp.click()
+  }
+
+  async navigateToBatchProcessInfoScreen() {
+    await t.wait(5000)
+    await t.pressKey('alt+shift+t')
+    await t.wait(5000)
+    await t.expect(await batchProcessInfo_Ext.batchProcessTitleBar.component.exists).ok()
+  }
+
+  async navigateToCheckFromFinancials() {
+    await claimMenuLinks_Ext.financials.click()
+    await claimMenuLinks_Ext.checks.click()
   }
 }

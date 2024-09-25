@@ -1,4 +1,4 @@
-@claimcenter @designatedfunction
+@claimcenter @designatedfunction @view_cliam
 Feature: View Claim Summary
     As a user, I want to view claim summary page
 

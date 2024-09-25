@@ -1,10 +1,12 @@
-const { When, Then } = require('@cucumber/cucumber')
+const { When, Then, Given } = require('@cucumber/cucumber')
 import { NewSubmissionScenario } from '../../../../ui/actions/gw/pc/NewSubmissionScenario'
-import { NavigationScenario } from '../../../../ui/actions/gw/pc/NavigationScenario'
+import { AccountScenario } from '../../../../ui/actions/gw/pc/AccountScenario'
+import { NavigationScenario } from "../../../../ui/actions/gw/pc/NavigationScenario";
 import { t } from 'testcafe'
 
 const newSubmissionScenario = new NewSubmissionScenario()
 const navigationScenario = new NavigationScenario()
+const accountScenario = new AccountScenario();
 
 When('the user bind the new submission', async function () {
     await newSubmissionScenario.bindPolicy()
@@ -38,6 +40,7 @@ When('the user quote the new submission for homeowners', async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.gWHomeownersLineScreen()
     await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await newSubmissionScenario.addHomeOwnersAdditionalCoverages()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
@@ -52,6 +55,7 @@ When('the user quote the new submission for small business', async function (t) 
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.smallBusinessBusinessType()
     await navigationScenario.navigateSmallBusinessTabSelection('SmallBusinessLineCoverages')
+    await newSubmissionScenario.addSmallBusinessLineCoverages()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
@@ -66,6 +70,7 @@ When('the user issue the new submission for small business', async function (t) 
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.smallBusinessBusinessType()
     await navigationScenario.navigateSmallBusinessTabSelection('SmallBusinessLineCoverages')
+    await newSubmissionScenario.addSmallBusinessLineCoverages()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
@@ -181,6 +186,7 @@ When('the user issue the new homeowner policy', async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.gWHomeownersLineScreen()
     await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await newSubmissionScenario.addHomeOwnersAdditionalCoverages()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
@@ -195,6 +201,7 @@ When('the user issue the new submission from actions menu for homeowner policy',
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.gWHomeownersLineScreen()
     await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await newSubmissionScenario.addHomeOwnersAdditionalCoverages()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
@@ -209,7 +216,9 @@ When('the user adds specific coverges to homeowner policy', async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.gWHomeownersLineScreen()
     await navigationScenario.navigateGWHomeownersLineTab('SectionIICoverages')
+    await newSubmissionScenario.addHomeOwnerSectionIICoverages()
     await navigationScenario.navigateGWHomeownersLineTab('AdditionalCoverges')
+    await newSubmissionScenario.addHomeOwnersAdditionalCoverages()
     await navigationScenario.navigateGWHomeownersLineTab('Exclusions&Conditions')
     await newSubmissionScenario.homeOwnersAddExclusionOrConditionScreen()
     await newSubmissionScenario.quote()
@@ -307,6 +316,7 @@ When('the user initiates quote for small business', async function () {
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.smallBusinessBusinessType()
     await navigationScenario.navigateSmallBusinessTabSelection('SmallBusinessLineCoverages')
+    await newSubmissionScenario.addSmallBusinessLineCoverages()
     await newSubmissionScenario.clickNext()
 })
 
@@ -328,6 +338,25 @@ When(/^the user issue the new submission for personal auto with (.*) drivers/, a
 })
 
 When('the user proceeds and issues policy', async function () {
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.quote()
+    await newSubmissionScenario.verifyQuote()
+    await newSubmissionScenario.issuePolicy()
+})
+
+Given('the user issues new Auto policy', async function () {
+    await navigationScenario.navigateNewAccountScreen()
+    await accountScenario.createPersonalAccount()
+    await accountScenario.organizationSearchPopup()
+    await accountScenario.createAccountNumber()
+    await navigationScenario.navigateNewSubmissionScreenActionsMenu()
+    await newSubmissionScenario.selectProduct()
+    await newSubmissionScenario.policyInfo()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.usaPersonalAutoStandardCoverages()
+    await newSubmissionScenario.clickNext()
+    await newSubmissionScenario.personalVehicle()
+    await newSubmissionScenario.clickNext()
     await newSubmissionScenario.clickNext()
     await newSubmissionScenario.quote()
     await newSubmissionScenario.verifyQuote()

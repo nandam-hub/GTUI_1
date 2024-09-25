@@ -13,7 +13,7 @@ const searchScenario = new SearchScenario()
 When('the user creates BI Liability exposure', async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
-    await navigationScenario.ClickClaimMenuAction()
+    await navigationScenario.clickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type', 'U'], 'Uninsured Motorist - Bodily Injury')
     await exposureScenario.newExposure()
     await exposureScenario.injuryIncident()
@@ -23,7 +23,7 @@ When('the user creates BI Liability exposure', async function () {
 When('the user creates UMBI Liability exposure', async function () {
     await searchScenario.claimSimpleSearch(t.ctx.claimNo)
     await searchTableRecord(3, t.ctx.claimNo)
-    await navigationScenario.ClickClaimMenuAction()
+    await navigationScenario.clickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type', 'U'], 'Underinsured Motorist - Bodily Injury')
     await exposureScenario.newExposure()
     await exposureScenario.injuryIncident()
@@ -31,7 +31,7 @@ When('the user creates UMBI Liability exposure', async function () {
 });
 
 When('the user creates medical payments exposure', async function () {
-    await navigationScenario.ClickClaimMenuAction()
+    await navigationScenario.clickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type', 'M'], 'Medical Payments')
     await exposureScenario.newExposure()
     await exposureScenario.injuryIncident()
@@ -39,7 +39,7 @@ When('the user creates medical payments exposure', async function () {
 });
 
 When('the user creates property exposure', async function () {
-    await navigationScenario.ClickClaimMenuAction()
+    await navigationScenario.clickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type'], 'Building Coverage')
     await exposureScenario.newExposureProperty()
     await exposureScenario.propertyIncident()

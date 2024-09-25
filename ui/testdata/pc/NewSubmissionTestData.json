@@ -14,7 +14,8 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "Screenname": "Policy Review"
     },
     "newSubmission_01": {
@@ -28,7 +29,9 @@
                 "VinNumber": "JH4KA2630HC019837",
                 "Year": "1987",
                 "Make": "Acura",
-                "Model": "Legend"
+                "Model": "Legend",
+                "AnnualMileage": "14000",
+                "PersonalUse": "Pleasure"
             }
         },
         "Address1": "1737 HURLEY",
@@ -36,12 +39,14 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
             "PropertyProtectionInsurance": "check",
-            "PropertyProtectionInsurancePropertyProtectionLimits": "1,000,000"
+            "PropertyProtectionInsurancePropertyProtectionLimits": "1,000,000",
+            "MedicalLimit": "5,000"
         }
     },
     "newSubmission_02": {
@@ -52,7 +57,8 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "RefusalType": "Cancelled",
         "Coverage": {
             "CoverageEPersonalLiability": "check",
@@ -75,7 +81,8 @@
         "State": "Idaho",
         "ZIPCode": "83814-5113",
         "AddressType": "Billing",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "UmbrellaLiabilityorExcessLiability": "Umbrella Liability",
         "Coverage": {
             "UmbrellaLiability": "update",
@@ -92,7 +99,8 @@
         "State": "Idaho",
         "ZIPCode": "83814-5113",
         "AddressType": "Billing",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "OrganizationType": "Common ownership",
         "Coverage": {
             "EachLossCausedByWind": "check",
@@ -112,7 +120,8 @@
         "State": "Idaho",
         "ZIPCode": "83814-5113",
         "AddressType": "Billing",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "OrganizationType": "Common ownership",
         "BusinessType": "Apartment",
         "Coverage": {
@@ -132,18 +141,25 @@
                 "VinNumber": "JH4KA2630HC019837",
                 "Year": "1987",
                 "Make": "Acura",
-                "Model": "Legend"
+                "Model": "Legend",
+                "AnnualMileage": "14000",
+                "PersonalUse": "Pleasure"
             },
             "Vehicle2": {
                 "BodyType": "Snowmobile",
-                "VinNumber": "3G5DB03E42S524192"
+                "VinNumber": "3G5DB03E42S524192",
+                "AnnualMileage": "6000",
+                "PersonalUse": "Pleasure",
+                "Year": "1992"
             },
             "Vehicle3": {
                 "BodyType": "Trailer",
                 "VinNumber": "7678476FCV7876352",
                 "Year": "2020",
                 "Make": "HOMEMADE",
-                "Model": "TRAILER"
+                "Model": "TRAILER",
+                "AnnualMileage": "8000",
+                "PersonalUse": "Pleasure"
             }
         },
         "Address1": "1737 HURLEY",
@@ -151,10 +167,12 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
-            "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10"
+            "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
+            "MedicalLimit": "5,000"
         }
     },
     "newSubmission_07": {
@@ -163,7 +181,8 @@
         "State": "Idaho",
         "ZIPCode": "83814-5113",
         "AddressType": "Billing",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "OrganizationType": "Common ownership",
         "LocationAdded": "3: 789 Main st, Pewaukee, ID",
         "Coverage": {
@@ -209,7 +228,9 @@
                 "VinNumber": "JH4KA2630HC019837",
                 "Year": "1987",
                 "Make": "Acura",
-                "Model": "Legend"
+                "Model": "Legend",
+                "AnnualMileage": "14000",
+                "PersonalUse": "Pleasure"
             }
         },
         "Address1": "1737 HURLEY",
@@ -217,10 +238,12 @@
         "State": "Florida",
         "ZIPCode": "53072-0000",
         "AddressType": "Home",
-        "Organization": "a",
+        "Organization": "e",
+        "ProducerCode": "QA1PRODUCER01 QA1PRODUCER01",
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
-            "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10"
+            "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
+            "MedicalLimit": "5,000"
         },
         "Drivers": {
             "Driver1": {

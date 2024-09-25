@@ -10,11 +10,11 @@ import { SubmissionWizard_New } from "./scenarioPages/navigation/submissionWizar
 import { CLLLocationPopup_New } from "./scenarioPages/popup/CLLCP/CLLLocationPopup_New.js";
 import { Summary_Ext } from "../../../actions/gw/pc/scenarioPages/policy/Summary_Ext"
 import { PolicyChangeWizard_New } from "./scenarioPages/policy/PolicyChangeWizard_New"
-import { AccountMenuActions} from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/menuActions/AccountMenuActions.js"
+import { AccountMenuActions } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/menuActions/AccountMenuActions.js"
 import { PolicyMenuLinks } from "../../../pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks";
 import { RiskAnalysis_Ext } from "./scenarioPages/policy/RiskAnalysis_Ext";
 import { PolicyMenuActions_Ext } from "./scenarioPages/navigation/menuActions/PolicyMenuActions_Ext";
-import { checkBox, selectInput } from "../../../util/gw/ActionHelper.js";
+import { checkBox} from "../../../util/gw/ActionHelper.js";
 
 import { t } from "testcafe";
 import { navigateAndClickSubmenu } from "../../../util/gw/helper";
@@ -92,17 +92,12 @@ export class NavigationScenario {
   }
 
   async navigateSmallBusinessTabSelection(tabSection) {
-    t.ctx.module = 'Coverage'
-    console.log(`The current module is ${t.ctx.module}`)
     switch (tabSection) {
       case ('SmallBusiness'):
         await submissionWizard_New.submissionWizardSmallBusienssTab.click()
         break;
       case ('SmallBusinessLineCoverages'):
         await submissionWizard_New.submissionWizardSmallBusinessLineCoveragesTab.click()
-        await checkBox("GeneralLiability");
-        await selectInput("GeneralLiabilityOccurrenceLImit")
-        await selectInput("GeneralLiabilityAggregateLimit")
         break;
       case ('SmallBusinessLineAdditionalCoverages'):
         await submissionWizard_New.submissionWizardSmallBusinessLineAdditionalCoveragesTab.click()
@@ -115,22 +110,13 @@ export class NavigationScenario {
     }
   }
 
-  async navigateGWHomeownersLineTab(tabSection) {
-    t.ctx.module = 'Coverage'
-    console.log(`The current module is ${t.ctx.module}`)
+  async navigateGWHomeownersLineTab(tabSection) {    
     switch (tabSection) {
       case ('AdditionalCoverges'):
-        await submissionWizard_New.submissionWizardAdditionalCoverage.click()
-        await checkBox("IdentityTheftProtection")
-        await selectInput("IdentityTheftProtectionLimit")
-        await selectInput("IdentityTheftProtectionDeductible")
+        await submissionWizard_New.submissionWizardAdditionalCoverage.click()  
         break;
       case ('SectionIICoverages'):
         await submissionWizard_New.submissionWizardSectionIICoverages.click()
-        await checkBox("CoverageEPersonalLiability")
-        await selectInput("CoverageEPersonalLiabilityLimit")
-        await checkBox("CoverageFMedicalPayments")
-        await selectInput("CoverageFMedicalPaymentsLimit")
         break;
       case ('Optional Coverages'):
         await submissionWizard_New.submissionWizardOptionalCoverages.click()
@@ -191,8 +177,7 @@ export class NavigationScenario {
     await navigateAndClickSubmenu((['Pre-Renewal Direction']))
   }
 
-  async navigateToNewActivity()
-  {
+  async navigateToNewActivity() {
     await navigateAndClickSubmenu(['New Activity', 'Interview'], 'Meet with Insured')
   }
 }

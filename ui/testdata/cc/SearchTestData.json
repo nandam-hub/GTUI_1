@@ -20,8 +20,8 @@
         "State": "Wisconsin"
     },
     "searchPolicy_01": {
-        "PolicyNumber": "PA23789",
-        "ClaimNo": "000-00-000562"
+        "PolicyNumber": "0000707633",
+        "ClaimNo": "000-00-000006"
     },
     "searchPolicy_02": {
         "PolicyNumber": "7407354463",
@@ -46,17 +46,16 @@
         "State": "Wisconsin"
     },
     "searchCheck_01": {
-        "ClaimNumber": "000-00-000554",
-        "Name": "TEST Auto"
+        "ClaimNumber": "000-00-000168",
+        "Status":"Requesting",
+        "Amount":"$100.00"
     },
     "searchContact_01": {
         "Type": "Contact",
         "LastName": "test",
-        "Name": "driver test"
+        "Name": "test test"
     },
     "advanceSearch_01": {
-        "SearchFor": "insured",
-        "LastName": "rjbf",
-        "ClaimNo": "000-00-002399"
+        "SearchFor": "insured"
     }
 }
