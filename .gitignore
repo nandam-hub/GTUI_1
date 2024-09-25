@@ -1,10 +1,2 @@
 node_modules
-.gradle
-api
-gradle
-repository
-build.gradle
-gradle.properties
-gradlew
-gradlew.bat
 reports
