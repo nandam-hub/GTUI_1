@@ -12,5 +12,5 @@ export class NormalCreateCheckWizard_New {
     paymentType = PcfSelectInput('#NormalCreateCheckWizard-CheckWizard_CheckPaymentsScreen-NewCheckPaymentPanelSet-NewPaymentDetailDV-Payment_PaymentType')
     amount = PcfTextInput('#NormalCreateCheckWizard-CheckWizard_CheckPaymentsScreen-NewCheckPaymentPanelSet-NewPaymentDetailDV-EditablePaymentLineItemsLV-0-Amount')
     finsh = PcfButton('#NormalCreateCheckWizard-Finish')
-    financialChecksHeader = PcfComponent('#ClaimFinancialsChecks-ClaimFinancialsChecksScreen-ttlBar > div.gw-TitleBar--titles--container')
+    financialChecksHeader = PcfComponent('#ClaimFinancialsChecks-ClaimFinancialsChecksScreen-ttlBar > div.gw-TitleBar--titles--container')    
 }

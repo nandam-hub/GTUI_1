@@ -12,7 +12,7 @@ Feature: Creating and verifying disbursment
         When the user creates a disbursement
         Then the disbursement created successfully
 
-    @automatic_disbursement
+    @automatic_disbursement  @quick
     Scenario: Creating automatic disbursement
         Given the user logs into the policy center as "superuser"
         And the user loads "pc" data "newSubmission_02" from json "NewSubmissionTestData"

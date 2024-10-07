@@ -107,6 +107,12 @@ export class NavigationScenario {
     await navigateAndClickSubmenu(['Check'])
   }
 
+  async navigateToManualCheckFromActions()
+  {
+    await claimMenuActions_Ext.claimClaimMenuActions.click()
+    await navigateAndClickSubmenu(['Other'],'Manual Check')
+  }
+
   async navigateToDocuments(){
     await claimMenuLinks.menuLinksClaim_ClaimDocuments.click()
   }

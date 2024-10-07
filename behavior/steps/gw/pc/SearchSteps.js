@@ -4,11 +4,18 @@ import { SearchScenario } from "../../../../ui/actions/gw/pc/SearchScenario";
 import { AccountSummaryScenario } from "../../../../ui/actions/gw/pc/AccountSummaryScenario";
 import { clickTableRecord, searchTableRecord } from "../../../../ui/util/gw/helper";
 import world from "../../../../ui/util/gw/world";
-import { t } from "testcafe"
+import { Selector, t } from "testcafe"
+import { downloadAndMovePdf, fetchFileFromSharedLocation} from '../../../../ui/util/gw/PdfDownloadHelper'
+import { PolicyMenuLinks } from "../../../../ui/pages/gw/generated/policysolutions/pages/navigation/menuLinks/PolicyMenuLinks";
 
 const navigationScenario = new NavigationScenario()
 const searchScenario = new SearchScenario()
 const accountSummaryScenario = new AccountSummaryScenario()
+const policyMenuLinks = new PolicyMenuLinks()
+
+When('the user moves file from shared location', async function () {
+    await fetchFileFromSharedLocation()
+});
 
 When('the user searches for the policy with policy number', async function () {
     await navigationScenario.navigateSearchPolicyScreen()

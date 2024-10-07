@@ -1,6 +1,6 @@
 const { When, Then } = require("@cucumber/cucumber")
 import { t } from "testcafe";
-import { FnolScenario } from "../../../../ui/actions/gw/cc/FnolScenario";
+import { FnolScenario } from "../../../../ui/actions/gw/cc/FNOLScenario";
 import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
 import { searchTableRecord, findTable } from "../../../../ui/util/gw/helper";

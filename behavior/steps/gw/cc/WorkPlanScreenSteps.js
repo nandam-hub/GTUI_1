@@ -10,8 +10,17 @@ When('the user completes the activity work plan', async function () {
     await workPlanScenario.workPlanActivity()
 });
 
+When('the user update the work plan', async function () {
+    await navigationScenario.navigateClaimWorkplan()
+    await workPlanScenario.workPlanUpdate()
+});
+
 Then('the activity work plan status is completed', async function () {
     await workPlanScenario.workPlanActivityStatusValidation()
+});
+
+Then('the work plan update is completed', async function () {
+    await workPlanScenario.workPlanUpdateValidation()
 });
 
 When('the user completes all workplan activities', async function () { 

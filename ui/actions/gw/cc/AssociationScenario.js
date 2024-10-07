@@ -1,7 +1,7 @@
 import { ClaimAssociations } from "../../../pages/gw/generated/claimsolutions/pages/claim/claimLossDetailsGroup/ClaimAssociations"
 import { NewClaimAssociation_Ext } from "./scenarioPages/claim/NewClaimAssociation_Ext"
 import { ClaimSearchPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/Claim/ClaimSearchPopup"
-import { ClaimSearchPopup_New } from "./scenarioPages/claim/ClaimSearchPopup_New"
+import { ClaimSearchPopup_New } from "./scenarioPages/claim/ClaimSearchPopup_new"
 import world from "../../../util/gw/world"
 import { t } from "testcafe"
 import { generateRandomStringFunction, validateTableRecord } from "../../../util/gw/helper"

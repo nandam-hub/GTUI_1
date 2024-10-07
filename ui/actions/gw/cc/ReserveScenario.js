@@ -48,4 +48,8 @@ export class ReserveScenario {
         await t.expect(await validateTableRecord("Cost Category", world.dataMap.get(`CostCategory${i}`), 6)).contains(world.dataMap.get(`CostCategory${i}`))
         }
     }
+
+    async validateAutomaticeReserve() {
+        await t.expect(await validateTableRecord("Cost Category", world.dataMap.get(`CostCategory`), 1)).contains(world.dataMap.get(`Exposure`))
+    }
 }

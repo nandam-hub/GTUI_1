@@ -38,6 +38,11 @@ export class ExposureScenario {
         await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimPropertyDamageDVNewClaimIncidentInputSetProperty_IncidentNewClaimPropertyDamageDV_NewIncidentMenuItem.click()
     }
 
+    async liabilityVehicleDamagaExposure() {
+        await newExposure_Ext.exposureClaimant.selectOptionByLabel(t.ctx.insuredName)
+        await newExposure_Ext.newExposureNewExposureScreenNewExposureDVNewClaimVehicleDamageDVClaimant_Type.selectOptionByLabel(world.dataMap.get('Type'))
+    }
+
     async injuryIncident() {
         await newInjuryIncidentPopup.newInjuryIncidentPopupNewInjuryIncidentScreenInjuryIncidentDVInjuryIncidentInputSetLossParty.selectOptionByValue(world.dataMap.get('LossParty'))
         await newInjuryIncidentPopup.newInjuryIncidentScreenUpdate.click()

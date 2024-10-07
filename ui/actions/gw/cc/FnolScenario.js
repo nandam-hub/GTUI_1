@@ -70,6 +70,10 @@ export class FnolScenario {
         t.ctx.claimNo = splitFunction(await newClaimSaved_Ext.newClaimDVAssignedHeader.component.innerText, " ", 1)
         console.log("The claim number is: " + t.ctx.claimNo)
     }
+    async readClaimNumber1() {
+        t.ctx.claimNo1 = splitFunction(await newClaimSaved_Ext.newClaimDVAssignedHeader.component.innerText, " ", 1)
+        console.log("The claim number is: " + t.ctx.claimNo)
+    }
 
     async addVehicleWithCoverage(vehicleNum) {
         for (let i = 1; i <= vehicleNum; i++) {

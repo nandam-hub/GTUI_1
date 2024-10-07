@@ -1,6 +1,8 @@
 const moment = require('moment');
 import { t, Selector } from 'testcafe';
-import { PcfComponent } from '@gtui/gt-ui-framework';
+const xlsx = require('xlsx');
+const fs = require('fs');
+import { deleteFileAfterUse, relocatePdf } from './PdfDownloadHelper';
 
 /**
  * To generate date from current date in MMDDYYYY format
@@ -304,4 +306,45 @@ export async function findTable(identifierColumnHeader) {
             break;
     }
     return foundTable;
+}
+
+/**
+* Function to check if all cells in the last column are TRUE.
+* @param {string} filePath - The path to the Excel file.
+* @returns {boolean} - Returns true if all cells in the last column are TRUE, otherwise false.
+*/
+export async function validateLastColumnTrue() {
+    // Read the Excel file
+    const workbook = xlsx.readFile(t.ctx.dataFilePath);
+    const sheetName = workbook.SheetNames[0]; // Get the first sheet
+    const sheet = workbook.Sheets[sheetName];
+
+    // Convert the sheet data to a JSON object
+    const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1 });
+
+    // Get the last column index (based on the first row)
+    const lastColumnIndex = jsonData[0].length - 1;
+
+    // Iterate through the rows and check if the last column is TRUE
+    for (let i = 1; i < jsonData.length; i++) {
+        const cellValue = jsonData[i][lastColumnIndex];
+        if (cellValue !== true) {
+            console.log("Match is false")
+            await relocatePdf()
+            await t.expect(isValid).ok('Not all cells are True');
+        }
+    }
+
+    await deleteFileAfterUse(); // All cells in the last column are TRUE
+}
+
+export async function verifyCompleteMatch(response){
+    if (response.completematch) {
+        await deleteFileAfterUse()
+    }
+    else {
+        console.log("response.completematch is false")
+        await relocatePdf()
+        await t.expect(response.completematch).eql(true)
+    }
 }

@@ -36,3 +36,15 @@ Feature: Create recovery reserve in Claim center
         When the user loads "cc" data "createMultipleReserve_02" from json "ReserveTestData"
         And the user creates 6 reserve
         Then the 6 reserves are created successfully
+
+    @automatic_reserve
+    Scenario: Validate the automatic reserve is created in the claim center
+        Given the user logs into the claims center as "adjuster"
+        And the user loads "cc" data "createActivity_02" from json "FNOLTestData"
+        When the user create new FNOL for USAPersonalAuto
+        And the FNOL is added successfully
+        And the user loads "cc" data "vehicleIncident_01" from json "CreateIncidentTestData"
+        And the user creates vehicle incident
+        And the user loads "cc" data "automaticReserve_01" from json "ReserveTestData"
+        And the user creates liability vehicle damage exposure
+        Then the automatic reserve is created successfully

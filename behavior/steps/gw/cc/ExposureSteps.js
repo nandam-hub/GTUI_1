@@ -39,10 +39,18 @@ When('the user creates medical payments exposure', async function () {
 });
 
 When('the user creates property exposure', async function () {
+    await navigationScenario.openClaim(t.ctx.claimNo);
     await navigationScenario.clickClaimMenuAction()
     await navigateAndClickSubmenu(['Choose by Coverage Type'], 'Building Coverage')
     await exposureScenario.newExposureProperty()
     await exposureScenario.propertyIncident()
+    await exposureScenario.clickOnUpdate()
+});
+
+When('the user creates liability vehicle damage exposure', async function () {
+    await navigationScenario.clickClaimMenuAction()
+    await navigateAndClickSubmenu(['Choose by Coverage Type', 'L'], 'Liability - Vehicle Damage')
+    await exposureScenario.liabilityVehicleDamagaExposure()
     await exposureScenario.clickOnUpdate()
 });
 

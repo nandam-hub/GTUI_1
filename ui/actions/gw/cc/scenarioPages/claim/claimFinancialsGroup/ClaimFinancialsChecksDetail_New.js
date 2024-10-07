@@ -9,4 +9,6 @@ export class ClaimFinancialsChecksDetail_New {
     reasonForVoidOrStop = PcfTextInput('#VoidStopCheck-VoidStopCheckScreen-VoidStopCheckDV-Comments')
     upToFinancialsChecks = PcfComponent('#ClaimFinancialsChecksDetail-ClaimFinancialsChecksDetail_UpLink')
     grossAmountLink = PcfComponent('#ClaimFinancialsChecks-ClaimFinancialsChecksScreen-ChecksLV-0-GrossAmount > div > div')
+    searchClaimNumber = PcfButton('#CheckTransfer-CheckTransferScreen-CheckTransferDV-Claim-SelectClaim')
+    transferButton = PcfButton('#CheckTransfer-CheckTransferScreen-CheckTransfer_TransferButton')
 }  

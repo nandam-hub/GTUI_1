@@ -6,4 +6,5 @@ export class NewExposure_Ext extends NewExposure {
     newExposureInjuryIncidentMenuIcon = PcfComponent("#NewExposure-NewExposureScreen-NewExposureDV-BIDamageInputSet-Injury_Incident-Injury_IncidentMenuIcon")
     newExposurePropertyIncidentMenuIcon = PcfComponent("#NewExposure-NewExposureScreen-NewExposureDV-NewClaimPropertyDamageDV-NewClaimIncidentInputSet-Property_Incident-Property_IncidentMenuIcon")
     newExposureClaimant_Picker = PcfSelectInput('#NewExposure-NewExposureScreen-NewExposureDV-NewClaimPropertyDamageDV-Claimant_Picker');
+    exposureClaimant = PcfSelectInput('#NewExposure-NewExposureScreen-NewExposureDV-NewClaimVehicleDamageDV-Claimant_Picker > div.gw-vw--value')
 }
