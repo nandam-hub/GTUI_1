@@ -17,10 +17,10 @@ Given(/^the user logs into the billing center as (.*)/, async (t, stepArguments)
 });
 
 Given(/^the user logs into the policy center as (.*)/, async function (t, stepArguments) {
-    role = stepArguments[0].replace(/["]/g, "")
-    await t.navigateTo(process.env["PC_URL"]);
-    await onPCApp.loginWithRole(role)
-    await t.wait(100);
+        role = stepArguments[0].replace(/["]/g, "")
+        await t.navigateTo(process.env["PC_URL"]);
+        await onPCApp.loginWithRole(role)
+        await t.wait(100);
 });
 
 Given(/^the user logs into the claims center as (.*)/, async function (t, stepArguments) {

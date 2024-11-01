@@ -84,4 +84,8 @@ export class ExposureScenario {
             }
         }
     }
+
+    async validateNewExposure() {
+        await t.expect((claimMenuActions_Ext.claimMenuActionsClaimMenuActions_NewExposure).component.exists).notOk();
+    }
 }

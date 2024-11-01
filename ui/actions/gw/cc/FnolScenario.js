@@ -5,8 +5,11 @@ import { NewClaimSaved_Ext } from "./scenarioPages/other/NewClaimSaved_Ext"
 import { NewClaimWizard_NewPolicyVehiclePopup_Ext } from "./scenarioPages/popup/New/NewClaimWizard_NewPolicyVehiclePopup_Ext"
 import { ClaimMenuActions_Ext } from "./scenarioPages/navigation/menuActions/ClaimMenuActions_Ext"
 import { CloseClaimPopup_Ext } from "./scenarioPages/popup/New/Close/CloseClaimPopup_Ext"
+import { ClaimLossDetails_Ext } from "./scenarioPages/claim/claimLossDetailsGroup/ClaimLossDetails_Ext"
+import { AssignClaimsPopup } from "../../../pages/gw/generated/claimsolutions/pages/popup/Assign/AssignClaimsPopup"
 import world from "../../../../ui/util/gw/world"
 import { t } from "testcafe"
+import { validateTableRecord } from "../../../util/gw/helper"
 
 const fNOLWizard_Ext = new FNOLWizard_Ext();
 const newContactPopup = new NewContactPopup()
@@ -14,6 +17,8 @@ const newClaimSaved_Ext = new NewClaimSaved_Ext()
 const newClaimWizard_NewPolicyVehiclePopup_Ext = new NewClaimWizard_NewPolicyVehiclePopup_Ext()
 const claimMenuActions_Ext = new ClaimMenuActions_Ext()
 const closeClaimPopup_Ext = new CloseClaimPopup_Ext()
+const claimLossDetails_Ext = new ClaimLossDetails_Ext()
+const assignClaimsPopup = new AssignClaimsPopup()
 
 export class FnolScenario {
     async searchOrCreatePolicy(policyNumber = world.dataMap.get('PolicyNumber')) {
@@ -136,5 +141,25 @@ export class FnolScenario {
         await t.typeText(closeClaimPopup_Ext.closeClaimPopupTextArea.component, world.dataMap.get('CloseClaimText'))
         await closeClaimPopup_Ext.closeClaimInfoDVOutcome.selectOptionByLabel(world.dataMap.get('CloseClaimOutcome'))
         await closeClaimPopup_Ext.closeClaimScreenUpdate.click()
+    }
+
+    async validateFutureLossDateNotification() {
+        await t.expect(await fNOLWizard_Ext.fNOLWizardFindPolicyScreenmsgs.component.textContent).eql(world.dataMap.get('Validation'))
+        console.log(world.dataMap.get('Validation'))
+    }
+
+    async updateLoss() {
+        await claimLossDetails_Ext.claimLossDetailsScreenEdit.click();
+        await claimLossDetails_Ext.lossDetailsDVLossCause.selectOptionByLabel(world.dataMap.get('LossCause'));
+        await claimLossDetails_Ext.claimLossDetailsScreenUpdate.click();
+    }
+
+    async assignClaim() {        
+        await claimMenuActions_Ext.claimMenuActions_ClaimActionsClaimMenuActions_Assign.click()
+        await assignClaimsPopup.assignClaimsPopupAssignmentPopupScreenAssignmentPopupDVAssignmentPopupScreen_ButtonButton.click()
+    }
+
+    async validateClaimAssignment() {
+        await t.expect(await validateTableRecord("Type", "Assigned", 4)).notEql(world.dataMap.get('Description'))
     }
 }

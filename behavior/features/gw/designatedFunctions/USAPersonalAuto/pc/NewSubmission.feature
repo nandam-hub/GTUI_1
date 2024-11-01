@@ -6,14 +6,14 @@ Feature: Personal auto new submission
     Background: Login as superuser
         Given the user logs into the policy center as "superuser"
 
-    @quote_submission
+    @quote_submission_personal
     Scenario: Creating personal auto quote
         Given the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         When the user creates personal account
         And the user quote the new submission for personal auto
         Then the quote is saved successfully
 
-    @bind_submission
+    @bind_submission_personal
     Scenario: Creating personal auto bind
         Given the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         When the user creates personal account
@@ -21,7 +21,7 @@ Feature: Personal auto new submission
         And the user bind the new submission
         Then the policy is bound successfully
 
-    @issue_submission
+    @issue_submission_personal
     Scenario: Issuing personal auto from actions menu
         Given the user loads "pc" data "newSubmission_01" from json "NewSubmissionTestData"
         When the user creates personal account

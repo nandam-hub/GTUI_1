@@ -9,7 +9,7 @@ Feature: Search menu in policy center
         When the user searches for an account with account number
         Then the account details are loaded
 
-    @search_contact
+    @search_contact_policy
     Scenario: Searching contact in policy center
         Given the user logs into the policy center as "superuser"
         And the user loads "pc" data "searchContact_01" from json "SearchTestData"

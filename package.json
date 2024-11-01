@@ -19,21 +19,22 @@
   "author": "pod-gotham",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "12.20.15",
-    "moment": "2.29.4",
-    "rimraf": "3.0.2",
-    "semver": "7.5.3",
-    "@types/lodash": "4.14.192",
     "@cucumber/cucumber": "7.3.0",
     "@gtui/gt-ui-framework": "file:libs/gt-ui-framework-2023.10.0.tgz",
     "@gtui/ignite": "file:libs/ignite-2023.10.0.tgz",
+    "@types/lodash": "4.14.192",
+    "@types/node": "12.20.15",
     "gherkin-testcafe": "5.0.1",
     "java": "0.12.2",
     "junit-report-builder": "3.0.0",
     "minimist": "1.2.6",
+    "moment": "2.29.4",
     "node-gyp": "8.2.0",
+    "protobufjs": "7.2.5",
+    "rimraf": "3.0.2",
+    "semver": "7.5.3",
     "testcafe": "1.19.0",
-    "protobufjs": "7.2.5"
+    "xlsx": "^0.18.5"
   },
   "overrides": {
     "kind-of": "6.0.3",

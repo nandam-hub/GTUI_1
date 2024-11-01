@@ -84,14 +84,28 @@
         "RentalText": "Other - Car rental"
     },
     "createActivity_05": {
-        "ExposureCoverage1":"Building Coverage",
+        "ExposureCoverage1": "Building Coverage",
         "ExposureCloseText": "Close exposure",
         "ExposureOutcome": "Completed",
         "CloseClaimText": "Closing claim",
         "CloseClaimOutcome": "Completed",
         "ClaimStatus": "Closed",
-        "Litigation1":"12345",
-        "CloseLitigationText" :"Closing Litigation",
-        "CloseLitigationResolution" :"Dismissed"
+        "Litigation1": "12345",
+        "CloseLitigationText": "Closing Litigation",
+        "CloseLitigationResolution": "Dismissed"
+    },
+    "FNOL_01": {
+        "PolicyNumber": "7407354463",
+        "SearchCreatePolicy": "Create Unverified Policy",
+        "Type": "Commercial Property",
+        "LossDate": "+110",
+        "EffectiveDate": "0",
+        "ExpirationDate": "+100",
+        "Name": "New Person",
+        "Validation": "Loss Date : Date must be in the past."
+    },
+    "assignClaim_01": {
+        "LossCause":"Animal",
+        "Description": "Assigned to user Claims Autopilot"
     }
 }

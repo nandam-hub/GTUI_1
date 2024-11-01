@@ -14,4 +14,5 @@ export class FNOLWizard_Ext extends FNOLWizard {
     fnolWizardRentalAgencyMenu = PcfComponent('#FNOLWizard-FullWizardStepSet-FNOLWizard_ServicesScreen-0-VehicleIncidentPanelSet-RentalServiceDV-RentalServiceInputSet-RentalServiceInputSet-RentalInputGroup-RentalAgency-RentalAgencyMenuIcon')
     fnolWizardNewVendor = PcfComponent('#FNOLWizard-FullWizardStepSet-FNOLWizard_ServicesScreen-0-VehicleIncidentPanelSet-RentalServiceDV-RentalServiceInputSet-RentalServiceInputSet-RentalInputGroup-RentalAgency-ClaimNewVendorOnlyPickerMenuItemSet-NewContactPickerMenuItemSet_CompanyVendor')
     fnolWizardPickUpLocation = PcfSelectInput('#FNOLWizard-FullWizardStepSet-FNOLWizard_ServicesScreen-0-VehicleIncidentPanelSet-RentalServiceDV-RentalServiceInputSet-RentalServiceInputSet-RentalInputGroup-OtherServiceRequestInfo-NewServiceRequestInstructionInputSet-ServiceAddressPicker')
+	fNOLWizardFindPolicyScreenmsgs = PcfComponent('#FNOLWizard-FNOLWizard_FindPolicyScreen-_msgs-0-0');
 }

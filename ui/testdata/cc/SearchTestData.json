@@ -53,7 +53,7 @@
     "searchContact_01": {
         "Type": "Contact",
         "LastName": "test",
-        "Name": "test test"
+        "Name": "abc test"
     },
     "advanceSearch_01": {
         "SearchFor": "insured"

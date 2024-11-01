@@ -137,8 +137,8 @@ export function pascalToCamel(inputString) {
 
 /** 
  * To click on a record in a table with a specific text.
- * @param {string} stringValue - Cell text value or id of the component on which click action should be performed
  * @param {string, Number} referenceCellValueOrIndex -Reference Cell text or column index
+ * @param {string} stringValue - Cell text value or css component of the text on which click action should be performed
  */
 export async function clickTableRecord(stringValue, referenceCellValueOrIndex) {
     const tableRows = Selector('table.gw-ListViewWidget--table').find('tr');

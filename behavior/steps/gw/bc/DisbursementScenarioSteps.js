@@ -28,7 +28,7 @@ Then('the commision statement is displayed', async function () {
 
 When('the user runs automatic disbursement batch job', async function () {
     await navigationScenario.navigateToBatchProcessInfoScreen()
-    await disbursementScenario.runAutomaticBatchJob("Automatic Disbursement")
+    await disbursementScenario.runAutomaticDisbursementBatchJob()
 })
 
 Then('the automatic disbursement batch job is processed successfully', async function () {
