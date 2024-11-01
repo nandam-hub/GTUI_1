@@ -4,7 +4,7 @@ import { t } from "testcafe";
 import { searchTableRecord, navigateAndClickSubmenu } from "../../../../ui/util/gw/helper";
 import { SearchScenario } from "../../../../ui/actions/gw/cc/SearchScenario";
 import { NavigationScenario } from "../../../../ui/actions/gw/cc/NavigationScenario";
-import { FnolScenario } from "../../../../ui/actions/gw/cc/FNOLScenario";
+import { FnolScenario } from "../../../../ui/actions/gw/cc/FnolScenario";
 import { ContactScenario} from "../../../../ui/actions/gw/cc/ContactScenario"
 import { ExposureScenario } from "../../../../ui/actions/gw/cc/ExposureScenario";
 
