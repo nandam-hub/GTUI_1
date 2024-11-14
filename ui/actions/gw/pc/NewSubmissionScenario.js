@@ -60,6 +60,7 @@ export class NewSubmissionScenario {
       console.log(`The current module is ${t.ctx.module}`)
       await checkBox("LiabilityBodilyInjuryAndPropertyDamage")
       await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.liabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage, "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage", world.coverageDataMap)
+      await checkBox("medicalPayments")
       await selectOptionByLabelIfExists(lOBWizardStepGroupSubmissionWizard_Ext.medicalLimit, "MedicalLimit", world.coverageDataMap)
     }
   }
@@ -364,7 +365,9 @@ export class NewSubmissionScenario {
         await setInputValueIfExists(ualPersonalVehiclePopup_New.make, 'Make', currentVehicleMap)
         await setInputValueIfExists(ualPersonalVehiclePopup_New.model, 'Model', currentVehicleMap)
         await ualPersonalVehiclePopup_New.personalAutoStandardCoveargeTab.click()
+        await ualPersonalVehiclePopup_New.comprehensive.click()
         await ualPersonalVehiclePopup_New.vehicleComprehensive.selectOptionByLabel('100')
+        await ualPersonalVehiclePopup_New.collision.click()
         await ualPersonalVehiclePopup_New.vehicleCollision.selectOptionByLabel('100')
 
         await ualPersonalVehiclePopup_New.UALPersonalVehiclePopup_Ok.click()

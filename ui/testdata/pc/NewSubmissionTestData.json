@@ -46,6 +46,7 @@
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
             "PropertyProtectionInsurance": "check",
             "PropertyProtectionInsurancePropertyProtectionLimits": "1,000,000",
+            "medicalPayments": "check",
             "MedicalLimit": "5,000"
         }
     },
@@ -172,6 +173,7 @@
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
+            "medicalPayments": "check",
             "MedicalLimit": "5,000"
         }
     },
@@ -243,6 +245,7 @@
         "Coverage": {
             "LiabilityBodilyInjuryAndPropertyDamage": "check",
             "LiabilityBodilyInjuryAndPropertyDamageAutoLiabilityPackage": "25/50/10",
+            "medicalPayments": "check",
             "MedicalLimit": "5,000"
         },
         "Drivers": {
