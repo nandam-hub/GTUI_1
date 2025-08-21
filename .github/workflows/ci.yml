@@ -26,9 +26,13 @@ jobs:
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
    
-    - name: Build Gradle project
-      working-directory: GTUI
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: ./GTUI
+ 
+    - name: Build with Gradle
       run: ./gradlew clean build -x test
+      working-directory: ./GTUI
    
     - name: Install npm dependencies
       working-directory: GTUI
