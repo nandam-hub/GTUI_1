@@ -53,9 +53,14 @@ jobs:
 
       # Ensure Gradle Wrapper is executable and present
       - name: Check Gradle Wrapper
+        shell: pwsh
         run: |
-          dir gradle\wrapper
-          if not exist gradlew.bat exit 1
+          Write-Host "Listing gradle\wrapper contents"
+          Get-ChildItem gradle\wrapper
+          if (-not (Test-Path gradlew.bat)) {
+              Write-Error "gradlew.bat not found!"
+              exit 1
+          }
 
       # Install npm dependencies
       - name: Install npm dependencies
