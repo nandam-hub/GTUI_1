@@ -12,28 +12,28 @@ jobs:
     timeout-minutes: 90  # Increased for VS install + Gradle build
 
     steps:
-      # Checkout repo
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Install VS2019 Build Tools
+      # 2️⃣ Install VS2019 Build Tools
       - name: Install VS2019 Build Tools
         run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
 
-      # Setup MSBuild 2019
+      # 3️⃣ Setup MSBuild 2019
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '[16.0,17.0)'
 
-      # Set up JDK 11 (Amazon Corretto)
+      # 4️⃣ Setup JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # Set up Node.js 16.3.0
+      # 5️⃣ Setup Node.js 16.3.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,17 +41,17 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      # Set up Python 3.10
+      # 6️⃣ Setup Python 3.10
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # Configure node-gyp to use VS2019
+      # 7️⃣ Configure node-gyp to use VS2019
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
-      # Ensure Gradle Wrapper is executable and present
+      # 8️⃣ Ensure Gradle wrapper is present
       - name: Check Gradle Wrapper
         shell: pwsh
         run: |
@@ -61,14 +61,20 @@ jobs:
               Write-Error "gradlew.bat not found!"
               exit 1
           }
+          if (-not (Test-Path gradle/wrapper/gradle-wrapper.jar)) {
+              Write-Host "gradle-wrapper.jar missing. Regenerating..."
+              ./gradlew.bat wrapper
+          }
 
-      # Install npm dependencies
+      # 9️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # Run TestCafe tests with cucumber tag using Gradle Wrapper
+      # 🔟 Build API module with Gradle and run TestCafe tests
       - name: Run UI tests (TestCafe)
+        shell: pwsh
         run: |
-          echo Running Gradle Wrapper
+          Write-Host "Running Gradle Wrapper"
           ./gradlew.bat :api:createApiJar --build-cache
+          Write-Host "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
