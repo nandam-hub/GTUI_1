@@ -35,11 +35,9 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Make gradlew executable
-        working-directory: GTUI
         run: chmod +x gradlew
 
       - name: Build Gradle project
-        working-directory: GTUI
         run: ./gradlew clean build -x test
 
       - name: Install npm dependencies
