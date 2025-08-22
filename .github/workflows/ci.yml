@@ -16,11 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Ensure MSBuild (Visual Studio 2019 Build Tools)
+      # Ensure MSBuild (Visual Studio 2022 Build Tools)
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
-          vs-version: '[16.0,17.0)'   # specifically VS2019 range
+          vs-version: '[17.0,18.0)'   # VS2022
 
       # Set up JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
