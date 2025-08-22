@@ -32,7 +32,8 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
         with:
-          allow-unstable: true   # ✅ correct format
+          allow-checksums: |
+            fadd64e5a1e78de66a5e4428fa35eb78e5c4f3b66a04451f97622f473bb4e995
 
       - name: Make gradlew executable
         run: chmod +x gradlew
