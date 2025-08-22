@@ -33,6 +33,7 @@ jobs:
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
+        working-directory: GTUI
 
       - name: Make gradlew executable
         run: chmod +x gradlew
