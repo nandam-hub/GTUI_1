@@ -28,7 +28,8 @@ jobs:
 
       # Optional: Verify MSBuild version
       - name: Check MSBuild version
-        run: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe" -version
+        run: |
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -version
 
       # Set up JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
