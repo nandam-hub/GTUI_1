@@ -16,17 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Install Visual Studio 2019 Build Tools (for MSBuild 16.x)
+      # Install VS2019 Build Tools
       - name: Install VS2019 Build Tools
-        run: |
-          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
-          refreshenv
+        run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
 
-      # Setup MSBuild (will now find 2019)
+      # Setup MSBuild 2019
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
-          vs-version: '[16.0,17.0)'   # VS2019 range
+          vs-version: '[16.0,17.0)'
+
+      # Optional: Verify MSBuild version
+      - name: Check MSBuild version
+        run: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe" -version
 
       # Set up JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
