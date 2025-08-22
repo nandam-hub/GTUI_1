@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
-    defaults:
-      run:
-        working-directory: GTUI  
-
     steps:
       - uses: actions/checkout@v4
 
@@ -34,7 +30,7 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
 
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1   # ✅ no working-directory
+        uses: gradle/wrapper-validation-action@v1
 
       - name: Make gradlew executable
         run: chmod +x gradlew
@@ -43,15 +39,19 @@ jobs:
         run: ./gradlew clean build -x test
 
       - name: Install npm dependencies
+        working-directory: ./GTUI
         run: npm ci
 
       - name: Build TypeScript
+        working-directory: ./GTUI
         run: npm run build-typescript
 
       - name: Run API tests
+        working-directory: ./GTUI
         run: ./gradlew :api:test
         continue-on-error: true
 
       - name: Run UI tests
+        working-directory: ./GTUI
         run: npm run gt-ui-tests -- --cucumberTags=@fnol_commercial
         continue-on-error: true
