@@ -51,6 +51,20 @@ jobs:
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
+      # Ensure Gradle wrapper exists
+      - name: Ensure Gradle wrapper
+        run: |
+          if exist gradlew.bat (
+            echo Gradle wrapper found.
+          ) else (
+            echo Gradle wrapper not found. Please commit gradlew and gradle/wrapper folder.
+            exit 1
+          )
+
+      # Verify Gradle version (should be 6.5.1)
+      - name: Verify Gradle version
+        run: gradlew --version
+
       # Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
