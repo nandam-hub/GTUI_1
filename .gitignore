@@ -1,2 +1,19 @@
-node_modules
-reports
+# Gradle caches and build artifacts
+.gradle/
+build/
+api/build/
+
+# Node modules & lock files
+node_modules/
+package-lock.json
+
+# Test reports
+reports/
+
+# OS files
+*.DS_Store
+Thumbs.db
+
+# Misc binaries
+*.bin
+*.lock
