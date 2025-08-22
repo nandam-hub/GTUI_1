@@ -58,4 +58,4 @@ jobs:
       - name: Run UI tests
         working-directory: GTUI
         run: npm run gt-ui-tests -- --cucumberTags=@fnol_commercial
-        continue-on-error: tru
+        continue-on-error: true
