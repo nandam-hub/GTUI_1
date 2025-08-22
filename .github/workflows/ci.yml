@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
-    timeout-minutes: 60   # Increased because VS install adds time
+    timeout-minutes: 60
 
     steps:
       # Checkout repo
@@ -51,14 +51,23 @@ jobs:
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
-     
-
-      
-
       # Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
+      # Ensure Gradle wrapper files exist and are executable
+      - name: Verify Gradle Wrapper
+        run: |
+          dir gradle\wrapper
+          dir .
+          if not exist gradlew.bat exit 1
+
+      # Run API build using Gradle wrapper
+      - name: Build API module
+        working-directory: ./GTUI   # Change if your gradlew is in a subfolder
+        run: .\gradlew.bat :api:createApiJar --build-cache
+
       # Run TestCafe tests with cucumber tag
       - name: Run UI tests (TestCafe)
+        working-directory: ./GTUI   # Make sure the path is correct
         run: npm run gt-ui-tests -- --cucumberTags=@add_activity
