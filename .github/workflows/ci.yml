@@ -1,3 +1,5 @@
+name: CI
+
 on:
   push:
     branches: [ main, develop ]
@@ -5,23 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
+      # Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      # Set up Java 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
-          cache: gradle
 
-      - name: List files
-        run: ls -R
-
+      # Set up Node.js 16.3.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -29,32 +31,22 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+      # Set up Python 3.10
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          allow-checksums: |
-            fadd64e5a1e78de66a5e4428fa35eb78e5c4f3b66a04451f97622f473bb4e995
+          python-version: '3.10'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+      # Install MSBuild Tools (Linux alternative: mono / msbuild)
+      - name: Install MS Build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mono-complete msbuild
 
-      - name: Build Gradle project
-        run: ./gradlew clean build -x test
-
+      # Install npm dependencies
       - name: Install npm dependencies
-        working-directory: ./GTUI
         run: npm ci
 
-      - name: Build TypeScript
-        working-directory: ./GTUI
-        run: npm run build-typescript
-
-      - name: Run API tests
-        working-directory: ./GTUI
-        run: ./gradlew :api:test
-        continue-on-error: true
-
-      - name: Run UI tests
-        working-directory: ./GTUI
-        run: npm run gt-ui-tests -- --cucumberTags=@fnol_commercial
-        continue-on-error: true
+      # Run TestCafe tests with cucumber tag
+      - name: Run UI tests (TestCafe)
+        run: npm run gt-ui-tests -- --cucumberTags=@add_activity
