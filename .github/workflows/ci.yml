@@ -1,63 +1,62 @@
 name: CI/CD Pipeline
- 
+
 on:
   push:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java-distribution: ['temurin', 'corretto']
-   
+    timeout-minutes: 30
+
     steps:
     - uses: actions/checkout@v4
-   
-    - name: Set up JDK 11
+
+    - name: Set up JDK 11 (Corretto)
       uses: actions/setup-java@v4
       with:
         java-version: '11'
-        distribution: ${{ matrix.java-distribution }}
-   
+        distribution: 'corretto'
+        cache: gradle
+
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '16.3.0'
         cache: 'npm'
         cache-dependency-path: GTUI/package-lock.json
-   
+
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@v1
-   
+
     - name: Make gradlew executable
       working-directory: GTUI
       run: chmod +x gradlew
-   
+
     - name: Build Gradle project
       working-directory: GTUI
       run: ./gradlew clean build -x test
-   
+
     - name: Install npm dependencies
       working-directory: GTUI
       run: npm ci
-   
+
     - name: Build TypeScript
       working-directory: GTUI
       run: npm run build-typescript
-   
+
     - name: Run API tests
       working-directory: GTUI
       run: ./gradlew :api:test
       continue-on-error: true
-   
+
     - name: Run UI tests
       working-directory: GTUI
       run: npm run gt-ui-tests -- --cucumberTags=@fnol_commercial
       continue-on-error: true
-   
+
     - name: Upload test reports
       uses: actions/upload-artifact@v4
       if: always()
@@ -66,4 +65,3 @@ jobs:
         path: |
           GTUI/reports/
           GTUI/build/reports/
- 
