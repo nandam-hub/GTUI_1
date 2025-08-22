@@ -9,18 +9,24 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 60   # Increased because VS install adds time
 
     steps:
       # Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Ensure MSBuild (Visual Studio 2022 Build Tools)
+      # Install Visual Studio 2019 Build Tools (for MSBuild 16.x)
+      - name: Install VS2019 Build Tools
+        run: |
+          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
+          refreshenv
+
+      # Setup MSBuild (will now find 2019)
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
-          vs-version: '[17.0,18.0)'   # VS2022
+          vs-version: '[16.0,17.0)'   # VS2019 range
 
       # Set up JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
@@ -43,13 +49,13 @@ jobs:
         with:
           python-version: '3.10'
 
+      # Configure node-gyp to use VS2019
+      - name: Configure node-gyp
+        run: npm config set msvs_version 2019
+
       # Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
-
-      # (Optional) If you need to build a .NET or C++ project
-      # - name: Build with MSBuild
-      #   run: msbuild YourSolution.sln /p:Configuration=Release
 
       # Run TestCafe tests with cucumber tag
       - name: Run UI tests (TestCafe)
