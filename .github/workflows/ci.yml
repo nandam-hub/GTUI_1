@@ -57,13 +57,13 @@ jobs:
         run: |
           Write-Host "Listing gradle\wrapper contents"
           Get-ChildItem gradle\wrapper
-          if (-not (Test-Path gradlew.bat)) {
-              Write-Error "gradlew.bat not found!"
+          if (-not (Test-Path .\gradlew.bat)) {
+              Write-Error "gradlew.bat not found! Ensure wrapper is committed."
               exit 1
           }
-          if (-not (Test-Path gradle/wrapper/gradle-wrapper.jar)) {
-              Write-Host "gradle-wrapper.jar missing. Regenerating..."
-              ./gradlew.bat wrapper
+          if (-not (Test-Path .\gradle\wrapper\gradle-wrapper.jar)) {
+              Write-Error "gradle-wrapper.jar not found! Ensure wrapper is committed."
+              exit 1
           }
 
       # 9️⃣ Install npm dependencies
@@ -75,6 +75,6 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "Running Gradle Wrapper"
-          ./gradlew.bat :api:createApiJar --build-cache
+          .\gradlew.bat :api:createApiJar --build-cache
           Write-Host "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
