@@ -2,7 +2,7 @@ name: CI_linux
 
 on:
   push:
-    branches: [ none ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -13,8 +13,8 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      # 1️⃣ Checkout repository
-      - name: Checkout repo
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       # 2️⃣ Set up JDK 11 (Corretto)
@@ -47,9 +47,8 @@ jobs:
         with:
           gradle-version: 8.5
 
-      # 7️⃣ Ensure Gradle Wrapper (safe for Linux)
+      # 7️⃣ Ensure Gradle wrapper with LF endings and executable
       - name: Ensure Gradle Wrapper
-        shell: bash
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
             echo "Gradle wrapper missing, generating..."
@@ -59,20 +58,18 @@ jobs:
             gradle wrapper --gradle-version 8.5
             popd
 
-            # Copy wrapper files
             cp temp-wrapper/gradlew ./gradlew
             cp temp-wrapper/gradlew.bat ./gradlew.bat
             rm -rf ./gradle/wrapper || true
             mkdir -p ./gradle/wrapper
-            cp temp-wrapper/gradle/wrapper/* ./gradle/wrapper/
-
+            cp -r temp-wrapper/gradle/wrapper/* ./gradle/wrapper/
             rm -rf temp-wrapper
 
-            # Convert gradlew to LF and make executable
+            # Fix line endings and permissions
             dos2unix ./gradlew
             chmod +x ./gradlew
 
-            # Optionally commit wrapper back to repo
+            # Optional: commit wrapper back to repo
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add gradlew gradlew.bat gradle/wrapper/
@@ -84,14 +81,8 @@ jobs:
 
       # 8️⃣ Build API module
       - name: Build API module
-        shell: bash
-        run: |
-          echo "Running Gradle Build for API module"
-          ./gradlew :api:createApiJar --build-cache
+        run: ./gradlew :api:createApiJar --build-cache
 
-      # 9️⃣ Run UI tests (TestCafe)
-      - name: Run GT UI Tests
-        shell: bash
-        run: |
-          echo "Running GT UI Tests"
-          npm run gt-ui-tests -- --cucumberTags=@add_activity
+      # 9️⃣ Run GT UI tests
+      - name: Run UI tests (TestCafe)
+        run: npm run gt-ui-tests -- --cucumberTags=@add_activity
