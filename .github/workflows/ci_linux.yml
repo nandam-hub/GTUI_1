@@ -2,7 +2,7 @@ name: CI_linux
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ none ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -15,6 +15,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          # prevent Git from converting line endings
+          lfs: false
+          fetch-depth: 0
+          # disables automatic CRLF conversion
+          git-config: |
+            core.autocrlf=false
 
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
@@ -57,8 +64,9 @@ jobs:
             cp -r temp-wrapper/gradle/wrapper ./gradle/wrapper
             rm -rf temp-wrapper
 
-            # Fix line endings for Linux
-            sed -i 's/\r$//' ./gradlew
+            # Convert gradlew to Unix LF line endings
+            dos2unix ./gradlew
+
             chmod +x ./gradlew
 
             git config user.name "github-actions[bot]"
