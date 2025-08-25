@@ -10,33 +10,31 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
-    timeout-minutes: 90  # Increased for VS install + Gradle build
+    timeout-minutes: 90
 
     steps:
       # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0   # needed for committing back
 
       # 2️⃣ Install VS2019 Build Tools
       - name: Install VS2019 Build Tools
         run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
 
-      # 3️⃣ Setup MSBuild 2019
+      # 3️⃣ Setup MSBuild
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '[16.0,17.0)'
 
-      # 4️⃣ Setup JDK 11 (Amazon Corretto)
+      # 4️⃣ Setup JDK 11
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 5️⃣ Setup Node.js 16.3.0
+      # 5️⃣ Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -44,49 +42,52 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      # 6️⃣ Setup Python 3.10
+      # 6️⃣ Setup Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 7️⃣ Configure node-gyp to use VS2019
+      # 7️⃣ Configure node-gyp
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
-      # 8️⃣ Install Gradle (avoid wrapper)
-      - name: Set up Gradle
+      # 8️⃣ Install Gradle
+      - name: Install Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.5
 
-      # 9️⃣ Generate Gradle wrapper
-      - name: Generate Gradle wrapper
-        run: gradle wrapper --gradle-version 8.5
-
-      # 🔟 Conditionally commit Gradle wrapper if missing
-      - name: Commit Gradle wrapper to repo if missing
-        shell: pwsh
-        run: |
-          if (-not (Test-Path gradlew) -or -not (Test-Path gradlew.bat) -or -not (Test-Path gradle/wrapper/gradle-wrapper.jar)) {
-              git config user.name "github-actions[bot]"
-              git config user.email "github-actions[bot]@users.noreply.github.com"
-              git add gradlew gradlew.bat gradle/wrapper/
-              git commit -m "Add gradle wrapper from CI" || echo "No changes to commit"
-              git push
-          } else {
-              Write-Host "Gradle wrapper already exists. Skipping commit."
-          }
-
-      # 1️⃣1️⃣ Install npm dependencies
+      # 9️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # 1️⃣2️⃣ Build API module with Gradle and run TestCafe tests
-      - name: Run UI tests (TestCafe)
+      # 🔟 Generate Gradle wrapper only if missing
+      - name: Generate Gradle Wrapper (if missing)
         shell: pwsh
         run: |
-          Write-Host "Running Gradle Build"
+          if (!(Test-Path "./gradlew") -or !(Test-Path "./gradlew.bat")) {
+              Write-Host "Gradle wrapper missing, generating..."
+              gradle wrapper --gradle-version 8.5
+              git config user.name "github-actions[bot]"
+              git config user.email "github-actions[bot]@users.noreply.github.com"
+              git add gradlew gradlew.bat gradle/wrapper/
+              git commit -m "Add Gradle wrapper from CI" || Write-Host "No changes to commit"
+              git push
+          } else {
+              Write-Host "Gradle wrapper already exists, skipping generation."
+          }
+
+      # 1️⃣1️⃣ Build API module
+      - name: Build API Module
+        shell: pwsh
+        run: |
+          Write-Host "Running Gradle Build for API module"
           gradle :api:createApiJar --build-cache
+
+      # 1️⃣2️⃣ Run GT UI Tests
+      - name: Run GT UI Tests
+        shell: pwsh
+        run: |
           Write-Host "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
