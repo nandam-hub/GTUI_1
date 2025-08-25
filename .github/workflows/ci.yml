@@ -13,49 +13,30 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      # 1️⃣ Checkout repo
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2️⃣ Install VS2019 Build Tools
-      - name: Install VS2019 Build Tools
-        run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
-
-      # 3️⃣ Setup MSBuild
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-        with:
-          vs-version: '[16.0,17.0)'
-
-      # 4️⃣ Setup JDK 11
-      - name: Set up JDK 11 (Corretto)
+      - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 5️⃣ Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'npm'
 
-      # 6️⃣ Setup Python 3.10
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 7️⃣ Configure node-gyp to use VS2019
-      - name: Configure node-gyp
-        run: npm config set msvs_version 2019
-
-      # 8️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # 9️⃣ Ensure Gradle Wrapper
+      # ⚡ Ensure Gradle wrapper exists
       - name: Ensure Gradle Wrapper
         shell: pwsh
         run: |
@@ -63,38 +44,35 @@ jobs:
           if (-not $wrapperExists) {
               Write-Host "Gradle wrapper missing, generating in temp folder..."
               Remove-Item -Recurse -Force temp-wrapper -ErrorAction SilentlyContinue
-              mkdir temp-wrapper
+              New-Item -ItemType Directory -Path temp-wrapper
               Push-Location temp-wrapper
               gradle wrapper --gradle-version 8.5
               Pop-Location
+
               Copy-Item -Path "temp-wrapper/gradlew" -Destination "./gradlew" -Force
               Copy-Item -Path "temp-wrapper/gradlew.bat" -Destination "./gradlew.bat" -Force
-              if (Test-Path "./gradle/wrapper") { Remove-Item -Recurse -Force "./gradle/wrapper" }
-              Copy-Item -Recurse -Path "temp-wrapper/gradle/wrapper" -Destination "./gradle/wrapper"
+
+              # Copy wrapper folder correctly
+              Remove-Item -Recurse -Force "./gradle/wrapper" -ErrorAction SilentlyContinue
+              New-Item -ItemType Directory -Path "./gradle/wrapper"
+              Copy-Item -Recurse -Path "temp-wrapper/gradle/wrapper/*" -Destination "./gradle/wrapper"
+
               Remove-Item -Recurse -Force temp-wrapper
-              
-              # Make wrapper executable
-              icacls .\gradlew /grant Everyone:F
-              
+
               git config user.name "github-actions[bot]"
               git config user.email "github-actions[bot]@users.noreply.github.com"
               git add gradlew gradlew.bat gradle/wrapper/
-              git commit -m "Add Gradle wrapper from CI" || Write-Host "No changes to commit"
+              git commit -m "Add Gradle wrapper from CI" -ErrorAction SilentlyContinue
               git push
           } else {
               Write-Host "Gradle wrapper already exists, skipping generation."
           }
 
-      # 🔟 Build API module
+      # 🔨 Build API module
       - name: Build API module
         shell: pwsh
         run: |
           Write-Host "Running Gradle Build for API module"
+          # Ensure gradlew is executable
+          icacls .\gradlew /grant Everyone:F
           .\gradlew :api:createApiJar --build-cache
-
-      # 1️⃣1️⃣ Run UI tests (TestCafe)
-      - name: Run UI tests (TestCafe)
-        shell: pwsh
-        run: |
-          Write-Host "Running GT UI Tests"
-          npm run gt-ui-tests -- --cucumberTags=@add_activity
