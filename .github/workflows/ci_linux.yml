@@ -1,58 +1,51 @@
-name: CI_Linux
+name: CI_linux
 
 on:
   push:
-    branches: [ none ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ none ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
     steps:
-      # 1️⃣ Checkout repo
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 3️⃣ Setup Node.js 16.3.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16.3.0'
+          node-version: '16'
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
-      # 4️⃣ Setup Python 3.10
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 5️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # 6️⃣ Install Gradle
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.5
 
-      # 7️⃣ Generate Gradle wrapper if missing
+      # ⚡ Ensure Gradle wrapper with LF endings
       - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradlew.bat" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
-            echo "Gradle wrapper missing, generating in temp folder..."
+            echo "Gradle wrapper missing, generating..."
             rm -rf temp-wrapper || true
             mkdir temp-wrapper
             pushd temp-wrapper
@@ -64,7 +57,8 @@ jobs:
             cp -r temp-wrapper/gradle/wrapper ./gradle/wrapper
             rm -rf temp-wrapper
 
-            # Make the wrapper executable
+            # Fix line endings for Linux
+            sed -i 's/\r$//' ./gradlew
             chmod +x ./gradlew
 
             git config user.name "github-actions[bot]"
@@ -76,16 +70,13 @@ jobs:
             echo "Gradle wrapper already exists, skipping generation."
           fi
 
-      # 8️⃣ Build API module using Gradle wrapper
       - name: Build API module
         run: |
           echo "Running Gradle Build for API module"
           chmod +x ./gradlew
           ./gradlew :api:createApiJar --build-cache
 
-      # 9️⃣ Run UI tests (TestCafe)
       - name: Run UI tests (TestCafe)
-        shell: bash
         run: |
           echo "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
