@@ -2,7 +2,7 @@ name: CI_linux
 
 on:
   push:
-    branches: [ none ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -47,7 +47,11 @@ jobs:
         with:
           gradle-version: 8.5
 
-      # 7️⃣ Ensure Gradle wrapper exists and is LF + executable
+      # 7️⃣ Install dos2unix (for CRLF → LF conversion)
+      - name: Install dos2unix
+        run: sudo apt-get update && sudo apt-get install -y dos2unix
+
+      # 8️⃣ Ensure Gradle wrapper exists and is LF + executable
       - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
@@ -66,14 +70,14 @@ jobs:
             rm -rf temp-wrapper
           fi
 
-          # Convert gradlew to LF and make executable (even if it already exists)
-          dos2unix ./gradlew || true
+          # Convert gradlew to LF and make executable
+          dos2unix ./gradlew
           chmod +x ./gradlew
 
-      # 8️⃣ Build API module
+      # 9️⃣ Build API module
       - name: Build API module
         run: ./gradlew :api:createApiJar --build-cache
 
-      # 9️⃣ Run UI tests (TestCafe)
+      # 🔟 Run UI tests (TestCafe)
       - name: Run UI tests
         run: npm run gt-ui-tests -- --cucumberTags=@add_activity
