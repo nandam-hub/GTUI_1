@@ -1,8 +1,8 @@
-name: CI_Linux
+name: CI_linux
 
 on:
   push:
-    branches: [ none]
+    branches: [ none ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -13,31 +13,43 @@ jobs:
     timeout-minutes: 90
 
     steps:
+      # 1️⃣ Checkout repository
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # 2️⃣ Set up JDK 11 (Corretto)
       - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
+      # 3️⃣ Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'npm'
 
+      # 4️⃣ Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
+      # 5️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # ⚡ Ensure Gradle wrapper exists and is correct
+      # 6️⃣ Set up Gradle
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+
+      # 7️⃣ Ensure Gradle Wrapper (safe for Linux)
       - name: Ensure Gradle Wrapper
+        shell: bash
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
             echo "Gradle wrapper missing, generating..."
@@ -47,6 +59,7 @@ jobs:
             gradle wrapper --gradle-version 8.5
             popd
 
+            # Copy wrapper files
             cp temp-wrapper/gradlew ./gradlew
             cp temp-wrapper/gradlew.bat ./gradlew.bat
             rm -rf ./gradle/wrapper || true
@@ -55,12 +68,30 @@ jobs:
 
             rm -rf temp-wrapper
 
-            # Fix line endings and permissions
-            sed -i 's/\r$//' ./gradlew
+            # Convert gradlew to LF and make executable
+            dos2unix ./gradlew
             chmod +x ./gradlew
+
+            # Optionally commit wrapper back to repo
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add gradlew gradlew.bat gradle/wrapper/
+            git commit -m "Add Gradle wrapper from CI" || echo "No changes to commit"
+            git push
           else
             echo "Gradle wrapper already exists, skipping generation."
           fi
 
+      # 8️⃣ Build API module
       - name: Build API module
-        run: ./gradlew :api:createApiJar --build-cache
+        shell: bash
+        run: |
+          echo "Running Gradle Build for API module"
+          ./gradlew :api:createApiJar --build-cache
+
+      # 9️⃣ Run UI tests (TestCafe)
+      - name: Run GT UI Tests
+        shell: bash
+        run: |
+          echo "Running GT UI Tests"
+          npm run gt-ui-tests -- --cucumberTags=@add_activity
