@@ -21,20 +21,20 @@ jobs:
       - name: Install VS2019 Build Tools
         run: choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --includeRecommended --includeOptional --quiet --norestart" --yes
 
-      # 3️⃣ Setup MSBuild
+      # 3️⃣ Setup MSBuild 2019
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '[16.0,17.0)'
 
-      # 4️⃣ Setup JDK 11
+      # 4️⃣ Setup JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 5️⃣ Setup Node.js
+      # 5️⃣ Setup Node.js 16.3.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,33 +42,34 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      # 6️⃣ Setup Python
+      # 6️⃣ Setup Python 3.10
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 7️⃣ Configure node-gyp
+      # 7️⃣ Configure node-gyp to use VS2019
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
-      # 8️⃣ Install Gradle
-      - name: Install Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: 8.5
-
-      # 9️⃣ Install npm dependencies
+      # 8️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # 🔟 Generate Gradle wrapper only if missing
-      - name: Generate Gradle Wrapper (if missing)
+      # 9️⃣ Generate Gradle wrapper if missing
+      - name: Generate Gradle wrapper if missing
         shell: pwsh
         run: |
           if (!(Test-Path "./gradlew") -or !(Test-Path "./gradlew.bat")) {
-              Write-Host "Gradle wrapper missing, generating..."
+              Write-Host "Gradle wrapper missing, generating in temporary folder..."
+              mkdir temp-wrapper
+              cd temp-wrapper
               gradle wrapper --gradle-version 8.5
+              cd ..
+              Copy-Item -Path "temp-wrapper/gradlew" -Destination "./gradlew"
+              Copy-Item -Path "temp-wrapper/gradlew.bat" -Destination "./gradlew.bat"
+              Copy-Item -Recurse -Path "temp-wrapper/gradle/wrapper" -Destination "./gradle/wrapper"
+              Remove-Item -Recurse -Force temp-wrapper
               git config user.name "github-actions[bot]"
               git config user.email "github-actions[bot]@users.noreply.github.com"
               git add gradlew gradlew.bat gradle/wrapper/
@@ -78,14 +79,14 @@ jobs:
               Write-Host "Gradle wrapper already exists, skipping generation."
           }
 
-      # 1️⃣1️⃣ Build API module
-      - name: Build API Module
+      # 🔟 Run Gradle build for API module (using existing wrapper)
+      - name: Run Gradle Build for API module
         shell: pwsh
         run: |
           Write-Host "Running Gradle Build for API module"
-          gradle :api:createApiJar --build-cache
+          .\gradlew :api:createApiJar --build-cache
 
-      # 1️⃣2️⃣ Run GT UI Tests
+      # 1️⃣1️⃣ Run GT UI tests
       - name: Run GT UI Tests
         shell: pwsh
         run: |
