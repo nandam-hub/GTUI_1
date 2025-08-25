@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+
 jobs:
   build-and-test:
     runs-on: windows-latest
@@ -51,20 +52,11 @@ jobs:
       - name: Configure node-gyp
         run: npm config set msvs_version 2019
 
-      # 8️⃣ Ensure Gradle wrapper is present
-      - name: Check Gradle Wrapper
-        shell: pwsh
-        run: |
-          Write-Host "Listing gradle\wrapper contents"
-          Get-ChildItem gradle\wrapper
-          if (-not (Test-Path .\gradlew.bat)) {
-              Write-Error "gradlew.bat not found! Ensure wrapper is committed."
-              exit 1
-          }
-          if (-not (Test-Path .\gradle\wrapper\gradle-wrapper.jar)) {
-              Write-Error "gradle-wrapper.jar not found! Ensure wrapper is committed."
-              exit 1
-          }
+      # 8️⃣ Install Gradle (avoid wrapper)
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5   # 👈 you can bump to the version your project needs
 
       # 9️⃣ Install npm dependencies
       - name: Install npm dependencies
@@ -74,7 +66,7 @@ jobs:
       - name: Run UI tests (TestCafe)
         shell: pwsh
         run: |
-          Write-Host "Running Gradle Wrapper"
-          .\gradlew.bat :api:createApiJar --build-cache
+          Write-Host "Running Gradle Build"
+          gradle :api:createApiJar --build-cache
           Write-Host "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
