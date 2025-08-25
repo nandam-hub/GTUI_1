@@ -1,4 +1,4 @@
-name: CI_linux
+name: CI_Linux
 
 on:
   push:
@@ -13,42 +13,35 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      - name: Checkout repo
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          # prevent Git from converting line endings
-          lfs: false
-          fetch-depth: 0
-          # disables automatic CRLF conversion
-          git-config: |
-            core.autocrlf=false
 
+      # 2️⃣ Setup JDK 11
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
+      # 3️⃣ Setup Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'npm'
 
+      # 4️⃣ Setup Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
+      # 5️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: 8.5
-
-      # ⚡ Ensure Gradle wrapper with LF endings
+      # 6️⃣ Ensure Gradle wrapper exists with LF endings
       - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradlew.bat" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
@@ -63,28 +56,16 @@ jobs:
             rm -rf ./gradle/wrapper || true
             cp -r temp-wrapper/gradle/wrapper ./gradle/wrapper
             rm -rf temp-wrapper
-
-            # Convert gradlew to Unix LF line endings
-            dos2unix ./gradlew
-
-            chmod +x ./gradlew
-
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add gradlew gradlew.bat gradle/wrapper/
-            git commit -m "Add Gradle wrapper from CI" || echo "No changes to commit"
-            git push
-          else
-            echo "Gradle wrapper already exists, skipping generation."
           fi
 
-      - name: Build API module
-        run: |
-          echo "Running Gradle Build for API module"
+          # Convert gradlew to LF and make executable
+          sed -i 's/\r$//' ./gradlew
           chmod +x ./gradlew
-          ./gradlew :api:createApiJar --build-cache
 
-      - name: Run UI tests (TestCafe)
-        run: |
-          echo "Running GT UI Tests"
-          npm run gt-ui-tests -- --cucumberTags=@add_activity
+      # 7️⃣ Build API module
+      - name: Build API module
+        run: ./gradlew :api:createApiJar --build-cache
+
+      # 8️⃣ Run UI tests (TestCafe)
+      - name: Run UI tests
+        run: npm run gt-ui-tests -- --cucumberTags=@add_activity
