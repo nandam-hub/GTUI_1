@@ -1,10 +1,10 @@
-name: CI
+name: CI_Windows
 
 on:
   push:
     branches: [ none ]
   pull_request:
-    branches: [ none ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -38,9 +38,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16.3.0'
+          node-version: '16'
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       # 6️⃣ Setup Python 3.10
       - name: Set up Python
@@ -60,28 +59,23 @@ jobs:
       - name: Ensure Gradle Wrapper
         shell: pwsh
         run: |
-          $wrapperExists = Test-Path "./gradlew" -and Test-Path "./gradlew.bat" -and Test-Path "./gradle/wrapper/gradle-wrapper.jar"
+          $wrapperExists = (Test-Path "./gradlew") -and (Test-Path "./gradlew.bat") -and (Test-Path "./gradle/wrapper/gradle-wrapper.jar")
           if (-not $wrapperExists) {
-              Write-Host "Gradle wrapper missing, generating..."
+              Write-Host "Gradle wrapper missing, generating in temp folder..."
               Remove-Item -Recurse -Force temp-wrapper -ErrorAction SilentlyContinue
               mkdir temp-wrapper
               Push-Location temp-wrapper
               gradle wrapper --gradle-version 8.5
               Pop-Location
-
               Copy-Item -Path "temp-wrapper/gradlew" -Destination "./gradlew" -Force
               Copy-Item -Path "temp-wrapper/gradlew.bat" -Destination "./gradlew.bat" -Force
-
               if (Test-Path "./gradle/wrapper") { Remove-Item -Recurse -Force "./gradle/wrapper" }
-              New-Item -ItemType Directory -Force -Path "./gradle"
               Copy-Item -Recurse -Path "temp-wrapper/gradle/wrapper" -Destination "./gradle/wrapper"
-
               Remove-Item -Recurse -Force temp-wrapper
-
-              # Make gradlew executable
+              
+              # Make wrapper executable
               icacls .\gradlew /grant Everyone:F
-
-              # Commit wrapper to repo if needed
+              
               git config user.name "github-actions[bot]"
               git config user.email "github-actions[bot]@users.noreply.github.com"
               git add gradlew gradlew.bat gradle/wrapper/
@@ -91,14 +85,14 @@ jobs:
               Write-Host "Gradle wrapper already exists, skipping generation."
           }
 
-      # 🔟 Build API module using Gradle wrapper
+      # 🔟 Build API module
       - name: Build API module
         shell: pwsh
         run: |
           Write-Host "Running Gradle Build for API module"
-          ./gradlew :api:createApiJar --build-cache
+          .\gradlew :api:createApiJar --build-cache
 
-      # 1️⃣1️⃣ Run GT UI tests
+      # 1️⃣1️⃣ Run UI tests (TestCafe)
       - name: Run UI tests (TestCafe)
         shell: pwsh
         run: |
