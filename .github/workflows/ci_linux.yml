@@ -1,30 +1,30 @@
-name: CI
+name: CI_Linux
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ none ]
   pull_request:
-    branches: [ main ]
+    branches: [ none ]
   workflow_dispatch:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup JDK 11
+      # 2️⃣ Setup JDK 11 (Amazon Corretto)
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 3️⃣ Setup Node.js
+      # 3️⃣ Setup Node.js 16.3.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,7 +42,13 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      # 6️⃣ Generate Gradle wrapper if missing
+      # 6️⃣ Install Gradle
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+
+      # 7️⃣ Generate Gradle wrapper if missing
       - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradlew.bat" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
@@ -58,6 +64,9 @@ jobs:
             cp -r temp-wrapper/gradle/wrapper ./gradle/wrapper
             rm -rf temp-wrapper
 
+            # Make the wrapper executable
+            chmod +x ./gradlew
+
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add gradlew gradlew.bat gradle/wrapper/
@@ -67,14 +76,16 @@ jobs:
             echo "Gradle wrapper already exists, skipping generation."
           fi
 
-      # 7️⃣ Build API module using Gradle wrapper
+      # 8️⃣ Build API module using Gradle wrapper
       - name: Build API module
         run: |
           echo "Running Gradle Build for API module"
+          chmod +x ./gradlew
           ./gradlew :api:createApiJar --build-cache
 
-      # 8️⃣ Run GT UI tests
+      # 9️⃣ Run UI tests (TestCafe)
       - name: Run UI tests (TestCafe)
+        shell: bash
         run: |
           echo "Running GT UI Tests"
           npm run gt-ui-tests -- --cucumberTags=@add_activity
