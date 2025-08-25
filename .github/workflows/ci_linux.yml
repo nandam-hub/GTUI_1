@@ -2,7 +2,7 @@ name: CI_linux
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ none ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -13,71 +13,51 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      # 1️⃣ Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Set up JDK 11
       - name: Set up JDK 11 (Corretto)
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'corretto'
 
-      # 3️⃣ Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
           cache: 'npm'
 
-      # 4️⃣ Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 5️⃣ Install npm dependencies
       - name: Install npm dependencies
         run: npm ci
 
-      # 6️⃣ Install Gradle
-      - name: Set up Gradle
+      - name: Install Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.5
 
-      # 7️⃣ Install dos2unix (for CRLF → LF conversion)
       - name: Install dos2unix
         run: sudo apt-get update && sudo apt-get install -y dos2unix
 
-      # 8️⃣ Ensure Gradle wrapper exists and is LF + executable
+      # ✅ Ensure Gradle wrapper exists with jar
       - name: Ensure Gradle Wrapper
         run: |
           if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
-            echo "Gradle wrapper missing, generating..."
-            rm -rf temp-wrapper || true
-            mkdir temp-wrapper
-            pushd temp-wrapper
+            echo "Gradle wrapper missing, generating full wrapper..."
             gradle wrapper --gradle-version 8.5
-            popd
-
-            cp temp-wrapper/gradlew ./gradlew
-            cp temp-wrapper/gradlew.bat ./gradlew.bat
-            rm -rf ./gradle/wrapper || true
-            mkdir -p ./gradle/wrapper
-            cp temp-wrapper/gradle/wrapper/* ./gradle/wrapper/
-            rm -rf temp-wrapper
           fi
 
-          # Convert gradlew to LF and make executable
+          # Fix script endings and permissions
           dos2unix ./gradlew
           chmod +x ./gradlew
 
-      # 9️⃣ Build API module
       - name: Build API module
         run: ./gradlew :api:createApiJar --build-cache
 
-      # 🔟 Run UI tests (TestCafe)
       - name: Run UI tests
         run: npm run gt-ui-tests -- --cucumberTags=@add_activity
